@@ -54,10 +54,13 @@ const DefaultLayout = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box 
+      minH="100vh" 
+      bg={useColorModeValue('gray.100', 'gray.900')}
+    >
         <SidebarContent
-            onClose={() => onClose}
-            display={{ base: 'none', md: 'block' }}
+          onClose={() => onClose}
+          display={{ base: 'none', md: 'block' }}
         />
         <Drawer
             autoFocus={false}
@@ -69,19 +72,26 @@ const DefaultLayout = ({
             size="full"
         >
             <DrawerContent>
-            <SidebarContent onClose={onClose} />
+              <SidebarContent onClose={onClose} />
             </DrawerContent>
         </Drawer>
         <Navbar
-            onOpen={onOpen}
+          onOpen={onOpen}
         />
-        <Container 
-          mx='auto' 
-          p="4"
+        <Box
+          ml={{
+            base: 0,
+            md: 60
+          }}
         >
+          <Container 
+            mx='auto' 
+            p="4"
+            maxW='6xl'
+          >
             {children}
-        </Container>
-        
+          </Container>
+        </Box>
     </Box>
   );
 }
@@ -109,8 +119,8 @@ const SidebarContent : React.FC<SidebarProps> = ({ onClose, ...rest }) => {
             justifyContent="space-between"
         >
             <Text 
-                fontSize="2xl"
-                fontWeight="bold"
+              fontSize="2xl"
+              fontWeight="bold"
             >
                 Satay
             </Text>
