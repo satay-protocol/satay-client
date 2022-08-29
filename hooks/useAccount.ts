@@ -2,7 +2,7 @@ import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter';
 import { useEffect } from 'react';
 
 const useAccount = () => {
-    const { connected, account, connect, disconnect, wallets } = useWallet();
+    const { connected, connecting, account, connect, disconnect, wallets } = useWallet();
 
     const connectWallet = (wallet : Wallet) => {
         connect(wallet.adapter.name);
@@ -16,10 +16,10 @@ const useAccount = () => {
 
     useEffect(() => {
         const wallet = window.localStorage.getItem('wallet');
-        if (!connected && wallet) {
+        if (!connected && !connecting && wallet) {
             connect(wallet);
         }
-    }, [connected, connect])
+    }, [connected, connecting, connect])
 
     return {
         connected,
