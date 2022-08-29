@@ -93,6 +93,7 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                                 ) : (
                                     wallets.map(wallet => (
                                         <MenuItem
+                                            key={wallet.adapter.name}
                                             onClick={() => connectWallet(wallet)}
                                         >
                                             {wallet.adapter.name}
