@@ -17,7 +17,7 @@ const useAccount = () => {
     useEffect(() => {
         const wallet = window.localStorage.getItem('wallet');
         if (!connected && !connecting && wallet) {
-            connect(wallet);
+            connect(wallet).catch(() => {});
         }
     }, [connected, connecting, connect])
 
