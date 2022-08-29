@@ -14,12 +14,12 @@ const useAccount = () => {
         window.localStorage.removeItem('wallet');
     }
 
-    useEffect(() => {
-        const wallet = window.localStorage.getItem('wallet');
-        if (!connected && !connecting && wallet) {
-            connect(wallet).catch(() => {});
-        }
-    }, [connected, connecting, connect])
+    // useEffect(() => {
+    //     const wallet = window.localStorage.getItem('wallet');
+    //     if (!connected && !connecting && wallet) {
+    //         connect(wallet).catch(() => {});
+    //     }
+    // }, [connected, connecting, connect])
 
     return {
         connected,
