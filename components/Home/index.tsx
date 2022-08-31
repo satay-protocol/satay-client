@@ -1,15 +1,19 @@
 import React from 'react'
 
 import { 
-  Container, 
   Text,
   VStack
 } from '@chakra-ui/react'
 
+import Card from '../utilities/Card'
+import VaultsList from '../Vaults/VaultsList'
+
 const Home = () => {
   return (
-    <Container>
-      <VStack>
+    <VStack
+      spacing={4}
+    >
+      <Card>
         <Text
           fontSize='2xl'
           fontWeight='bold'
@@ -17,10 +21,20 @@ const Home = () => {
           Welcome to Satay Finance
         </Text>
         <Text>
-          View a vault to get started.
+          Pioneering Yield Aggregation on Aptos
         </Text>
-      </VStack>
-    </Container>
+      </Card>
+      <Card>
+        <Text
+          fontSize='2xl'
+          fontWeight='bold'
+          mb={4}
+        >
+          Vaults
+        </Text>
+        <VaultsList />
+      </Card>
+    </VStack>
   )
 }
 

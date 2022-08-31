@@ -7,6 +7,7 @@ import theme from '../theme';
 import {
   PontemWalletAdapter, WalletProvider, WalletAdapter
 } from '@manahippo/aptos-wallet-adapter';
+import { AptosProvider } from '../contexts/AptosContext';
 
 const wallets : WalletAdapter[] = [
   new PontemWalletAdapter()
@@ -20,7 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider
         theme={theme}
       >
-        <Component {...pageProps} />
+        <AptosProvider>
+          <Component {...pageProps} />
+        </AptosProvider>
       </ChakraProvider>
     </WalletProvider>
   )

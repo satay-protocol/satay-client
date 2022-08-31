@@ -31,7 +31,8 @@ const VaultPreview : React.FC<Props> = ({ vault }) => {
                 px={2}
                 borderRadius={8}
                 _hover={{
-                    bg: 'gray.100'
+                    bg: 'gray.100',
+                    cursor: 'pointer'
                 }}
             >
                 <HStack

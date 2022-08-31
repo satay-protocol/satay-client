@@ -22,16 +22,17 @@ interface Props {
 const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
   return (
     <Card
-        height='100%'
+        h='100%'
     >
         <Tabs>
             <TabList>
                 <Tab flex={1}>Deposit</Tab>
                 <Tab flex={1}>Withdraw</Tab>
             </TabList>
-
             <TabPanels>
-                <TabPanel>
+                <TabPanel
+                    key='deposit'
+                >
                     <Action 
                         action={deposit}
                         asset={vault.asset}
@@ -39,7 +40,9 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                         actionName='Deposit'
                     />
                 </TabPanel>
-                <TabPanel>
+                <TabPanel
+                    key='withdraw'
+                >
                     <Action 
                         action={withdraw}
                         logo={vault.logo}

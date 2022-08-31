@@ -7,7 +7,6 @@ import {
     NumberInput,
     NumberInputField,
     Flex,
-    Box,
     Button
 } from '@chakra-ui/react';
 

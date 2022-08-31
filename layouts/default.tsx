@@ -58,6 +58,10 @@ const DefaultLayout = ({
       minH="100vh" 
       bg={useColorModeValue('gray.100', 'gray.900')}
     >
+      <Container 
+        mx='auto' 
+        maxW='6xl'
+      >
         <SidebarContent
           onClose={() => onClose}
           display={{ base: 'none', md: 'block' }}
@@ -75,23 +79,22 @@ const DefaultLayout = ({
               <SidebarContent onClose={onClose} />
             </DrawerContent>
         </Drawer>
-        <Navbar
-          onOpen={onOpen}
-        />
         <Box
           ml={{
             base: 0,
             md: 60
           }}
+          display='flex'
+          flexDirection='column'
+          gap={4}
+          p={4}
         >
-          <Container 
-            mx='auto' 
-            p="4"
-            maxW='6xl'
-          >
-            {children}
-          </Container>
+          <Navbar
+            onOpen={onOpen}
+          />
+          {children}
         </Box>
+      </Container>
     </Box>
   );
 }
@@ -104,42 +107,39 @@ const SidebarContent : React.FC<SidebarProps> = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue('white', 'gray.900')}
-      borderRight="1px"
-      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
       {...rest}
     >
-        <Flex 
-            h="20" 
-            alignItems="center" 
-            mx="8" 
-            justifyContent="space-between"
-        >
-            <Text 
-              fontSize="2xl"
-              fontWeight="bold"
-            >
-                Satay
-            </Text>
-            <CloseButton 
-                display={{ base: 'flex', md: 'none' }} 
-                onClick={onClose} 
-            />
-        </Flex>
-        {
-            LinkItems.map((link) => (
-                <NavItem 
-                    key={link.name} 
-                    icon={link.icon}
-                    href={link.href}
-                >
-                    {link.name}
-                </NavItem>
-            ))
-        }
+      <Flex 
+          h="20" 
+          alignItems="center" 
+          mx="8" 
+          justifyContent="space-between"
+      >
+          <Text 
+            fontSize="2xl"
+            fontWeight="bold"
+          >
+              Satay
+          </Text>
+          <CloseButton 
+              display={{ base: 'flex', md: 'none' }} 
+              onClick={onClose} 
+          />
+      </Flex>
+      {
+          LinkItems.map((link) => (
+              <NavItem 
+                  key={link.name} 
+                  icon={link.icon}
+                  href={link.href}
+              >
+                  {link.name}
+              </NavItem>
+          ))
+      }
     </Box>
   );
 };
@@ -164,8 +164,8 @@ const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
             role="group"
             cursor="pointer"
             _hover={{
-            bg: 'cyan.400',
-            color: 'white',
+              bg: 'blue.500',
+              color: 'white',
             }}
             {...rest}
         >

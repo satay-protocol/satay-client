@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { Vault } from "../types/vaults";
+import useTransaction from "./useTransaction";
 
 const useVault = (vaultId : string) => {
+
+    const { module } = useTransaction();
 
     const [vault, setVault] = useState<Vault | null>(null);
 

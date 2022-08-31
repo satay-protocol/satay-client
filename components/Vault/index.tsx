@@ -4,7 +4,8 @@ import useVault from '../../hooks/useVault';
 
 import { 
   HStack, 
-  Box 
+  Box, 
+  Flex
 } from '@chakra-ui/react';
 
 import VaultInfo from './VaultInfo';
@@ -22,8 +23,8 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
     <Box>
       {
         vault && (
-          <HStack
-            spacing={8}
+          <Flex
+            gap={4}
           >
             <VaultInfo
               vault={vault}
@@ -33,7 +34,7 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
               withdraw={withdraw}
               vault={vault}
             />
-          </HStack>
+          </Flex>
         )
       }
       
