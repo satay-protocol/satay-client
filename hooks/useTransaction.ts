@@ -4,8 +4,6 @@ import { useAptos } from "../contexts/AptosContext";
 import useAccount from './useAccount';
 
 import { MoveModule } from "aptos/dist/generated";
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
-
 
 
 const useTransaction = () => {

@@ -57,7 +57,6 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
             <Text
                 display={{ base: 'flex', md: 'none' }}
                 fontSize="2xl"
-                fontFamily="monospace"
                 fontWeight="bold"
             >
                 Satay

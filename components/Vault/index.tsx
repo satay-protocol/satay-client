@@ -25,6 +25,10 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
         vault && (
           <Flex
             gap={4}
+            direction={{
+              base: 'column',
+              md: 'row'
+            }}
           >
             <VaultInfo
               vault={vault}

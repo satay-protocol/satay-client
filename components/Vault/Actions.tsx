@@ -33,7 +33,8 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                 <TabPanel
                     key='deposit'
                 >
-                    <Action 
+                    <Action
+                        key='depositAction'
                         action={deposit}
                         asset={vault.asset}
                         logo={vault.logo}
@@ -43,7 +44,8 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                 <TabPanel
                     key='withdraw'
                 >
-                    <Action 
+                    <Action
+                        key='withdrawAction'
                         action={withdraw}
                         logo={vault.logo}
                         asset={vault.asset}

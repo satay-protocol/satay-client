@@ -1,0 +1,1 @@
+export const vaultManager = "0xc09622c20bdd49b2b83b7e05c264a62cfedeb45eaf5c629d0f0174917d801aef";
