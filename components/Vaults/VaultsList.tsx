@@ -21,7 +21,7 @@ const VaultsList = () => {
             {
                 vaults.map(vault => (
                     <VaultPreview
-                        key={vault.id}
+                        key={`${vault.managerAddress}-${vault.vaultId}`}
                         vault={vault}
                     />
                 ))

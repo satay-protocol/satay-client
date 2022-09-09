@@ -4,13 +4,8 @@ import { useAptos } from '../contexts/AptosContext';
 import { VaultPreview } from "../types/vaults";
 
 import { getVaults } from '../services/vaults';
-import { getVaultPreview } from '../data/vaultsData';
-import useManagerResource from './useManagerResource';
 
-interface ManagerResource {
-    vaults: {handle : string},
-    next_vault_id: string;
-}
+import useManagerResource from './useManagerResource';
 
 const useVaults = () => {
 
@@ -25,17 +20,9 @@ const useVaults = () => {
     useEffect(() => {
         const getVaultsData = async () => {
             if(managerResource){
-                const vaults = await getVaults(client, managerResource)
-    
+                const vaults = await getVaults(client, managerResource);
+                setVaults(vaults.filter(v => v !== null).map(v => v as VaultPreview));
                 setFetched(true);
-    
-                setVaults(vaults.map((vault) => ({
-                    ...getVaultPreview(vault.base_coin),
-                    apy: 10.5,
-                    totalAssets: 100000,
-                    id: vault.vault_address
-                    
-                })));
             }
         }
         if(!fetched && managerResource){

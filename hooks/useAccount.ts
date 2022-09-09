@@ -2,7 +2,7 @@ import { useWallet, Wallet, WalletName } from '@manahippo/aptos-wallet-adapter';
 import { useEffect } from 'react';
 
 const useAccount = () => {
-    const { connected, connecting, account, connect, disconnect, select, wallets } = useWallet();
+    const { connected, connecting, account, connect, disconnect, select, signAndSubmitTransaction, wallets } = useWallet();
 
     const connectWallet = (wallet : Wallet) => {
         connect(wallet.adapter.name);
@@ -24,6 +24,7 @@ const useAccount = () => {
     return {
         connected,
         account,
+        signAndSubmitTransaction,
         connectWallet,
         disconnectWallet,
         wallets

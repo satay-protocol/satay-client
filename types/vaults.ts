@@ -3,7 +3,9 @@ export interface VaultPreview {
     logo: string;
     apy: number | null;
     totalAssets: number;
-    id: string;
+    vaultId: string;
+    managerAddress: string;
+    vaultAddress: string;
 }
 
 export interface Vault extends VaultPreview {
@@ -14,4 +16,9 @@ export interface Vault extends VaultPreview {
 export interface Strategy {
     title: string;
     description: string;
+}
+
+export interface Holding {
+    coin: string;
+    value: number;
 }

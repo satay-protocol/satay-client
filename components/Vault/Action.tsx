@@ -9,6 +9,7 @@ import {
     Flex,
     Button
 } from '@chakra-ui/react';
+import useAccount from '../../hooks/useAccount';
 
 interface Props {
     actionName: string;
@@ -18,6 +19,8 @@ interface Props {
 }
 
 const Action : React.FC<Props> = ({ action, asset, logo, actionName}) => {
+
+    const { connected } = useAccount();
 
     const [amount, setAmount] = useState(0);
 
@@ -81,15 +84,11 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName}) => {
                 gap={4}
             >
                 <Button
-                    flex={1}
-                >
-                    Approve
-                </Button>
-                <Button
                     onClick={() => action(amount)}
                     variant='solid'
                     colorScheme='blue'
                     flex={1}
+                    disabled={!connected}
                 >
                     {actionName}
                 </Button>

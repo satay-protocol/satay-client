@@ -13,16 +13,10 @@ interface Props {
     vault: VaultPreview
 }
 
-const keys = [
-    'asset',
-    'apy',
-    'totalAssets'
-] as Array<keyof VaultPreview>
-
 const VaultPreview : React.FC<Props> = ({ vault }) => {
     return (
         <Link
-            href={`/vaults/${vault.id}`}
+            href={`/vaults/${vault.managerAddress}/${vault.vaultId}`}
         >
             <HStack
                 width='100%'
