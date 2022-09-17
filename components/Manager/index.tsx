@@ -1,9 +1,26 @@
 import React from 'react'
 
-const Manager = () => {
+import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import NotConnected from '../utilities/NotConnected';
+import ManagerComponent from './ManagerComponent';
+
+
+const Manager : React.FC = () => {
+
+  const { account } = useWallet();
+
+  if(!account?.address) {
+    return (
+      <NotConnected />
+    )
+  }
+
   return (
-    <div>Manager</div>
+    <ManagerComponent 
+      managerAddress={account.address.toString()}
+    />
   )
+  
 }
 
 export default Manager

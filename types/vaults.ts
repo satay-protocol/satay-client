@@ -10,10 +10,14 @@ export interface VaultPreview {
 
 export interface Vault extends VaultPreview {
     about: string;
-    strategies: Strategy[];
+    strategy: Strategy | null;
+    coinType: string;
+    strategyString: string;
 }
 
 export interface Strategy {
+    strategyId: string,
+    baseCoin: string;
     title: string;
     description: string;
 }

@@ -16,17 +16,10 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
   Container,
 } from '@chakra-ui/react';
 import {
   FiHome,
-  FiMenu,
-  FiChevronDown,
 } from 'react-icons/fi';
 
 import {
@@ -35,15 +28,14 @@ import {
 import { IconType } from 'react-icons';
 import Navbar from '../components/Navbar';
 
+import useAccount from '../hooks/useAccount';
+import { vaultManager } from '../data/vaultManager';
+
 interface LinkItemProps {
   name: string;
   icon: IconType;
   href: string;
 }
-const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/' },
-  { name: 'Vaults', icon: BsSafe, href: '/vaults' },
-];
 
 const DefaultLayout = ({
   children,
@@ -104,6 +96,18 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent : React.FC<SidebarProps> = ({ onClose, ...rest }) => {
+
+  const { account } = useAccount();
+
+  const LinkItems: Array<LinkItemProps> = [
+    { name: 'Home', icon: FiHome, href: '/' },
+    { name: 'Vaults', icon: BsSafe, href: '/vaults' },
+  ];
+
+  if(account && vaultManager === account.address) {
+    LinkItems.push({ name: 'Manage', icon: BsSafe, href: `/manager/${vaultManager}` });
+  }
+
   return (
     <Box
       transition="3s ease"

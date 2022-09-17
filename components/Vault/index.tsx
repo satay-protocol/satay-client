@@ -3,7 +3,6 @@ import React from 'react'
 import useVault from '../../hooks/useVault';
 
 import { 
-  HStack, 
   Box, 
   Flex
 } from '@chakra-ui/react';
@@ -11,13 +10,15 @@ import {
 import VaultInfo from './VaultInfo';
 import Actions from './Actions';
 
+import { vaultManager } from '../../data/vaultManager';
+
 interface Props {
   vaultId: string;
 }
 
 const Vault : React.FC<Props> = ({ vaultId }) => {
 
-  const { vault, deposit, withdraw } = useVault(vaultId)
+  const { vault, deposit, withdraw } = useVault(vaultManager, vaultId)
 
   return (
     <Box>

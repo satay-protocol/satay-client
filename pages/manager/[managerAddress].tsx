@@ -1,10 +1,14 @@
 import { NextPage } from 'next'
 import React from 'react'
+
+import DefaultLayout from '../../layouts/default';
 import Manager from '../../components/Manager';
 
 const ManagerPage : NextPage = () => {
   return (
-    <Manager />
+    <DefaultLayout>
+      <Manager />
+    </DefaultLayout>
   )
 }
 

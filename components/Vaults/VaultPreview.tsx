@@ -37,6 +37,7 @@ const VaultPreview : React.FC<Props> = ({ vault }) => {
                         height='40px'
                         width='40px'
                         rounded='full'
+                        alt='coin logo'
                     />
                     <Text
                         flex={1}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FocusEventHandler, useState } from 'react'
 
 import {
     VStack,
@@ -9,24 +9,32 @@ import {
     Flex,
     Button
 } from '@chakra-ui/react';
-import useAccount from '../../hooks/useAccount';
+
+import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import useCoinBalance from '../../hooks/useCoinBalance';
+import { fromAptos } from '../../services/utils';
 
 interface Props {
     actionName: string;
     action: (amount : number) => Promise<void>;
     asset: string;
     logo: string;
+    coinAddress: string
 }
 
-const Action : React.FC<Props> = ({ action, asset, logo, actionName}) => {
+const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress}) => {
 
-    const { connected } = useAccount();
+    const { connected } = useWallet();
+
+    const balance = useCoinBalance(coinAddress);
 
     const [amount, setAmount] = useState(0);
 
-    const onChange = (valueAsString : string, valueAsNumber : number) => {
-        setAmount(valueAsNumber);
+    const onChange = (valueAsString : string) => {
+        setAmount(parseFloat(valueAsString));
     }
+
+    console.log(amount);
 
     return (
         <Flex
@@ -48,6 +56,7 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName}) => {
                         height='60px'
                         width='60px'
                         rounded='full'
+                        alt='token logo'
                     />
                     <Text>
                         {asset}
@@ -64,27 +73,24 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName}) => {
                     <Text
                         fontSize='sm'
                     >
-                        You have 1.5681 APTOS
+                        You have {balance} {asset}
                     </Text>
                     <NumberInput
-                        value={amount}
                         onChange={onChange}
                         w='100%'
+                        max={balance}
+                        precision={8}
+                        defaultValue={0}
                     >
                         <NumberInputField />
                     </NumberInput>
-                    <Text
-                        fontSize='sm'
-                    >
-                        $50.47
-                    </Text>
                 </VStack>
             </Flex>
             <Flex
                 gap={4}
             >
                 <Button
-                    onClick={() => action(amount)}
+                    onClick={() => action(fromAptos(amount))}
                     variant='solid'
                     colorScheme='blue'
                     flex={1}

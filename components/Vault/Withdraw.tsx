@@ -21,6 +21,7 @@ const Withdraw : React.FC<Props> = ({ logo, withdraw }) => {
                 height='60px'
                 width='60px'
                 rounded='full'
+                alt='coin logo'
             />
         </VStack>
     </HStack>

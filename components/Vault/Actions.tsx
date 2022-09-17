@@ -12,6 +12,7 @@ import Card from '../utilities/Card'
 import Action from './Action';
 
 import { Vault } from '../../types/vaults';
+import { vaultManager } from '../../data/vaultManager';
 
 interface Props {
     vault: Vault;
@@ -39,6 +40,7 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                         asset={vault.asset}
                         logo={vault.logo}
                         actionName='Deposit'
+                        coinAddress={vault.coinType}
                     />
                 </TabPanel>
                 <TabPanel
@@ -48,8 +50,9 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                         key='withdrawAction'
                         action={withdraw}
                         logo={vault.logo}
-                        asset={vault.asset}
+                        asset={"Vault Coin"}
                         actionName='Withdraw'
+                        coinAddress={`${vaultManager}::vault::VaultCoin<${vault.coinType}>`}
                     />
                 </TabPanel>
             </TabPanels>

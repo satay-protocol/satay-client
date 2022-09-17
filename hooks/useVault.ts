@@ -8,15 +8,15 @@ import { getVaultCoins, getVaultFromTable } from "../services/vaults";
 import { Vault } from "../types/vaults";
 import useAccount from "./useAccount";
 
-import useManagerResource from "./useManagerResource";
+import useManagerResource from "./manager/useManagerResource";
 
-const useVault = (vaultId : string) => {
+const useVault = (managerAddress : string, vaultId : string) => {
 
     const { client } = useAptos();
 
     const { account, signAndSubmitTransaction } = useAccount();
 
-    const { managerResource, complete: managerResourceComplete } = useManagerResource();
+    const { managerResource, complete: managerResourceComplete } = useManagerResource(managerAddress);
 
     const [vault, setVault] = useState<Vault | null>(null);
     const [complete, setComplete] = useState<boolean>(false);
@@ -48,14 +48,28 @@ const useVault = (vaultId : string) => {
                     vault.vaultId,
                     amount.toString()
                 ],
-                type_arguments: ["0x43417434fd869edee76cca2a4d2301e528a1551b1d719b75c350c3c97d15b8b9::coins::USDT"]
+                type_arguments: [vault.coinType]
             }
-            await signAndSubmitTransaction(payload);
+            const tx = await signAndSubmitTransaction(payload)
+            await client.waitForTransaction(tx.hash);
         }
     }
 
     const withdraw = async (amount : number) => {
-
+        if(vault && account?.address){
+            const payload : TransactionPayload = {
+                type: 'entry_function_payload',
+                function: `0xc09622c20bdd49b2b83b7e05c264a62cfedeb45eaf5c629d0f0174917d801aef::satay::withdraw`,
+                arguments: [
+                    vault.managerAddress,
+                    vault.vaultId,
+                    amount.toString()
+                ],
+                type_arguments: [vault.coinType]
+            }
+            const tx = await signAndSubmitTransaction(payload)
+            await client.waitForTransaction(tx.hash);
+        }
     }
 
     return {

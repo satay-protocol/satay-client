@@ -33,7 +33,7 @@ const Overview : React.FC<Props> = ({ apy, asset, totalAssets, logo}) => {
                 height="100px"
                 width="100px"
                 rounded="full"
-
+                alt="logo image"
             />
             <VStack
                 alignItems='flex-start'

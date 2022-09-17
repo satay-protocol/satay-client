@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useAptos } from '../contexts/AptosContext';
 
-import { VaultPreview } from "../types/vaults";
+import { Vault } from "../types/vaults";
 
 import { getVaults } from '../services/vaults';
 
-import useManagerResource from './useManagerResource';
+import useManagerResource from './manager/useManagerResource';
 
-const useVaults = () => {
+const useVaults = (managerAddress : string) => {
 
     const { client } = useAptos();
 
-    const { managerResource } = useManagerResource();
+    const { managerResource } = useManagerResource(managerAddress);
 
-    const [vaults, setVaults] = useState<VaultPreview[]>([]);
+    const [vaults, setVaults] = useState<Vault[]>([]);
 
     const [fetched, setFetched] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ const useVaults = () => {
         const getVaultsData = async () => {
             if(managerResource){
                 const vaults = await getVaults(client, managerResource);
-                setVaults(vaults.filter(v => v !== null).map(v => v as VaultPreview));
+                setVaults(vaults.filter(v => v !== null).map(v => v as Vault));
                 setFetched(true);
             }
         }

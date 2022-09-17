@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WalletProvider
       wallets={wallets}
+      autoConnect={true}
     >
       <ChakraProvider
         theme={theme}

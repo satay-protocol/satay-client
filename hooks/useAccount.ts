@@ -1,25 +1,15 @@
-import { useWallet, Wallet, WalletName } from '@manahippo/aptos-wallet-adapter';
-import { useEffect } from 'react';
+import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter';
 
 const useAccount = () => {
-    const { connected, connecting, account, connect, disconnect, select, signAndSubmitTransaction, wallets } = useWallet();
+    const { connected, account, connect, disconnect, signAndSubmitTransaction, wallets } = useWallet();
 
     const connectWallet = (wallet : Wallet) => {
         connect(wallet.adapter.name);
-        window.localStorage.setItem('wallet', wallet.adapter.name);
     }
 
     const disconnectWallet = () => {
         disconnect();
-        window.localStorage.removeItem('wallet');
     }
-
-    useEffect(() => {
-        const wallet = window.localStorage.getItem('wallet') as WalletName;
-        if (!connected && !connecting && wallet) {
-            select(wallet)
-        }
-    }, [connected, connecting, connect])
 
     return {
         connected,
