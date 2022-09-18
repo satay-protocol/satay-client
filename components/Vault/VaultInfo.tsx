@@ -22,10 +22,8 @@ const VaultInfo : React.FC<Props> = ({ vault }) => {
             alignItems='flex-start'
         >
             <Overview
-                apy={vault.apy}
-                asset={vault.asset}
-                totalAssets={vault.totalAssets}
                 logo={vault.logo}
+                vaultAddress={vault.vaultAddress}
             />
             <AboutVault 
                 about={vault.about}

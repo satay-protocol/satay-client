@@ -88,7 +88,7 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
                 gap={4}
             >
                 <Button
-                    onClick={() => action(fromAptos(amount))}
+                    onClick={() => action(Math.round(fromAptos(amount)))}
                     variant='solid'
                     colorScheme='blue'
                     flex={1}
