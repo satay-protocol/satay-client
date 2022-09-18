@@ -13,6 +13,7 @@ import Action from './Action';
 
 import { Vault } from '../../types/vaults';
 import { vaultManager } from '../../data/vaultManager';
+import Holdings from './Holdings';
 
 interface Props {
     vault: Vault;
@@ -57,6 +58,9 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                 </TabPanel>
             </TabPanels>
         </Tabs>
+        <Holdings 
+            vaultAddress={vault.vaultAddress}
+        />
     </Card>
   )
 }

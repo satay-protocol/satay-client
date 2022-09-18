@@ -7,17 +7,14 @@ import {
     Image,
     Box
 } from '@chakra-ui/react'
-import useCoinBalances from '../../hooks/useCoinBalances';
 import { toAptos } from '../../services/utils';
 
 interface Props {
     logo: string;
-    vaultAddress: string;
+    asset: string;
 }
 
-const Overview : React.FC<Props> = ({ logo, vaultAddress}) => {
-
-    const balances = useCoinBalances(vaultAddress);
+const Overview : React.FC<Props> = ({ logo, asset}) => {
 
     return (
         <VStack
@@ -43,19 +40,12 @@ const Overview : React.FC<Props> = ({ logo, vaultAddress}) => {
                     alignItems='flex-start'
                     justifyContent='center'
                 >
-                    {
-                        balances.map((balance) => (
-                            <Box
-                                p={4}
-                                bg='gray.50'
-                                rounded='lg'
-                                key={balance.coin}
-                                w='100%'
-                            >
-                                <Text>{balance.coin}: {toAptos(balance.value)}</Text>
-                            </Box>
-                        ))
-                    }
+                    <Text
+                        fontSize="xl"
+                        fontWeight="bold"
+                    >
+                        {asset} Vault
+                    </Text>
                 </VStack>
                 
             </HStack>
