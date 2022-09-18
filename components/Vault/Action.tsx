@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react';
 
 import { useWallet } from '@manahippo/aptos-wallet-adapter';
-import useCoinBalance from '../../hooks/useCoinBalance';
 import { fromAptos } from '../../services/utils';
+import useUserCoinBalance from '../../hooks/useUserCoinBalance';
 
 interface Props {
     actionName: string;
@@ -26,15 +26,13 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
 
     const { connected } = useWallet();
 
-    const balance = useCoinBalance(coinAddress);
+    const balance = useUserCoinBalance(coinAddress);
 
     const [amount, setAmount] = useState(0);
 
     const onChange = (valueAsString : string) => {
         setAmount(parseFloat(valueAsString));
     }
-
-    console.log(amount);
 
     return (
         <Flex

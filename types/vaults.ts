@@ -26,3 +26,8 @@ export interface Holding {
     coin: string;
     value: number;
 }
+
+export interface CoinData {
+    coin: string;
+    value: number;
+}

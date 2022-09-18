@@ -11,6 +11,8 @@ import {
 import { Vault } from '../../types/vaults'
 import useVaultStrategy from '../../hooks/manager/useVaultStrategy'
 import SelectStrategy from '../modals/SelectStrategy'
+import ApplyStrategy from '../modals/ApplyStrategy'
+import LiquidateStrategy from '../modals/LiquidateStrategy'
 
 interface Props {
     vault: Vault,
@@ -19,17 +21,33 @@ interface Props {
 
 const Vault : React.FC<Props> = ({ vault, managerAddress }) => {
 
-    const { onOpen, onClose, isOpen } = useDisclosure();
+    const { onOpen: onSelectStrategyOpen, onClose: onStrategySelectClose, isOpen : isSelectStrategyOpen } = useDisclosure();
+    const { onOpen: onApplyStrategyOpen, onClose: onApplyStrategyClose, isOpen : isApplyStrategyOpen } = useDisclosure();
+    const { onOpen: onLiquidateStrategyOpen, onClose: onLiquidateStrategyClose, isOpen : isLiquidateStrategyOpen } = useDisclosure();
 
-    const { approveStrategy } = useVaultStrategy(managerAddress, vault.vaultId);
+    const { approveStrategy, applyStrategy, liquidateStrategy } = useVaultStrategy(managerAddress, vault.vaultId, vault.strategyString);
 
     return (
         <>
             <SelectStrategy 
-                isOpen={isOpen}
-                onClose={onClose}
+                isOpen={isSelectStrategyOpen}
+                onClose={onStrategySelectClose}
                 baseCoin={vault.coinType}
                 approveStrategy={approveStrategy}
+            />
+            <ApplyStrategy 
+                isOpen={isApplyStrategyOpen}
+                onClose={onApplyStrategyClose}
+                baseCoin={vault.coinType}
+                vaultAddress={vault.vaultAddress}
+                applyStrategy={applyStrategy}
+            />
+            <LiquidateStrategy
+                isOpen={isLiquidateStrategyOpen}
+                onClose={onLiquidateStrategyClose}
+                strategyCoin={"0x43417434fd869edee76cca2a4d2301e528a1551b1d719b75c350c3c97d15b8b9::lp::LP<0x1::aptos_coin::AptosCoin, 0x43417434fd869edee76cca2a4d2301e528a1551b1d719b75c350c3c97d15b8b9::coins::USDT>"}
+                vaultAddress={vault.vaultAddress}
+                liquidateStrategy={liquidateStrategy}
             />
             <HStack
                 width='100%'
@@ -55,14 +73,18 @@ const Vault : React.FC<Props> = ({ vault, managerAddress }) => {
                     </Text>
                 </HStack>
                 <Button
-                    onClick={onOpen}
+                    onClick={onSelectStrategyOpen}
                 >
                     Select Strategy
                 </Button>
-                <Button>
+                <Button
+                    onClick={onApplyStrategyOpen}
+                >
                     Apply Strategy
                 </Button>
-                <Button>
+                <Button
+                    onClick={onLiquidateStrategyOpen}
+                >
                     Liquidate Strategy
                 </Button>
             </HStack>

@@ -8,6 +8,7 @@ import Overview from './Overview'
 import Strategies from './Strategies'
 
 import { Vault } from '../../types/vaults'
+import Holdings from './Holdings'
 
 interface Props {
     vault: Vault
@@ -28,6 +29,9 @@ const VaultInfo : React.FC<Props> = ({ vault }) => {
             />
             <AboutVault 
                 about={vault.about}
+            />
+            <Holdings 
+                vaultAddress={vault.vaultAddress}
             />
             <Strategies 
                 strategy={vault.strategy}

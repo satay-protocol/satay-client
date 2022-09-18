@@ -3,7 +3,7 @@ import { TransactionPayload } from "aptos/dist/generated";
 import { useEffect, useState } from "react";
 import { useAptos } from "../contexts/AptosContext";
 import { vaultManager } from "../data/vaultManager";
-import { getVaultCoins, getVaultFromTable } from "../services/vaults";
+import { getVaultFromTable } from "../services/vaults";
 
 import { Vault } from "../types/vaults";
 import useAccount from "./useAccount";
@@ -16,7 +16,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
 
     const { account, signAndSubmitTransaction } = useAccount();
 
-    const { managerResource, complete: managerResourceComplete } = useManagerResource(managerAddress);
+    const { managerResource } = useManagerResource(managerAddress);
 
     const [vault, setVault] = useState<Vault | null>(null);
     const [complete, setComplete] = useState<boolean>(false);
@@ -26,7 +26,6 @@ const useVault = (managerAddress : string, vaultId : string) => {
             if(managerResource && vaultId){
                 const vault = await getVaultFromTable(client, managerResource, vaultId);
                 if(vault){
-                    getVaultCoins(client, vault.vaultAddress);
                     setVault(vault);
                     setComplete(true);
                 }

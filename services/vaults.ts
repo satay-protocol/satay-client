@@ -44,7 +44,6 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         const {data : vault} = await client.getAccountResource(vaultInfo.vault_cap.vec[0].vault_addr, `${vaultManager}::vault::Vault`);
         const vaultData = vault as VaultData;
         const strategyString = vaultInfo.strategy_type.vec.length > 0 ? getTypeString(vaultInfo.strategy_type.vec[0]) : "";
-        console.log(getStrategy(strategyString));
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
             coinType: getTypeString(vaultData.base_coin_type),
@@ -76,25 +75,7 @@ export const getVaults = async (client : AptosClient, managerResource : ManagerR
     }))
 }
 
-interface CoinStore {
-    coin: {
-        value: string
-    }
-}
-
-export const getVaultCoins = async (client : AptosClient, vaultAddress: string) => {
-    let resources = await client.getAccountResources(vaultAddress);
-    let coins = resources
-        .filter(r => r.type.includes('CoinStore'))
-        .map((r) => ({
-            coin: r.type.slice(r.type.lastIndexOf("::") + 2, -1),
-            value: parseInt((r.data as CoinStore).coin.value)
-        }))
-    // const vaultData = vault as VaultData;
-    // return vaultData.user_positions.handle;
-}
-
-const getTypeString = (struct : StructData) => {
+export const getTypeString = (struct : StructData) => {
     return struct.account_address + "::"
         + Buffer.from(struct.module_name.slice(2), 'hex').toString() + "::"
         + Buffer.from(struct.struct_name.slice(2), 'hex').toString();

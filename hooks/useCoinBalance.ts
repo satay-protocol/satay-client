@@ -1,4 +1,3 @@
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import { useEffect, useState } from 'react';
 
 import { useAptos } from '../contexts/AptosContext';
@@ -7,21 +6,18 @@ import { getCoinBalance } from '../services/aptosUtils';
 import { toAptos } from '../services/utils';
 
 
-const useCoinBalance = (coinAddress : string) => {
+const useCoinBalance = (accountAddress: string, coinAddress : string, coinStoreAddress = '0x1::coin') => {
 
     const { client } = useAptos();
-    const { account } = useWallet();
 
     const [balance, setBalance] = useState(0);
 
     useEffect(() => {
-        const getBalance = async (address : string) => {
-            const coinBalance = await getCoinBalance(client, coinAddress, address);
+        const getBalance = async () => {
+            const coinBalance = await getCoinBalance(client, coinAddress, accountAddress, coinStoreAddress);
             setBalance(toAptos(coinBalance));
         }
-        if(account?.address){
-            getBalance(account.address.toString());
-        }
+        getBalance();
     }, [coinAddress])
 
     return balance;
