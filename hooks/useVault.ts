@@ -41,7 +41,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
         if(vault && account?.address){
             const payload : TransactionPayload = {
                 type: 'entry_function_payload',
-                function: `0xc09622c20bdd49b2b83b7e05c264a62cfedeb45eaf5c629d0f0174917d801aef::satay::deposit`,
+                function: `${vaultManager}::satay::deposit`,
                 arguments: [
                     vault.managerAddress,
                     vault.vaultId,
@@ -58,7 +58,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
         if(vault && account?.address){
             const payload : TransactionPayload = {
                 type: 'entry_function_payload',
-                function: `0xc09622c20bdd49b2b83b7e05c264a62cfedeb45eaf5c629d0f0174917d801aef::satay::withdraw`,
+                function: `${vaultManager}::satay::withdraw`,
                 arguments: [
                     vault.managerAddress,
                     vault.vaultId,

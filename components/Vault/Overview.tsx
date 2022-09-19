@@ -5,16 +5,15 @@ import {
     Text,
     HStack,
     Image,
-    Box
 } from '@chakra-ui/react'
-import { toAptos } from '../../services/utils';
 
 interface Props {
     logo: string;
     asset: string;
+    totalDeposits: number;
 }
 
-const Overview : React.FC<Props> = ({ logo, asset}) => {
+const Overview : React.FC<Props> = ({ logo, asset, totalDeposits}) => {
 
     return (
         <VStack
@@ -45,6 +44,9 @@ const Overview : React.FC<Props> = ({ logo, asset}) => {
                         fontWeight="bold"
                     >
                         {asset} Vault
+                    </Text>
+                    <Text>
+                        {totalDeposits} {asset}
                     </Text>
                 </VStack>
                 

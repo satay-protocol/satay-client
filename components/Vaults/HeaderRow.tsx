@@ -7,8 +7,8 @@ import {
 
 const columns = [
     "Asset",
-    "APY",
-    "Total Assets"
+    "Total Deposits",
+    "Active Strategy"
 ]
 
 const HeaderRow : React.FC = () => {

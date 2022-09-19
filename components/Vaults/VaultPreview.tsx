@@ -6,11 +6,11 @@ import {
     Text 
 } from '@chakra-ui/react'
 
-import { VaultPreview } from '../../types/vaults'
+import { Vault } from '../../types/vaults'
 import Link from 'next/link'
 
 interface Props {
-    vault: VaultPreview
+    vault: Vault
 }
 
 const VaultPreview : React.FC<Props> = ({ vault }) => {
@@ -48,12 +48,12 @@ const VaultPreview : React.FC<Props> = ({ vault }) => {
                 <Text
                     flex={1}
                 >
-                    {vault.apy}%
+                    {vault.totalDeposits.toLocaleString()} {vault.coinType.slice(vault.coinType.lastIndexOf('::') + 2)}
                 </Text>
                 <Text
                     flex={1}
                 >
-                    ${vault.totalAssets.toLocaleString()}
+                    {vault.strategy?.strategyId.slice(vault.strategy?.strategyId.lastIndexOf("::") + 2) || "No Active Strategy"}
                 </Text>
             </HStack>
         </Link>

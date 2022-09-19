@@ -1,17 +1,13 @@
-export interface VaultPreview {
+export interface Vault {
     asset: string;
     logo: string;
-    apy: number | null;
-    totalAssets: number;
+    totalDeposits: number;
     vaultId: string;
     managerAddress: string;
     vaultAddress: string;
-}
-
-export interface Vault extends VaultPreview {
     about: string;
-    strategy: Strategy | null;
     coinType: string;
+    strategy: Strategy | null;
     strategyString: string;
 }
 

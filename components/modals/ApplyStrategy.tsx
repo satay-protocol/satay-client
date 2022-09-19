@@ -28,8 +28,6 @@ interface Props {
 
 const ApplyStrategy : React.FC<Props> = ({ isOpen, onClose, applyStrategy, baseCoin, vaultAddress }) => {
 
-    console.log(baseCoin);
-
     const balance = useCoinBalance(vaultAddress, baseCoin, `${vaultManager}::vault`);
 
     const [amount, setAmount] = useState(0);

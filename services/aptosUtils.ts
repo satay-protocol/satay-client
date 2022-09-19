@@ -1,7 +1,7 @@
 import { AptosClient } from "aptos";
 import { CoinData } from "../types/vaults";
 
-interface CoinStoreResource {
+export interface CoinStoreResource {
     coin: {
         value: string
     }
