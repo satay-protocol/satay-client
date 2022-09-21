@@ -38,7 +38,12 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
                         key={balance.coin}
                         w='100%'
                     >
-                        <Text>{balance.coin}: {toAptos(balance.value)}</Text>
+                        <Text>
+                            <span>
+                                {toAptos(balance.value)}{' '}
+                            </span>
+                            {balance.coin}
+                        </Text>
                     </Box>
                 ))
             }

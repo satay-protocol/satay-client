@@ -46,7 +46,7 @@ const Overview : React.FC<Props> = ({ logo, asset, totalDeposits}) => {
                         {asset} Vault
                     </Text>
                     <Text>
-                        {totalDeposits} {asset}
+                        TVL: {totalDeposits} {asset}
                     </Text>
                 </VStack>
                 

@@ -1,7 +1,11 @@
+import { useToast } from "@chakra-ui/react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter"
+import { useAptos } from "../../contexts/AptosContext";
 import { fromAptos } from "../../services/utils";
 
 const useVaultStrategy = (managerAddress : string, vaultId: string, strategyString: string) => {
+
+    const toast = useToast();
 
     const { signAndSubmitTransaction } = useWallet();
 
@@ -12,6 +16,23 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
             arguments: [vaultId],
             type_arguments: [strategyType]
         })
+            .then(() => {
+                toast({
+                    title: "Strategy Approved!",
+                    description: "The strategy has been approved",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
+            .catch(() => {
+                toast({
+                    title: "Strategy Approval Failed",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
     }
 
     const applyStrategy = async (amount : number) => {
@@ -21,6 +42,24 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
         })
+            .then(() => {
+                toast({
+                    title: "Strategy Applied!",
+                    description: `The strategy has been applied to ${amount} coins`,
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
+            .catch(() => {
+                toast({
+                    title: "Strategy Failed",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
+
     }
 
     const liquidateStrategy = async (amount : number) => {
@@ -30,6 +69,23 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
         })
+            .then(() => {
+                toast({
+                    title: "Strategy Liquidated!",
+                    description: `${amount} strategy position tokens have been liquidated`,
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
+            .catch(() => {
+                toast({
+                    title: "Strategy Liquidation Failed",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
     }
 
     return {
