@@ -28,8 +28,8 @@ import {
 import { IconType } from 'react-icons';
 import Navbar from '../components/Navbar';
 
-import useAccount from '../hooks/useAccount';
 import { vaultManager } from '../data/vaultManager';
+import { useWallet } from '@manahippo/aptos-wallet-adapter';
 
 interface LinkItemProps {
   name: string;
@@ -97,7 +97,7 @@ interface SidebarProps extends BoxProps {
 
 const SidebarContent : React.FC<SidebarProps> = ({ onClose, ...rest }) => {
 
-  const { account } = useAccount();
+  const { account } = useWallet();
 
   const LinkItems: Array<LinkItemProps> = [
     { name: 'Home', icon: FiHome, href: '/' },

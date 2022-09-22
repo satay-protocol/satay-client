@@ -1,10 +1,10 @@
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { Coin } from "../../data/coins";
 import { vaultManager } from "../../data/vaultManager";
-import useAccount from "../useAccount";
 
 const useCreateVault = () => {
 
-    const { account, signAndSubmitTransaction } = useAccount();
+    const { account, signAndSubmitTransaction } = useWallet();
 
     const createVault = async (vaultName: string, coin : Coin) => {
         if(account){

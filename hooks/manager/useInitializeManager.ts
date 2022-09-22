@@ -1,8 +1,8 @@
-import useAccount from "../useAccount";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 const useInitializeManager = () => {
 
-    const { account, signAndSubmitTransaction } = useAccount();
+    const { account, signAndSubmitTransaction } = useWallet();
 
     const initialize = async () => {
         if(account){
