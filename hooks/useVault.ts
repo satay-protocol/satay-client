@@ -51,6 +51,9 @@ const useVault = (managerAddress : string, vaultId : string) => {
                     amount.toString()
                 ],
                 type_arguments: [vault.coinType]
+            }, {
+                max_gas_amount: '5000',
+                gas_unit_price: '1000',
             })
                 .then(() => {
                     toast({
@@ -83,6 +86,9 @@ const useVault = (managerAddress : string, vaultId : string) => {
                     amount.toString()
                 ],
                 type_arguments: [vault.coinType]
+            }, {
+                max_gas_amount: '5000',
+                gas_unit_price: '1000',
             })
                 .then(() => {
                     toast({

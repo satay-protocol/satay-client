@@ -20,6 +20,9 @@ const useInitializeStrategy = (strategyAddress : string, vaultId : string, vault
             function: `${strategyAddress}::initialize`,
             arguments: [account?.address, vaultId],
             type_arguments: []
+        }, {
+            max_gas_amount: '5000',
+            gas_unit_price: '1000',
         })
     }
 

@@ -1,7 +1,6 @@
 import { Coin } from "../../data/coins";
+import { vaultManager } from "../../data/vaultManager";
 import useAccount from "../useAccount";
-
-
 
 const useCreateVault = () => {
 
@@ -11,10 +10,14 @@ const useCreateVault = () => {
         if(account){
             await signAndSubmitTransaction({
                 type: 'entry_function_payload',
-                function: `0xc09622c20bdd49b2b83b7e05c264a62cfedeb45eaf5c629d0f0174917d801aef::satay::new_vault`,
+                function: `${vaultManager}::satay::new_vault`,
                 arguments: [vaultName],
                 type_arguments: [coin.type]
+            }, {
+                max_gas_amount: '5000',
+                gas_unit_price: '1000',
             })
+
         }
     }
 
