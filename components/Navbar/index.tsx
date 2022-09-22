@@ -19,9 +19,8 @@ import {
 
 import { useRouter } from 'next/router';
 
-import useAccount from '../../hooks/useAccount';
-
 import { ellipsize } from '../../services/utils';
+import { useWallet } from '@manahippo/aptos-wallet-adapter';
 
 interface Props extends FlexProps {
     onOpen: () => void;
@@ -33,9 +32,9 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
         connected,
         account,
         wallets,
-        connectWallet,
-        disconnectWallet,
-    } = useAccount();
+        connect,
+        disconnect
+    } = useWallet();
 
     return (
         <Flex
@@ -85,7 +84,7 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                             {
                                 connected ? (
                                     <MenuItem
-                                        onClick={() => disconnectWallet()}
+                                        onClick={() => disconnect()}
                                     >
                                         Disconnect
                                     </MenuItem>
@@ -93,7 +92,7 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                                     wallets.map(wallet => (
                                         <MenuItem
                                             key={wallet.adapter.name}
-                                            onClick={() => connectWallet(wallet)}
+                                            onClick={() => connect(wallet.adapter.name)}
                                         >
                                             {wallet.adapter.name}
                                         </MenuItem>

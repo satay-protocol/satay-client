@@ -5,17 +5,17 @@ import { vaultManager } from "../data/vaultManager";
 import { getVaultFromTable } from "../services/vaults";
 
 import { Vault } from "../types/vaults";
-import useAccount from "./useAccount";
 
 import useManagerResource from "./manager/useManagerResource";
 import { useToast } from "@chakra-ui/react";
 import { toAptos } from "../services/utils";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 const useVault = (managerAddress : string, vaultId : string) => {
 
     const { client } = useAptos();
 
-    const { account, signAndSubmitTransaction } = useAccount();
+    const { account, signAndSubmitTransaction } = useWallet();
 
     const { managerResource } = useManagerResource(managerAddress);
 
