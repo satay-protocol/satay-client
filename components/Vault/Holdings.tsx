@@ -30,22 +30,29 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
                 Holdings
             </Text>
             {
-                balances.map((balance) => (
-                    <Box
-                        p={4}
-                        bg='gray.50'
-                        rounded='lg'
-                        key={balance.coin}
-                        w='100%'
-                    >
-                        <Text>
-                            <span>
-                                {toAptos(balance.value)}{' '}
-                            </span>
-                            {balance.coin}
-                        </Text>
-                    </Box>
-                ))
+                balances.length > 0 ? (
+                    balances.map((balance) => (
+                        <Box
+                            p={4}
+                            bg='gray.50'
+                            rounded='lg'
+                            key={balance.coin}
+                            w='100%'
+                        >
+                            <Text>
+                                <span>
+                                    {toAptos(balance.value)}{' '}
+                                </span>
+                                {balance.coin}
+                            </Text>
+                        </Box>
+                    ))
+                ) : (
+                    <Text>
+                        No holdings
+                    </Text>
+                )
+                
             }
         </VStack>
     )
