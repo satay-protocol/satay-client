@@ -44,6 +44,9 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
             function: `${strategyString.slice(0, strategyString.lastIndexOf("::"))}::apply_strategy`,
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
+        }, {
+            max_gas_amount: '5000',
+            gas_unit_price: '1000',
         })
             .then(() => {
                 toast({
@@ -71,6 +74,9 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
             function: `${strategyString.slice(0, strategyString.lastIndexOf("::"))}::liquidate_strategy`,
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
+        }, {
+            max_gas_amount: '5000',
+            gas_unit_price: '1000',
         })
             .then(() => {
                 toast({
