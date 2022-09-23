@@ -15,6 +15,9 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
             function: `${managerAddress}::satay::approve_strategy`,
             arguments: [vaultId],
             type_arguments: [strategyType]
+        }, {
+            max_gas_amount: '5000',
+            gas_unit_price: '1000',
         })
             .then(() => {
                 toast({
