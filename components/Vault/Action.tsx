@@ -90,7 +90,7 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
                 <Button
                     onClick={() => action(Math.round(fromAptos(amount)))}
                     variant='solid'
-                    colorScheme='blue'
+                    colorScheme='brand'
                     flex={1}
                     disabled={!connected}
                 >

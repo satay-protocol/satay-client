@@ -18,6 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WalletProvider
       wallets={wallets}
       autoConnect={true}
+      onError={(error: Error) => {
+        console.log('Handle Error Message', error);
+      }}
     >
       <ChakraProvider
         theme={theme}

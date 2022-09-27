@@ -1,6 +1,5 @@
 import { useToast } from "@chakra-ui/react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter"
-import { useAptos } from "../../contexts/AptosContext";
 import { fromAptos } from "../../services/utils";
 
 const useVaultStrategy = (managerAddress : string, vaultId: string, strategyString: string) => {

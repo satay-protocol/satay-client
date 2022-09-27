@@ -61,7 +61,7 @@ const CreateVault : React.FC = () => {
                     </Select>
                     <Button
                         onClick={() => selectedCoin && createVault(vaultName, selectedCoin)}
-                        colorScheme="blue"
+                        colorScheme="brand"
                         disabled={!selectedCoin || !vaultName}
                         flexShrink={0}
                     >

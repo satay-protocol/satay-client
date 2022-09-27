@@ -1,4 +1,3 @@
-import { TransactionPayload } from "aptos/dist/generated";
 import { useEffect, useState } from "react";
 import { useAptos } from "../contexts/AptosContext";
 import { vaultManager } from "../data/vaultManager";
@@ -64,7 +63,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
                         isClosable: true,
                     })
                 })
-                .catch(() => {
+                .catch((err) => {
                     toast({
                         title: "Deposit Failed",
                         status: "error",

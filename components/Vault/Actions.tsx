@@ -26,7 +26,7 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
     <Card
         h='100%'
     >
-        <Tabs>
+        <Tabs colorScheme='brand'>
             <TabList>
                 <Tab flex={1}>Deposit</Tab>
                 <Tab flex={1}>Withdraw</Tab>

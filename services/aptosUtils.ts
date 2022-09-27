@@ -8,7 +8,6 @@ export interface CoinStoreResource {
 }
 
 export const getCoinBalance = async (client : AptosClient, coinAddress : string, address : string, coinStoreAddress = '0x1::coin') => {
-    console.log()
     let coin : number = await client.getAccountResource(address, `${coinStoreAddress}::CoinStore<${coinAddress}>`)
         .then(res => parseInt((res.data as CoinStoreResource).coin.value))
         .catch((err) => 0)
@@ -16,8 +15,8 @@ export const getCoinBalance = async (client : AptosClient, coinAddress : string,
 }
 
 export const getCoinBalances = async (client : AptosClient, address: string) : Promise<CoinData[]> => {
+    console.log(address);
     let resources = await client.getAccountResources(address);
-    console.log(resources.filter(r => r.type.includes('CoinStore') && parseInt((r.data as CoinStoreResource).coin.value) > 0));
     return resources
         .filter(r => r.type.includes('CoinStore') && parseInt((r.data as CoinStoreResource).coin.value) > 0)
         .map((r) => ({

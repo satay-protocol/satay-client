@@ -9,7 +9,8 @@ import {
     MenuButton,
     Box,
     MenuList,
-    MenuItem
+    MenuItem,
+    Image
 } from '@chakra-ui/react'
 
 import {
@@ -20,7 +21,7 @@ import {
 import { useRouter } from 'next/router';
 
 import { ellipsize } from '../../services/utils';
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter';
 
 interface Props extends FlexProps {
     onOpen: () => void;
@@ -32,9 +33,13 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
         connected,
         account,
         wallets,
-        connect,
+        select,
         disconnect
     } = useWallet();
+
+    const onConnect = async (wallet : Wallet) => {
+        select(wallet.adapter.name);
+    }
 
     return (
         <Flex
@@ -42,7 +47,7 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
             height={20}
             alignItems="center"
             bg={useColorModeValue('white', 'gray.900')}
-            justifyContent={{ base: 'space-between', md: 'flex-end' }}
+            justifyContent={{ base: 'space-between' }}
             rounded="lg"
             {...rest}
         >
@@ -53,13 +58,12 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                 aria-label="open menu"
                 icon={<FiMenu />}
             />
-            <Text
-                display={{ base: 'flex', md: 'none' }}
-                fontSize="2xl"
-                fontWeight="bold"
-            >
-                Satay
-            </Text>
+            <Image 
+                src="/logo.png"
+                height={10}
+                width={10}
+                alt='satay logo'
+            />
             <HStack spacing={{ base: '0', md: '6' }}>
                 <Flex alignItems={'center'}>
                     <Menu>
@@ -92,7 +96,7 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                                     wallets.map(wallet => (
                                         <MenuItem
                                             key={wallet.adapter.name}
-                                            onClick={() => connect(wallet.adapter.name)}
+                                            onClick={() => onConnect(wallet)}
                                         >
                                             {wallet.adapter.name}
                                         </MenuItem>

@@ -12,7 +12,7 @@ export interface Vault {
 }
 
 export interface Strategy {
-    strategyId: string,
+    strategyId: string;
     baseCoin: string;
     title: string;
     description: string;
