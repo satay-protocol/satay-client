@@ -25,6 +25,7 @@ const Vault : React.FC<Props> = ({ vault, managerAddress }) => {
     const { onOpen: onApplyStrategyOpen, onClose: onApplyStrategyClose, isOpen : isApplyStrategyOpen } = useDisclosure();
     const { onOpen: onLiquidateStrategyOpen, onClose: onLiquidateStrategyClose, isOpen : isLiquidateStrategyOpen } = useDisclosure();
 
+    
     const { approveStrategy, applyStrategy, liquidateStrategy } = useVaultStrategy(managerAddress, vault.vaultId, vault.strategyString);
 
     return (

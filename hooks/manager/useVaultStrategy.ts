@@ -4,6 +4,8 @@ import { fromAptos } from "../../services/utils";
 
 const useVaultStrategy = (managerAddress : string, vaultId: string, strategyString: string) => {
 
+    console.log(strategyString);
+
     const toast = useToast();
 
     const { signAndSubmitTransaction } = useWallet();

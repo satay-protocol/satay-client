@@ -46,7 +46,7 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         const {data : vault} = await client.getAccountResource(vaultInfo.vault_cap.vec[0].vault_addr, `${vaultManager}::vault::Vault`);
         const vaultData = vault as VaultData;
         const coinType = getTypeString(vaultData.base_coin_type);
-        const strategyString = vaultInfo.strategy_type.vec.length > 0 ? getTypeString(vaultInfo.strategy_type.vec[0]) : "";
+        const strategyString = vaultInfo.strategy_type?.vec.length > 0 ? getTypeString(vaultInfo.strategy_type.vec[0]) : "";
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
             coinType: getTypeString(vaultData.base_coin_type),

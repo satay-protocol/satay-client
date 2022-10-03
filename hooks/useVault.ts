@@ -39,7 +39,6 @@ const useVault = (managerAddress : string, vaultId : string) => {
     }, [vaultId, managerResource, vault, complete]);
 
     const deposit = async (amount : number) => {
-        
         if(vault && account?.address){
             await signAndSubmitTransaction({
                 type: 'entry_function_payload',
