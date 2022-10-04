@@ -19,7 +19,6 @@ const useManagerResource = (managerAddress : string) => {
         const getManagerResource = async () => {
             const resource = await client.getAccountResource(managerAddress, `${vaultManager}::satay::ManagerAccount`)
                 .then(res => res)
-                .catch(err => console.log(err));
             if(resource?.data){
                 setManagerResource({...resource.data, vaultManager} as ManagerResource);
                 setComplete(true);

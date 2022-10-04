@@ -5,7 +5,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../theme';
 
 import {
-  PontemWalletAdapter, WalletProvider, WalletAdapter
+  PontemWalletAdapter, 
+  WalletProvider,
+  WalletAdapter
 } from '@manahippo/aptos-wallet-adapter';
 import { AptosProvider } from '../contexts/AptosContext';
 
