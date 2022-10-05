@@ -1,12 +1,8 @@
 import React, { ReactNode } from 'react';
 import {
-  IconButton,
-  Avatar,
   Box,
   CloseButton,
   Flex,
-  HStack,
-  VStack,
   Icon,
   useColorModeValue,
   Link,
@@ -18,18 +14,22 @@ import {
   FlexProps,
   Container,
 } from '@chakra-ui/react';
+
 import {
   FiHome,
 } from 'react-icons/fi';
-
 import {
     BsSafe
 } from 'react-icons/bs';
 import { IconType } from 'react-icons';
+
 import Navbar from '../components/Navbar';
 
 import { vaultManager } from '../data/vaultManager';
+
 import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import useCurrentNetwork from '../hooks/useCurrentNetwork';
+import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 
 interface LinkItemProps {
   name: string;
@@ -44,6 +44,8 @@ const DefaultLayout = ({
 }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { correctNetwork } = useCurrentNetwork();
 
   return (
     <Box 
@@ -84,7 +86,13 @@ const DefaultLayout = ({
           <Navbar
             onOpen={onOpen}
           />
-          {children}
+          {
+            correctNetwork 
+              ? children 
+              : (
+                <IncorrectNetwork />
+              )
+          }
         </Box>
       </Container>
     </Box>
