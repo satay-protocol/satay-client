@@ -1,29 +1,39 @@
-import { useState, useEffect } from "react";
-
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { useAptos } from "../../contexts/AptosContext"
 
+import { useToast } from "@chakra-ui/react";
 
-const useInitializeStrategy = (strategyAddress : string, vaultId : string, vaultAddress: string) => {
+const useInitializeStrategy = (strategyModule : string, vaultId : string) => {
 
-    const { account, signAndSubmitTransaction } = useWallet();
+    const { signAndSubmitTransaction } = useWallet();
 
-    const [isInitialized, setIsInitialized] = useState(false);
-
-    useEffect(() => {
-        
-    }, [strategyAddress, vaultId]);
+    const toast = useToast();
 
     const initialize = async () => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyAddress}::initialize`,
-            arguments: [account?.address, vaultId],
+            function: `${strategyModule}::initialize`,
+            arguments: [vaultId],
             type_arguments: []
         }, {
             max_gas_amount: '5000',
             gas_unit_price: '1000',
         })
+            .then(() => {
+                toast({
+                    title: "Strategy Initialized!",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
+            .catch(() => {
+                toast({
+                    title: "Initialization Failed!",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            })
     }
 
     return {

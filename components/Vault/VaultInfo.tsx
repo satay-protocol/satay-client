@@ -29,7 +29,7 @@ const VaultInfo : React.FC<Props> = ({ vault }) => {
                 about={vault.about}
             />
             <Strategies 
-                strategy={vault.strategy}
+                strategies={vault.strategies}
             />
         </VStack>
     </Card>

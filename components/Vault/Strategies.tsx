@@ -8,10 +8,10 @@ import {
 import { Strategy } from '../../types/vaults'
 
 interface Props {
-    strategy: Strategy | null
+    strategies: Strategy[]
 }
 
-const Strategies: React.FC<Props> = ({ strategy }) => {
+const Strategies: React.FC<Props> = ({ strategies }) => {
   return (
     <VStack
         alignItems='flex-start'
@@ -20,30 +20,32 @@ const Strategies: React.FC<Props> = ({ strategy }) => {
             fontSize="xl"
             fontWeight="bold"
         >
-            Strategy
+            Strategies
         </Text>
         {
-            strategy ? (
-                <Box
-                    p={4}
-                    bg='gray.50'
-                    rounded='lg'
-                >
-                    <Text
-                        fontSize="sm"
-                        fontWeight="bold"
+            strategies.length > 0 ? (
+                strategies.map(strategy => (
+                    <Box
+                        p={4}
+                        bg='gray.50'
+                        rounded='lg'
+                        key={strategy.strategyModule}
                     >
-                        {strategy.title}
-                    </Text>
-                    <Text>
-                        {strategy.description}
-                    </Text>
-                </Box>
+                        <Text
+                            fontSize="sm"
+                            fontWeight="bold"
+                        >
+                            {strategy.title}
+                        </Text>
+                        <Text>
+                            {strategy.description}
+                        </Text>
+                    </Box>
+                ))
             ) : (
-                <Text>No active strategy.</Text>
+                <Text>No active strategies.</Text>
             )
         }
-        
     </VStack>
   )
 }

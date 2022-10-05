@@ -6,7 +6,7 @@ import { getVaultInfo } from "../data/vaultsData";
 
 
 import { ManagerResource } from "../hooks/manager/useManagerResource";
-import { Vault } from "../types/vaults";
+import { Vault, Strategy } from "../types/vaults";
 import { CoinStoreResource } from "./aptosUtils";
 import { toAptos } from "./utils";
 
@@ -46,7 +46,6 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         const {data : vault} = await client.getAccountResource(vaultInfo.vault_cap.vec[0].vault_addr, `${vaultManager}::vault::Vault`);
         const vaultData = vault as VaultData;
         const coinType = getTypeString(vaultData.base_coin_type);
-        const strategyString = vaultInfo.strategy_type?.vec.length > 0 ? getTypeString(vaultInfo.strategy_type.vec[0]) : "";
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
             coinType: getTypeString(vaultData.base_coin_type),
@@ -54,8 +53,7 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
             managerAddress: managerResource.vaultManager,
             vaultId,
             vaultAddress: vaultInfo.vault_cap.vec[0].vault_addr,
-            strategyString,
-            strategy: getStrategy(strategyString)
+            strategies: await getStrategiesForVault(client, vaultInfo.vault_cap.vec[0].vault_addr)
         }
     } else {
         return null;
@@ -87,4 +85,18 @@ const getTotalDeposits = async (client : AptosClient, baseCoin : string) => {
     return client.getAccountResource(vaultManager, `0x1::coin::CoinStore<${vaultManager}::vault::VaultCoin<${baseCoin}>>`)
         .then(res => toAptos(parseInt((res.data as CoinStoreResource).coin.value)))
         .catch(err => 0)
+}
+
+interface VaultStrategyData {
+    base_coin_type: StructData
+}
+
+export const getStrategiesForVault = async (client : AptosClient, vaultAddress : string) : Promise<Strategy[]> => {
+    const resources = await client.getAccountResources(vaultAddress);
+    return resources
+        .filter(resource => resource.type.includes("VaultStrategy"))
+        .map(resource => getStrategy(
+            resource.type.slice(resource.type.indexOf("VaultStrategy<") + 14, resource.type.lastIndexOf("::")),
+            getTypeString((resource.data as VaultStrategyData).base_coin_type)
+        ))
 }

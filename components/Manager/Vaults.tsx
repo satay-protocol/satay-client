@@ -16,7 +16,6 @@ const Vaults : React.FC<Props> = ({ managerAddress }) => {
 
     const { vaults } = useVaults(managerAddress);
 
-
     return (
         <Card>
             <Text
@@ -31,7 +30,6 @@ const Vaults : React.FC<Props> = ({ managerAddress }) => {
                         <Vault
                             key={vault.vaultAddress}
                             vault={vault}
-                            managerAddress={managerAddress}
                         />
                     )
                 })

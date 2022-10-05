@@ -2,47 +2,16 @@ import { useToast } from "@chakra-ui/react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter"
 import { fromAptos } from "../../services/utils";
 
-const useVaultStrategy = (managerAddress : string, vaultId: string, strategyString: string) => {
-
-    console.log(strategyString);
+const useVaultStrategy = (vaultId: string, strategyModule: string) => {
 
     const toast = useToast();
 
     const { signAndSubmitTransaction } = useWallet();
 
-    const approveStrategy = async (strategyType : string) => {
-        await signAndSubmitTransaction({
-            type: 'entry_function_payload',
-            function: `${managerAddress}::satay::approve_strategy`,
-            arguments: [vaultId],
-            type_arguments: [strategyType]
-        }, {
-            max_gas_amount: '5000',
-            gas_unit_price: '1000',
-        })
-            .then(() => {
-                toast({
-                    title: "Strategy Approved!",
-                    description: "The strategy has been approved",
-                    status: "success",
-                    duration: 5000,
-                    isClosable: true,
-                })
-            })
-            .catch(() => {
-                toast({
-                    title: "Strategy Approval Failed",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                })
-            })
-    }
-
     const applyStrategy = async (amount : number) => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyString.slice(0, strategyString.lastIndexOf("::"))}::apply_strategy`,
+            function: `${strategyModule}::apply_strategy`,
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
         }, {
@@ -72,7 +41,7 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
     const liquidateStrategy = async (amount : number) => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyString.slice(0, strategyString.lastIndexOf("::"))}::liquidate_strategy`,
+            function: `${strategyModule}::liquidate_strategy`,
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
         }, {
@@ -99,7 +68,6 @@ const useVaultStrategy = (managerAddress : string, vaultId: string, strategyStri
     }
 
     return {
-        approveStrategy,
         applyStrategy,
         liquidateStrategy
     }

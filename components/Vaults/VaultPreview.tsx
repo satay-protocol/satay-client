@@ -53,7 +53,11 @@ const VaultPreview : React.FC<Props> = ({ vault }) => {
                 <Text
                     flex={1}
                 >
-                    {vault.strategy?.strategyId.slice(vault.strategy?.strategyId.lastIndexOf("::") + 2) || "No Active Strategy"}
+                    {
+                        vault.strategies.length > 0
+                        ? `${vault.strategies.length} Strateg${vault.strategies.length == 1 ? "y" : "ies"}` 
+                        : "No Active Strategies"
+                    }
                 </Text>
             </HStack>
         </Link>

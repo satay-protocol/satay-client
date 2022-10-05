@@ -1,32 +1,43 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {
     HStack,
     Image,
     Text,
     Button,
-    useDisclosure
+    useDisclosure,
+    Flex
 } from '@chakra-ui/react'
 
-import { Vault } from '../../types/vaults'
+import { Vault, Strategy } from '../../types/vaults'
 import useVaultStrategy from '../../hooks/manager/useVaultStrategy'
 import SelectStrategy from '../modals/SelectStrategy'
 import ApplyStrategy from '../modals/ApplyStrategy'
 import LiquidateStrategy from '../modals/LiquidateStrategy'
+import VaultStrategyModals from './VaultStrategyModals'
 
 interface Props {
     vault: Vault,
-    managerAddress: string
 }
 
-const Vault : React.FC<Props> = ({ vault, managerAddress }) => {
+const Vault : React.FC<Props> = ({ vault }) => {
 
     const { onOpen: onSelectStrategyOpen, onClose: onStrategySelectClose, isOpen : isSelectStrategyOpen } = useDisclosure();
     const { onOpen: onApplyStrategyOpen, onClose: onApplyStrategyClose, isOpen : isApplyStrategyOpen } = useDisclosure();
     const { onOpen: onLiquidateStrategyOpen, onClose: onLiquidateStrategyClose, isOpen : isLiquidateStrategyOpen } = useDisclosure();
 
     
-    const { approveStrategy, applyStrategy, liquidateStrategy } = useVaultStrategy(managerAddress, vault.vaultId, vault.strategyString);
+    const [activeStrategy, setActiveStrategy] = useState<Strategy | null>(null);
+
+    const onApplyOpen = (strategy: Strategy) => {
+        setActiveStrategy(strategy);
+        onApplyStrategyOpen();
+    }
+
+    const onLiquidateOpen = (strategy: Strategy) => {
+        setActiveStrategy(strategy);
+        onLiquidateStrategyOpen();
+    }
 
     return (
         <>
@@ -34,61 +45,89 @@ const Vault : React.FC<Props> = ({ vault, managerAddress }) => {
                 isOpen={isSelectStrategyOpen}
                 onClose={onStrategySelectClose}
                 baseCoin={vault.coinType}
-                approveStrategy={approveStrategy}
+                approvedStrategies={vault.strategies.map(strategy => strategy.strategyModule)}
+                vault={vault}
             />
-            <ApplyStrategy 
-                isOpen={isApplyStrategyOpen}
-                onClose={onApplyStrategyClose}
-                baseCoin={vault.coinType}
-                vaultAddress={vault.vaultAddress}
-                applyStrategy={applyStrategy}
-            />
-            <LiquidateStrategy
-                isOpen={isLiquidateStrategyOpen}
-                onClose={onLiquidateStrategyClose}
-                strategyCoin={"0x43417434fd869edee76cca2a4d2301e528a1551b1d719b75c350c3c97d15b8b9::lp::LP<0x1::aptos_coin::AptosCoin, 0x43417434fd869edee76cca2a4d2301e528a1551b1d719b75c350c3c97d15b8b9::coins::USDT>"}
-                vaultAddress={vault.vaultAddress}
-                liquidateStrategy={liquidateStrategy}
-            />
-            <HStack
-                width='100%'
+            {
+                activeStrategy !== null && (
+                    <VaultStrategyModals 
+                        isApplyStrategyOpen={isApplyStrategyOpen}
+                        onApplyStrategyClose={onApplyStrategyClose}
+                        isLiquidateStrategyOpen={isLiquidateStrategyOpen}
+                        onLiquidateStrategyClose={onLiquidateStrategyClose}
+                        vault={vault}
+                        activeStrategy={activeStrategy}
+                    />
+                )
+            }
+            <Flex
+                direction='column'
                 borderBottomWidth='1px'
                 py={4}
                 px={2}
-                borderRadius={8}
+                gap={4}
             >
                 <HStack
-                    flex={1}
+                    width='100%'
+                    borderRadius={8}
                 >
-                    <Image
-                        src={vault.logo}
-                        height='40px'
-                        width='40px'
-                        rounded='full'
-                        alt='token logo'
-                    />
-                    <Text
+                    <HStack
                         flex={1}
                     >
-                        {vault.asset}
-                    </Text>
+                        <Image
+                            src={vault.logo}
+                            height='40px'
+                            width='40px'
+                            rounded='full'
+                            alt='token logo'
+                        />
+                        <Text
+                            flex={1}
+                        >
+                            {vault.asset}
+                        </Text>
+                    </HStack>
+                    <Button
+                        onClick={onSelectStrategyOpen}
+                    >
+                        Select Strategy
+                    </Button>
                 </HStack>
-                <Button
-                    onClick={onSelectStrategyOpen}
+                <Text
+                    fontWeight='bold'
                 >
-                    Select Strategy
-                </Button>
-                <Button
-                    onClick={onApplyStrategyOpen}
+                    Active Strategies
+                </Text>
+                <Flex
+                    direction='column'
+                    gap={2}
                 >
-                    Apply Strategy
-                </Button>
-                <Button
-                    onClick={onLiquidateStrategyOpen}
-                >
-                    Liquidate Strategy
-                </Button>
-            </HStack>
+                    {
+                        vault.strategies.map((strategy) => (
+                            <HStack
+                                key={strategy.strategyModule}
+                            >
+                                <Text
+                                    mr='auto'
+                                >
+                                    {strategy.title}
+                                </Text>
+                                <Button
+                                    onClick={() => onApplyOpen(strategy)}
+                                >
+                                    Apply Strategy
+                                </Button>
+                                <Button
+                                    onClick={() => onLiquidateOpen(strategy)}
+                                >
+                                    Liquidate Strategy
+                                </Button>
+                                
+                            </HStack>
+                        ))
+                    }
+                </Flex>
+            </Flex>
         </>
     )
 }

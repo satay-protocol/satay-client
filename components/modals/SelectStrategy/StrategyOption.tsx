@@ -2,14 +2,17 @@ import React from 'react'
 
 import { Box, Text, Button, HStack } from '@chakra-ui/react'
 
-import { Strategy } from '../../../types/vaults'
+import { StrategyInfo, Vault } from '../../../types/vaults'
+import useInitializeStrategy from '../../../hooks/manager/useInitializeStrategy'
 
 interface Props {
-    strategy: Strategy,
-    approveStrategy: (strategyType: string) => Promise<void>
+    strategy: StrategyInfo,
+    vault: Vault,
 }
 
-const StrategyOption : React.FC<Props> = ({ strategy, approveStrategy }) => {
+const StrategyOption : React.FC<Props> = ({ strategy, vault }) => {
+
+    const { initialize } = useInitializeStrategy(strategy.strategyModule, vault.vaultId);
 
     return (
         <HStack
@@ -28,7 +31,7 @@ const StrategyOption : React.FC<Props> = ({ strategy, approveStrategy }) => {
                 </Text>
             </Box>
             <Button
-                onClick={() => approveStrategy(strategy.strategyId)}
+                onClick={() => initialize()}
                 flexShrink={0}
             >
                 Select

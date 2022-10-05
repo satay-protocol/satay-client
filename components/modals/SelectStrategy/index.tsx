@@ -1,27 +1,34 @@
 import React from 'react'
 
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button
-  } from '@chakra-ui/react'
-import { strategies } from '../../../data/strategies';
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Text
+} from '@chakra-ui/react'
+
 import StrategyOption from './StrategyOption';
 
+import { strategies } from '../../../data/strategies';
+
+import { Vault } from '../../../types/vaults';
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
     baseCoin: string;
-    approveStrategy: (strategyType: string) => Promise<void> 
+    vault: Vault
+    approvedStrategies: string[]
 }
 
-const SelectStrategy : React.FC<Props> = ({ isOpen, onClose, baseCoin, approveStrategy }) => {
+const SelectStrategy : React.FC<Props> = ({ isOpen, onClose, baseCoin, vault, approvedStrategies }) => {
+
+  const availableStrategies = strategies
+    .filter(strategy => strategy.baseCoin === baseCoin && !approvedStrategies.includes(strategy.strategyModule))
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -31,19 +38,20 @@ const SelectStrategy : React.FC<Props> = ({ isOpen, onClose, baseCoin, approveSt
           <ModalCloseButton />
           <ModalBody>
             {
-                strategies.filter(strategy => strategy.baseCoin === baseCoin).map(strategy => (
-                  <StrategyOption
-                    key={strategy.strategyId}
-                    strategy={strategy}
-                    approveStrategy={approveStrategy}
-                  />
-                ))
+                availableStrategies.length > 0 ? (
+                  availableStrategies.map(strategy => (
+                    <StrategyOption
+                      key={strategy.strategyModule}
+                      strategy={strategy}
+                      vault={vault}
+                    />
+                  ))
+                ) : (
+                  <Text>No available strategies.</Text>
+                )
             }
           </ModalBody>
-
-          <ModalFooter>
-            
-          </ModalFooter>
+          <ModalFooter />
         </ModalContent>
       </Modal>
   )
