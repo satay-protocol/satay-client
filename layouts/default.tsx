@@ -30,6 +30,7 @@ import { vaultManager } from '../data/vaultManager';
 import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import useCurrentNetwork from '../hooks/useCurrentNetwork';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
+import Head from 'next/head';
 
 interface LinkItemProps {
   name: string;
@@ -52,6 +53,10 @@ const DefaultLayout = ({
       minH="100vh" 
       bg={useColorModeValue('gray.100', 'gray.900')}
     >
+      <Head>
+        <title>Satay Finance</title>
+        <meta name="description" content="The premier yield aggregator on Aptos." />
+      </Head>
       <Container 
         mx='auto' 
         maxW='6xl'
