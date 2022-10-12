@@ -28,15 +28,17 @@ import Navbar from '../components/Navbar';
 import { vaultManager } from '../data/vaultManager';
 
 import { useWallet } from '@manahippo/aptos-wallet-adapter';
-import useCurrentNetwork from '../hooks/useCurrentNetwork';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 import Head from 'next/head';
+import NotConnected from '../components/utilities/NotConnected';
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
   href: string;
 }
+
+const devnetChainId = "33";
 
 const DefaultLayout = ({
   children,
@@ -46,7 +48,9 @@ const DefaultLayout = ({
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { correctNetwork } = useCurrentNetwork();
+  const { network, connected } = useWallet();
+
+  const correctNetwork = network?.chainId === devnetChainId;
 
   return (
     <Box 
@@ -92,10 +96,15 @@ const DefaultLayout = ({
             onOpen={onOpen}
           />
           {
-            correctNetwork 
-              ? children 
-              : (
-                <IncorrectNetwork />
+            !connected 
+              ? (
+                <NotConnected />
+              ) : (
+                correctNetwork 
+                  ? children 
+                  : (
+                    <IncorrectNetwork />
+                  )
               )
           }
         </Box>
