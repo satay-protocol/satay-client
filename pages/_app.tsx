@@ -6,13 +6,17 @@ import theme from '../theme';
 
 import {
   PontemWalletAdapter, 
+  AptosWalletAdapter,
   WalletProvider,
-  WalletAdapter
+  WalletAdapter,
+  MartianWalletAdapter
 } from '@manahippo/aptos-wallet-adapter';
 import { AptosProvider } from '../contexts/AptosContext';
 
 const wallets : WalletAdapter[] = [
-  new PontemWalletAdapter()
+  new PontemWalletAdapter(),
+  new AptosWalletAdapter(),
+  new MartianWalletAdapter()
 ]
 
 function MyApp({ Component, pageProps }: AppProps) {

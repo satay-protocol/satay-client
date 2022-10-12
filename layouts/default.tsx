@@ -38,8 +38,6 @@ interface LinkItemProps {
   href: string;
 }
 
-const devnetChainId = "33";
-
 const DefaultLayout = ({
   children,
 }: {
@@ -50,7 +48,7 @@ const DefaultLayout = ({
 
   const { network, connected } = useWallet();
 
-  const correctNetwork = network?.chainId === devnetChainId;
+  const correctNetwork = network?.name?.toLowerCase().includes('devnet');
 
   return (
     <Box 
