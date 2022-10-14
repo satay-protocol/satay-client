@@ -12,7 +12,7 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 const useVault = (managerAddress : string, vaultId : string) => {
 
-    const { client } = useAptos();
+    const { client, updateClient } = useAptos();
 
     const { account, signAndSubmitTransaction } = useWallet();
 
@@ -40,7 +40,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
 
     const deposit = async (amount : number) => {
         if(vault && account?.address){
-            await signAndSubmitTransaction({
+            const res = await signAndSubmitTransaction({
                 type: 'entry_function_payload',
                 function: `${vaultManager}::satay::deposit`,
                 arguments: [
@@ -53,13 +53,16 @@ const useVault = (managerAddress : string, vaultId : string) => {
                 max_gas_amount: '5000',
                 gas_unit_price: '1000',
             })
-                .then(() => {
-                    toast({
-                        title: "Deposit Succeeded!",
-                        description: `You have deposited ${toAptos(amount)} coins`,
-                        status: "success",
-                        duration: 5000,
-                        isClosable: true,
+                .then(({ hash }) => {
+                    client.waitForTransaction(hash).then(() => {
+                        toast({
+                            title: "Deposit Succeeded!",
+                            description: `You have deposited ${toAptos(amount)} coins`,
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                        })
+                        updateClient();
                     })
                 })
                 .catch((err) => {
@@ -88,13 +91,16 @@ const useVault = (managerAddress : string, vaultId : string) => {
                 max_gas_amount: '5000',
                 gas_unit_price: '1000',
             })
-                .then(() => {
-                    toast({
-                        title: "Withdraw Succeeded!",
-                        description: `You have burned ${toAptos(amount)} vault coins`,
-                        status: "success",
-                        duration: 5000,
-                        isClosable: true,
+                .then(({ hash }) => {
+                    client.waitForTransaction(hash).then(() => {
+                        toast({
+                            title: "Withdraw Succeeded!",
+                            description: `You have burned ${toAptos(amount)} vault coins`,
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                        })
+                        updateClient();
                     })
                 })
                 .catch(() => {

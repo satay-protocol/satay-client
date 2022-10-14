@@ -18,7 +18,7 @@ const useCoinBalance = (accountAddress: string, coinAddress : string, coinStoreA
             setBalance(toAptos(coinBalance));
         }
         getBalance();
-    }, [coinAddress])
+    }, [coinAddress, client])
 
     return balance;
 }

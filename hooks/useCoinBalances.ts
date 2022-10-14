@@ -17,7 +17,7 @@ const useCoinBalances = (address : string) => {
             setBalances(balances);
         }
         getBalances();
-    }, [address])
+    }, [address, client]);
 
     return balances;
 }
