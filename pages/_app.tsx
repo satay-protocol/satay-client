@@ -9,14 +9,16 @@ import {
   AptosWalletAdapter,
   WalletProvider,
   WalletAdapter,
-  MartianWalletAdapter
+  MartianWalletAdapter,
+  BloctoWalletAdapter,
 } from '@manahippo/aptos-wallet-adapter';
 import { AptosProvider } from '../contexts/AptosContext';
 
 const wallets : WalletAdapter[] = [
   new PontemWalletAdapter(),
   new AptosWalletAdapter(),
-  new MartianWalletAdapter()
+  new MartianWalletAdapter(),
+  new BloctoWalletAdapter()
 ]
 
 function MyApp({ Component, pageProps }: AppProps) {
