@@ -18,10 +18,10 @@ export const toAptos = (lamports: number) => lamports / Math.pow(10, 8);
 
 export const fromAptos = (aptos: number) => aptos * Math.pow(10, 8);
 
-export const getPerformanceArray = () => {
+export const getPerformanceArray = (numPoints = 30) => {
     let val = 0;
     const arr = [];
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < numPoints; i++) {
         arr.push({
             val,
             i
