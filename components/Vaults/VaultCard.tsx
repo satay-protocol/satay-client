@@ -59,6 +59,7 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                             {vault.symbol} Vault
                         </Text>
                         <Text
+                            fontSize='xl'
                             color='brand.500'
                             fontWeight='bold'
                         >
