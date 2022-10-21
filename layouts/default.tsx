@@ -3,24 +3,17 @@ import {
   Box,
   CloseButton,
   Flex,
-  Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
   useDisclosure,
   BoxProps,
-  FlexProps,
   Container,
 } from '@chakra-ui/react';
 
-import {
-  FiHome,
-} from 'react-icons/fi';
-import {
-    BsSafe
-} from 'react-icons/bs';
+import { FiHome } from 'react-icons/fi';
+import { BsSafe } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 
 import Navbar from '../components/Navbar';
@@ -65,7 +58,7 @@ const DefaultLayout = ({
       >
         <SidebarContent
           onClose={() => onClose}
-          display={{ base: 'none', md: 'block' }}
+          display={{ base: 'none' }}
         />
         <Drawer
             autoFocus={false}
@@ -153,61 +146,7 @@ const SidebarContent : React.FC<SidebarProps> = ({ onClose, ...rest }) => {
               onClick={onClose} 
           />
       </Flex>
-      {
-          LinkItems.map((link) => (
-              <NavItem 
-                  key={link.name} 
-                  icon={link.icon}
-                  href={link.href}
-              >
-                  {link.name}
-              </NavItem>
-          ))
-      }
     </Box>
-  );
-};
-
-interface NavItemProps extends FlexProps {
-  icon: IconType;
-  href: string;
-  children: string;
-}
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
-  return (
-    <Link 
-        href={href} 
-        style={{ textDecoration: 'none' }} 
-        _focus={{ boxShadow: 'none' }}
-    >
-        <Flex
-            align="center"
-            p="4"
-            mx="4"
-            borderRadius="lg"
-            role="group"
-            cursor="pointer"
-            _hover={{
-              bg: '#ad8d40',
-              color: 'white',
-            }}
-            {...rest}
-        >
-            {
-                icon && (
-                <Icon
-                    mr="4"
-                    fontSize="16"
-                    _groupHover={{
-                    color: 'white',
-                    }}
-                    as={icon}
-                />
-                )
-            }
-            {children}
-      </Flex>
-    </Link>
   );
 };
 

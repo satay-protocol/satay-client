@@ -1,4 +1,5 @@
 export interface Vault {
+    symbol: string;
     asset: string;
     logo: string;
     totalDeposits: number;

@@ -24,16 +24,7 @@ const Home = () => {
           Pioneering Yield Aggregation on Aptos
         </Text>
       </Card>
-      <Card>
-        <Text
-          fontSize='2xl'
-          fontWeight='bold'
-          mb={4}
-        >
-          Vaults
-        </Text>
-        <VaultsList />
-      </Card>
+      <VaultsList />
     </VStack>
   )
 }

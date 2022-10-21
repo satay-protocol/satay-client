@@ -12,7 +12,8 @@ const Card : ComponentStyleConfig = {
     wordWrap: "break-word",
     bg: mode("#ffffff", "navy.800"),
     backgroundClip: "border-box",
-    rounded:'lg'
+    rounded:'lg',
+    shadow: 'xl'
   },
 };
 

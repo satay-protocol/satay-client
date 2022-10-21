@@ -11,6 +11,7 @@ import VaultPreview from './VaultPreview'
 import useVaults from '../../hooks/useVaults'
 
 import { vaultManager } from '../../data/vaultManager'
+import VaultCard from './VaultCard'
 
 const VaultsList = () => {
 
@@ -20,11 +21,10 @@ const VaultsList = () => {
         <VStack
             width='100%'
         >
-            <HeaderRow />
             {
                 vaults.length > 0 ? (
                     vaults.map(vault => (
-                        <VaultPreview
+                        <VaultCard
                             key={`${vault.managerAddress}-${vault.vaultId}`}
                             vault={vault}
                         />

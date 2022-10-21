@@ -17,15 +17,26 @@ import {
     FiMenu,
     FiChevronDown,
 } from 'react-icons/fi';
-
-import { useRouter } from 'next/router';
+import { IconType } from 'react-icons';
 
 import { ellipsize } from '../../services/utils';
 import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter';
 
+import { FiHome } from 'react-icons/fi';
+import { BsSafe } from 'react-icons/bs';
+
+import NavItem from './NavItem';
+
 interface Props extends FlexProps {
     onOpen: () => void;
 }
+
+interface LinkItemProps {
+    name: string;
+    icon: IconType;
+    href: string;
+  }
+  
   
 const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
 
@@ -40,6 +51,14 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
     const onConnect = async (wallet : Wallet) => {
         select(wallet.adapter.name);
     }
+    
+
+    const LinkItems: Array<LinkItemProps> = [
+        { name: 'Home', icon: FiHome, href: '/' },
+        { name: 'Vaults', icon: BsSafe, href: '/vaults' },
+    ];
+
+    
 
     return (
         <Flex
@@ -47,8 +66,9 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
             height={20}
             alignItems="center"
             bg={useColorModeValue('white', 'gray.900')}
-            justifyContent={{ base: 'space-between' }}
             rounded="lg"
+            gap={16}
+            shadow='xl'
             {...rest}
         >
             <IconButton
@@ -64,6 +84,22 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                 width={10}
                 alt='satay logo'
             />
+            <Flex
+                mr='auto'
+                gap={4}
+            >
+                {
+                    LinkItems.map((item, index) => (
+                        <NavItem 
+                            key={index}
+                            icon={item.icon}
+                            href={item.href}
+                        >
+                            {item.name}
+                        </NavItem>
+                    ))
+                }
+            </Flex>
             <HStack spacing={{ base: '0', md: '6' }}>
                 <Flex alignItems={'center'}>
                     <Menu>
