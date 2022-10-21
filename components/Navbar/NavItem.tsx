@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Flex,
-  Icon,
+  Button,
   Link,
   FlexProps,
 } from '@chakra-ui/react';
 
 import { IconType } from 'react-icons';
+import { useRouter } from 'next/router';
 
 interface NavItemProps extends FlexProps {
     icon: IconType;
@@ -15,13 +15,22 @@ interface NavItemProps extends FlexProps {
 }
 
   const NavItem : React.FC<NavItemProps> = ({ icon, children, href, ...rest }) => {
+
+    const { pathname } = useRouter();
+
     return (
       <Link 
           href={href} 
           style={{ textDecoration: 'none' }} 
           _focus={{ boxShadow: 'none' }}
       >
-          <Flex
+        <Button
+          variant="ghost"
+          colorScheme={pathname === href ? 'brand' : 'gray'}
+        >
+          {children}
+        </Button>
+          {/* <Flex
               align="center"
               p="2"
               borderRadius="lg"
@@ -34,7 +43,7 @@ interface NavItemProps extends FlexProps {
               {...rest}
           >
               {children}
-        </Flex>
+        </Flex> */}
       </Link>
     );
   };
