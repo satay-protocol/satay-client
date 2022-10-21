@@ -11,6 +11,7 @@ import VaultInfo from './VaultInfo';
 import Actions from './Actions';
 
 import { vaultManager } from '../../data/vaultManager';
+import PriceChart from './PriceChart';
 
 interface Props {
   vaultId: string;
@@ -25,20 +26,26 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
       {
         vault && (
           <Flex
+            direction='column'
             gap={4}
-            direction={{
-              base: 'column',
-              md: 'row'
-            }}
           >
-            <VaultInfo
-              vault={vault}
-            />
-            <Actions 
-              deposit={deposit}
-              withdraw={withdraw}
-              vault={vault}
-            />
+            <Flex
+              gap={4}
+              direction={{
+                base: 'column',
+                md: 'row'
+              }}
+            >
+              <VaultInfo
+                vault={vault}
+              />
+              <Actions 
+                deposit={deposit}
+                withdraw={withdraw}
+                vault={vault}
+              />
+            </Flex>
+            <PriceChart />
           </Flex>
         )
       }

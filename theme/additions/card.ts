@@ -5,6 +5,7 @@ const Card : ComponentStyleConfig = {
     p: "20px",
     display: "flex",
     flexDirection: "column",
+    justifyContent:'center',
     width: "100%",
     position: "relative",
     minWidth: "0px",

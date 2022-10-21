@@ -15,3 +15,16 @@ export const stringToHex = (text: string) => {
 export const toAptos = (lamports: number) => lamports / Math.pow(10, 8);
 
 export const fromAptos = (aptos: number) => aptos * Math.pow(10, 8);
+
+export const getPerformanceArray = () => {
+    let val = 0;
+    const arr = [];
+    for (let i = 0; i < 30; i++) {
+        arr.push({
+            val,
+            i
+        });
+        val += (Math.random() - (1/3)) * 10;
+    }
+    return arr;
+}
