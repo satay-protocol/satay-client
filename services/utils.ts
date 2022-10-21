@@ -6,6 +6,8 @@ export const ellipsize = (str : string | undefined, n = 5) => (
         : ''
 );
 
+export const round2 = (num : number) => Math.round(num * 100) / 100;
+
 export const stringToHex = (text: string) => {
     const encoder = new TextEncoder();
     const encoded = encoder.encode(text);
@@ -28,3 +30,5 @@ export const getPerformanceArray = () => {
     }
     return arr;
 }
+
+export const performanceArray = getPerformanceArray();

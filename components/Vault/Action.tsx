@@ -83,6 +83,7 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
                         max={balance}
                         precision={8}
                         defaultValue={0}
+                        focusBorderColor='brand.500'
                     >
                         <NumberInputField />
                     </NumberInput>

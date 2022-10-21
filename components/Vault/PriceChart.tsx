@@ -5,13 +5,12 @@ import { Line } from 'react-chartjs-2';
 
 import { useColorModeValue, useTheme, Text } from "@chakra-ui/react";
 import Card from '../utilities/Card';
-import { getPerformanceArray } from '../../services/utils';
+import { performanceArray } from '../../services/utils';
 
 interface Props {
   
 }
 
-const prices = getPerformanceArray();
 
 const PriceChart : React.FC<Props> = () => {
 
@@ -33,9 +32,9 @@ const PriceChart : React.FC<Props> = () => {
         </Text>
         <Line
             data={{
-                labels: prices.map((price) => price.i),
+                labels: performanceArray.map((price) => price.i),
                 datasets: [{
-                    data: prices.map((price) => price.val),
+                    data: performanceArray.map((price) => price.val),
                     backgroundColor: barColor,
                 }]
             }}

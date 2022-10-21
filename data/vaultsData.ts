@@ -19,7 +19,7 @@ const vaults : Vaults = {
     'AptosCoin': {
         symbol: 'APT',
         logo: 'https://cdn-images-1.medium.com/max/1200/1*Gf747eyRywU8Img0tK5wvw.png',
-        about: "Aptos is a Layer 1 blockchain built on a Proof-of-Stake (PoS) consensus mechanism developed by former Meta developers, who were previously working on the company’s “Diem” $200 million cryptocurrency project before it was scrapped in January 2022.",
+        about: "APT is the native token of Aptos, a layer-1 blockchain network created by Aptos Labs. In order to maximize the network\'s security and scalability, Aptos utilizes the Move programming language, which was created as part of Meta\'s effort to launch the Libra blockchain.",
     }
 }
 

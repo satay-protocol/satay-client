@@ -6,14 +6,17 @@ import {
     HStack,
     Image,
 } from '@chakra-ui/react'
+import { performanceArray, round2 } from '../../services/utils';
 
 interface Props {
     logo: string;
-    asset: string;
+    symbol: string;
     totalDeposits: number;
 }
 
-const Overview : React.FC<Props> = ({ logo, asset, totalDeposits}) => {
+const Overview : React.FC<Props> = ({ logo, symbol, totalDeposits}) => {
+
+    const performance = round2(performanceArray[performanceArray.length - 1].val);
 
     return (
         <VStack
@@ -43,10 +46,20 @@ const Overview : React.FC<Props> = ({ logo, asset, totalDeposits}) => {
                         fontSize="xl"
                         fontWeight="bold"
                     >
-                        {asset} Vault
+                        {symbol} Vault
                     </Text>
                     <Text>
-                        TVL: {totalDeposits} {asset}
+                        TVL: {totalDeposits} {symbol}
+                    </Text>
+                    <Text>
+                        Performace:{' '}
+                        <Text 
+                            as={'span'} 
+                            color='brand.500' 
+                            fontWeight='bold'
+                        >
+                            {performance !== 0 && (performance > 0 ? '+' : '-')}{performance}%
+                        </Text>
                     </Text>
                 </VStack>
                 

@@ -21,7 +21,7 @@ const Home = () => {
           Welcome to Satay Finance
         </Text>
         <Text>
-          Pioneering Yield Aggregation on Aptos
+          Pioneering Yield Aggregation on Aptos and Sui
         </Text>
       </Card>
       <VaultsList />

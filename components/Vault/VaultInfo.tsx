@@ -22,7 +22,7 @@ const VaultInfo : React.FC<Props> = ({ vault }) => {
         >
             <Overview
                 logo={vault.logo}
-                asset={vault.asset}
+                symbol={vault.symbol}
                 totalDeposits={vault.totalDeposits}
             />
             <AboutVault 

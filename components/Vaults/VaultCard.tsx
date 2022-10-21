@@ -91,6 +91,7 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                             max={balance}
                             precision={8}
                             defaultValue={0}
+                            focusBorderColor='brand.500'
                         >
                             <NumberInputField />
                         </NumberInput>

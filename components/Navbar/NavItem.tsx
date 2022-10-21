@@ -30,20 +30,6 @@ interface NavItemProps extends FlexProps {
         >
           {children}
         </Button>
-          {/* <Flex
-              align="center"
-              p="2"
-              borderRadius="lg"
-              role="group"
-              cursor="pointer"
-              _hover={{
-                bg: '#ad8d40',
-                color: 'white',
-              }}
-              {...rest}
-          >
-              {children}
-        </Flex> */}
       </Link>
     );
   };
