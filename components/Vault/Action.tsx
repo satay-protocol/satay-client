@@ -1,4 +1,4 @@
-import React, { FocusEventHandler, useState } from 'react'
+import React, { useState } from 'react'
 
 import {
     VStack,
@@ -32,6 +32,10 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
 
     const onChange = (valueAsString : string) => {
         setAmount(parseFloat(valueAsString));
+    }
+
+    const onClick = async () => {
+        await action(Math.round(fromAptos(amount)));
     }
 
     return (
@@ -88,7 +92,7 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
                 gap={4}
             >
                 <Button
-                    onClick={() => action(Math.round(fromAptos(amount)))}
+                    onClick={() => onClick()}
                     variant='solid'
                     colorScheme='brand'
                     flex={1}

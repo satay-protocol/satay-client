@@ -11,7 +11,7 @@ const useVaultStrategy = (vaultId: string, strategyModule: string) => {
     const applyStrategy = async (amount : number) => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyModule}::apply_strategy`,
+            function: `${strategyModule}::apply_position`,
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
         }, {
@@ -41,7 +41,7 @@ const useVaultStrategy = (vaultId: string, strategyModule: string) => {
     const liquidateStrategy = async (amount : number) => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyModule}::liquidate_strategy`,
+            function: `${strategyModule}::liquidate_position`,
             arguments: [vaultId, fromAptos(amount).toString()],
             type_arguments: []
         }, {

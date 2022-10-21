@@ -11,7 +11,7 @@ const useInitializeStrategy = (strategyModule : string, vaultId : string) => {
     const initialize = async () => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyModule}::initialize`,
+            function: `${strategyModule}::init`,
             arguments: [vaultId],
             type_arguments: []
         }, {
