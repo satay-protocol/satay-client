@@ -54,7 +54,7 @@ const DefaultLayout = ({
       </Head>
       <Container 
         mx='auto' 
-        maxW='6xl'
+        maxW='4xl'
       >
         <SidebarContent
           onClose={() => onClose}
@@ -69,15 +69,11 @@ const DefaultLayout = ({
             onOverlayClick={onClose}
             size="full"
         >
-            <DrawerContent>
-              <SidebarContent onClose={onClose} />
-            </DrawerContent>
+          <DrawerContent>
+            <SidebarContent onClose={onClose} />
+          </DrawerContent>
         </Drawer>
         <Box
-          ml={{
-            base: 0,
-            md: 60
-          }}
           display='flex'
           flexDirection='column'
           gap={4}
