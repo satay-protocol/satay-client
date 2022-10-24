@@ -12,7 +12,7 @@ const IncorrectNetwork = () => {
             Incorrect Network
         </Text>
         <Text>
-            Satay is currently only available on the Aptos devnet. You must connect your Pontem wallet and switch to the Aptos devnet to use Satay.
+            Satay is currently only available on the Aptos devnet. You must connect your wallet and switch to the Aptos devnet to use Satay.
         </Text>
     </Card>
   )
