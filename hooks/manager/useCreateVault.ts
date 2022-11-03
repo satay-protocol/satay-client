@@ -11,7 +11,7 @@ const useCreateVault = () => {
             await signAndSubmitTransaction({
                 type: 'entry_function_payload',
                 function: `${vaultManager}::satay::new_vault`,
-                arguments: [vaultName],
+                arguments: [vaultName, "2000", "5000"],
                 type_arguments: [coin.type]
             }, {
                 max_gas_amount: '5000',
