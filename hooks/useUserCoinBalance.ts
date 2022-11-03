@@ -1,5 +1,4 @@
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
-
+import useWallet from "./useWallet";
 import useCoinBalance from "./useCoinBalance";
 
 const useUserCoinBalance = (coinAddress: string) => {

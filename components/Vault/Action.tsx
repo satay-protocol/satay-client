@@ -10,9 +10,9 @@ import {
     Button
 } from '@chakra-ui/react';
 
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import { fromAptos } from '../../services/utils';
 import useUserCoinBalance from '../../hooks/useUserCoinBalance';
+import useWallet from '../../hooks/useWallet';
 
 interface Props {
     actionName: string;

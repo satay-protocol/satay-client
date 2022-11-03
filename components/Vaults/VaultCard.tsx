@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import Link from 'next/link'
+
 import { Text, Flex, Image, VStack, NumberInput, NumberInputField, Button } from '@chakra-ui/react'
 import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 
@@ -7,11 +9,11 @@ import { Vault } from '../../types/vaults'
 
 import Card from '../utilities/Card'
 
-import { useWallet } from '@manahippo/aptos-wallet-adapter'
+import { fromAptos } from '../../services/utils'
+
 import useUserCoinBalance from '../../hooks/useUserCoinBalance'
 import useVault from '../../hooks/useVault'
-import { fromAptos } from '../../services/utils'
-import Link from 'next/link'
+import useWallet from '../../hooks/useWallet'
 
 interface Props {
     vault: Vault

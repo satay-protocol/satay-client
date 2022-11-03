@@ -20,7 +20,8 @@ import Navbar from '../components/Navbar';
 
 import { vaultManager } from '../data/vaultManager';
 
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import useWallet from '../hooks/useWallet';
+
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 import Head from 'next/head';
 import NotConnected from '../components/utilities/NotConnected';

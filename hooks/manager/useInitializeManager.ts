@@ -1,20 +1,20 @@
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import useWallet from "../useWallet";
 import { vaultManager } from "../../data/vaultManager";
 
 const useInitializeManager = () => {
 
-    const { account, signAndSubmitTransaction } = useWallet();
+    const { account, submitTransaction } = useWallet();
 
     const initialize = async () => {
         if(account){
-            await signAndSubmitTransaction({
+            await submitTransaction({
                 type: 'entry_function_payload',
                 function: `${vaultManager}::satay::initialize`,
                 arguments: [],
                 type_arguments: []
             }, {
-                max_gas_amount: '5000',
-                gas_unit_price: '1000',
+                title: "Vault Manager Initialized!",
+                description: `You have initialized your ManagerAccount`
             })
         }
     }

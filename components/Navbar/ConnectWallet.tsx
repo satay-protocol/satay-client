@@ -1,18 +1,20 @@
 import React from 'react'
 
+import { Wallet } from '@manahippo/aptos-wallet-adapter'
+
 import {
     Menu,
     MenuButton,
-    HStack,
     MenuList,
-    Text,
-    Box,
     MenuItem,
     Button
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+
 import { ellipsize } from '../../services/utils'
-import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter'
+
+import useWallet from '../../hooks/useWallet'
+
 
 const ConnectWallet = () => {
 
