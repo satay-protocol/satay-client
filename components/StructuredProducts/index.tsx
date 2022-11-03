@@ -22,7 +22,8 @@ const StructuredProducts : React.FC = () => {
         </Card>
         {
             structuredProducts.map((structuredProduct) => (
-                <StructuredProductComponent 
+                <StructuredProductComponent
+                    key={structuredProduct.moduleAddress}
                     structuredProduct={structuredProduct}
                 />
             ))

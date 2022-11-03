@@ -5,7 +5,6 @@ import { Text, VStack } from '@chakra-ui/react'
 import StrategyComponent from './Strategy'
 
 import { Strategy } from '../../types/vaults'
-import Card from '../utilities/Card'
 
 interface Props {
     strategies: Strategy[]
@@ -27,6 +26,7 @@ const Strategies : React.FC<Props> = ({ strategies }) => {
                 strategies.length > 0 ? (
                     strategies.map((strategy) => (
                         <StrategyComponent
+                            key={strategy.strategyModule}
                             strategy={strategy}
                         />
                     ))
