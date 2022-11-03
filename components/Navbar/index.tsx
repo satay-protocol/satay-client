@@ -25,7 +25,6 @@ interface Props extends FlexProps {
 
 interface LinkItemProps {
     name: string;
-    icon: IconType;
     href: string;
   }
   
@@ -33,11 +32,11 @@ interface LinkItemProps {
 const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {    
 
     const LinkItems: Array<LinkItemProps> = [
-        { name: 'Home', icon: FiHome, href: '/' },
-        { name: 'Vaults', icon: BsSafe, href: '/vaults' },
+        { name: 'Home', href: '/' },
+        { name: 'Vaults', href: '/vaults' },
+        { name: 'Products', href: '/products' },
     ];
 
-    
 
     return (
         <Flex
@@ -71,7 +70,6 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                     LinkItems.map((item, index) => (
                         <NavItem 
                             key={index}
-                            icon={item.icon}
                             href={item.href}
                         >
                             {item.name}

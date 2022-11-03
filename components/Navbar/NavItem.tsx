@@ -5,16 +5,14 @@ import {
   FlexProps,
 } from '@chakra-ui/react';
 
-import { IconType } from 'react-icons';
 import { useRouter } from 'next/router';
 
 interface NavItemProps extends FlexProps {
-    icon: IconType;
     href: string;
     children: string;
 }
 
-  const NavItem : React.FC<NavItemProps> = ({ icon, children, href, ...rest }) => {
+  const NavItem : React.FC<NavItemProps> = ({ children, href }) => {
 
     const { pathname } = useRouter();
 
