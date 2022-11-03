@@ -43,6 +43,8 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
 
     const onClick = async () => {
         await action(Math.round(fromAptos(amount)));
+        setAmountAsString('0.00000000');
+        setAmount(0);
     }
 
     return (
