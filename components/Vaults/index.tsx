@@ -11,6 +11,7 @@ const Vaults = () => {
     <Flex
       flexDirection='column'
       gap={4}
+      w='100%'
     >
       <Card>
         <Text

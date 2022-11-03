@@ -1,46 +1,43 @@
 import React from 'react'
 
-import { 
-    VStack,
-    Text,
-} from '@chakra-ui/react'
+import { Text, VStack } from '@chakra-ui/react'
 
-import Card from '../utilities/Card'
-import StrategyComponent from '../Strategy'
+import StrategyComponent from './Strategy'
 
 import { Strategy } from '../../types/vaults'
+import Card from '../utilities/Card'
 
 interface Props {
     strategies: Strategy[]
 }
 
-const Strategies: React.FC<Props> = ({ strategies }) => {
-  return (
-    <Card>
+const Strategies : React.FC<Props> = ({ strategies }) => {
+    return (
         <VStack
+            spacing={2}
             alignItems='flex-start'
         >
             <Text
-                fontSize="xl"
+                fontSize="lg"
                 fontWeight="bold"
             >
-                Strategies
+                Approved Strategies
             </Text>
             {
                 strategies.length > 0 ? (
-                    strategies.map(strategy => (
-                        <StrategyComponent 
-                            key={strategy.strategyModule}
+                    strategies.map((strategy) => (
+                        <StrategyComponent
                             strategy={strategy}
                         />
                     ))
                 ) : (
-                    <Text>No active strategies.</Text>
+                    <Text>
+                        No approved strategies
+                    </Text>
                 )
             }
         </VStack>
-    </Card>
-  )
+    )
 }
 
 export default Strategies

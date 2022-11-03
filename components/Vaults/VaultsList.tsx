@@ -5,9 +5,6 @@ import {
     Text
 } from '@chakra-ui/react'
 
-import HeaderRow from './HeaderRow'
-import VaultPreview from './VaultPreview'
-
 import useVaults from '../../hooks/useVaults'
 
 import { vaultManager } from '../../data/vaultManager'

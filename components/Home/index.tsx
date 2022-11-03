@@ -6,7 +6,8 @@ import {
 } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
-import VaultsList from '../Vaults/VaultsList'
+import StructuredProducts from '../StructuredProducts'
+import Vaults from '../Vaults'
 
 const Home = () => {
   return (
@@ -24,7 +25,8 @@ const Home = () => {
           Pioneering Yield Aggregation on Aptos and Sui
         </Text>
       </Card>
-      <VaultsList />
+      <Vaults />
+      <StructuredProducts />
     </VStack>
   )
 }
