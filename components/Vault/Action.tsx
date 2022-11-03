@@ -28,10 +28,17 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
 
     const balance = useUserCoinBalance(coinAddress);
 
+    const [amountAsString, setAmountAsString] = useState('0.00000000');
     const [amount, setAmount] = useState(0);
 
-    const onChange = (valueAsString : string) => {
-        setAmount(parseFloat(valueAsString));
+    const handleTextChange = (value : string) => {
+        setAmountAsString(value);
+        if(value == ""){
+            setAmountAsString('0.00000000');
+            setAmount(0);
+        } else if(value[value.length-1] !== "."){
+            setAmount(parseFloat(value));
+        }
     }
 
     const onClick = async () => {
@@ -78,7 +85,8 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
                         You have {balance} {asset}
                     </Text>
                     <NumberInput
-                        onChange={onChange}
+                        value={amountAsString}
+                        onChange={handleTextChange}
                         w='100%'
                         max={balance}
                         precision={8}
