@@ -7,14 +7,16 @@ export const strategies : StrategyInfo[] = [
         strategyWitness: "AptosUsdcLpStrategy",
         baseCoin: "0x1::aptos_coin::AptosCoin",
         title: "Aptos/USDT Liquidity Provision",
-        description: "Swap 50% of pooled Aptos to USDT and add liquidity to the Aptos/USDT Liquidswap pool. Yield earned from trading fees."
+        description: "Swap 50% of pooled Aptos to USDT and add liquidity to the Aptos/USDT Liquidswap pool. Yield earned from trading fees.",
+        protocolsUsed: ["pontem"]
     },
     {
         strategyModule: "0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac::leveraged_ditto_strategy",
         strategyWitness: "LeveragedDittoStrategy",
         baseCoin: "0x1::aptos_coin::AptosCoin",
         title: "Leveraged Ditto Staking Strategy",
-        description: "Stake APT for stAPT, deposit stAPT into lending pool, repeat."
+        description: "Stake APT for stAPT, deposit stAPT into lending pool, repeat.",
+        protocolsUsed: ["ditto", "aries"]
     }
 ]
 

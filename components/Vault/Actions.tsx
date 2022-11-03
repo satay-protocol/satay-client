@@ -29,7 +29,6 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
     >
         <Card
             h='100%'
-            
         >
             <Tabs colorScheme='brand'>
                 <TabList>

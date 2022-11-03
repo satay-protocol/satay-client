@@ -41,10 +41,10 @@ const Action : React.FC<Props> = ({ action, asset, logo, actionName, coinAddress
     return (
         <Flex
             flexDirection='column'
-            gap={8}
+            gap={4}
         >
             <Flex
-                gap={8}
+                gap={4}
             >
                 <VStack
                     bg='gray.50'

@@ -12,6 +12,7 @@ import Actions from './Actions';
 
 import { vaultManager } from '../../data/vaultManager';
 import PriceChart from './PriceChart';
+import Strategies from './Strategies';
 
 interface Props {
   vaultId: string;
@@ -45,6 +46,9 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
                 vault={vault}
               />
             </Flex>
+            <Strategies 
+              strategies={vault.strategies}
+            />
             <PriceChart />
           </Flex>
         )

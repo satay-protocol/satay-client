@@ -17,6 +17,7 @@ export interface StrategyInfo {
     baseCoin: string;
     title: string;
     description: string;
+    protocolsUsed: string[];
 }
 
 export interface Strategy extends StrategyInfo {

@@ -11,8 +11,8 @@ const useVaultStrategy = (vaultId: string, strategyModule: string) => {
     const applyStrategy = async (amount : number) => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyModule}::apply_position`,
-            arguments: [vaultId, fromAptos(amount).toString()],
+            function: `${strategyModule}::harvest`,
+            arguments: [vaultId],
             type_arguments: []
         }, {
             max_gas_amount: '5000',

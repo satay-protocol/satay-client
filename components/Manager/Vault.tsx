@@ -10,10 +10,7 @@ import {
 } from '@chakra-ui/react'
 
 import { Vault, Strategy } from '../../types/vaults'
-import useVaultStrategy from '../../hooks/manager/useVaultStrategy'
 import SelectStrategy from '../modals/SelectStrategy'
-import ApplyStrategy from '../modals/ApplyStrategy'
-import LiquidateStrategy from '../modals/LiquidateStrategy'
 import VaultStrategyModals from './VaultStrategyModals'
 
 interface Props {

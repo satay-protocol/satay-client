@@ -5,7 +5,6 @@ import { VStack } from '@chakra-ui/react'
 import Card from '../utilities/Card'
 import AboutVault from './AboutVault'
 import Overview from './Overview'
-import Strategies from './Strategies'
 
 import { Vault } from '../../types/vaults'
 
@@ -27,9 +26,6 @@ const VaultInfo : React.FC<Props> = ({ vault }) => {
             />
             <AboutVault 
                 about={vault.about}
-            />
-            <Strategies 
-                strategies={vault.strategies}
             />
         </VStack>
     </Card>

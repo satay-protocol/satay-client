@@ -12,7 +12,7 @@ const useInitializeStrategy = (strategyModule : string, vaultId : string) => {
         await signAndSubmitTransaction({
             type: 'entry_function_payload',
             function: `${strategyModule}::init`,
-            arguments: [vaultId],
+            arguments: [vaultId, "10000"],
             type_arguments: []
         }, {
             max_gas_amount: '5000',
