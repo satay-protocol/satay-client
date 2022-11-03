@@ -39,7 +39,7 @@ const VaultStrategyModals : React.FC<Props> = ({
             <LiquidateStrategy
                 isOpen={isLiquidateStrategyOpen}
                 onClose={onLiquidateStrategyClose}
-                strategyCoin={activeStrategy.position_coin_type}
+                strategyCoin={activeStrategy.strategy_coin_type}
                 vaultAddress={vault.vaultAddress}
                 liquidateStrategy={liquidateStrategy}
             />

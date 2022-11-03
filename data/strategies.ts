@@ -22,5 +22,5 @@ export const strategies : StrategyInfo[] = [
 
 export const getStrategy = (strategyModule : string, position_coin_type : string) : Strategy => ({
     ...strategies.find((strategy) => strategy.strategyModule === strategyModule) || null,
-    position_coin_type
+    strategy_coin_type: position_coin_type
 });

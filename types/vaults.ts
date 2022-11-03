@@ -21,7 +21,7 @@ export interface StrategyInfo {
 }
 
 export interface Strategy extends StrategyInfo {
-    position_coin_type: string;
+    strategy_coin_type: string;
 }
 
 export interface Holding {
