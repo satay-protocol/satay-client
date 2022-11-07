@@ -8,5 +8,13 @@ export const structuredProducts: StructuredProduct[] = [
         coinStruct: "0x1::aptos_coin::AptosCoin",
         coinSymbol: "APT",
         protocols: ["ditto", "pontem"],
+    },
+    {
+        moduleAddress: "0x0000",
+        name: "Leveraged Liquid Staking",
+        description: "Stake APT on Tortuga for tAPT. Deposit tAPT into Aries Markets as collateral. Borrow APT and repeat.",
+        coinStruct: "0x1::aptos_coin::AptosCoin",
+        coinSymbol: "APT",
+        protocols: ["tortuga", "aries"],
     }
 ]
