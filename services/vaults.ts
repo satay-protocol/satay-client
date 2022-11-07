@@ -1,11 +1,8 @@
 import { AptosClient } from "aptos";
-import { MoveResource } from "aptos/src/generated";
-import { Coin } from "../data/coins";
 import { getStrategy } from "../data/strategies";
 
 import { vaultManager } from "../data/vaultManager";
 import { getVaultInfo } from "../data/vaultsData";
-
 
 import { ManagerResource } from "../hooks/manager/useManagerResource";
 import { Vault, Strategy } from "../types/vaults";

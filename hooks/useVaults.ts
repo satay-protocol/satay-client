@@ -14,7 +14,6 @@ const useVaults = (managerAddress : string) => {
     const { managerResource } = useManagerResource(managerAddress);
 
     const [vaults, setVaults] = useState<Vault[]>([]);
-
     const [fetched, setFetched] = useState<boolean>(false);
 
     useEffect(() => {
@@ -31,7 +30,8 @@ const useVaults = (managerAddress : string) => {
     }, [fetched, managerResource]);
 
     return {
-        vaults
+        vaults,
+        fetched
     };
 }
 
