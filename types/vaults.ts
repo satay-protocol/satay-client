@@ -2,7 +2,7 @@ export interface Vault {
     symbol: string;
     asset: string;
     logo: string;
-    totalDeposits: number;
+    tvl: number;
     vaultId: string;
     managerAddress: string;
     vaultAddress: string;

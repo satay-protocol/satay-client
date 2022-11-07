@@ -11,10 +11,10 @@ import { performanceArray, round2 } from '../../services/utils';
 interface Props {
     logo: string;
     symbol: string;
-    totalDeposits: number;
+    tvl: number;
 }
 
-const Overview : React.FC<Props> = ({ logo, symbol, totalDeposits}) => {
+const Overview : React.FC<Props> = ({ logo, symbol, tvl}) => {
 
     const performance = round2(performanceArray[performanceArray.length - 1].val);
 
@@ -49,7 +49,7 @@ const Overview : React.FC<Props> = ({ logo, symbol, totalDeposits}) => {
                         {symbol} Vault
                     </Text>
                     <Text>
-                        TVL: {totalDeposits} {symbol}
+                        TVL: {tvl} {symbol}
                     </Text>
                     <Text>
                         Performace:{' '}

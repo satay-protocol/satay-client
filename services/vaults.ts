@@ -1,4 +1,6 @@
 import { AptosClient } from "aptos";
+import { MoveResource } from "aptos/src/generated";
+import { Coin } from "../data/coins";
 import { getStrategy } from "../data/strategies";
 
 import { vaultManager } from "../data/vaultManager";
@@ -31,9 +33,7 @@ interface VaultInfo {
 
 interface VaultData {
     base_coin_type: StructData,
-    user_positions: {
-        handle: string
-    }
+    total_debt: string
 }
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
@@ -43,13 +43,15 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         key: vaultId
     }).catch(e => console.log(e.message));
     if(vaultInfo){
-        const {data : vault} = await client.getAccountResource(vaultInfo.vault_cap.vec[0].vault_addr, `${vaultManager}::vault::Vault`);
+        const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
+        const {data : vault} = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::Vault`);
         const vaultData = vault as VaultData;
+        console.log(vaultData);
         const coinType = getTypeString(vaultData.base_coin_type);
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
-            coinType: getTypeString(vaultData.base_coin_type),
-            totalDeposits: await getTotalDeposits(client, coinType),
+            coinType,
+            tvl: await getTVL(client, vaultAddress, coinType, parseInt(vaultData.total_debt)),
             managerAddress: managerResource.vaultManager,
             vaultId,
             vaultAddress: vaultInfo.vault_cap.vec[0].vault_addr,
@@ -81,10 +83,9 @@ export const getTypeString = (struct : StructData) => {
         + Buffer.from(struct.struct_name.slice(2), 'hex').toString();
 }
 
-const getTotalDeposits = async (client : AptosClient, baseCoin : string) => {
-    return client.getAccountResource(vaultManager, `0x1::coin::CoinStore<${vaultManager}::vault::VaultCoin<${baseCoin}>>`)
-        .then(res => toAptos(parseInt((res.data as CoinStoreResource).coin.value)))
-        .catch(err => 0)
+export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin: string, totalDebt: number) => {
+    let { data } = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::CoinStore<${baseCoin}>`);
+    return totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value))
 }
 
 interface VaultStrategyData {
