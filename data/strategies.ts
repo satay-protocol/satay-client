@@ -1,4 +1,5 @@
-import { Strategy, StrategyInfo } from "../types/vaults";
+import { getTypeString } from "../services/vaults";
+import { Strategy, StrategyInfo, VaultStrategyData } from "../types/vaults";
 
 
 export const strategies : StrategyInfo[] = [
@@ -20,7 +21,11 @@ export const strategies : StrategyInfo[] = [
     }
 ]
 
-export const getStrategy = (strategyModule : string, position_coin_type : string) : Strategy => ({
+export const getStrategy = (strategyModule : string, vaultStrategyData: VaultStrategyData) : Strategy => ({
     ...strategies.find((strategy) => strategy.strategyModule === strategyModule) || null,
-    strategy_coin_type: position_coin_type
+    totalDebt: vaultStrategyData.total_debt,
+    totalGain: vaultStrategyData.total_gain,
+    totalLoss: vaultStrategyData.total_loss,
+    debtRatio: vaultStrategyData.debt_ratio,
+    strategyCoinType: getTypeString(vaultStrategyData.base_coin_type),
 });

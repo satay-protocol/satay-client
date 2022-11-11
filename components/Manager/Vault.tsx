@@ -9,32 +9,32 @@ import {
     Flex
 } from '@chakra-ui/react'
 
-import { Vault, Strategy } from '../../types/vaults'
+import { Vault, VaultStrategyData } from '../../types/vaults'
 import SelectStrategy from '../modals/SelectStrategy'
-import VaultStrategyModals from './VaultStrategyModals'
+import HarvestButton from './HarvestButton'
+
+import {getStrategy} from '../../data/strategies'
+import DebtRatioSlider from './DebtRatioSlider'
 
 interface Props {
     vault: Vault,
 }
 
+const vaultStrategyData : VaultStrategyData = {
+    debt_ratio: 1000,
+    total_debt: 0,
+    total_gain: 0,
+    total_loss: 0,
+    base_coin_type: {
+        struct_name: '',
+        module_name: '',
+        account_address: '',
+    }
+}
+
 const Vault : React.FC<Props> = ({ vault }) => {
 
     const { onOpen: onSelectStrategyOpen, onClose: onStrategySelectClose, isOpen : isSelectStrategyOpen } = useDisclosure();
-    const { onOpen: onApplyStrategyOpen, onClose: onApplyStrategyClose, isOpen : isApplyStrategyOpen } = useDisclosure();
-    const { onOpen: onLiquidateStrategyOpen, onClose: onLiquidateStrategyClose, isOpen : isLiquidateStrategyOpen } = useDisclosure();
-
-    
-    const [activeStrategy, setActiveStrategy] = useState<Strategy | null>(null);
-
-    const onApplyOpen = (strategy: Strategy) => {
-        setActiveStrategy(strategy);
-        onApplyStrategyOpen();
-    }
-
-    const onLiquidateOpen = (strategy: Strategy) => {
-        setActiveStrategy(strategy);
-        onLiquidateStrategyOpen();
-    }
 
     return (
         <>
@@ -45,18 +45,6 @@ const Vault : React.FC<Props> = ({ vault }) => {
                 approvedStrategies={vault.strategies.map(strategy => strategy.strategyModule)}
                 vault={vault}
             />
-            {
-                activeStrategy !== null && (
-                    <VaultStrategyModals 
-                        isApplyStrategyOpen={isApplyStrategyOpen}
-                        onApplyStrategyClose={onApplyStrategyClose}
-                        isLiquidateStrategyOpen={isLiquidateStrategyOpen}
-                        onLiquidateStrategyClose={onLiquidateStrategyClose}
-                        vault={vault}
-                        activeStrategy={activeStrategy}
-                    />
-                )
-            }
             <Flex
                 direction='column'
                 borderBottomWidth='1px'
@@ -100,26 +88,25 @@ const Vault : React.FC<Props> = ({ vault }) => {
                     gap={2}
                 >
                     {
-                        vault.strategies.map((strategy) => (
+                        (vault.strategies.concat(getStrategy("0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac::leveraged_ditto_strategy", vaultStrategyData))).map((strategy) => (
                             <HStack
                                 key={strategy.strategyModule}
+                                spacing={4}
                             >
                                 <Text
                                     mr='auto'
                                 >
                                     {strategy.title}
                                 </Text>
-                                <Button
-                                    onClick={() => onApplyOpen(strategy)}
-                                >
-                                    Apply Strategy
-                                </Button>
-                                <Button
-                                    onClick={() => onLiquidateOpen(strategy)}
-                                >
-                                    Liquidate Strategy
-                                </Button>
-                                
+                                <DebtRatioSlider 
+                                    strategyModule={strategy.strategyModule}
+                                    vaultId={vault.vaultId}
+                                    currentDebtRatio={strategy.debtRatio}
+                                />
+                                <HarvestButton 
+                                    vaultId={vault.vaultId}
+                                    strategyModule={strategy.strategyModule}
+                                />
                             </HStack>
                         ))
                     }

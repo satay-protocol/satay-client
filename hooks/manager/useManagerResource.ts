@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+
 import { useAptos } from "../../contexts/AptosContext";
+
 import { vaultManager } from "../../data/vaultManager";
 
-export interface ManagerResource {
-    vaults: {handle : string},
-    next_vault_id: string;
-    vaultManager: string
-}
+import { ManagerResource } from "../../types/aptos";
+
 
 const useManagerResource = (managerAddress : string) => {
 
@@ -19,15 +18,17 @@ const useManagerResource = (managerAddress : string) => {
         const getManagerResource = async () => {
             const resource = await client.getAccountResource(managerAddress, `${vaultManager}::satay::ManagerAccount`)
                 .then(res => res)
+                .catch((err) => null)
             if(resource?.data){
                 setManagerResource({...resource.data, vaultManager} as ManagerResource);
                 setComplete(true);
+            } else {
+                setManagerResource(null);
+                setComplete(true);
             }
         }
-        if(!managerResource && !complete && managerAddress){
-            getManagerResource();
-        }
-    })
+        getManagerResource();
+    }, [client, managerAddress])
 
     return {
         managerResource,

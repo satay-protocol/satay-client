@@ -1,49 +1,26 @@
 import { AptosClient } from "aptos";
-import { getStrategy } from "../data/strategies";
 
+import { getStrategy } from "../data/strategies";
 import { vaultManager } from "../data/vaultManager";
 import { getVaultInfo } from "../data/vaultsData";
 
-import { ManagerResource } from "../hooks/manager/useManagerResource";
-import { Vault, Strategy } from "../types/vaults";
-import { CoinStoreResource } from "./aptosUtils";
+import { Vault, Strategy, VaultStrategyData } from "../types/vaults";
+import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/aptos";
+import { CoinStoreResource } from "../types/aptos";
+
 import { toAptos } from "./utils";
 
-interface StructData {
-    struct_name: string,
-    account_address: string;
-    module_name: string;
-}
-
-interface VaultCapability {
-    vault_addr: string
-}
-
-interface VaultInfo {
-    vault_cap: {
-        vec: VaultCapability[]
-    },
-    strategy_type: {
-        vec: StructData[]
-    }
-}
-
-interface VaultData {
-    base_coin_type: StructData,
-    total_debt: string
-}
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
     const vaultInfo : VaultInfo = await client.getTableItem(managerResource.vaults.handle, {
         key_type: "u64",
         value_type: `${vaultManager}::satay::VaultInfo`,
         key: vaultId
-    }).catch(e => console.log(e.message));
+    }).catch(e => null);
     if(vaultInfo){
         const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
         const {data : vault} = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::Vault`);
         const vaultData = vault as VaultData;
-        console.log(vaultData);
         const coinType = getTypeString(vaultData.base_coin_type);
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
@@ -85,9 +62,6 @@ export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin
     return totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value))
 }
 
-interface VaultStrategyData {
-    base_coin_type: StructData
-}
 
 export const getStrategiesForVault = async (client : AptosClient, vaultAddress : string) : Promise<Strategy[]> => {
     const resources = await client.getAccountResources(vaultAddress);
@@ -95,6 +69,6 @@ export const getStrategiesForVault = async (client : AptosClient, vaultAddress :
         .filter(resource => resource.type.includes("VaultStrategy"))
         .map(resource => getStrategy(
             resource.type.slice(resource.type.indexOf("VaultStrategy<") + 14, resource.type.lastIndexOf("::")),
-            getTypeString((resource.data as VaultStrategyData).base_coin_type)
+            resource.data as VaultStrategyData
         ))
 }

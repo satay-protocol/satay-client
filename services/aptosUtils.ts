@@ -1,11 +1,8 @@
 import { AptosClient } from "aptos";
+
+import { CoinStoreResource } from "../types/aptos";
 import { CoinData } from "../types/vaults";
 
-export interface CoinStoreResource {
-    coin: {
-        value: string
-    }
-}
 
 export const getCoinBalance = async (client : AptosClient, coinAddress : string, address : string, coinStoreAddress = '0x1::coin') => {
     let coin : number = await client.getAccountResource(address, `${coinStoreAddress}::CoinStore<${coinAddress}>`)
@@ -15,7 +12,6 @@ export const getCoinBalance = async (client : AptosClient, coinAddress : string,
 }
 
 export const getCoinBalances = async (client : AptosClient, address: string) : Promise<CoinData[]> => {
-    console.log(address);
     let resources = await client.getAccountResources(address);
     return resources
         .filter(r => r.type.includes('CoinStore') && parseInt((r.data as CoinStoreResource).coin.value) > 0)

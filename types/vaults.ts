@@ -1,3 +1,5 @@
+import { StructData } from "./aptos";
+
 export interface Vault {
     symbol: string;
     asset: string;
@@ -21,7 +23,19 @@ export interface StrategyInfo {
 }
 
 export interface Strategy extends StrategyInfo {
-    strategy_coin_type: string;
+    strategyCoinType: string;
+    debtRatio: number;
+    totalDebt: number;
+    totalGain: number;
+    totalLoss: number;
+}
+
+export interface VaultStrategyData {
+    base_coin_type: StructData;
+    debt_ratio: number;
+    total_debt: number;
+    total_gain: number;
+    total_loss: number;
 }
 
 export interface Holding {
