@@ -42,7 +42,7 @@ const DefaultLayout = ({
 
   const { network, connected } = useWallet();
 
-  const correctNetwork = network?.name?.toLowerCase().includes('devnet');
+  const correctNetwork = network?.chainId === '36' || network?.chainId === '2';
 
   return (
     <Box 

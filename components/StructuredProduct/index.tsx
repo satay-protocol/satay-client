@@ -7,6 +7,7 @@ import Card from '../utilities/Card'
 import { StructuredProduct } from '../../types/structuredProduct'
 import ProtocolList from '../utilities/ProtocolList'
 import DepositBox from '../utilities/DepositBox'
+import useStructuredProduct from '../../hooks/useStructuredProduct'
 
 interface Props {
     structuredProduct: StructuredProduct
@@ -14,9 +15,7 @@ interface Props {
 
 const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => {
 
-    const onDeposit = async (amount : number) => {
-
-    }
+    const { deposit } = useStructuredProduct(structuredProduct.moduleAddress);
 
     return (
         <Card
@@ -42,7 +41,7 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 <DepositBox 
                     coinStruct={structuredProduct.coinStruct}
                     coinSymbol={structuredProduct.coinSymbol}
-                    onDeposit={onDeposit}
+                    onDeposit={deposit}
                     viewPath={'/'}
                 />
                 <ProtocolList 

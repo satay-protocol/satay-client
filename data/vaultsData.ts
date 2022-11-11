@@ -1,5 +1,3 @@
-import { Strategy } from "../types/vaults";
-
 interface VaultInfo {
     symbol: string;
     logo: string,
@@ -11,11 +9,6 @@ interface Vaults {
 }
 
 const vaults : Vaults = {
-    'USDT': {
-        symbol: 'USDT',
-        logo: 'https://seeklogo.com//images/T/tether-usdt-logo-FA55C7F397-seeklogo.com.png',
-        about: "Tether, is an asset-backed cryptocurrency stablecoin. It was launched by the company Tether Limited Inc. in 2014. Tether Limited is owned by the Hong Kong-based company iFinex Inc., which also owns the Bitfinex cryptocurrency exchange.",
-    },
     'AptosCoin': {
         symbol: 'APT',
         logo: 'https://cdn-images-1.medium.com/max/1200/1*Gf747eyRywU8Img0tK5wvw.png',

@@ -1,7 +1,7 @@
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { AptosClient } from "aptos";
 
 import { createContext, ReactNode, FC, useContext, useState } from "react"
-
 
 interface ContextType {
     client: AptosClient;
@@ -17,16 +17,16 @@ export const useAptos = () => useContext(AptosContext);
 
 interface AptosContextProps {
     children: ReactNode;
-    rpcUrl?: string;
 }
 
-export const AptosProvider : FC<AptosContextProps> = ({ children, rpcUrl }) => {
+export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
 
-    const [client, setClient] = useState<AptosClient>(new AptosClient(rpcUrl || 'https://fullnode.devnet.aptoslabs.com/v1'));
+    const { network } = useWallet();
+
+    const [client, setClient] = useState<AptosClient>(new AptosClient(network?.api || 'https://fullnode.devnet.aptoslabs.com/v1'));
 
     const updateClient = async () => {
-        console.log('update');
-        setClient(new AptosClient(rpcUrl || 'https://fullnode.devnet.aptoslabs.com/v1'));
+        setClient(new AptosClient(network?.api || 'https://fullnode.devnet.aptoslabs.com/v1'));
     }
 
     return (
