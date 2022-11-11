@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import {
     HStack,
@@ -9,12 +9,10 @@ import {
     Flex
 } from '@chakra-ui/react'
 
-import { Vault, VaultStrategyData } from '../../types/vaults'
 import SelectStrategy from '../modals/SelectStrategy'
-import HarvestButton from './HarvestButton'
+import StrategyRow from './StrategyRow'
 
-import {getStrategy} from '../../data/strategies'
-import DebtRatioSlider from './DebtRatioSlider'
+import { Vault, VaultStrategyData } from '../../types/vaults'
 
 interface Props {
     vault: Vault,
@@ -88,26 +86,12 @@ const Vault : React.FC<Props> = ({ vault }) => {
                     gap={2}
                 >
                     {
-                        (vault.strategies.concat(getStrategy("0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac::leveraged_ditto_strategy", vaultStrategyData))).map((strategy) => (
-                            <HStack
+                        vault.strategies.map((strategy) => (
+                            <StrategyRow 
                                 key={strategy.strategyModule}
-                                spacing={4}
-                            >
-                                <Text
-                                    mr='auto'
-                                >
-                                    {strategy.title}
-                                </Text>
-                                <DebtRatioSlider 
-                                    strategyModule={strategy.strategyModule}
-                                    vaultId={vault.vaultId}
-                                    currentDebtRatio={strategy.debtRatio}
-                                />
-                                <HarvestButton 
-                                    vaultId={vault.vaultId}
-                                    strategyModule={strategy.strategyModule}
-                                />
-                            </HStack>
+                                strategy={strategy}
+                                vaultId={vault.vaultId}
+                            />
                         ))
                     }
                 </Flex>
