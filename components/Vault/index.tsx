@@ -4,16 +4,17 @@ import useVault from '../../hooks/useVault';
 
 import { 
   Box, 
-  Flex
+  Flex,
 } from '@chakra-ui/react';
 
 import VaultInfo from './VaultInfo';
-import Actions from './Actions';
+import DepositWithdraw from '../DepositWithdraw';
 
 import { vaultManager } from '../../data/vaultManager';
-import PriceChart from './PriceChart';
+
 import Strategies from '../Strategies';
 import Card from '../utilities/Card';
+import Holdings from './Holdings';
 
 interface Props {
   vaultId: string;
@@ -41,18 +42,24 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
               <VaultInfo
                 vault={vault}
               />
-              <Actions 
-                deposit={deposit}
-                withdraw={withdraw}
-                vault={vault}
-              />
+              <Card>
+                <DepositWithdraw 
+                  deposit={deposit}
+                  withdraw={withdraw}
+                  coinAddress={vault.coinType}
+                  coinSymbol={vault.symbol}
+                  coinLogo={vault.logo}
+                />    
+                <Holdings
+                  vaultAddress={vault.vaultAddress}
+                />
+              </Card>
             </Flex>
             <Card>
               <Strategies 
                 strategies={vault.strategies}
               />
             </Card>
-            <PriceChart />
           </Flex>
         )
       }

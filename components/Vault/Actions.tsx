@@ -12,17 +12,18 @@ import {
 import Card from '../utilities/Card'
 import Action from './Action';
 
-import { Vault } from '../../types/vaults';
-import { vaultManager } from '../../data/vaultManager';
-import Holdings from './Holdings';
+import { Block } from '../../types/block';
 
 interface Props {
-    vault: Vault;
     deposit: (amount : number) => Promise<void>;
     withdraw: (amount : number) => Promise<void>;
+    coinLogo: string;
+    coinSymbol: string;
+    coinAddress: string;
+    block?: Block
 }
 
-const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
+const Actions : React.FC<Props> = ({ deposit, withdraw, coinAddress, coinLogo, coinSymbol }) => {
   return (
     <Box
         w={'100%'}
@@ -42,10 +43,10 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                         <Action
                             key='depositAction'
                             action={deposit}
-                            asset={vault.asset}
-                            logo={vault.logo}
+                            symbol={coinSymbol}
+                            logo={coinLogo}
                             actionName='Deposit'
-                            coinAddress={vault.coinType}
+                            coinAddress={coinAddress}
                         />
                     </TabPanel>
                     <TabPanel
@@ -54,17 +55,14 @@ const Actions : React.FC<Props> = ({ vault, deposit, withdraw }) => {
                         <Action
                             key='withdrawAction'
                             action={withdraw}
-                            logo={vault.logo}
-                            asset={"Vault Coin"}
+                            logo={coinLogo}
+                            symbol={coinSymbol}
                             actionName='Withdraw'
-                            coinAddress={`${vaultManager}::vault::VaultCoin<${vault.coinType}>`}
+                            coinAddress={coinAddress}
                         />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
-            <Holdings 
-                vaultAddress={vault.vaultAddress}
-            />
         </Card>
     </Box>
   )

@@ -7,9 +7,10 @@ import { AddIcon } from '@chakra-ui/icons'
 interface Props {
     protocols: string[]
     iconSize?: string
+    iconSeparator?: React.ReactNode
 }
 
-const ProtocolList : React.FC<Props> = ({ protocols, iconSize = '48px' }) => {
+const ProtocolList : React.FC<Props> = ({ protocols, iconSize = '48px', iconSeparator = <AddIcon /> }) => {
   return (
     <HStack>
         {
@@ -24,7 +25,7 @@ const ProtocolList : React.FC<Props> = ({ protocols, iconSize = '48px' }) => {
                     />
                     {
                         index !== protocols.length - 1 && (
-                            <AddIcon />
+                            iconSeparator
                         )
                     }
                 </>

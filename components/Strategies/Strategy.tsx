@@ -18,9 +18,11 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
             key={strategy.strategyModule}
             w='100%'
             justifyContent='space-between'
+            gap={4}
         >
             <VStack
                 alignItems='flex-start'
+                flex={1}
             >
                 <Text
                     fontSize="sm"

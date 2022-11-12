@@ -23,7 +23,7 @@ const vaultStrategyData : VaultStrategyData = {
     total_debt: 0,
     total_gain: 0,
     total_loss: 0,
-    base_coin_type: {
+    strategy_coin_type: {
         struct_name: '',
         module_name: '',
         account_address: '',

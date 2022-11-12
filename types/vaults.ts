@@ -31,7 +31,7 @@ export interface Strategy extends StrategyInfo {
 }
 
 export interface VaultStrategyData {
-    base_coin_type: StructData;
+    strategy_coin_type: StructData;
     debt_ratio: number;
     total_debt: number;
     total_gain: number;

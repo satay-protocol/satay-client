@@ -18,7 +18,7 @@ export const toAptos = (lamports: number) => lamports / Math.pow(10, 8);
 
 export const fromAptos = (aptos: number) => aptos * Math.pow(10, 8);
 
-export const getPerformanceArray = (numPoints = 30) => {
+export const getPerformanceArray = (numPoints = 30, apy = 0.07) => {
     let val = 0;
     const arr = [];
     for (let i = 0; i < numPoints; i++) {
@@ -26,7 +26,7 @@ export const getPerformanceArray = (numPoints = 30) => {
             val,
             i
         });
-        val += (Math.random() - (1/3)) * 10;
+        val += (Math.random() * (apy / numPoints));
     }
     return arr;
 }

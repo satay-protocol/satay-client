@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 
-import { useColorModeValue, useTheme, Text, Button, HStack } from "@chakra-ui/react";
+import { Box, useTheme, Text, Button, HStack } from "@chakra-ui/react";
 import Card from '../utilities/Card';
 import { getPerformanceArray, performanceArray } from '../../services/utils';
 
@@ -63,46 +63,50 @@ const PriceChart : React.FC<Props> = () => {
             >
                 Performance
             </Text>
-            <Line
-                data={{
-                    labels: performance.map((price) => price.i),
-                    datasets: [{
-                        data: performance.map((price) => price.val),
-                        backgroundColor: barColor,
-                    }]
-                }}
-                options={{
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                        tooltip: {
-                            enabled: false,
-                        }
-                    },
-                    scales: {
-                        y: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: tickColor,
-                                callback: (value) => `${value}%`,
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: tickColor,
+            <Box
+                h="200px"
+            >
+                <Line
+                    data={{
+                        labels: performance.map((price) => price.i),
+                        datasets: [{
+                            data: performance.map((price) => price.val),
+                            backgroundColor: barColor,
+                        }]
+                    }}
+                    options={{
+                        responsive: true,
+                        plugins: {
+                            legend: {
                                 display: false,
+                            },
+                            tooltip: {
+                                enabled: false,
                             }
-                        }
-                    },
-                }}
-            />
+                        },
+                        scales: {
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: tickColor,
+                                    callback: (value) => `${value}%`,
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: tickColor,
+                                    display: false,
+                                }
+                            }
+                        },
+                    }}
+                />
+            </Box>
             <HStack
                 spacing={4}
                 justifyContent='space-around'

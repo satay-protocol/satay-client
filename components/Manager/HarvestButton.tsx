@@ -16,6 +16,7 @@ const HarvestButton : React.FC<Props> = ({ vaultId, strategyModule }) => {
     return (
         <Button
             onClick={harvest}
+            colorScheme="brand"
         >
             Harvest
         </Button>

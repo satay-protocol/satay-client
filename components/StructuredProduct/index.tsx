@@ -42,7 +42,7 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                     coinStruct={structuredProduct.coinStruct}
                     coinSymbol={structuredProduct.coinSymbol}
                     onDeposit={deposit}
-                    viewPath={'/'}
+                    viewPath={'/products/' + structuredProduct.moduleAddress.slice(structuredProduct.moduleAddress.indexOf('::') + 2)}
                 />
                 <ProtocolList 
                     protocols={structuredProduct.protocols}

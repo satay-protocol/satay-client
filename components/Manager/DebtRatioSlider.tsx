@@ -33,6 +33,9 @@ const DebtRatioSlider : React.FC<Props> = ({ vaultId, strategyModule, currentDeb
     <HStack
         flex={1}
         spacing={4}
+        bg='gray.100'
+        p={4}
+        rounded='lg'
     >
         <Slider 
             aria-label={`${strategyModule}-${vaultId}-debt-ratio-slider`}

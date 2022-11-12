@@ -52,6 +52,7 @@ export const getVaults = async (client : AptosClient, managerResource : ManagerR
 }
 
 export const getTypeString = (struct : StructData) => {
+    console.log(struct);
     return struct.account_address + "::"
         + Buffer.from(struct.module_name.slice(2), 'hex').toString() + "::"
         + Buffer.from(struct.struct_name.slice(2), 'hex').toString();
