@@ -13,6 +13,7 @@ import SelectStrategy from '../modals/SelectStrategy'
 import StrategyRow from './StrategyRow'
 
 import { Vault, VaultStrategyData } from '../../types/vaults'
+import { structToString } from '../../services/vaults'
 
 interface Props {
     vault: Vault,
@@ -39,7 +40,7 @@ const Vault : React.FC<Props> = ({ vault }) => {
             <SelectStrategy 
                 isOpen={isSelectStrategyOpen}
                 onClose={onStrategySelectClose}
-                baseCoin={vault.coinType}
+                baseCoin={structToString(vault.baseCoin)}
                 approvedStrategies={vault.strategies.map(strategy => strategy.strategyModule)}
                 vault={vault}
             />
@@ -67,7 +68,7 @@ const Vault : React.FC<Props> = ({ vault }) => {
                         <Text
                             flex={1}
                         >
-                            {vault.asset}
+                            {vault.symbol}
                         </Text>
                     </HStack>
                     <Button

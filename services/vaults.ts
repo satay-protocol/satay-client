@@ -22,14 +22,19 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         const {data : vault} = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::Vault`);
         const vaultData = vault as VaultData;
         const coinType = getTypeString(vaultData.base_coin_type);
+        const baseCoin = {
+            struct_name: Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString(),
+            module_name: Buffer.from(vaultData.base_coin_type.module_name.slice(2), 'hex').toString(),
+            account_address: vaultData.base_coin_type.account_address
+        }
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
-            coinType,
+            baseCoin,
             tvl: await getTVL(client, vaultAddress, coinType, parseInt(vaultData.total_debt)),
             managerAddress: managerResource.vaultManager,
             vaultId,
             vaultAddress: vaultInfo.vault_cap.vec[0].vault_addr,
-            strategies: await getStrategiesForVault(client, vaultInfo.vault_cap.vec[0].vault_addr)
+            strategies: await getStrategiesForVault(client, vaultInfo.vault_cap.vec[0].vault_addr),
         }
     } else {
         return null;
@@ -52,10 +57,13 @@ export const getVaults = async (client : AptosClient, managerResource : ManagerR
 }
 
 export const getTypeString = (struct : StructData) => {
-    console.log(struct);
     return struct.account_address + "::"
         + Buffer.from(struct.module_name.slice(2), 'hex').toString() + "::"
         + Buffer.from(struct.struct_name.slice(2), 'hex').toString();
+}
+
+export const structToString = (struct : StructData) => {
+    return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
 }
 
 export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin: string, totalDebt: number) => {

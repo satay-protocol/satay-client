@@ -15,6 +15,7 @@ import { vaultManager } from '../../data/vaultManager';
 import Strategies from '../Strategies';
 import Card from '../utilities/Card';
 import Holdings from './Holdings';
+import { satayStakeCoin } from '../../types/block';
 
 interface Props {
   vaultId: string;
@@ -23,6 +24,8 @@ interface Props {
 const Vault : React.FC<Props> = ({ vaultId }) => {
 
   const { vault, deposit, withdraw } = useVault(vaultManager, vaultId)
+
+  const block = vault && satayStakeCoin(vault.baseCoin, vault.symbol, vault.baseCoinProtocol);
 
   return (
     <Box>
@@ -46,9 +49,7 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
                 <DepositWithdraw 
                   deposit={deposit}
                   withdraw={withdraw}
-                  coinAddress={vault.coinType}
-                  coinSymbol={vault.symbol}
-                  coinLogo={vault.logo}
+                  block={block}
                 />    
                 <Holdings
                   vaultAddress={vault.vaultAddress}

@@ -2,14 +2,14 @@ import { StructData } from "./aptos";
 
 export interface Vault {
     symbol: string;
-    asset: string;
     logo: string;
     tvl: number;
     vaultId: string;
     managerAddress: string;
     vaultAddress: string;
     about: string;
-    coinType: string;
+    baseCoin: StructData;
+    baseCoinProtocol: string;
     strategies: Strategy[];
 }
 

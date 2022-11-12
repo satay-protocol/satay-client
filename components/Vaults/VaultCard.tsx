@@ -1,21 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import Link from 'next/link'
-
-import { Text, Flex, Image, VStack, NumberInput, NumberInputField, Button } from '@chakra-ui/react'
-import { AddIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-
-import { Vault } from '../../types/vaults'
+import { Text, Flex, Image } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
-
-import { fromAptos } from '../../services/utils'
-
-import useUserCoinBalance from '../../hooks/useUserCoinBalance'
-import useVault from '../../hooks/useVault'
-import useWallet from '../../hooks/useWallet'
 import DepositBox from '../utilities/DepositBox'
 import Strategies from '../Strategies'
+
+import useVault from '../../hooks/useVault'
+
+import { structToString } from '../../services/vaults'
+import { Vault } from '../../types/vaults'
 
 interface Props {
     vault: Vault
@@ -57,7 +51,7 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                         </Text>
                     </Flex>
                     <DepositBox 
-                        coinStruct={vault.coinType}
+                        coinStruct={structToString(vault.baseCoin)}
                         coinSymbol={vault.symbol}
                         onDeposit={deposit}
                         viewPath={`/vaults/${vault.managerAddress}/${vault.vaultId}`}

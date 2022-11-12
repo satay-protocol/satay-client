@@ -27,6 +27,8 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinAddres
     const { connected } = useWallet();
 
     const balance = useUserCoinBalance(coinAddress);
+    
+    console.log(balance); 
 
     const [amountAsString, setAmountAsString] = useState('0.00000000');
     const [amount, setAmount] = useState(0);

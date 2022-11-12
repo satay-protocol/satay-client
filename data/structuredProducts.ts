@@ -1,5 +1,5 @@
 import { Struct } from "@solana/web3.js";
-import { dittoStakeAptos, dittoStakeAptosLp } from "../types/block";
+import { dittoStakeAptos, dittoStakeAptosAndLp, dittoStakeAptosLp, tortugaStakeAptos } from "../types/block";
 import { StructuredProduct } from "../types/structuredProduct";
 import { vaultManager } from "./vaultManager";
 
@@ -14,7 +14,8 @@ const dittoStaking : StructuredProduct = {
     blocks: [
         dittoStakeAptos,
         dittoStakeAptosLp
-    ]
+    ],
+    block: dittoStakeAptosAndLp
 }
 
 const tortugaLeverage : StructuredProduct = {
@@ -25,7 +26,8 @@ const tortugaLeverage : StructuredProduct = {
     coinSymbol: "APT",
     coinSlug: "aptos",
     protocols: ["tortuga", "aries"],
-    blocks: []
+    blocks: [tortugaStakeAptos],
+    block: tortugaStakeAptos
 }
 
 

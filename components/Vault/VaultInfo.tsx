@@ -20,7 +20,7 @@ const VaultInfo : React.FC<Props> = ({ vault }) => {
             alignItems='flex-start'
         >
             <Overview
-                logo={vault.logo}
+                logo={`/${vault.baseCoinProtocol}_logo.jpeg`}
                 symbol={vault.symbol}
                 tvl={vault.tvl}
             />

@@ -9,4 +9,5 @@ export interface StructuredProduct {
     coinSlug: string;
     protocols: string[];
     blocks: Block[];
+    block: Block;
 }

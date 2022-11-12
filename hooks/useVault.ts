@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAptos } from "../contexts/AptosContext";
 import { vaultManager } from "../data/vaultManager";
-import { getVaultFromTable } from "../services/vaults";
+import { structToString, getVaultFromTable } from "../services/vaults";
 
 import { Vault } from "../types/vaults";
 
@@ -17,8 +17,6 @@ const useVault = (managerAddress : string, vaultId : string) => {
     const { account, submitTransaction } = useWallet();
 
     const { managerResource } = useManagerResource(managerAddress);
-
-    const toast = useToast();
 
     const [vault, setVault] = useState<Vault | null>(null);
     const [complete, setComplete] = useState<boolean>(false);
@@ -48,7 +46,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
                     vault.vaultId,
                     amount.toString()
                 ],
-                type_arguments: [vault.coinType]
+                type_arguments: [structToString(vault.baseCoin)]
             }, {
                 title: "Deposit Succeeded!",
                 description: `You have deposited ${toAptos(amount)} coins`
@@ -66,7 +64,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
                     vault.vaultId,
                     amount.toString()
                 ],
-                type_arguments: [vault.coinType]
+                type_arguments: [structToString(vault.baseCoin)]
             }, {
                 title: "Withdraw Succeeded!",
                 description: `You have burned ${toAptos(amount)} vault coins`,

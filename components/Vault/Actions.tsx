@@ -13,17 +13,15 @@ import Card from '../utilities/Card'
 import Action from './Action';
 
 import { Block } from '../../types/block';
+import { structToString } from '../../services/vaults';
 
 interface Props {
     deposit: (amount : number) => Promise<void>;
     withdraw: (amount : number) => Promise<void>;
-    coinLogo: string;
-    coinSymbol: string;
-    coinAddress: string;
-    block?: Block
+    block: Block
 }
 
-const Actions : React.FC<Props> = ({ deposit, withdraw, coinAddress, coinLogo, coinSymbol }) => {
+const Actions : React.FC<Props> = ({ deposit, withdraw, block }) => {
   return (
     <Box
         w={'100%'}
@@ -43,10 +41,10 @@ const Actions : React.FC<Props> = ({ deposit, withdraw, coinAddress, coinLogo, c
                         <Action
                             key='depositAction'
                             action={deposit}
-                            symbol={coinSymbol}
-                            logo={coinLogo}
+                            symbol={block.inputCoinSymbol}
+                            logo={`/${block.inputProtocol}_logo.jpeg`}
                             actionName='Deposit'
-                            coinAddress={coinAddress}
+                            coinAddress={structToString(block.inputCoinType)}
                         />
                     </TabPanel>
                     <TabPanel
@@ -55,10 +53,10 @@ const Actions : React.FC<Props> = ({ deposit, withdraw, coinAddress, coinLogo, c
                         <Action
                             key='withdrawAction'
                             action={withdraw}
-                            logo={coinLogo}
-                            symbol={coinSymbol}
+                            logo={`/${block.outputProtocol}_logo.jpeg`}
+                            symbol={block.outputCoinSymbol}
                             actionName='Withdraw'
-                            coinAddress={coinAddress}
+                            coinAddress={structToString(block.outputCoinType)}
                         />
                     </TabPanel>
                 </TabPanels>
