@@ -1,4 +1,3 @@
-import { Struct } from "@solana/web3.js";
 import { dittoStakeAptos, dittoStakeAptosAndLp, dittoStakeAptosLp, tortugaStakeAptos } from "../types/block";
 import { StructuredProduct } from "../types/structuredProduct";
 import { vaultManager } from "./vaultManager";
