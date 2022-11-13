@@ -21,9 +21,6 @@ interface Props {
 }
 
 const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block }) => {
-
-    console.log(block.outputCoinType);
-
     return (
         <Box
             w={'100%'}

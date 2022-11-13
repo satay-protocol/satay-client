@@ -8,7 +8,7 @@ import { Vault, Strategy, VaultStrategyData } from "../types/vaults";
 import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/aptos";
 import { CoinStoreResource } from "../types/aptos";
 
-import { toAptos } from "./utils";
+import { round, toAptos } from "./utils";
 
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
@@ -68,7 +68,7 @@ export const structToString = (struct : StructData) => {
 
 export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin: string, totalDebt: number) => {
     let { data } = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::CoinStore<${baseCoin}>`);
-    return totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value))
+    return round(totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value)), 3);
 }
 
 

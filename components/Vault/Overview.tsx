@@ -6,7 +6,7 @@ import {
     HStack,
     Image,
 } from '@chakra-ui/react'
-import { fromAptos, performanceArray, round2, toAptos } from '../../services/utils';
+import { fromAptos, performanceArray, round, round2, toAptos } from '../../services/utils';
 
 interface Props {
     logo: string;
@@ -49,10 +49,10 @@ const Overview : React.FC<Props> = ({ logo, symbol, tvl}) => {
                         {symbol} Vault
                     </Text>
                     <Text>
-                        TVL: {toAptos(tvl)} {symbol}
+                        TVL: {round(toAptos(tvl), 3)} {symbol}
                     </Text>
                     <Text>
-                        Performace:{' '}
+                        Performance:{' '}
                         <Text 
                             as={'span'} 
                             color='brand.500' 

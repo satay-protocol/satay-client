@@ -10,7 +10,7 @@ import {
     Button
 } from '@chakra-ui/react';
 
-import { fromAptos } from '../../services/utils';
+import { fromAptos, round } from '../../services/utils';
 import useUserCoinBalance from '../../hooks/useUserCoinBalance';
 import useWallet from '../../hooks/useWallet';
 
@@ -69,9 +69,6 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinAddres
                         rounded='full'
                         alt='token logo'
                     />
-                    <Text>
-                        {symbol}
-                    </Text>
                 </VStack>
                 <VStack
                     alignItems='flex-start'
@@ -81,11 +78,23 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinAddres
                     bg='gray.50'
                     flex={1}
                 >
-                    <Text
-                        fontSize='sm'
+                    <VStack
+                        spacing={0}
+                        alignItems='flex-start'
                     >
-                        You have {balance} {symbol}
-                    </Text>
+                        <Text
+                            fontSize='sm'
+                            fontWeight='semibold'
+                        >
+                            Balance
+                        </Text>
+                        <Text
+                            fontSize='sm'
+                            fontWeight='bold'
+                        >
+                            {round(balance, 3)} {symbol}
+                        </Text>
+                    </VStack>
                     <NumberInput
                         value={amountAsString}
                         onChange={handleTextChange}

@@ -15,7 +15,9 @@ interface Props {
 
 const ProductInfo : React.FC<Props> = ({ name, blocks }) => {
   return (
-    <VStack>
+    <VStack
+      spacing={2}
+    >
       <Card>
         <Text
           fontSize='lg'

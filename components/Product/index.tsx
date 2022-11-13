@@ -5,12 +5,12 @@ import {
 } from '@chakra-ui/react';
 
 import ProductInfo from './ProductInfo';
-import Actions from '../Vault/Actions';
 
 import { vaultManager } from '../../data/vaultManager';
 import useStructuredProduct from '../../hooks/useStructuredProduct';
 import { getStructuredProduct } from '../../data/structuredProducts';
-import { structToString } from '../../services/vaults';
+import DepositWithdraw from '../DepositWithdraw';
+import Card from '../utilities/Card';
 
 interface Props {
   productName: string;
@@ -40,11 +40,13 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
           name={structuredProduct.name}
           blocks={structuredProduct.blocks}
         />
-        <Actions
-          deposit={deposit}
-          withdraw={withdraw}
-          block={structuredProduct.block}
-        />
+        <Card>
+          <DepositWithdraw 
+            deposit={deposit}
+            withdraw={withdraw}
+            block={structuredProduct.block}
+          />
+        </Card>
       </Flex>
     </Flex>
   )

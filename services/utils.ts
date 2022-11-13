@@ -31,4 +31,9 @@ export const getPerformanceArray = (numPoints = 30, apy = 0.07) => {
     return arr;
 }
 
+export const round = (num: number, precision = 2) => {
+    const factor = Math.pow(10, precision);
+    return Math.round(num * factor) / factor;
+}
+
 export const performanceArray = getPerformanceArray();
