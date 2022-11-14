@@ -29,8 +29,8 @@ export const strategies : StrategyInfo[] = [
         strategyWitness: tortugaStrategyWitness,
         baseCoin: APT,
         title: "Tortuga Staking Strategy",
-        description: "Stake APT on Tortuga for tAPT to earn APT emission rewards.",
-        protocolsUsed: ["tortuga", "pontem"],
+        description: "Stake APT on Tortuga for tAPT to earn APT emission rewards. Instantly unstake at best rate via Hippo Aggregator.",
+        protocolsUsed: ["tortuga", "hippo"],
     }
 ]
 
