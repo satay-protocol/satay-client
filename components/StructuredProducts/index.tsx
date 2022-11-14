@@ -7,6 +7,7 @@ import { VStack, Text } from '@chakra-ui/react'
 import StructuredProductComponent from '../StructuredProduct'
 import Card from '../utilities/Card'
 import { useWallet } from '@manahippo/aptos-wallet-adapter'
+import { getNetworkSlug } from '../../services/aptosUtils'
 
 const StructuredProducts : React.FC = () => {
 
@@ -25,7 +26,7 @@ const StructuredProducts : React.FC = () => {
                 </Text>
             </Card>
             {
-                getStructuredProducts(network.chainId).map((structuredProduct) => (
+                getStructuredProducts(getNetworkSlug(network?.name)).map((structuredProduct) => (
                     <StructuredProductComponent
                         key={structuredProduct.moduleAddress}
                         structuredProduct={structuredProduct}

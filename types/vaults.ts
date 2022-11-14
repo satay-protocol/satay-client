@@ -20,10 +20,12 @@ export interface StrategyInfo {
     title: string;
     description: string;
     protocolsUsed: string[];
+    productName?: string;
 }
 
 export interface Strategy extends StrategyInfo {
     strategyCoinType: string;
+    productName?: string;
     debtRatio: number;
     totalDebt: number;
     totalGain: number;

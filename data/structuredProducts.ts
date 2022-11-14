@@ -40,12 +40,12 @@ const testnetStructuredProducts: StructuredProduct[] = [
 ]
 
 const structuredProducts: {[key: string]: StructuredProduct[]} = {
-    '2': testnetStructuredProducts,
-    '36': devnetStructuredProducts,
+    'testnet': testnetStructuredProducts,
+    'devnet': devnetStructuredProducts,
 }
 
-export const getStructuredProducts = (chainId = '36') => structuredProducts[chainId] || [];
+export const getStructuredProducts = (chainName = 'devnet') => structuredProducts[chainName] || [];
 
-export const getStructuredProduct = (product_name: string, chainId = '36') => {
-    return getStructuredProducts(chainId).find((product) => `${vaultManager}::${product_name}` === product.moduleAddress);
+export const getStructuredProduct = (product_name: string, chainName = 'devnet') => {
+    return getStructuredProducts(chainName).find((product) => `${vaultManager}::${product_name}` === product.moduleAddress);
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HStack, Image } from '@chakra-ui/react'
+import { HStack, Image, Box } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
 
 
@@ -15,7 +15,9 @@ const ProtocolList : React.FC<Props> = ({ protocols, iconSize = '48px', iconSepa
     <HStack>
         {
             protocols.map((protocol, index) => (
-                <>
+                <HStack
+                    key={protocol}
+                >
                     <Image
                         src={`/${protocol}_logo.jpeg`}
                         alt={protocol}
@@ -28,7 +30,7 @@ const ProtocolList : React.FC<Props> = ({ protocols, iconSize = '48px', iconSepa
                             iconSeparator
                         )
                     }
-                </>
+                </HStack>
             ))
         }
     </HStack>

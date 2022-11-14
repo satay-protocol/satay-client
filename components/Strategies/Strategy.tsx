@@ -4,6 +4,7 @@ import { Flex, Text, VStack } from '@chakra-ui/react'
 
 import { Strategy } from '../../types/vaults'
 import ProtocolList from '../utilities/ProtocolList'
+import Link from 'next/link'
 
 interface Props {
     strategy: Strategy
@@ -11,33 +12,41 @@ interface Props {
 
 const Strategy : React.FC<Props> = ({ strategy }) => {
     return (
-        <Flex
-            p={4}
-            bg='gray.50'
-            rounded='lg'
-            key={strategy.strategyModule}
-            w='100%'
-            justifyContent='space-between'
-            gap={4}
+        <Link
+            href={'/products/' + strategy.productName}
         >
-            <VStack
-                alignItems='flex-start'
-                flex={1}
+            <Flex
+                p={4}
+                bg='gray.50'
+                rounded='lg'
+                key={strategy.strategyModule}
+                w='100%'
+                justifyContent='space-between'
+                gap={4}
+                _hover={{
+                    cursor: 'pointer',
+                    shadow: 'lg'
+                }}
             >
-                <Text
-                    fontSize="sm"
-                    fontWeight="bold"
+                <VStack
+                    alignItems='flex-start'
+                    flex={1}
                 >
-                    {strategy.title}
-                </Text>
-                <Text>
-                    {strategy.description}
-                </Text>
-            </VStack>
-            <ProtocolList 
-                protocols={strategy.protocolsUsed}
-            />
-        </Flex>
+                    <Text
+                        fontSize="sm"
+                        fontWeight="bold"
+                    >
+                        {strategy.title}
+                    </Text>
+                    <Text>
+                        {strategy.description}
+                    </Text>
+                </VStack>
+                <ProtocolList 
+                    protocols={strategy.protocolsUsed}
+                />
+            </Flex>
+        </Link>
     )
 }
 

@@ -2,14 +2,20 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { AptosClient } from "aptos";
 
 import { createContext, ReactNode, FC, useContext, useState, useEffect } from "react"
+import { getNetworkSlug } from "../services/aptosUtils";
 
 interface ContextType {
     client: AptosClient;
     updateClient: () => Promise<void>;
 }
 
+const rpcUrls = {
+    "devnet": 'https://fullnode.devnet.aptoslabs.com/v1',
+    "testnet": 'https://fullnode.testnet.aptoslabs.com/v1',
+}
+
 export const AptosContext = createContext<ContextType>({
-    client: new AptosClient('https://fullnode.devnet.aptoslabs.com/v1'),
+    client: new AptosClient(rpcUrls['devnet']),
     updateClient: async () => {}
 });
 
@@ -27,12 +33,12 @@ export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
         updateClient();
     }, [network]);
 
-    const [client, setClient] = useState<AptosClient>(new AptosClient(network?.api || 'https://fullnode.devnet.aptoslabs.com/v1'));
+    const [client, setClient] = useState<AptosClient>(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || "devnet"]));
 
     const updateClient = async () => {
-        setClient(new AptosClient(network?.api || 'https://fullnode.devnet.aptoslabs.com/v1'));
+        setClient(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || "devnet"]));
     }
-
+ 
     return (
         
         <AptosContext.Provider

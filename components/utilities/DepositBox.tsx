@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Link from 'next/link';
 
@@ -64,8 +64,11 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
             >
                 Deposit
             </Text>
-            <Text>
-                You have {balance} {coinSymbol}
+            <Text
+                fontSize='sm'
+                fontWeight='bold'
+            >
+                Balance: {balance} {coinSymbol}
             </Text>
             <NumberInput
                 value={amountAsString}

@@ -9,7 +9,8 @@ export const strategies : StrategyInfo[] = [
         baseCoin: "0x1::aptos_coin::AptosCoin",
         title: "Ditto Staking + LP Strategy",
         description: "Stake APT on Ditto for stAPT to earn APT emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees. Stake LP tokens on Ditto Rewards to earn DTO emissions.",
-        protocolsUsed: ["ditto", "pontem"]
+        protocolsUsed: ["ditto", "pontem"],
+        productName: "ditto_rewards_product"
     }
 ]
 

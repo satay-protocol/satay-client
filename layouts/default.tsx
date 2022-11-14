@@ -25,6 +25,7 @@ import useWallet from '../hooks/useWallet';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 import Head from 'next/head';
 import NotConnected from '../components/utilities/NotConnected';
+import { getNetworkSlug } from '../services/aptosUtils';
 
 interface LinkItemProps {
   name: string;
@@ -42,7 +43,7 @@ const DefaultLayout = ({
 
   const { network, connected } = useWallet();
 
-  const correctNetwork = network?.chainId === '36' || network?.chainId === '2';
+  const correctNetwork = getNetworkSlug(network?.name) !== "";
 
   return (
     <Box 

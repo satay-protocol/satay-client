@@ -8,6 +8,7 @@ import { StructuredProduct } from '../../types/structuredProduct'
 import ProtocolList from '../utilities/ProtocolList'
 import DepositBox from '../utilities/DepositBox'
 import useStructuredProduct from '../../hooks/useStructuredProduct'
+import { structToString } from '../../services/vaults'
 
 interface Props {
     structuredProduct: StructuredProduct
@@ -39,8 +40,8 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 spacing={8}
             >
                 <DepositBox 
-                    coinStruct={structuredProduct.coinStruct}
-                    coinSymbol={structuredProduct.coinSymbol}
+                    coinStruct={structToString(structuredProduct.block.inputCoinType)}
+                    coinSymbol={structuredProduct.block.inputCoinSymbol}
                     onDeposit={deposit}
                     viewPath={'/products/' + structuredProduct.moduleAddress.slice(structuredProduct.moduleAddress.indexOf('::') + 2)}
                 />

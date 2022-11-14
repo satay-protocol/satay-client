@@ -12,11 +12,14 @@ const useCoinBalance = (accountAddress: string, coinAddress : string, coinStoreA
 
     const [balance, setBalance] = useState(0);
 
-    useEffect(() => {
-        const getBalance = async () => {
-            const coinBalance = await getCoinBalance(client, coinAddress, accountAddress, coinStoreAddress);
+    const getBalance = async () => {
+        const coinBalance = await getCoinBalance(client, coinAddress, accountAddress, coinStoreAddress);
+        if(coinBalance !== balance && coinBalance > 0) {
             setBalance(toAptos(coinBalance));
         }
+    }
+
+    useEffect(() => {
         getBalance();
     }, [coinAddress, client])
 
