@@ -14,7 +14,7 @@ interface Props {
 const Strategy : React.FC<Props> = ({ strategy }) => {
     return (
         <Link
-            href={'/products/' + strategy.productName}
+            href={'/products' + (strategy.productName ? `/${strategy.productName}` : '')}
         >
             <Flex
                 p={4}
