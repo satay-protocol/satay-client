@@ -5,6 +5,7 @@ import { Flex, Text, VStack } from '@chakra-ui/react'
 import { Strategy } from '../../types/vaults'
 import ProtocolList from '../utilities/ProtocolList'
 import Link from 'next/link'
+import { structToString } from '../../services/vaults'
 
 interface Props {
     strategy: Strategy
@@ -19,7 +20,7 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
                 p={4}
                 bg='gray.50'
                 rounded='lg'
-                key={strategy.strategyModule}
+                key={structToString(strategy.strategyWitness)}
                 w='100%'
                 justifyContent='space-between'
                 gap={4}

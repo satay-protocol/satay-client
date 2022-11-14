@@ -8,6 +8,7 @@ import {
 import DebtRatioSlider from './DebtRatioSlider';
 import HarvestButton from './HarvestButton';
 import { Strategy } from '../../types/vaults';
+import { structToModule, structToString } from '../../services/vaults';
 
 interface Props {
     strategy: Strategy,
@@ -15,27 +16,30 @@ interface Props {
 }
 
 const StrategyRow : React.FC<Props> = ({ strategy, vaultId}) => {
-  return (
-    <HStack
-        key={strategy.strategyModule}
-        spacing={4}
-    >
-        <Text
-            mr='auto'
+
+    const strategyModule = structToModule(strategy.strategyWitness);
+
+    return (
+        <HStack
+            key={structToString(strategy.strategyWitness)}
+            spacing={4}
         >
-            {strategy.title}
-        </Text>
-        <DebtRatioSlider 
-            strategyModule={strategy.strategyModule}
-            vaultId={vaultId}
-            currentDebtRatio={strategy.debtRatio}
-        />
-        <HarvestButton 
-            vaultId={vaultId}
-            strategyModule={strategy.strategyModule}
-        />
-    </HStack>
-  )
+            <Text
+                mr='auto'
+            >
+                {strategy.title}
+            </Text>
+            <DebtRatioSlider 
+                strategyModule={strategyModule}
+                vaultId={vaultId}
+                currentDebtRatio={strategy.debtRatio}
+            />
+            <HarvestButton 
+                vaultId={vaultId}
+                strategyModule={strategyModule}
+            />
+        </HStack>
+    )
 }
 
 export default StrategyRow

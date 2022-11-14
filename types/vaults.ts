@@ -14,9 +14,8 @@ export interface Vault {
 }
 
 export interface StrategyInfo {
-    strategyModule: string;
-    strategyWitness: string;
-    baseCoin: string;
+    strategyWitness: StructData;
+    baseCoin: StructData;
     title: string;
     description: string;
     protocolsUsed: string[];

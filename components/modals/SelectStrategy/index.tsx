@@ -16,11 +16,13 @@ import StrategyOption from './StrategyOption';
 import { strategies } from '../../../data/strategies';
 
 import { Vault } from '../../../types/vaults';
+import { StructData } from '../../../types/aptos';
+import { structToString } from '../../../services/vaults';
 
 interface Props {
     isOpen: boolean;
     onClose: () => void;
-    baseCoin: string;
+    baseCoin: StructData;
     vault: Vault
     approvedStrategies: string[]
 }
@@ -28,7 +30,10 @@ interface Props {
 const SelectStrategy : React.FC<Props> = ({ isOpen, onClose, baseCoin, vault, approvedStrategies }) => {
 
   const availableStrategies = strategies
-    .filter(strategy => strategy.baseCoin === baseCoin && !approvedStrategies.includes(strategy.strategyModule))
+    .filter(strategy => 
+      structToString(strategy.baseCoin) === structToString(baseCoin) 
+      && !approvedStrategies.includes(structToString(strategy.strategyWitness))
+    )
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -41,7 +46,7 @@ const SelectStrategy : React.FC<Props> = ({ isOpen, onClose, baseCoin, vault, ap
                 availableStrategies.length > 0 ? (
                   availableStrategies.map(strategy => (
                     <StrategyOption
-                      key={strategy.strategyModule}
+                      key={structToString(strategy.strategyWitness)}
                       strategy={strategy}
                       vault={vault}
                     />

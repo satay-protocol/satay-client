@@ -4,6 +4,7 @@ import { Box, Text, Button, HStack } from '@chakra-ui/react'
 
 import { StrategyInfo, Vault } from '../../../types/vaults'
 import useInitializeStrategy from '../../../hooks/manager/useInitializeStrategy'
+import { structToModule } from '../../../services/vaults'
 
 interface Props {
     strategy: StrategyInfo,
@@ -12,7 +13,7 @@ interface Props {
 
 const StrategyOption : React.FC<Props> = ({ strategy, vault }) => {
 
-    const { initialize } = useInitializeStrategy(strategy.strategyModule, vault.vaultId);
+    const { initialize } = useInitializeStrategy(structToModule(strategy.strategyWitness), vault.vaultId);
 
     return (
         <HStack

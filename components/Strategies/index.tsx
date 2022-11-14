@@ -5,12 +5,16 @@ import { Text, VStack } from '@chakra-ui/react'
 import StrategyComponent from './Strategy'
 
 import { Strategy } from '../../types/vaults'
+import { structToString } from '../../services/vaults'
 
 interface Props {
     strategies: Strategy[]
 }
 
 const Strategies : React.FC<Props> = ({ strategies }) => {
+
+    // console.log(strategies);
+
     return (
         <VStack
             spacing={2}
@@ -26,7 +30,7 @@ const Strategies : React.FC<Props> = ({ strategies }) => {
                 strategies.length > 0 ? (
                     strategies.map((strategy) => (
                         <StrategyComponent
-                            key={strategy.strategyModule}
+                            key={structToString(strategy.strategyWitness)}
                             strategy={strategy}
                         />
                     ))

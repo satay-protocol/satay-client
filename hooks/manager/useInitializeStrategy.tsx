@@ -9,7 +9,7 @@ const useInitializeStrategy = (strategyModule : string, vaultId : string) => {
         await submitTransaction({
             type: 'entry_function_payload',
             function: `${strategyModule}::initialize`,
-            arguments: [vaultId, "10000"],
+            arguments: [vaultId, "0"],
             type_arguments: []
         }, {
             title: 'Strategy Initialized!',

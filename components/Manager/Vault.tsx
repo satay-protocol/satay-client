@@ -35,13 +35,14 @@ const Vault : React.FC<Props> = ({ vault }) => {
 
     const { onOpen: onSelectStrategyOpen, onClose: onStrategySelectClose, isOpen : isSelectStrategyOpen } = useDisclosure();
 
+
     return (
         <>
             <SelectStrategy 
                 isOpen={isSelectStrategyOpen}
                 onClose={onStrategySelectClose}
-                baseCoin={structToString(vault.baseCoin)}
-                approvedStrategies={vault.strategies.map(strategy => strategy.strategyModule)}
+                baseCoin={vault.baseCoin}
+                approvedStrategies={vault.strategies.map(strategy => structToString(strategy.strategyWitness))}
                 vault={vault}
             />
             <Flex
@@ -89,7 +90,7 @@ const Vault : React.FC<Props> = ({ vault }) => {
                     {
                         vault.strategies.map((strategy) => (
                             <StrategyRow 
-                                key={strategy.strategyModule}
+                                key={`${strategy.strategyWitness.account_address}::${strategy.strategyWitness.module_name}`}
                                 strategy={strategy}
                                 vaultId={vault.vaultId}
                             />

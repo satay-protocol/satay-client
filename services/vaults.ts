@@ -9,6 +9,7 @@ import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/apto
 import { CoinStoreResource } from "../types/aptos";
 
 import { round, toAptos } from "./utils";
+import { getStructFromType } from "./aptosUtils";
 
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
@@ -66,6 +67,10 @@ export const structToString = (struct : StructData) => {
     return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
 }
 
+export const structToModule = (struct : StructData) => {
+    return struct.account_address + "::" + struct.module_name;
+}
+
 export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin: string, totalDebt: number) => {
     let { data } = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::CoinStore<${baseCoin}>`);
     return round(totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value)), 3);
@@ -74,10 +79,12 @@ export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin
 
 export const getStrategiesForVault = async (client : AptosClient, vaultAddress : string) : Promise<Strategy[]> => {
     const resources = await client.getAccountResources(vaultAddress);
-    return resources
+    const strategies = resources
         .filter(resource => resource.type.includes("VaultStrategy"))
         .map(resource => getStrategy(
-            resource.type.slice(resource.type.indexOf("VaultStrategy<") + 14, resource.type.lastIndexOf("::")),
+            getStructFromType(resource.type.slice(resource.type.indexOf("VaultStrategy<") + 14, -1)),
             resource.data as VaultStrategyData
         ))
+    console.log(strategies);
+    return strategies;
 }
