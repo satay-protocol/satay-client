@@ -40,7 +40,7 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 spacing={8}
             >
                 <DepositBox 
-                    coinStruct={structToString(structuredProduct.block.inputCoinType)}
+                    coinStruct={structuredProduct.block.inputCoinType}
                     coinSymbol={structuredProduct.block.inputCoinSymbol}
                     onDeposit={deposit}
                     viewPath={'/products/' + structuredProduct.moduleAddress.slice(structuredProduct.moduleAddress.indexOf('::') + 2)}

@@ -17,9 +17,10 @@ import useWallet from '../../hooks/useWallet';
 import { fromAptos } from '../../services/utils';
 import useCoinBalance from '../../hooks/useCoinBalance';
 
+import { StructData } from '../../types/aptos';
 
 interface Props {
-    coinStruct: string,
+    coinStruct: StructData,
     coinSymbol: string,
     onDeposit: (amount : number) => Promise<void>,
     viewPath: string,

@@ -51,7 +51,7 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                         </Text>
                     </Flex>
                     <DepositBox 
-                        coinStruct={structToString(vault.baseCoin)}
+                        coinStruct={vault.baseCoin}
                         coinSymbol={vault.symbol}
                         onDeposit={deposit}
                         viewPath={`/vaults/${vault.managerAddress}/${vault.vaultId}`}

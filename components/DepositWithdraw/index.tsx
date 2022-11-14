@@ -40,7 +40,7 @@ const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block }) => {
                             symbol={block.inputCoinSymbol}
                             logo={`/${block.inputProtocol}_logo.jpeg`}
                             actionName='Deposit'
-                            coinAddress={structToString(block.inputCoinType)}
+                            coinStruct={block.inputCoinType}
                         />
                     </TabPanel>
                     <TabPanel
@@ -52,7 +52,7 @@ const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block }) => {
                             symbol={block.outputCoinSymbol}
                             logo={`/${block.outputProtocol}_logo.jpeg`}
                             actionName='Withdraw'
-                            coinAddress={structToString(block.outputCoinType)}
+                            coinStruct={block.outputCoinType}
                         />
                     </TabPanel>
                 </TabPanels>

@@ -1,12 +1,18 @@
 import { AptosClient } from "aptos";
 
-import { CoinStoreResource } from "../types/aptos";
+import { CoinInfoStruct, CoinStoreResource, StructData } from "../types/aptos";
 import { CoinData } from "../types/vaults";
+import { structToString } from "./vaults";
 
 
-export const getCoinBalance = async (client : AptosClient, coinAddress : string, address : string, coinStoreAddress = '0x1::coin') => {
-    let coin : number = await client.getAccountResource(address, `${coinStoreAddress}::CoinStore<${coinAddress}>`)
+export const getCoinBalance = async (client : AptosClient, coinStruct: StructData, address : string, coinStoreAddress = '0x1::coin') => {
+    let coin : number = await client.getAccountResource(address, `${coinStoreAddress}::CoinStore<${structToString(coinStruct)}>`)
         .then(res => parseInt((res.data as CoinStoreResource).coin.value))
+        .then(async balanceInt => {
+            const coinInfo = await getCoinInfo(client, coinStruct);
+            const decimals = (coinInfo.data as CoinInfoStruct).decimals;
+            return balanceInt / Math.pow(10, decimals);
+        })
         .catch((err) => 0)
     return coin;
 }
@@ -19,6 +25,11 @@ export const getCoinBalances = async (client : AptosClient, address: string) : P
             coin: getCoinType(r.type.slice(r.type.indexOf('CoinStore<') + 10, -1)),
             value: parseInt((r.data as CoinStoreResource).coin.value)
         }))
+}
+
+export const getCoinInfo = async (client : AptosClient, coinStruct : StructData) => {
+    let coinInfo = await client.getAccountResource(coinStruct.account_address, `0x1::coin::CoinInfo<${structToString(coinStruct)}>`);
+    return coinInfo;
 }
 
 export const getCoinType = (resourceType: string) => (

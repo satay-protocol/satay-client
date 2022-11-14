@@ -14,19 +14,21 @@ import { fromAptos, round } from '../../services/utils';
 import useUserCoinBalance from '../../hooks/useUserCoinBalance';
 import useWallet from '../../hooks/useWallet';
 
+import { StructData } from '../../types/aptos';
+
 interface Props {
     actionName: string;
     action: (amount : number) => Promise<void>;
     symbol: string;
     logo: string;
-    coinAddress: string
+    coinStruct: StructData
 }
 
-const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinAddress}) => {
+const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct}) => {
 
     const { connected } = useWallet();
 
-    const balance = useUserCoinBalance(coinAddress);
+    const balance = useUserCoinBalance(coinStruct);
 
     const [amountAsString, setAmountAsString] = useState('0.00000000');
     const [amount, setAmount] = useState(0);
