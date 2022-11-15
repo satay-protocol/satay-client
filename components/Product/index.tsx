@@ -13,12 +13,11 @@ import DepositWithdraw from '../DepositWithdraw';
 import Card from '../utilities/Card';
 import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import { getNetworkSlug } from '../../services/aptosUtils';
+import ProductHeader from './ProductHeader';
 
 interface Props {
   productName: string;
 }
-
-
 
 const ProductComponent : React.FC<Props> = ({ productName }) => {
 
@@ -32,7 +31,13 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
     <Flex
       direction='column'
       flex={1}
+      gap={4}
     >
+      <ProductHeader 
+        name={structuredProduct.name}
+        description={structuredProduct.description}
+        protocols={structuredProduct.protocols}
+      />
       <Flex
         gap={4}
         direction={{
@@ -41,10 +46,11 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
         }}
       >
         <ProductInfo
-          name={structuredProduct.name}
           blocks={structuredProduct.blocks}
         />
-        <Card>
+        <Card
+          justifyContent='center'
+        >
           <DepositWithdraw 
             deposit={deposit}
             withdraw={withdraw}

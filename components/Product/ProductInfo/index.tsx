@@ -9,21 +9,20 @@ import { Block } from '../../../types/block'
 
 
 interface Props {
-  name: string;
   blocks: Block[];
 }
 
-const ProductInfo : React.FC<Props> = ({ name, blocks }) => {
+const ProductInfo : React.FC<Props> = ({ blocks }) => {
   return (
     <VStack
-      spacing={2}
+      spacing={4}
     >
       <Card>
         <Text
           fontSize='lg'
           fontWeight='bold'
         >
-          {name}
+          Steps
         </Text>
       </Card>
       {blocks.map((block, index) => (
