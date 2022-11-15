@@ -6,13 +6,13 @@ import { structToString, getVaultFromTable } from "../services/vaults";
 import { Vault } from "../types/vaults";
 
 import useManagerResource from "./manager/useManagerResource";
-import { useToast } from "@chakra-ui/react";
+
 import { toAptos } from "../services/utils";
 import useWallet from "./useWallet";
 
 const useVault = (managerAddress : string, vaultId : string) => {
 
-    const { client, updateClient } = useAptos();
+    const { client } = useAptos();
 
     const { account, submitTransaction } = useWallet();
 

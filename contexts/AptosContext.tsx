@@ -15,7 +15,7 @@ const rpcUrls = {
 }
 
 export const AptosContext = createContext<ContextType>({
-    client: new AptosClient(rpcUrls['devnet']),
+    client: new AptosClient(rpcUrls['testnet']),
     updateClient: async () => {}
 });
 
@@ -33,10 +33,10 @@ export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
         updateClient();
     }, [network]);
 
-    const [client, setClient] = useState<AptosClient>(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || "devnet"]));
+    const [client, setClient] = useState<AptosClient>(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || "testnet"]));
 
     const updateClient = async () => {
-        setClient(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || "devnet"]));
+        setClient(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || "testnet"]));
     }
  
     return (

@@ -15,6 +15,7 @@ import useUserCoinBalance from '../../hooks/useUserCoinBalance';
 import useWallet from '../../hooks/useWallet';
 
 import { StructData } from '../../types/aptos';
+import useCoinInfo from '../../hooks/useCoinInfo';
 
 interface Props {
     actionName: string;
@@ -30,6 +31,8 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
 
     const balance = useUserCoinBalance(coinStruct);
 
+    const { decimals } = useCoinInfo(coinStruct);
+
     const [amountAsString, setAmountAsString] = useState('0.00000000');
     const [amount, setAmount] = useState(0);
 
@@ -44,7 +47,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
     }
 
     const onClick = async () => {
-        await action(Math.round(fromAptos(amount)));
+        await action(Math.round(amount * 10**decimals));
         setAmountAsString('0.00000000');
         setAmount(0);
     }

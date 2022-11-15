@@ -23,7 +23,7 @@ interface Props {
 
 const Vault : React.FC<Props> = ({ vaultId }) => {
 
-  const { vault, deposit, withdraw } = useVault(vaultManager, vaultId)
+  const { vault, deposit, withdraw } = useVault(vaultManager, vaultId);
 
   const block = vault && satayStakeCoin(vault.baseCoin, vault.symbol, vault.baseCoinProtocol);
 
