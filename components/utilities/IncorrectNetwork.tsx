@@ -12,7 +12,7 @@ const IncorrectNetwork = () => {
             Incorrect Network
         </Text>
         <Text>
-            Satay is currently only available on the Aptos testnet and devnet. You must connect your wallet and switch to the Aptos devnet to use Satay.
+            Satay is currently only available on the Aptos testnet. You must connect your wallet and switch to the Aptos testnet to use Satay.
         </Text>
     </Card>
   )

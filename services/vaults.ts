@@ -13,11 +13,13 @@ import { getStructFromType } from "./aptosUtils";
 
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
-    const vaultInfo : VaultInfo = await client.getTableItem(managerResource.vaults.handle, {
+    const vaultInfo = await client.getTableItem(managerResource.vaults.handle, {
         key_type: "u64",
         value_type: `${vaultManager}::satay::VaultInfo`,
         key: vaultId
-    }).catch(e => null);
+    })
+        .then((res) => (res as VaultInfo))
+        .catch(e => null);
     if(vaultInfo){
         const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
         const {data : vault} = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::Vault`);
@@ -85,6 +87,5 @@ export const getStrategiesForVault = async (client : AptosClient, vaultAddress :
             getStructFromType(resource.type.slice(resource.type.indexOf("VaultStrategy<") + 14, -1)),
             resource.data as VaultStrategyData
         ))
-    console.log(strategies);
     return strategies;
 }

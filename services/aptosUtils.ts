@@ -49,7 +49,7 @@ export const getCoinType = (resourceType: string) => (
         .join("")
 )
 
-const supportedNetworks = ['testnet', 'devnet'];
+const supportedNetworks = ['testnet'];
 
 export const getNetworkSlug = (networkName: string | null) => {
     if (!networkName) return "";

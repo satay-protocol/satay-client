@@ -27,7 +27,9 @@ const useManagerResource = (managerAddress : string) => {
                 setComplete(true);
             }
         }
-        getManagerResource();
+        if(!managerResource && !complete){
+            getManagerResource();
+        }
     }, [client, managerAddress])
 
     return {

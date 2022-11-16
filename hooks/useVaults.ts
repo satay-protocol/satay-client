@@ -14,17 +14,20 @@ const useVaults = (managerAddress : string) => {
     const { managerResource } = useManagerResource(managerAddress);
 
     const [vaults, setVaults] = useState<Vault[]>([]);
+    const [fetching, setFetching] = useState<boolean>(false);
     const [fetched, setFetched] = useState<boolean>(false);
 
     useEffect(() => {
         const getVaultsData = async () => {
             if(managerResource){
+                setFetching(true);
                 const vaults = await getVaults(client, managerResource);
                 setVaults(vaults.filter(v => v !== null).map(v => v as Vault));
                 setFetched(true);
+                setFetching(false);
             }
         }
-        if(!fetched && managerResource){
+        if(!fetching && vaults.length == 0 && !fetched && managerResource){
             getVaultsData();
         }
     }, [fetched, managerResource]);

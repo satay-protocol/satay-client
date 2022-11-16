@@ -20,18 +20,21 @@ const useVault = (managerAddress : string, vaultId : string) => {
 
     const [vault, setVault] = useState<Vault | null>(null);
     const [complete, setComplete] = useState<boolean>(false);
+    const [fetching, setFetching] = useState<boolean>(false);
 
     useEffect(() => {
         const getVaultData = async () => {
             if(managerResource && vaultId){
+                setFetching(true);
                 const vault = await getVaultFromTable(client, managerResource, vaultId);
                 if(vault){
                     setVault(vault);
                     setComplete(true);
                 }
+                setFetching(false);
             }
         }
-        if(!vault && !complete && managerResource){
+        if(!fetching && !vault && !complete && managerResource){
             getVaultData();
         }
     }, [vaultId, managerResource, vault, complete]);
