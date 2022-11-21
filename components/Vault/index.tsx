@@ -10,7 +10,7 @@ import {
 import VaultInfo from './VaultInfo';
 import DepositWithdraw from '../DepositWithdraw';
 
-import { vaultManager } from '../../data/vaultManager';
+import { satay } from '../../data/moduleAddresses';
 
 import Strategies from '../Strategies';
 import Card from '../utilities/Card';
@@ -23,7 +23,7 @@ interface Props {
 
 const Vault : React.FC<Props> = ({ vaultId }) => {
 
-  const { vault, deposit, withdraw } = useVault(vaultManager, vaultId);
+  const { vault, deposit, withdraw } = useVault(satay, vaultId);
 
   const block = vault && satayStakeCoin(vault.baseCoin, vault.symbol, vault.baseCoinProtocol);
 

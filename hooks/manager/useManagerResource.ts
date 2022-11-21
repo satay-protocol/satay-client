@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useAptos } from "../../contexts/AptosContext";
 
-import { vaultManager } from "../../data/vaultManager";
+import { satay } from "../../data/moduleAddresses";
 
 import { ManagerResource } from "../../types/aptos";
 
@@ -16,11 +16,11 @@ const useManagerResource = (managerAddress : string) => {
 
     useEffect(() => {
         const getManagerResource = async () => {
-            const resource = await client.getAccountResource(managerAddress, `${vaultManager}::satay::ManagerAccount`)
+            const resource = await client.getAccountResource(managerAddress, `${satay}::satay::ManagerAccount`)
                 .then(res => res)
                 .catch((err) => null)
             if(resource?.data){
-                setManagerResource({...resource.data, vaultManager} as ManagerResource);
+                setManagerResource({...resource.data, vaultManager: satay} as ManagerResource);
                 setComplete(true);
             } else {
                 setManagerResource(null);

@@ -18,7 +18,7 @@ import { IconType } from 'react-icons';
 
 import Navbar from '../components/Navbar';
 
-import { vaultManager } from '../data/vaultManager';
+import { satay } from '../data/moduleAddresses';
 
 import useWallet from '../hooks/useWallet';
 
@@ -115,8 +115,8 @@ const SidebarContent : React.FC<SidebarProps> = ({ onClose, ...rest }) => {
     { name: 'Vaults', icon: BsSafe, href: '/vaults' },
   ];
 
-  if(account && vaultManager === account.address) {
-    LinkItems.push({ name: 'Manage', icon: BsSafe, href: `/manager/${vaultManager}` });
+  if(account && satay === account.address) {
+    LinkItems.push({ name: 'Manage', icon: BsSafe, href: `/manager/${satay}` });
   }
 
   return (

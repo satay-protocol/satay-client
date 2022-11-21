@@ -1,7 +1,7 @@
 import useWallet from "../useWallet";
 
 import { Coin } from "../../data/coins";
-import { vaultManager } from "../../data/vaultManager";
+import { satay } from "../../data/moduleAddresses";
 
 const useCreateVault = () => {
 
@@ -11,7 +11,7 @@ const useCreateVault = () => {
         if(account){
             await submitTransaction({
                 type: 'entry_function_payload',
-                function: `${vaultManager}::satay::new_vault`,
+                function: `${satay}::satay::new_vault`,
                 arguments: [vaultName, "2000", "5000"],
                 type_arguments: [coin.type]
             }, {

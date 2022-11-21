@@ -1,9 +1,10 @@
+import { dittoFarming } from "./moduleAddresses";
+
 import { dittoStakeAptos, dittoStakeAptosAndLp, dittoStakeAptosLp, tortugaStakeAptos } from "../types/block";
 import { StructuredProduct } from "../types/structuredProduct";
-import { vaultManager } from "./vaultManager";
 
 const dittoStaking : StructuredProduct = {
-    moduleAddress: "0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac::ditto_rewards_product",
+    moduleAddress: `${dittoFarming}::ditto_farming`,
     name: "Ditto Staking + LP Farming",
     description: "Stake APT on Ditto for stAPT to earn APT emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees. Stake LP tokens on Ditto Rewards to earn DTO emissions.",
     coinStruct: "0x1::aptos_coin::AptosCoin",
@@ -32,14 +33,18 @@ const tortugaLeverage : StructuredProduct = {
 
 const devnetStructuredProducts: StructuredProduct[] = [
     dittoStaking,
-    tortugaLeverage
 ]
 
 const testnetStructuredProducts: StructuredProduct[] = [
     dittoStaking,
 ]
 
+const mainnetStructuredProducts: StructuredProduct[] = [
+    dittoStaking
+]
+
 const structuredProducts: {[key: string]: StructuredProduct[]} = {
+    'mainnet': mainnetStructuredProducts,
     'testnet': testnetStructuredProducts,
     'devnet': devnetStructuredProducts,
 }
@@ -47,5 +52,5 @@ const structuredProducts: {[key: string]: StructuredProduct[]} = {
 export const getStructuredProducts = (chainName = 'devnet') => structuredProducts[chainName] || [];
 
 export const getStructuredProduct = (product_name: string, chainName = 'devnet') => {
-    return getStructuredProducts(chainName).find((product) => `${vaultManager}::${product_name}` === product.moduleAddress);
+    return getStructuredProducts(chainName).find((product) => product.moduleAddress.includes(product_name));
 }

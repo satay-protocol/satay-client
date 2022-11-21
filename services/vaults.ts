@@ -1,7 +1,7 @@
 import { AptosClient } from "aptos";
 
 import { getStrategy } from "../data/strategies";
-import { vaultManager } from "../data/vaultManager";
+import { satay } from "../data/moduleAddresses";
 import { getVaultInfo } from "../data/vaultsData";
 
 import { Vault, Strategy, VaultStrategyData } from "../types/vaults";
@@ -15,14 +15,14 @@ import { getStructFromType } from "./aptosUtils";
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
     const vaultInfo = await client.getTableItem(managerResource.vaults.handle, {
         key_type: "u64",
-        value_type: `${vaultManager}::satay::VaultInfo`,
+        value_type: `${satay}::satay::VaultInfo`,
         key: vaultId
     })
         .then((res) => (res as VaultInfo))
         .catch(e => null);
     if(vaultInfo){
         const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
-        const {data : vault} = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::Vault`);
+        const {data : vault} = await client.getAccountResource(vaultAddress, `${satay}::vault::Vault`);
         const vaultData = vault as VaultData;
         const coinType = getTypeString(vaultData.base_coin_type);
         const baseCoin = {
@@ -45,7 +45,7 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
 }
 
 export const getVaultFromAddress = async (client : AptosClient, vaultAddress : string) => {
-    const {data : vault} = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::Vault`);
+    const {data : vault} = await client.getAccountResource(vaultAddress, `${satay}::vault::Vault`);
     const vaultData = vault as VaultData;
     return {
         vault_address: vaultAddress,
@@ -74,7 +74,7 @@ export const structToModule = (struct : StructData) => {
 }
 
 export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin: string, totalDebt: number) => {
-    let { data } = await client.getAccountResource(vaultAddress, `${vaultManager}::vault::CoinStore<${baseCoin}>`);
+    let { data } = await client.getAccountResource(vaultAddress, `${satay}::vault::CoinStore<${baseCoin}>`);
     return round(totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value)), 3);
 }
 

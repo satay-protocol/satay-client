@@ -1,5 +1,5 @@
 import useWallet from "../useWallet";
-import { vaultManager } from "../../data/vaultManager";
+import { satay } from "../../data/moduleAddresses";
 
 const useInitializeManager = () => {
 
@@ -9,7 +9,7 @@ const useInitializeManager = () => {
         if(account){
             await submitTransaction({
                 type: 'entry_function_payload',
-                function: `${vaultManager}::satay::initialize`,
+                function: `${satay}::satay::initialize`,
                 arguments: [],
                 type_arguments: []
             }, {

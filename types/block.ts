@@ -1,4 +1,4 @@
-import { APT, LP, stAPT, vaultCoin } from "../data/coinStructs";
+import { APT, dittoFarmingCoin, LP, stAPT, vaultCoin } from "../data/coinStructs";
 import { StructData } from "./aptos";
 
 export interface Block {
@@ -33,9 +33,9 @@ export const dittoStakeAptosLp: Block = {
 
 export const dittoStakeAptosAndLp: Block = {
     inputCoinType: APT,
-    outputCoinType: LP(APT, stAPT, "Stable"),
+    outputCoinType: dittoFarmingCoin,
     inputCoinSymbol: "APT",
-    outputCoinSymbol: "LP<APT, stAPT>",
+    outputCoinSymbol: "LP<APT, stAPT> + DTO",
     description: "Stake APT on Ditto for stAPT to earn emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees",
     inputProtocol: "aptos",
     outputProtocol: "pontem",

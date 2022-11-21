@@ -13,6 +13,7 @@ const rpcUrls = {
     "devnet": 'https://fullnode.devnet.aptoslabs.com/v1',
     // "testnet": 'https://fullnode.testnet.aptoslabs.com/v1',
     "testnet": `https://aptos-testnet.nodereal.io/v1/${process.env.NEXT_PUBLIC_NODEREAL_API_KEY}/v1`,
+    "mainnet": 'https://fullnode.mainnet.aptoslabs.com/v1',
 }
 
 export const AptosContext = createContext<ContextType>({

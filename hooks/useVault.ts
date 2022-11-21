@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAptos } from "../contexts/AptosContext";
-import { vaultManager } from "../data/vaultManager";
+import { satay } from "../data/moduleAddresses";
 import { structToString, getVaultFromTable } from "../services/vaults";
 
 import { Vault } from "../types/vaults";
@@ -43,7 +43,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
         if(vault && account?.address){
             await submitTransaction({
                 type: 'entry_function_payload',
-                function: `${vaultManager}::satay::deposit`,
+                function: `${satay}::satay::deposit`,
                 arguments: [
                     vault.managerAddress,
                     vault.vaultId,
@@ -61,7 +61,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
         if(vault && account?.address){
             await submitTransaction({
                 type: 'entry_function_payload',
-                function: `${vaultManager}::satay::withdraw`,
+                function: `${satay}::satay::withdraw`,
                 arguments: [
                     vault.managerAddress,
                     vault.vaultId,

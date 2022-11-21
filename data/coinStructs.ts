@@ -2,7 +2,7 @@ import { dittoStakingAddress, liquidswapCurvesAddress, liquidswapLPAddress } fro
 
 import { StructData } from "../types/aptos";
 import { structToString } from "../services/vaults";
-import { vaultManager } from "./vaultManager";
+import { dittoFarming, satay } from "./moduleAddresses";
 
 const convertStringToHex = (str: string) => {
     var arr = [];
@@ -56,6 +56,12 @@ export const LP = (coin1: StructData, coin2: StructData, poolType: PoolType) : S
 
 export const vaultCoin = (coin: StructData) : StructData => ({
     struct_name: `VaultCoin<${structToString(coin)}>`,
-    account_address: vaultManager,
+    account_address: satay,
     module_name: "vault"
 })
+
+export const dittoFarmingCoin : StructData = {
+    struct_name: "DittoFarmingCoin",
+    account_address: dittoFarming,
+    module_name: "ditto_farming"
+}

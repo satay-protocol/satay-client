@@ -1,12 +1,15 @@
+import { APT } from "./coinStructs";
+import { satay } from "./moduleAddresses";
+
 import { getTypeString, structToString } from "../services/vaults";
+
 import { StructData } from "../types/aptos";
 import { Strategy, StrategyInfo, VaultStrategyData } from "../types/vaults";
-import { APT } from "./coinStructs";
 
 const dittoStrategyWitness: StructData = {
     struct_name: "DittoStrategy",
-    account_address: "0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac",
-    module_name: "ditto_strategy"
+    account_address: satay,
+    module_name: "ditto_farming_strategy"
 }
 
 const tortugaStrategyWitness: StructData = {
@@ -25,13 +28,13 @@ export const strategies : StrategyInfo[] = [
         protocolsUsed: ["ditto", "pontem"],
         productName: "ditto_rewards_product"
     },
-    {
-        strategyWitness: tortugaStrategyWitness,
-        baseCoin: APT,
-        title: "Tortuga Staking Strategy",
-        description: "Stake APT on Tortuga for tAPT to earn APT emission rewards. Instantly unstake at best rate via Hippo Aggregator.",
-        protocolsUsed: ["tortuga", "hippo"],
-    }
+    // {
+    //     strategyWitness: tortugaStrategyWitness,
+    //     baseCoin: APT,
+    //     title: "Tortuga Staking Strategy",
+    //     description: "Stake APT on Tortuga for tAPT to earn APT emission rewards. Instantly unstake at best rate via Hippo Aggregator.",
+    //     protocolsUsed: ["tortuga", "hippo"],
+    // }
 ]
 
 export const getStrategy = (strategyWitness: StructData, vaultStrategyData: VaultStrategyData) : Strategy => ({

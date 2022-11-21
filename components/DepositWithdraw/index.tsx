@@ -12,7 +12,6 @@ import {
 import Action from './Action';
 
 import { Block } from '../../types/block';
-import { structToString } from '../../services/vaults';
 
 interface Props {
     deposit: (amount : number) => Promise<void>;

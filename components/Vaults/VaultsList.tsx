@@ -8,13 +8,13 @@ import {
 
 import useVaults from '../../hooks/useVaults'
 
-import { vaultManager } from '../../data/vaultManager'
+import { satay } from '../../data/moduleAddresses'
 import VaultCard from './VaultCard'
 import Card from '../utilities/Card'
 
 const VaultsList = () => {
 
-    const { vaults, fetched } = useVaults(vaultManager);
+    const { vaults, fetched } = useVaults(satay);
 
     return (
         <VStack

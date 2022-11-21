@@ -4,16 +4,17 @@ import {
   Flex
 } from '@chakra-ui/react';
 
-import ProductInfo from './ProductInfo';
+import { useWallet } from '@manahippo/aptos-wallet-adapter';
 
-import { vaultManager } from '../../data/vaultManager';
-import useStructuredProduct from '../../hooks/useStructuredProduct';
-import { getStructuredProduct } from '../../data/structuredProducts';
+import ProductInfo from './ProductInfo';
 import DepositWithdraw from '../DepositWithdraw';
 import Card from '../utilities/Card';
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
-import { getNetworkSlug } from '../../services/aptosUtils';
 import ProductHeader from './ProductHeader';
+
+import useStructuredProduct from '../../hooks/useStructuredProduct';
+
+import { getStructuredProduct } from '../../data/structuredProducts';
+import { getNetworkSlug } from '../../services/aptosUtils';
 
 interface Props {
   productName: string;
@@ -23,9 +24,9 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
 
   const { network } = useWallet();
 
-  const { deposit, withdraw } = useStructuredProduct(`${vaultManager}::${productName}`);
-
   const structuredProduct = getStructuredProduct(productName, getNetworkSlug(network?.name));
+
+  const { deposit, withdraw } = useStructuredProduct(structuredProduct.moduleAddress);
 
   return (
     <Flex
@@ -33,31 +34,37 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
       flex={1}
       gap={4}
     >
-      <ProductHeader 
-        name={structuredProduct.name}
-        description={structuredProduct.description}
-        protocols={structuredProduct.protocols}
-      />
-      <Flex
-        gap={4}
-        direction={{
-          base: 'column',
-          md: 'row'
-        }}
-      >
-        <ProductInfo
-          blocks={structuredProduct.blocks}
-        />
-        <Card
-          justifyContent='center'
-        >
-          <DepositWithdraw 
-            deposit={deposit}
-            withdraw={withdraw}
-            block={structuredProduct.block}
-          />
-        </Card>
-      </Flex>
+      {
+        structuredProduct && (
+          <>
+            <ProductHeader 
+              name={structuredProduct.name}
+              description={structuredProduct.description}
+              protocols={structuredProduct.protocols}
+            />
+            <Flex
+              gap={4}
+              direction={{
+                base: 'column',
+                md: 'row'
+              }}
+            >
+              <ProductInfo
+                blocks={structuredProduct.blocks}
+              />
+              <Card
+                justifyContent='center'
+              >
+                <DepositWithdraw 
+                  deposit={deposit}
+                  withdraw={withdraw}
+                  block={structuredProduct.block}
+                />
+              </Card>
+            </Flex>
+          </>
+        )
+      }
     </Flex>
   )
 }
