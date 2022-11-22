@@ -14,7 +14,7 @@ const useCoinBalance = (accountAddress: string, coinStruct: StructData, coinStor
 
     const getBalance = async () => {
         const coinBalance = await getCoinBalance(client, coinStruct, accountAddress, coinStoreAddress);
-        if(coinBalance !== balance && coinBalance > 0) {
+        if(coinBalance !== balance) {
             setBalance(coinBalance);
         }
     }

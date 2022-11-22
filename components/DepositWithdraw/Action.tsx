@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
     VStack,
@@ -33,13 +33,21 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
 
     const { decimals } = useCoinInfo(coinStruct);
 
-    const [amountAsString, setAmountAsString] = useState('0.00000000');
+    const zeroWithDecimals = `0.${'0'.repeat(decimals)}`;
+
+    const [amountAsString, setAmountAsString] = useState(zeroWithDecimals);
     const [amount, setAmount] = useState(0);
+
+    useEffect(() => {
+        if(amount === 0) {
+            setAmountAsString(zeroWithDecimals);
+        }
+    }, [decimals, amount, zeroWithDecimals]);
 
     const handleTextChange = (value : string) => {
         setAmountAsString(value);
         if(value == ""){
-            setAmountAsString('0.00000000');
+            setAmountAsString(zeroWithDecimals);
             setAmount(0);
         } else if(value[value.length-1] !== "."){
             setAmount(parseFloat(value));
@@ -48,7 +56,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
 
     const onClick = async () => {
         await action(Math.round(amount * 10**decimals));
-        setAmountAsString('0.00000000');
+        setAmountAsString(zeroWithDecimals);
         setAmount(0);
     }
 
@@ -105,7 +113,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                         onChange={handleTextChange}
                         w='100%'
                         max={balance}
-                        precision={8}
+                        precision={decimals}
                         defaultValue={0}
                         focusBorderColor='brand.500'
                     >

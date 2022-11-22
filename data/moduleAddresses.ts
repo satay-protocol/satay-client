@@ -1,3 +1,3 @@
-export const satay = "0xb2104bc99e57db595ad246a46ff3d57adce17fb33058703ae770c302d0a88b63";
+export const satay = "0xbfb4153132b66aa462b33d2a74c52a1b7fe711758af32f5b66dbff725a10f630";
 
-export const dittoFarming = "0xb2104bc99e57db595ad246a46ff3d57adce17fb33058703ae770c302d0a88b63"
+export const dittoFarming = "0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac";

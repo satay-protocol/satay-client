@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Link from 'next/link';
 
@@ -18,6 +18,7 @@ import { fromAptos } from '../../services/utils';
 import useCoinBalance from '../../hooks/useCoinBalance';
 
 import { StructData } from '../../types/aptos';
+import useCoinInfo from '../../hooks/useCoinInfo';
 
 interface Props {
     coinStruct: StructData,
@@ -31,6 +32,8 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
     const { connected, account } = useWallet()
 
     const balance = useCoinBalance(account.address.toString(), coinStruct);
+
+    const { decimals } = useCoinInfo(coinStruct);
 
     const [amount, setAmount] = React.useState(0);
     const [amountAsString, setAmountAsString] = React.useState('0.00000000');
@@ -76,7 +79,7 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                 onChange={handleTextChange}
                 w='100%'
                 max={balance}
-                precision={8}
+                precision={decimals}
                 defaultValue={0}
                 focusBorderColor='brand.500'
             >

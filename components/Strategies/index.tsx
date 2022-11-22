@@ -13,8 +13,6 @@ interface Props {
 
 const Strategies : React.FC<Props> = ({ strategies }) => {
 
-    // console.log(strategies);
-
     return (
         <VStack
             spacing={2}

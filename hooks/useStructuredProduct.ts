@@ -3,8 +3,6 @@ import useWallet from "./useWallet";
 
 const useStructuredProduct = (moduleAddress: string) => {
 
-    console.log(moduleAddress);
-
     const { submitTransaction } = useWallet();
 
     const deposit = async (amount: number) => {

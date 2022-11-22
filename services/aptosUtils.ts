@@ -50,7 +50,7 @@ export const getCoinType = (resourceType: string) => (
 )
 
 const supportedNetworks = [
-    'testnet', 
+    'testnet',
     // 'mainnet'
 ] as const;
 
