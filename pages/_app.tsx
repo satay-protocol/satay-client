@@ -17,12 +17,12 @@ import { AptosProvider } from '../contexts/AptosContext';
 
 const wallets : WalletAdapter[] = [
   new PontemWalletAdapter(),
-  new AptosWalletAdapter(),
-  new MartianWalletAdapter(),
   new BloctoWalletAdapter({
     bloctoAppId: 'a9d395d4-4b40-4af3-bcb8-cf30fce97614',
     network: WalletAdapterNetwork.Testnet,
-  })
+  }),
+  new AptosWalletAdapter(),
+  new MartianWalletAdapter(),
 ]
 
 function MyApp({ Component, pageProps }: AppProps) {
