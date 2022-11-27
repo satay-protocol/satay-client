@@ -47,7 +47,6 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
     const handleTextChange = (value : string) => {
         setAmountAsString(value);
         if(value == ""){
-            setAmountAsString(zeroWithDecimals);
             setAmount(0);
         } else if(value[value.length-1] !== "."){
             setAmount(parseFloat(value));
@@ -58,6 +57,12 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
         await action(Math.round(amount * 10**decimals));
         setAmountAsString(zeroWithDecimals);
         setAmount(0);
+    }
+
+    const onFocus = () => {
+        if(amount === 0){
+            setAmountAsString("");
+        }
     }
 
     return (
@@ -116,6 +121,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                         precision={decimals}
                         defaultValue={0}
                         focusBorderColor='brand.500'
+                        onFocus={onFocus}
                     >
                         <NumberInputField />
                     </NumberInput>
@@ -129,7 +135,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                     variant='solid'
                     colorScheme='brand'
                     flex={1}
-                    disabled={!connected}
+                    disabled={!connected || amount === 0}
                 >
                     {actionName}
                 </Button>

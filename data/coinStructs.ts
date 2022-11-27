@@ -24,6 +24,12 @@ export const stAPT : StructData = {
     module_name: "staked_coin"
 }
 
+export const tAPT: StructData = {
+    struct_name: "TortugaAptos",
+    account_address: satay,
+    module_name: "tortuga_coin"
+}
+
 const stablePool : StructData = {
     struct_name: "Stable",
     account_address: liquidswapCurvesAddress,

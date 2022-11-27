@@ -3,6 +3,7 @@ import {
     dittoFarmingCoin, 
     LP, 
     stAPT, 
+    tAPT, 
     vaultCoin } from "../data/coinStructs";
 
 import { Block } from '../types/block';
@@ -65,6 +66,26 @@ export const tortugaStakeAptos: Block = {
     outputCoinSymbol: "tAPT",
     description: "Stake APT on Tortuga for tAPT",
     inputProtocol: "aptos",
+    outputProtocol: "tortuga",
+}
+
+export const tortugaCollateralAptos: Block = {
+    inputCoinType: tAPT,
+    outputCoinType: APT,
+    inputCoinSymbol: "tAPT",
+    outputCoinSymbol: "APT",
+    description: "Deposit tAPT as collateral to borrow APT on Aries.",
+    inputProtocol: "tortuga",
+    outputProtocol: "aries",
+}
+
+export const repeatStakeTortugaAptos: Block = {
+    inputCoinType: APT,
+    outputCoinType: tAPT,
+    inputCoinSymbol: "APT",
+    outputCoinSymbol: "tAPT",
+    description: "Repeat 2x to gain 2.8x leverage - 65% LTV on Aries",
+    inputProtocol: "aries",
     outputProtocol: "tortuga",
 }
 

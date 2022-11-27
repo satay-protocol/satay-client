@@ -1,6 +1,6 @@
 import { dittoFarming as dittoFarmingAddress } from "./moduleAddresses";
 
-import { dittoFarming, dittoStakeAptos, dittoStakeAptosAndLp, dittoStakedAptosLp, stakeAptStaptLP, tortugaStakeAptos } from "./blocks";
+import { dittoFarming, dittoStakeAptos, dittoStakeAptosAndLp, dittoStakedAptosLp, repeatStakeTortugaAptos, stakeAptStaptLP, tortugaCollateralAptos, tortugaStakeAptos } from "./blocks";
 import { StructuredProduct } from "../types/structuredProduct";
 
 const dittoStakingInfo = {
@@ -40,7 +40,7 @@ const tortugaLeverage : StructuredProduct = {
     coinSymbol: "APT",
     coinSlug: "aptos",
     protocols: ["tortuga", "aries"],
-    blocks: [tortugaStakeAptos],
+    blocks: [tortugaStakeAptos, tortugaCollateralAptos, repeatStakeTortugaAptos],
     block: tortugaStakeAptos
 }
 
@@ -49,6 +49,7 @@ const devnetStructuredProducts: StructuredProduct[] = []
 
 const testnetStructuredProducts: StructuredProduct[] = [
     dittoStakingTestnet,
+    // tortugaLeverage
 ]
 
 const mainnetStructuredProducts: StructuredProduct[] = [

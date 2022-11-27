@@ -41,7 +41,6 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
     const handleTextChange = (value : string) => {
         setAmountAsString(value);
         if(value == ""){
-            setAmountAsString('0.00000000');
             setAmount(0);
         } else if(value[value.length-1] !== "."){
             setAmount(parseFloat(value));
@@ -52,6 +51,12 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
         await onDeposit(Math.round(fromAptos(amount)));
         setAmountAsString('0.00000000');
         setAmount(0);
+    }
+
+    const onFocus = () => {
+        if(amount === 0){
+            setAmountAsString("");
+        }
     }
 
     return (
@@ -82,6 +87,7 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                 precision={decimals}
                 defaultValue={0}
                 focusBorderColor='brand.500'
+                onFocus={onFocus}
             >
                 <NumberInputField />
             </NumberInput>
@@ -92,7 +98,7 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                     onClick={() => onClick()}
                     variant='solid'
                     colorScheme='brand'
-                    disabled={!connected}
+                    disabled={!connected || amount === 0}
                 >
                     Deposit
                 </Button>

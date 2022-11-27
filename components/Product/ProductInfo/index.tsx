@@ -16,6 +16,7 @@ const ProductInfo : React.FC<Props> = ({ blocks }) => {
   return (
     <VStack
       spacing={4}
+      w='100%'
     >
       <Card>
         <Text
