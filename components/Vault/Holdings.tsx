@@ -3,7 +3,8 @@ import React from 'react'
 import { 
     Box, 
     VStack,
-    Text
+    Text,
+    useColorModeValue
 } from '@chakra-ui/react';
 
 import useCoinBalances from '../../hooks/useCoinBalances';
@@ -34,7 +35,7 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
                     balances.map((balance) => (
                         <Box
                             p={4}
-                            bg='gray.50'
+                            bg={useColorModeValue('gray.50', 'gray.800')}
                             rounded='lg'
                             key={balance.coin}
                             w='100%'

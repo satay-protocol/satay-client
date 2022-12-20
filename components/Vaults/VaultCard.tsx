@@ -58,9 +58,10 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                     />
                 </Flex>
                 <Image 
-                    src={vault.logo}
+                    src={`/${vault.baseCoinProtocol}_logo.jpeg`}
                     alt={vault.symbol}
                     boxSize={'100px'}
+                    rounded='full'
                 />
             </Flex>
             <Strategies 

@@ -7,7 +7,8 @@ import {
     NumberInput,
     NumberInputField,
     Flex,
-    Button
+    Button,
+    useColorModeValue
 } from '@chakra-ui/react';
 
 import { fromAptos, round } from '../../services/utils';
@@ -74,7 +75,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                 gap={4}
             >
                 <VStack
-                    bg='gray.50'
+                    bg={useColorModeValue('gray.50', 'gray.800')}
                     p={4}
                     borderRadius='lg'
                     minH='100%'
@@ -93,7 +94,7 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                     spacing={4}
                     p={4}
                     borderRadius='lg'
-                    bg='gray.50'
+                    bg={useColorModeValue('gray.50', 'gray.800')}
                     flex={1}
                 >
                     <VStack

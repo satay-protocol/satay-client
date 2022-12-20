@@ -21,6 +21,8 @@ import ChainSelect from './ChainSelect';
 import ConnectWallet from './ConnectWallet';
 import { routes } from './routes';
 import Link from 'next/link';
+import ColorModeToggle from './ColorModeToggle';
+import Card from '../utilities/Card';
 
 interface Props extends FlexProps {
     onOpen: () => void;
@@ -28,58 +30,56 @@ interface Props extends FlexProps {
   
 const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {    
     return (
-        <Flex
-            px={4}
-            height={20}
-            alignItems="center"
-            bg={useColorModeValue('white', 'gray.900')}
-            rounded="lg"
-            shadow='xl'
-            {...rest}
-            gap={8}
-        >
-            <IconButton
-                display={{ base: 'flex', md: 'none' }}
-                onClick={onOpen}
-                variant="outline"
-                aria-label="open menu"
-                icon={<FiMenu />}
-            />
-            <Link
-                href='/'
-            >
-                <Button
-                    variant='ghost'
-                    colorScheme='brand'
-                    px={0}
-                >
-                    <Image 
-                        src="/logo.png"
-                        height={10}
-                        width={10}
-                        alt='satay logo'
-
-                    />
-                </Button>
-            </Link>
+        <Card>
             <Flex
-                mr='auto'
-                alignItems={'center'}
+                alignItems="center"
+                {...rest}
+                gap={8}
             >
-                {
-                    routes.map((route) => (
-                        <NavItem 
-                            key={route.href}
-                            route={route}
+                <IconButton
+                    display={{ base: 'flex', md: 'none' }}
+                    onClick={onOpen}
+                    variant="outline"
+                    aria-label="open menu"
+                    icon={<FiMenu />}
+                />
+                <Link
+                    href='/'
+                >
+                    <Button
+                        variant='ghost'
+                        colorScheme='brand'
+                        px={0}
+                    >
+                        <Image 
+                            src="/logo.png"
+                            height={10}
+                            width={10}
+                            alt='satay logo'
+
                         />
-                    ))
-                }
+                    </Button>
+                </Link>
+                <Flex
+                    mr='auto'
+                    alignItems={'center'}
+                >
+                    {
+                        routes.map((route) => (
+                            <NavItem 
+                                key={route.href}
+                                route={route}
+                            />
+                        ))
+                    }
+                </Flex>
+                <HStack>
+                    {/* <ChainSelect /> */}
+                    <ConnectWallet />
+                    <ColorModeToggle />
+                </HStack>
             </Flex>
-            <HStack>
-                {/* <ChainSelect /> */}
-                <ConnectWallet />
-            </HStack>
-        </Flex>
+        </Card>
     );
 };
 

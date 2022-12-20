@@ -1,10 +1,13 @@
 import { extendTheme } from "@chakra-ui/react";
 
-import { CardComponent } from "./additions/card";
+import components from "./components";
 
 import { colors } from "./color";
 
+import { config } from "./config";
+
 export default extendTheme({
-    ...CardComponent,
+    components,
     colors,
+    config
 });

@@ -49,7 +49,7 @@ const DefaultLayout = ({
   return (
     <Box 
       minH="100vh" 
-      bg={useColorModeValue('gray.100', 'gray.900')}
+      bg={useColorModeValue('blackAlpha.50', 'blackAlpha.900')}
     >
       <Head>
         <title>Satay Finance</title>

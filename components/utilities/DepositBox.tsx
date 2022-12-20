@@ -9,6 +9,7 @@ import {
     VStack,
     Button,
     NumberInputField,
+    useColorModeValue
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
@@ -59,12 +60,14 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
         }
     }
 
+
+
     return (
         <VStack
             p={4}
             alignItems='flex-start'
             borderRadius='lg'
-            bg='gray.50'
+            bg={useColorModeValue('gray.50', 'gray.800')}
             flex={1}
         >
             <Text

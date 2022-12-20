@@ -3,6 +3,7 @@ import React from 'react'
 import {
   Box,
   Text,
+  useColorModeValue,
   VStack
 } from '@chakra-ui/react'
 
@@ -23,7 +24,7 @@ const AboutVault : React.FC<Props> = ({ about }) => {
       </Text>
       <Box
         p={4}
-        bg='gray.50'
+        bg={useColorModeValue('gray.50', 'gray.800')}
         rounded='lg'
       >
         <Text>

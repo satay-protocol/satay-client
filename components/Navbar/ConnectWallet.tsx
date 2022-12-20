@@ -31,6 +31,7 @@ const ConnectWallet = () => {
                 _focus={{ boxShadow: 'none' }}
                 as={Button} 
                 colorScheme='brand'
+                variant='outline'
                 rightIcon={<ChevronDownIcon />}
             >
                 {connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet'}

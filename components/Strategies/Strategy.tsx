@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Flex, Text, VStack } from '@chakra-ui/react'
+import { Flex, Text, useColorModeValue, VStack } from '@chakra-ui/react'
 
 import { Strategy } from '../../types/vaults'
 import ProtocolList from '../utilities/ProtocolList'
@@ -18,7 +18,7 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
         >
             <Flex
                 p={4}
-                bg='gray.50'
+                bg={useColorModeValue('gray.50', 'gray.800')}
                 rounded='lg'
                 key={structToString(strategy.strategyWitness)}
                 w='100%'
