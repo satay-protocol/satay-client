@@ -19,6 +19,8 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
 
     const balances = useCoinBalances(vaultAddress);
 
+    const balanceBg = useColorModeValue('gray.50', 'gray.800')
+
     return (
         <VStack
             alignItems='flex-start'
@@ -35,7 +37,7 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
                     balances.map((balance) => (
                         <Box
                             p={4}
-                            bg={useColorModeValue('gray.50', 'gray.800')}
+                            bg={balanceBg}
                             rounded='lg'
                             key={balance.coin}
                             w='100%'
