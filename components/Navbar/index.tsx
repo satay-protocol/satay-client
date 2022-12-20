@@ -36,7 +36,7 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
             rounded="lg"
             shadow='xl'
             {...rest}
-            gap={4}
+            gap={8}
         >
             <IconButton
                 display={{ base: 'flex', md: 'none' }}

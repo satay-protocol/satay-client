@@ -26,6 +26,7 @@ import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 import Head from 'next/head';
 import NotConnected from '../components/utilities/NotConnected';
 import { getNetworkSlug } from '../services/aptosUtils';
+import Footer from '../components/Footer';
 
 interface LinkItemProps {
   name: string;
@@ -58,10 +59,6 @@ const DefaultLayout = ({
         mx='auto' 
         maxW='4xl'
       >
-        <SidebarContent
-          onClose={() => onClose}
-          display={{ base: 'none' }}
-        />
         <Drawer
             autoFocus={false}
             isOpen={isOpen}
@@ -96,6 +93,7 @@ const DefaultLayout = ({
                   )
               )
           }
+          <Footer />
         </Box>
       </Container>
     </Box>
