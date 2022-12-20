@@ -6,27 +6,30 @@ import {
 } from '@chakra-ui/react';
 
 import { useRouter } from 'next/router';
+import { Route } from './routes';
 
 interface NavItemProps extends FlexProps {
-    href: string;
-    children: string;
+  route: Route
 }
 
-  const NavItem : React.FC<NavItemProps> = ({ children, href }) => {
+  const NavItem : React.FC<NavItemProps> = ({ route }) => {
 
     const { pathname } = useRouter();
 
     return (
       <Link 
-          href={href} 
+          href={route.href} 
           style={{ textDecoration: 'none' }} 
           _focus={{ boxShadow: 'none' }}
       >
         <Button
           variant="ghost"
-          colorScheme={pathname === href ? 'brand' : 'gray'}
+          colorScheme={pathname === route.href ? 'brand' : 'gray'}
+          leftIcon={<route.icon size='30px' />}
+          alignItems='center'
+          display='flex'
         >
-          {children}
+          {route.name}
         </Button>
       </Link>
     );

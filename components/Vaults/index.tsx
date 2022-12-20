@@ -20,6 +20,9 @@ const Vaults = () => {
         >
           Vaults
         </Text>
+        <Text>
+          Satay Vaults are secure capital pools that automatically maximize yield on staked digital assets
+        </Text>
       </Card>
       <VaultsList />
     </Flex>

@@ -4,7 +4,8 @@ import {
     IconButton,
     useColorModeValue,
     HStack,
-    Image
+    Image,
+    Button
 } from '@chakra-ui/react'
 
 import {
@@ -18,26 +19,14 @@ import { BsSafe } from 'react-icons/bs';
 import NavItem from './NavItem';
 import ChainSelect from './ChainSelect';
 import ConnectWallet from './ConnectWallet';
+import { routes } from './routes';
+import Link from 'next/link';
 
 interface Props extends FlexProps {
     onOpen: () => void;
 }
-
-interface LinkItemProps {
-    name: string;
-    href: string;
-  }
-  
   
 const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {    
-
-    const LinkItems: Array<LinkItemProps> = [
-        { name: 'Home', href: '/' },
-        { name: 'Vaults', href: '/vaults' },
-        { name: 'Products', href: '/products' },
-    ];
-
-
     return (
         <Flex
             px={4}
@@ -45,9 +34,9 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
             alignItems="center"
             bg={useColorModeValue('white', 'gray.900')}
             rounded="lg"
-            gap={16}
             shadow='xl'
             {...rest}
+            gap={4}
         >
             <IconButton
                 display={{ base: 'flex', md: 'none' }}
@@ -56,29 +45,38 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                 aria-label="open menu"
                 icon={<FiMenu />}
             />
-            <Image 
-                src="/logo.png"
-                height={10}
-                width={10}
-                alt='satay logo'
-            />
+            <Link
+                href='/'
+            >
+                <Button
+                    variant='ghost'
+                    colorScheme='brand'
+                    px={0}
+                >
+                    <Image 
+                        src="/logo.png"
+                        height={10}
+                        width={10}
+                        alt='satay logo'
+
+                    />
+                </Button>
+            </Link>
             <Flex
                 mr='auto'
-                gap={4}
+                alignItems={'center'}
             >
                 {
-                    LinkItems.map((item, index) => (
+                    routes.map((route) => (
                         <NavItem 
-                            key={index}
-                            href={item.href}
-                        >
-                            {item.name}
-                        </NavItem>
+                            key={route.href}
+                            route={route}
+                        />
                     ))
                 }
             </Flex>
-            <HStack spacing={{ base: '0', md: '6' }}>
-                <ChainSelect />
+            <HStack>
+                {/* <ChainSelect /> */}
                 <ConnectWallet />
             </HStack>
         </Flex>

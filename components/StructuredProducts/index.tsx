@@ -24,6 +24,9 @@ const StructuredProducts : React.FC = () => {
                 >
                     Structured Products
                 </Text>
+                <Text>
+                    Structured Products allow you to open complex, multi-protocol positions in one click
+                </Text>
             </Card>
             {
                 getStructuredProducts(getNetworkSlug(network?.name)).map((structuredProduct) => (
