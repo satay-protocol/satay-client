@@ -13,6 +13,7 @@ const SocialLink: React.FC<Props> = ({ socialLink }) => {
     <a
         href={socialLink.href}
         target="_blank"
+        rel="noreferrer"
     >
         <Button
             variant="ghost"
