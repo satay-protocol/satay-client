@@ -44,7 +44,7 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
                         >
                             <Text>
                                 <span>
-                                    {toAptos(balance.value)}{' '}
+                                    {toAptos(balance.value).toLocaleString()}{' '}
                                 </span>
                                 {balance.coin}
                             </Text>
