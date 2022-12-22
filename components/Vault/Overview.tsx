@@ -49,7 +49,7 @@ const Overview : React.FC<Props> = ({ logo, symbol, tvl}) => {
                         {symbol} Vault
                     </Text>
                     <Text>
-                        TVL: {round(toAptos(tvl), 3)} {symbol}
+                        TVL: {round(toAptos(tvl)).toLocaleString()} {symbol}
                     </Text>
                     <Text>
                         Performance:{' '}
