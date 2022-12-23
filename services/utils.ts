@@ -36,4 +36,8 @@ export const round = (num: number, precision = 2) => {
     return Math.round(num * factor) / factor;
 }
 
-export const performanceArray = getPerformanceArray();
+export const performanceArray = getPerformanceArray()
+
+export const ellipsizeAddress = (address: string) => {
+    return address.slice(0, 5) + '...' + address.slice(-5);
+}

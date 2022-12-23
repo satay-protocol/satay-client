@@ -3,68 +3,54 @@ import React from 'react'
 import {
     VStack,
     Text,
-    HStack,
     Image,
+    HStack,
 } from '@chakra-ui/react'
-import { fromAptos, performanceArray, round, round2, toAptos } from '../../services/utils';
+import Copyable from '../utilities/Copyable';
+import { ellipsizeAddress } from '../../services/utils';
+
+const imageSize = "80px"
 
 interface Props {
     logo: string;
     symbol: string;
-    tvl: number;
+    vaultAddress: string;
 }
 
-const Overview : React.FC<Props> = ({ logo, symbol, tvl}) => {
-
-    const performance = round2(performanceArray[performanceArray.length - 1].val);
+const Overview : React.FC<Props> = ({ logo, symbol, vaultAddress }) => {
 
     return (
-        <VStack
-            alignItems='flex-start'
+        <HStack
+            w='100%'
+            spacing={4}
         >
-            <Text
-                fontSize="xl"
-                fontWeight="bold"
+            <Image 
+                src={logo}
+                height={imageSize}
+                width={imageSize}
+                rounded="full"
+                alt="logo image"
+            />
+            <VStack
+                alignItems="flex-start"
             >
-                Overview
-            </Text>
-            <HStack
-                spacing={8}
-            >
-                <Image 
-                    src={logo}
-                    height="100px"
-                    width="100px"
-                    rounded="full"
-                    alt="logo image"
-                />
-                <VStack
-                    alignItems='flex-start'
-                    justifyContent='center'
+                <Text
+                    fontSize="lg"
+                    fontWeight="bold"
                 >
-                    <Text
-                        fontSize="xl"
-                        fontWeight="bold"
-                    >
-                        {symbol} Vault
-                    </Text>
+                    {symbol} Vault
+                </Text>
+                <HStack>
                     <Text>
-                        TVL: {round(toAptos(tvl)).toLocaleString()} {symbol}
+                        Address:
                     </Text>
-                    <Text>
-                        Performance:{' '}
-                        <Text 
-                            as={'span'} 
-                            color='brand.500' 
-                            fontWeight='bold'
-                        >
-                            {performance !== 0 && (performance > 0 ? '+' : '-')}{performance}%
-                        </Text>
-                    </Text>
-                </VStack>
-                
-            </HStack>
-        </VStack>
+                    <Copyable
+                        display={ellipsizeAddress(vaultAddress)}
+                        copyText={vaultAddress}
+                    />
+                </HStack>
+            </VStack>
+        </HStack>
     )
 }
 

@@ -10,6 +10,7 @@ import {
 import useCoinBalances from '../../hooks/useCoinBalances';
 
 import { toAptos } from '../../services/utils';
+import AccentedBox from '../utilities/AccentedBox';
 
 interface Props {
     vaultAddress: string;
@@ -35,10 +36,7 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
             {
                 balances.length > 0 ? (
                     balances.map((balance) => (
-                        <Box
-                            p={4}
-                            bg={balanceBg}
-                            rounded='lg'
+                        <AccentedBox
                             key={balance.coin}
                             w='100%'
                         >
@@ -48,7 +46,7 @@ const Holdings : React.FC<Props> = ({ vaultAddress }) => {
                                 </span>
                                 {balance.coin}
                             </Text>
-                        </Box>
+                        </AccentedBox>
                     ))
                 ) : (
                     <Text>

@@ -1,25 +1,42 @@
 import { useEffect, useState } from "react";
+import { TVLRecord } from "../cloudFunctions";
 
-interface VaultPerformance {
-    totalAssets: number;
+interface PerformanceMetrics {
+    "tvl": number;
+    "earnings": number;
+}
+
+export type MetricsSlug = keyof PerformanceMetrics;
+
+interface PerformancePoint {
+    metrics: PerformanceMetrics;
     time: string;
 }
 
-const useVaultPerformance = (vaultId: string) => {
+const useVaultPerformance = (vaultId: string, numDays: number) => {
 
-    const [performance, setPerformance] = useState<VaultPerformance[]>([]);
+    const [performance, setPerformance] = useState<PerformancePoint[]>([]);
     const [loading, setLoading] = useState(true);
 
     const fetchPerformance = async () => {
-        const response = await fetch(`https://us-central1-satay-finance.cloudfunctions.net/readTVL`);
+        const response = await fetch(`https://us-central1-satay-finance.cloudfunctions.net/readTVL?numDays=${numDays}`);
         const data = await response.json();
-        setPerformance(data.performance as VaultPerformance[]);
+        const performance = data.performance.map((point: TVLRecord) => {
+            return {
+                metrics: {
+                    tvl: point.tvl,
+                    earnings: 0,
+                },
+                time: point.time,
+            }
+        })
+        setPerformance(performance);
         setLoading(false);
     }
 
     useEffect(() => {
         fetchPerformance();
-    }, []);
+    }, [numDays]);
 
     return { performance, loading };
 }

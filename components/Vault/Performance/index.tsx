@@ -1,0 +1,96 @@
+import React, { useState } from 'react'
+
+import moment from 'moment';
+
+import { Box, Button, HStack, Skeleton, Tab, TabList, Tabs, Text, useColorModeValue } from '@chakra-ui/react';
+
+import LineGraph from '../../utilities/LineGraph';
+
+import useVaultPerformance from '../../../hooks/useVaultPerformance';
+
+import { Interval, intervals } from './intervals';
+import { Metric, metrics } from './metrics';
+import AccentedBox from '../../utilities/AccentedBox';
+
+interface Props {
+    vaultId: string;
+    symbol: string;
+}
+
+const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
+
+    const [selectedMetric, setSelectedMetric] = useState<Metric>(metrics[0]);
+    const [selectedInterval, setSelectedInterval] = useState<Interval>(intervals[0]);
+
+    const { performance, loading } = useVaultPerformance(vaultId, selectedInterval.value);
+
+    const displayValue = performance[performance.length - 1]?.metrics[selectedMetric.value] || 0;
+
+    return (
+        <Box
+            w='100%'
+            display='flex'
+            flexDirection='column'
+            gap={2}
+        >
+            <AccentedBox>
+                <Box
+                    display='flex'
+                    flexDirection='column'
+                    gap={4}
+                >
+                    <Tabs
+                        isFitted
+                        onChange={(index) => setSelectedMetric(metrics[index])}
+                        colorScheme='brand'
+                    >
+                        <TabList>
+                            {
+                                metrics.map((metric) => (
+                                    <Tab
+                                        key={metric.value}
+                                    >
+                                        {metric.name}
+                                    </Tab>
+                                ))
+                            }
+                        </TabList>
+                    </Tabs>
+                    <Skeleton
+                        isLoaded={!loading}
+                    >
+                        <Text
+                            fontSize='lg'
+                            fontWeight='bold'
+                        >
+                            {selectedMetric.name}: {displayValue.toLocaleString()} {symbol}
+                        </Text>
+                        <LineGraph 
+                            data={performance.map((p) => p.metrics[selectedMetric.value] || 0)}
+                            labels={performance.map((p) => moment(p.time).format('M/DD/YY HH:mm'))}
+                        />
+                    </Skeleton>
+                    <HStack
+                        spacing={4}
+                        justifyContent='space-around'
+                    >
+                        {
+                            intervals.map((interval) => (
+                                <Button
+                                    key={interval.name}
+                                    onClick={() => setSelectedInterval(interval)}
+                                    variant='ghost'
+                                    colorScheme={interval.name == selectedInterval.name ? 'brand' : 'gray'}
+                                >
+                                    {interval.name}
+                                </Button>
+                            ))
+                        }
+                    </HStack>
+                </Box>
+            </AccentedBox>
+        </Box>
+    ) 
+}
+
+export default Performance
