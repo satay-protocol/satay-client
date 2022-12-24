@@ -6,6 +6,7 @@ import { Strategy } from '../../types/vaults'
 import ProtocolList from '../utilities/ProtocolList'
 import Link from 'next/link'
 import { structToString } from '../../services/vaults'
+import AccentedBox from '../utilities/AccentedBox'
 
 interface Props {
     strategy: Strategy
@@ -16,18 +17,16 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
         <Link
             href={'/products' + (strategy.productName ? `/${strategy.productName}` : '')}
         >
-            <Flex
-                p={4}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                rounded='lg'
-                key={structToString(strategy.strategyWitness)}
+            <AccentedBox
                 w='100%'
+                display='flex'
                 justifyContent='space-between'
                 gap={4}
                 _hover={{
                     cursor: 'pointer',
-                    shadow: 'lg'
+                    shadow: 'md'
                 }}
+                transition='all 0.2s'
             >
                 <VStack
                     alignItems='flex-start'
@@ -46,7 +45,7 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
                 <ProtocolList 
                     protocols={strategy.protocolsUsed}
                 />
-            </Flex>
+            </AccentedBox>
         </Link>
     )
 }

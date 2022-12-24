@@ -18,6 +18,7 @@
     "aptos": "1.4.0",
     "chart.js": "^3.9.1",
     "framer-motion": "^6",
+    "moment": "^2.29.4",
     "msafe-wallet": "^2.0.2",
     "next": "12.2.5",
     "react": "18.2.0",

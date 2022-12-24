@@ -17,6 +17,7 @@ import useWallet from '../../hooks/useWallet';
 
 import { StructData } from '../../types/aptos';
 import useCoinInfo from '../../hooks/useCoinInfo';
+import AccentedBox from '../utilities/AccentedBox';
 
 interface Props {
     actionName: string;
@@ -74,59 +75,58 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
             <Flex
                 gap={4}
             >
-                <VStack
-                    bg={useColorModeValue('gray.50', 'gray.800')}
-                    p={4}
-                    borderRadius='lg'
-                    minH='100%'
-                    justifyContent='center'
-                >
-                    <Image 
-                        src={logo}
-                        height='60px'
-                        width='60px'
-                        rounded='full'
-                        alt='token logo'
-                    />
-                </VStack>
-                <VStack
-                    alignItems='flex-start'
-                    spacing={4}
-                    p={4}
-                    borderRadius='lg'
-                    bg={useColorModeValue('gray.50', 'gray.800')}
+                <AccentedBox>
+                    <VStack
+                        minH='100%'
+                        justifyContent='center'
+                    >
+                        <Image 
+                            src={logo}
+                            height='60px'
+                            width='60px'
+                            rounded='full'
+                            alt='token logo'
+                        />
+                    </VStack>
+                </AccentedBox>
+                <AccentedBox
                     flex={1}
                 >
                     <VStack
-                        spacing={0}
                         alignItems='flex-start'
+                        spacing={4}
                     >
-                        <Text
-                            fontSize='sm'
-                            fontWeight='semibold'
+                        <VStack
+                            spacing={0}
+                            alignItems='flex-start'
                         >
-                            Balance
-                        </Text>
-                        <Text
-                            fontSize='sm'
-                            fontWeight='bold'
+                            <Text
+                                fontSize='sm'
+                                fontWeight='semibold'
+                            >
+                                Balance
+                            </Text>
+                            <Text
+                                fontSize='sm'
+                                fontWeight='bold'
+                            >
+                                {round(balance, 3)} {symbol}
+                            </Text>
+                        </VStack>
+                        <NumberInput
+                            value={amountAsString}
+                            onChange={handleTextChange}
+                            w='100%'
+                            max={balance}
+                            precision={decimals}
+                            defaultValue={0}
+                            focusBorderColor='brand.500'
+                            onFocus={onFocus}
                         >
-                            {round(balance, 3)} {symbol}
-                        </Text>
+                            <NumberInputField />
+                        </NumberInput>
                     </VStack>
-                    <NumberInput
-                        value={amountAsString}
-                        onChange={handleTextChange}
-                        w='100%'
-                        max={balance}
-                        precision={decimals}
-                        defaultValue={0}
-                        focusBorderColor='brand.500'
-                        onFocus={onFocus}
-                    >
-                        <NumberInputField />
-                    </NumberInput>
-                </VStack>
+                </AccentedBox>
             </Flex>
             <Flex
                 gap={4}

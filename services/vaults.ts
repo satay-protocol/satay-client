@@ -33,7 +33,7 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         return {
             ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
             baseCoin,
-            tvl: await getTVL(client, vaultAddress, coinType, parseInt(vaultData.total_debt)),
+            tvl: await getTVL(vaultId),
             managerAddress: managerResource.vaultManager,
             vaultId,
             vaultAddress: vaultInfo.vault_cap.vec[0].vault_addr,
@@ -73,9 +73,11 @@ export const structToModule = (struct : StructData) => {
     return struct.account_address + "::" + struct.module_name;
 }
 
-export const getTVL = async (client: AptosClient, vaultAddress: string, baseCoin: string, totalDebt: number) => {
-    let { data } = await client.getAccountResource(vaultAddress, `${satay}::vault::CoinStore<${baseCoin}>`);
-    return round(totalDebt + toAptos(parseInt((data as CoinStoreResource).coin.value)), 3);
+export const getTVL = async (vaultId: string): Promise<number> => {
+    const TVL: number = await fetch(`/api/total_assets/${vaultId}`)
+        .then(res => res.json())
+        .then(data => data.totalAssets)
+    return TVL;
 }
 
 

@@ -20,6 +20,7 @@ import useCoinBalance from '../../hooks/useCoinBalance';
 
 import { StructData } from '../../types/aptos';
 import useCoinInfo from '../../hooks/useCoinInfo';
+import AccentedBox from './AccentedBox';
 
 interface Props {
     coinStruct: StructData,
@@ -63,12 +64,11 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
 
 
     return (
-        <VStack
-            p={4}
-            alignItems='flex-start'
-            borderRadius='lg'
-            bg={useColorModeValue('gray.50', 'gray.800')}
+        <AccentedBox
             flex={1}
+            display='flex'
+            flexDirection='column'
+            gap={2}
         >
             <Text
                 fontWeight='bold'
@@ -117,7 +117,7 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                     </Button>
                 </Link>
             </Flex>
-        </VStack>
+        </AccentedBox>
     )
 }
 

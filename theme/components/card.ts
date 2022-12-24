@@ -11,7 +11,7 @@ export const Card : ComponentStyleConfig = {
     position: "relative",
     minWidth: "0px",
     wordWrap: "break-word",
-    bg: mode("#ffffff", "gray.900")(props),
+    bg: mode("#ffffff", "whiteAlpha.50")(props),
     backgroundClip: "border-box",
     rounded:'lg',
     shadow: 'xl'

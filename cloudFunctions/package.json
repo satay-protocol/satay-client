@@ -1,0 +1,22 @@
+{
+  "name": "cloudfunctions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gcp-build": "npm run build",
+    "build": "tsc",
+    "start": "npm run build && npx @google-cloud/functions-framework --target=readTVL",
+    "deploy": "npm run build && gcloud functions deploy readTVL --allow-unauthenticated --trigger-http --runtime nodejs18"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.1.3",
+    "@google-cloud/storage": "^6.8.0",
+    "@influxdata/influxdb-client": "^1.33.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
