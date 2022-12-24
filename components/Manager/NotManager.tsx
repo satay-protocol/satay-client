@@ -5,11 +5,14 @@ import Card from '../utilities/Card'
 const NotManager = () => {
   return (
     <Card>
-        <Text>
+        <Text
+            fontSize="2xl"
+            fontWeight="bold"
+        >
             Not Authorized
         </Text>
         <Text>
-            You are not authorized to access this page because your currently connected address is not the manager address.
+            Only the Governor can view this page.
         </Text>
     </Card>
   )

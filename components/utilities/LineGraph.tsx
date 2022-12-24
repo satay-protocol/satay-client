@@ -20,6 +20,7 @@ const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeav
   const { colors } = useTheme();
 
   const brand = useColorModeValue(colors.brand[600], colors.brand[400]);
+  const hoverLine = useColorModeValue(colors.blackAlpha[400], colors.whiteAlpha[400]);
 
   useEffect(() => {
     Chart.register({
@@ -38,7 +39,7 @@ const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeav
           ctx.moveTo(x, topY);
           ctx.lineTo(x, bottomY);
           ctx.lineWidth = 2;
-          ctx.strokeStyle = brand;
+          ctx.strokeStyle = hoverLine;
           ctx.stroke();
           ctx.restore();
         }
@@ -80,10 +81,10 @@ const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeav
             elements: {
                 line: {
                   borderColor: brand,
-                  borderWidth: 1,
+                  borderWidth: 3,
                 },
                 point: {
-                  radius: 0,
+                  radius: 2,
                 }
             },
             scales: {

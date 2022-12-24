@@ -21,6 +21,7 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
                 w='100%'
                 display='flex'
                 justifyContent='space-between'
+                flexDirection={{ base: 'column-reverse', md: 'row' }}
                 gap={4}
                 _hover={{
                     cursor: 'pointer',
