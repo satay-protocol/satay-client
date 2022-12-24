@@ -7,11 +7,11 @@ export interface Metric {
 
 export const metrics: Metric[] = [
     {
+        name: 'TVL',
+        value: 'tvl'
+    },
+    {
         name: 'Earnings',
         value: 'earnings'
     },
-    {
-        name: 'TVL',
-        value: 'tvl'
-    }
 ]
