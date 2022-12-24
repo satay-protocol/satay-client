@@ -11,6 +11,7 @@ import useVaultPerformance from '../../../hooks/useVaultPerformance';
 import { Interval, intervals } from './intervals';
 import { Metric, metrics } from './metrics';
 import AccentedBox from '../../utilities/AccentedBox';
+import ChangePercentage from '../../utilities/ChangePercentage';
 
 interface Props {
     vaultId: string;
@@ -23,8 +24,15 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
     const [selectedInterval, setSelectedInterval] = useState<Interval>(intervals[0]);
 
     const { performance, loading } = useVaultPerformance(vaultId, selectedInterval.value);
+    const [displayValueIndex, setDisplayValueIndex] = useState<number>(performance.length - 1);
+    const [mouseOver, setMouseOver] = useState<boolean>(false);
 
-    const displayValue = performance[performance.length - 1]?.metrics[selectedMetric.value] || 0;
+    const displayValue = mouseOver
+        ? performance[displayValueIndex]?.metrics[selectedMetric.value] || 0
+        : performance[performance.length - 1]?.metrics[selectedMetric.value] || 0;
+
+    const change = performance.length > 1 ? displayValue - performance[0].metrics[selectedMetric.value] : 0;
+    const percentChange = performance.length > 1 ? change / (performance[0].metrics[selectedMetric.value] || 100) * 100 : 0;
 
     return (
         <Box
@@ -59,15 +67,26 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
                     <Skeleton
                         isLoaded={!loading}
                     >
-                        <Text
-                            fontSize='lg'
-                            fontWeight='bold'
-                        >
-                            {selectedMetric.name}: {displayValue.toLocaleString()} {symbol}
-                        </Text>
+                        <HStack>
+                            <Text
+                                fontSize='lg'
+                                fontWeight='bold'
+                            >
+                                {displayValue.toFixed(2).toLocaleString()} {symbol}
+                            </Text>
+                            <ChangePercentage 
+                                percentChange={percentChange}
+                            />
+                        </HStack>
                         <LineGraph 
                             data={performance.map((p) => p.metrics[selectedMetric.value] || 0)}
                             labels={performance.map((p) => moment(p.time).format('M/DD/YY HH:mm'))}
+                            setDisplayIndex={setDisplayValueIndex}
+                            onMouseLeave={() => {
+                                setMouseOver(false)
+                                setDisplayValueIndex(performance.length - 1)}
+                            }
+                            onMouseEnter={() => setMouseOver(true)}
                         />
                     </Skeleton>
                     <HStack

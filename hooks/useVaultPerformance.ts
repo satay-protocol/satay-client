@@ -24,7 +24,7 @@ const useVaultPerformance = (vaultId: string, numDays: number) => {
         const performance = data.performance.map((point: TVLRecord) => {
             return {
                 metrics: {
-                    tvl: point.tvl,
+                    tvl: point.tvl || 0,
                     earnings: 0,
                 },
                 time: point.time,
