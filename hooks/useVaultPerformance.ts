@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { TVLRecord } from "../cloudFunctions";
+interface TVLRecord {
+    tvl: number;
+    time: string;
+  }
 
 interface PerformanceMetrics {
     "tvl": number;

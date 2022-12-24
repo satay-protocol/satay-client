@@ -19,7 +19,7 @@ interface ReqParams {
   numDays: string;
 }
 
-export interface TVLRecord {
+interface TVLRecord {
   tvl: number;
   time: string;
 }
