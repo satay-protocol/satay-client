@@ -5,6 +5,7 @@ import useVault from '../../hooks/useVault';
 import { 
   Box, 
   Flex,
+  Skeleton,
 } from '@chakra-ui/react';
 
 import VaultInfo from './VaultInfo';
@@ -29,6 +30,14 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
 
   return (
     <Box>
+      {
+        !vault && (
+          <Skeleton 
+            h='200px'
+            rounded='lg'
+          />
+        )
+      }
       {
         vault && (
           <Flex
@@ -64,7 +73,6 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
           </Flex>
         )
       }
-      
     </Box>
   )
 }

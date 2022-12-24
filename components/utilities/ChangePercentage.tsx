@@ -9,7 +9,7 @@ interface Props {
 const ChangePercentage: React.FC<Props> = ({ amountStart, amountEnd }) => {
 
     const change = amountEnd - amountStart;
-    const changeDisplay = `${change > 0 ? "+" : ""}${change.toFixed(2).toLocaleString()}`;
+    const changeDisplay = `${change > 0 ? "+" : ""}${change.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
     const percentChange = (change / (amountStart || 100)) * 100;
     const percentDisplay = `${percentChange > 0 ? "+" : ""}${percentChange.toFixed(2)}%`;
 
@@ -24,7 +24,7 @@ const ChangePercentage: React.FC<Props> = ({ amountStart, amountEnd }) => {
             color={color}
             fontWeight='bold'
         >
-            {changeDisplay} ({percentDisplay})
+            {changeDisplay} {amountStart > 0 && `(${percentDisplay})`}
         </Text>
     )
 }

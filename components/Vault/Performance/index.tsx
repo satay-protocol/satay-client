@@ -69,7 +69,7 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
                                 fontSize='lg'
                                 fontWeight='bold'
                             >
-                                {displayValue.toFixed(2).toLocaleString()} {symbol}
+                                {displayValue.toLocaleString(undefined, {minimumFractionDigits: 2})} {symbol}
                             </Text>
                             <ChangePercentage 
                                 amountStart={performance[0]?.metrics[selectedMetric.value] || 0}
