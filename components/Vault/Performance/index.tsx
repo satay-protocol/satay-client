@@ -31,9 +31,6 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
         ? performance[displayValueIndex]?.metrics[selectedMetric.value] || 0
         : performance[performance.length - 1]?.metrics[selectedMetric.value] || 0;
 
-    const change = performance.length > 1 ? displayValue - performance[0].metrics[selectedMetric.value] : 0;
-    const percentChange = performance.length > 1 ? change / (performance[0].metrics[selectedMetric.value] || 100) * 100 : 0;
-
     return (
         <Box
             w='100%'
@@ -75,7 +72,8 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
                                 {displayValue.toFixed(2).toLocaleString()} {symbol}
                             </Text>
                             <ChangePercentage 
-                                percentChange={percentChange}
+                                amountStart={performance[0]?.metrics[selectedMetric.value] || 0}
+                                amountEnd={displayValue}
                             />
                         </HStack>
                         <LineGraph 
