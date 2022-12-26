@@ -36,13 +36,6 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                 {...rest}
                 gap={8}
             >
-                <IconButton
-                    display={{ base: 'flex', md: 'none' }}
-                    onClick={onOpen}
-                    variant="outline"
-                    aria-label="open menu"
-                    icon={<FiMenu />}
-                />
                 <Link
                     href='/'
                 >
@@ -61,8 +54,8 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                     </Button>
                 </Link>
                 <Flex
-                    mr='auto'
                     alignItems={'center'}
+                    display={{ base: 'none', md: 'flex' }}
                 >
                     {
                         routes.map((route) => (
@@ -73,10 +66,20 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                         ))
                     }
                 </Flex>
-                <HStack>
+                <HStack 
+                    flex={1}
+                    justifyContent='flex-end'
+                >
                     {/* <ChainSelect /> */}
                     <ConnectWallet />
                     <ColorModeToggle />
+                    <IconButton
+                        display={{ base: 'flex', md: 'none' }}
+                        onClick={onOpen}
+                        variant="outline"
+                        aria-label="open menu"
+                        icon={<FiMenu />}
+                    />
                 </HStack>
             </Flex>
         </Card>

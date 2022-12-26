@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Box, Flex } from '@chakra-ui/react'
 
-import InitializeManager from './InitializeManager';
 import CreateVault from './CreateVault';
 import Vaults from './Vaults';
 
 import useManagerResource from '../../hooks/manager/useManagerResource'
+import NotManager from './NotManager';
 
 
 interface Props {
@@ -31,7 +31,7 @@ const ManagerComponent : React.FC<Props> = ({ managerAddress }) => {
               <CreateVault />
             </Flex>
           ) : (
-            <InitializeManager />
+            <NotManager />
           )
         }
       </Box>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HStack, VStack, Text } from '@chakra-ui/react';
+import { HStack, VStack, Text, Flex } from '@chakra-ui/react';
 
 import Card from '../utilities/Card';
 import ProtocolList from '../utilities/ProtocolList';
@@ -14,7 +14,10 @@ interface Props {
 const ProductHeader : React.FC<Props> = ({ name, description, protocols}) => {
   return (
     <Card>
-        <HStack>
+        <Flex
+            flexDirection={{base: 'column-reverse', sm: 'row'}}
+            gap={4}
+        >
             <VStack
                 flex={1}
                 alignItems='flex-start'
@@ -32,7 +35,7 @@ const ProductHeader : React.FC<Props> = ({ name, description, protocols}) => {
             <ProtocolList 
                 protocols={protocols}
             />
-        </HStack>
+        </Flex>
     </Card>
   )
 }
