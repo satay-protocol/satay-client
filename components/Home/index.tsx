@@ -16,12 +16,15 @@ const Home = () => {
     >
       <Card>
         <Text
-          fontSize='4xl'
-          fontWeight='bold'
+          fontSize={{ base: '2xl', md: '3xl' }}
+          fontWeight='extrabold'
         >
           Welcome to Satay Finance
         </Text>
-        <Text>
+        <Text
+          fontSize='lg'
+          fontWeight='semibold'
+        >
           Pioneering Yield Aggregation on Aptos and Sui
         </Text>
       </Card>

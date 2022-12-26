@@ -113,7 +113,7 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                         colorScheme='brand'
                         rightIcon={<ArrowForwardIcon />}
                     >
-                        View
+                        View More
                     </Button>
                 </Link>
             </Flex>

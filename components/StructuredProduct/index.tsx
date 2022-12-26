@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HStack, Text, VStack } from '@chakra-ui/react'
+import { Flex, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 
@@ -18,6 +18,8 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
 
     const { deposit } = useStructuredProduct(structuredProduct.moduleAddress);
 
+    const iconSize = useBreakpointValue({ base: '60px', md: '80px' })
+
     return (
         <Card
             gap={8}
@@ -26,8 +28,8 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 alignItems='flex-start'
             >
                 <Text
-                    fontSize='xl'
-                    fontWeight='bold'
+                    fontSize={{ base: 'lg', md: 'xl'}}
+                    fontWeight='semibold'
                 >
                     {structuredProduct.name}
                 </Text>
@@ -36,8 +38,9 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 </Text>
                 
             </VStack>
-            <HStack
-                spacing={8}
+            <Flex
+                gap={8}
+                flexDirection={{ base: 'column-reverse', md: 'row' }}
             >
                 <DepositBox 
                     coinStruct={structuredProduct.block.inputCoinType}
@@ -47,9 +50,9 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 />
                 <ProtocolList 
                     protocols={structuredProduct.protocols}
-                    iconSize='80px'
+                    iconSize={iconSize}
                 />
-            </HStack>
+            </Flex>
         </Card>
     )
 }

@@ -8,7 +8,6 @@ import Strategies from '../Strategies'
 
 import useVault from '../../hooks/useVault'
 
-import { structToString } from '../../services/vaults'
 import { Vault } from '../../types/vaults'
 
 interface Props {
@@ -33,17 +32,18 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                     gap={4}
                 >
                     <Flex
+                        justifyContent={{ base: 'space-between', md: 'flex-start' }}
                         alignItems='center'
                         gap={8}
                     >
                         <Text
-                            fontSize='xl'
+                            fontSize={{ base: 'lg', md: 'xl'}}
                             fontWeight='bold'
                         >
                             {vault.symbol} Vault
                         </Text>
                         <Text
-                            fontSize='xl'
+                            fontSize='lg'
                             color='brand.500'
                             fontWeight='bold'
                         >
@@ -62,6 +62,7 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                     alt={vault.symbol}
                     boxSize={'100px'}
                     rounded='full'
+                    display={{ base: 'none', md: 'block' }}
                 />
             </Flex>
             <Strategies 

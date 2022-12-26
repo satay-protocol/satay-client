@@ -19,7 +19,6 @@ const Strategies : React.FC<Props> = ({ strategies }) => {
             alignItems='flex-start'
         >
             <Text
-                fontSize="lg"
                 fontWeight="bold"
             >
                 Approved Strategies

@@ -1,12 +1,20 @@
 import React from 'react'
 
-import { Text, Flex } from '@chakra-ui/react'
+import { Text, Flex, useBreakpointValue } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 
 import VaultsList from './VaultsList';
 
-const Vaults = () => {
+interface Props {
+  page?: boolean
+}
+
+const Vaults: React.FC<Props> = ({ page }) => {
+
+  const pageHeaderSize = useBreakpointValue({ base: '2xl', md: '3xl' })
+  const nonpageHeaderSize = useBreakpointValue({ base: 'xl', md: '2xl' })
+
   return (
     <Flex
       flexDirection='column'
@@ -15,12 +23,14 @@ const Vaults = () => {
     >
       <Card>
         <Text
-          fontSize="2xl"
-          fontWeight="bold"
+          fontSize={page ? pageHeaderSize : nonpageHeaderSize}
+          fontWeight={page ? 'extrabold' : 'bold'}
         >
           Vaults
         </Text>
-        <Text>
+        <Text
+          fontWeight={page ? 'semibold' : 'normal'}
+        >
           Satay Vaults are secure capital pools that automatically maximize yield on staked digital assets
         </Text>
       </Card>

@@ -8,7 +8,9 @@ import Vaults from '../../components/Vaults'
 const VaultsPage : NextPage = () => {
   return (
     <DefaultLayout>
-        <Vaults />
+        <Vaults 
+          page
+        />
     </DefaultLayout>
   )
 }
