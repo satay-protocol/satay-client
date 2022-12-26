@@ -62,8 +62,8 @@ const structuredProducts: {[key: string]: StructuredProduct[]} = {
     'devnet': devnetStructuredProducts,
 }
 
-export const getStructuredProducts = (chainName = 'devnet') => structuredProducts[chainName] || [];
+export const getStructuredProducts = (chainName = 'testnet') => structuredProducts[chainName] || [];
 
-export const getStructuredProduct = (product_name: string, chainName = 'devnet') => {
+export const getStructuredProduct = (product_name: string, chainName = 'testnet') => {
     return getStructuredProducts(chainName).find((product) => product.moduleAddress.includes(product_name));
 }

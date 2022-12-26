@@ -32,7 +32,7 @@ const ConnectWallet = () => {
         if (account?.address) {
             setValue(account?.address?.toString())
         }
-    }, [account])
+    }, [account, setValue])
 
 
     const onConnect = async (wallet : Wallet) => {
@@ -61,9 +61,9 @@ const ConnectWallet = () => {
                 as={mobileView ? IconButton : Button} 
                 colorScheme={connected ? 'brand': 'gray'}
                 variant={connected ? 'outline' : 'solid'}
-                rightIcon={!mobileView && <ChevronDownIcon />}
-                leftIcon={!mobileView && <FaWallet />}
-                icon={mobileView && <FaWallet />}
+                rightIcon={!mobileView ? <ChevronDownIcon /> : undefined}
+                leftIcon={!mobileView ? <FaWallet /> : undefined}
+                icon={mobileView ? <FaWallet /> : undefined}
             >
                 {(connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet')}
             </MenuButton>

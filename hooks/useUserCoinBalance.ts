@@ -5,9 +5,9 @@ import { StructData } from "../types/aptos";
 
 const useUserCoinBalance = (coinStruct: StructData) => {
 
-    const { account } = useWallet();
+    const { address } = useWallet();
 
-    const balance = useCoinBalance(account?.address?.toString() || '', coinStruct);
+    const balance = useCoinBalance(address, coinStruct);
 
     return balance;
 

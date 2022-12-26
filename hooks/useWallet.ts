@@ -63,7 +63,7 @@ const useWallet = () => {
     }
 
     return {
-        account,
+        address: account?.address?.toString() || "",
         connected,
         wallets,
         wallet,

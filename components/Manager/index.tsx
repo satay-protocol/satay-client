@@ -8,9 +8,9 @@ import useWallet from '../../hooks/useWallet';
 
 const Manager : React.FC = () => {
 
-  const { account } = useWallet();
+  const { address } = useWallet();
 
-  if(!account?.address) {
+  if(!address) {
     return (
       <NotConnected />
     )
@@ -18,7 +18,7 @@ const Manager : React.FC = () => {
 
   return (
     <ManagerComponent 
-      managerAddress={account.address.toString()}
+      managerAddress={address}
     />
   )
   

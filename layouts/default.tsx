@@ -34,7 +34,7 @@ const DefaultLayout = ({
 
   const { network, connected } = useWallet();
 
-  const correctNetwork = getNetworkSlug(network?.name) !== "";
+  const correctNetwork = Boolean(getNetworkSlug(network?.name))
 
   return (
     <Box 
@@ -58,16 +58,9 @@ const DefaultLayout = ({
         >
           <Navbar />
           {
-            !connected 
-              ? (
-                <NotConnected />
-              ) : (
-                correctNetwork 
-                  ? children 
-                  : (
-                    <IncorrectNetwork />
-                  )
-              )
+            connected && !correctNetwork 
+            ? <IncorrectNetwork />
+            : children
           }
           <Footer />
         </Box>
