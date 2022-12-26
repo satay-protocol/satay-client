@@ -47,6 +47,7 @@ const ConnectWallet = () => {
                 colorScheme={connected ? 'brand': 'gray'}
                 variant={connected ? 'outline' : 'solid'}
                 rightIcon={!mobileView && <ChevronDownIcon />}
+                leftIcon={!mobileView && <FaWallet />}
                 icon={mobileView && <FaWallet />}
             >
                 {(connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet')}
