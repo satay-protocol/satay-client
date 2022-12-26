@@ -48,12 +48,13 @@ const DefaultLayout = ({
       <Container 
         mx='auto' 
         maxW='4xl'
+        p={0}
       >
         <Box
           display='flex'
           flexDirection='column'
           gap={4}
-          p={{ base: 2, md: 4}}
+          p={{ base: 4, md: 8}}
         >
           <Navbar />
           {
