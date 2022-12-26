@@ -16,7 +16,7 @@ const Home = () => {
     >
       <Card>
         <Text
-          fontSize='2xl'
+          fontSize='4xl'
           fontWeight='bold'
         >
           Welcome to Satay Finance
