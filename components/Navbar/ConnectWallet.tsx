@@ -10,7 +10,8 @@ import {
     Button,
     useBreakpointValue,
     IconButton,
-    useClipboard
+    useClipboard,
+    useToast
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { FaWallet } from 'react-icons/fa'
@@ -23,17 +24,31 @@ const ConnectWallet = () => {
 
     const { connected, account, disconnect, wallets, select } = useWallet();
 
-    const onConnect = async (wallet : Wallet) => {
-        select(wallet.adapter.name);
-    }
-
     const { onCopy, setValue } = useClipboard("")
+
+    const toast = useToast();
 
     useEffect(() => {
         if (account?.address) {
             setValue(account?.address?.toString())
         }
     }, [account])
+
+
+    const onConnect = async (wallet : Wallet) => {
+        select(wallet.adapter.name);
+    }
+
+    const copy = () => {
+        onCopy();
+        toast({
+            title: "Address Copied",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+        })
+    }
+    
 
     const mobileView = useBreakpointValue({ base: true, sm: false })
 
@@ -57,7 +72,7 @@ const ConnectWallet = () => {
                     connected ? (
                         <>
                             <MenuItem
-                                onClick={() => onCopy()}
+                                onClick={copy}
                             >
                                 Copy Address
                             </MenuItem>

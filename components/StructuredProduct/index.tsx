@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { Flex, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react'
+import { Flex, Box, Text, useBreakpointValue } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
-
-import { StructuredProduct } from '../../types/structuredProduct'
 import ProtocolList from '../utilities/ProtocolList'
 import DepositBox from '../utilities/DepositBox'
+
 import useStructuredProduct from '../../hooks/useStructuredProduct'
-import { structToString } from '../../services/vaults'
+
+import { StructuredProduct } from '../../types/structuredProduct'
 
 interface Props {
     structuredProduct: StructuredProduct
@@ -22,11 +22,9 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
 
     return (
         <Card
-            gap={8}
+            gap={{ base: 4, md: 8}}
         >
-            <VStack
-                alignItems='flex-start'
-            >
+            <Box>
                 <Text
                     fontSize={{ base: 'lg', md: 'xl'}}
                     fontWeight='semibold'
@@ -36,10 +34,9 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                 <Text>
                     {structuredProduct.description}
                 </Text>
-                
-            </VStack>
+            </Box>
             <Flex
-                gap={8}
+                gap={{ base: 4, md: 8 }}
                 flexDirection={{ base: 'column-reverse', md: 'row' }}
             >
                 <DepositBox 
