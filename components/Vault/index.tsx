@@ -5,7 +5,9 @@ import useVault from '../../hooks/useVault';
 import { 
   Box, 
   Flex,
+  HStack,
   Skeleton,
+  VStack,
 } from '@chakra-ui/react';
 
 import VaultInfo from './VaultInfo';
@@ -55,14 +57,20 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
                 vault={vault}
               />
               <Card>
-                <DepositWithdraw 
-                  deposit={deposit}
-                  withdraw={withdraw}
-                  block={block}
-                />    
-                <Holdings
-                  vaultAddress={vault.vaultAddress}
-                />
+                <VStack
+                  justifyContent='center'
+                  alignItems='flex-start'
+                  h='100%'
+                >
+                  <DepositWithdraw 
+                    deposit={deposit}
+                    withdraw={withdraw}
+                    block={block}
+                  />    
+                  <Holdings
+                    vaultAddress={vault.vaultAddress}
+                  />
+                </VStack>
               </Card>
             </Flex>
             <Card>

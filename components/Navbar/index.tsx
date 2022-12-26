@@ -1,39 +1,27 @@
+import React from 'react';
+
+import Link from 'next/link';
+
 import {
-    FlexProps,
     Flex,
-    IconButton,
-    useColorModeValue,
     HStack,
     Image,
     Button
 } from '@chakra-ui/react'
 
-import {
-    FiMenu,
-} from 'react-icons/fi';
-import { IconType } from 'react-icons';
-
-import { FiHome } from 'react-icons/fi';
-import { BsSafe } from 'react-icons/bs';
-
 import NavItem from './NavItem';
-import ChainSelect from './ChainSelect';
 import ConnectWallet from './ConnectWallet';
-import { routes } from './routes';
-import Link from 'next/link';
 import ColorModeToggle from './ColorModeToggle';
 import Card from '../utilities/Card';
+import MobileNav from './MobileNav';
 
-interface Props extends FlexProps {
-    onOpen: () => void;
-}
+import { routes } from './routes';
   
-const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {    
+const Navbar : React.FC = () => {    
     return (
         <Card>
             <Flex
                 alignItems="center"
-                {...rest}
                 gap={8}
             >
                 <Link
@@ -70,16 +58,9 @@ const Navbar : React.FC<Props> = ({ onOpen, ...rest }) => {
                     flex={1}
                     justifyContent='flex-end'
                 >
-                    {/* <ChainSelect /> */}
                     <ConnectWallet />
                     <ColorModeToggle />
-                    <IconButton
-                        display={{ base: 'flex', md: 'none' }}
-                        onClick={onOpen}
-                        variant="outline"
-                        aria-label="open menu"
-                        icon={<FiMenu />}
-                    />
+                    <MobileNav />
                 </HStack>
             </Flex>
         </Card>

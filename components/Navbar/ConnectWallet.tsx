@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter'
 
@@ -9,7 +9,9 @@ import {
     MenuItem,
     Button,
     useBreakpointValue,
-    IconButton
+    IconButton,
+    useClipboard,
+    useToast
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { FaWallet } from 'react-icons/fa'
@@ -22,9 +24,31 @@ const ConnectWallet = () => {
 
     const { connected, account, disconnect, wallets, select } = useWallet();
 
+    const { onCopy, setValue } = useClipboard("")
+
+    const toast = useToast();
+
+    useEffect(() => {
+        if (account?.address) {
+            setValue(account?.address?.toString())
+        }
+    }, [account])
+
+
     const onConnect = async (wallet : Wallet) => {
         select(wallet.adapter.name);
     }
+
+    const copy = () => {
+        onCopy();
+        toast({
+            title: "Address Copied",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+        })
+    }
+    
 
     const mobileView = useBreakpointValue({ base: true, sm: false })
 
@@ -38,6 +62,7 @@ const ConnectWallet = () => {
                 colorScheme={connected ? 'brand': 'gray'}
                 variant={connected ? 'outline' : 'solid'}
                 rightIcon={!mobileView && <ChevronDownIcon />}
+                leftIcon={!mobileView && <FaWallet />}
                 icon={mobileView && <FaWallet />}
             >
                 {(connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet')}
@@ -45,11 +70,19 @@ const ConnectWallet = () => {
             <MenuList>
                 {
                     connected ? (
-                        <MenuItem
-                            onClick={() => disconnect()}
-                        >
-                            Disconnect
-                        </MenuItem>
+                        <>
+                            <MenuItem
+                                onClick={copy}
+                            >
+                                Copy Address
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => disconnect()}
+                            >
+                                Disconnect
+                            </MenuItem>
+                        </>
+
                     ) : (
                         wallets.map(wallet => (
                             <MenuItem
