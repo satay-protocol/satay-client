@@ -38,7 +38,6 @@ export const readTVL: HttpFunction = async (req, res) => {
   const performance: TVLRecord[] = []
   await queryClient.collectRows(query, (row, tableMeta) => {
     const tableObject = tableMeta.toObject(row)
-    console.log(tableObject);
     performance.push({
       tvl: tableObject._value,
       time: tableObject._time,

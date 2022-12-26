@@ -5,10 +5,10 @@ import { satay } from "../../data/moduleAddresses";
 
 const useCreateVault = () => {
 
-    const { account, submitTransaction } = useWallet();
+    const { address, submitTransaction } = useWallet();
 
     const createVault = async (vaultName: string, coin : Coin) => {
-        if(account){
+        if(address){
             await submitTransaction({
                 type: 'entry_function_payload',
                 function: `${satay}::satay::new_vault`,

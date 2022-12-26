@@ -20,11 +20,15 @@ const StructuredProducts : React.FC<Props> = ({ page }) => {
     const pageHeaderSize = useBreakpointValue({ base: '2xl', md: '3xl' })
     const nonpageHeaderSize = useBreakpointValue({ base: 'xl', md: '2xl' })  
 
+    const structuredProducts = getStructuredProducts(getNetworkSlug(network?.name));
+
     return (
         <VStack
             spacing={4}
         >
-            <Card>
+            <Card
+                w='100%'
+            >
                 <Text
                     fontSize={page ? pageHeaderSize : nonpageHeaderSize}
                     fontWeight={page ? 'extrabold' : 'bold'}
@@ -38,7 +42,7 @@ const StructuredProducts : React.FC<Props> = ({ page }) => {
                 </Text>
             </Card>
             {
-                getStructuredProducts(getNetworkSlug(network?.name)).map((structuredProduct) => (
+                structuredProducts.map((structuredProduct) => (
                     <StructuredProductComponent
                         key={structuredProduct.moduleAddress}
                         structuredProduct={structuredProduct}

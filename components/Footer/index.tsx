@@ -1,14 +1,12 @@
 import React from 'react'
 
-import { Flex, HStack, Text, useBreakpoint, useBreakpointValue } from '@chakra-ui/react'
+import { Flex, HStack, Text } from '@chakra-ui/react'
+
 import { socialLinks } from './socialLinks'
 import SocialLink from './SocialLink'
 import Card from '../utilities/Card'
 
 const Footer = () => {
-
-    const breakpoint = useBreakpoint();
-    console.log(breakpoint);
     return (
         <Card>
             <Flex

@@ -3,10 +3,10 @@ import { satay } from "../../data/moduleAddresses";
 
 const useInitializeManager = () => {
 
-    const { account, submitTransaction } = useWallet();
+    const { address, submitTransaction } = useWallet();
 
     const initialize = async () => {
-        if(account){
+        if(address){
             await submitTransaction({
                 type: 'entry_function_payload',
                 function: `${satay}::satay::initialize`,

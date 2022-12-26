@@ -45,7 +45,7 @@ const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeav
         }
       }
     });
-  }, [setDisplayIndex, brand]);
+  }, [setDisplayIndex, brand, hoverLine]);
 
   const gridOptions = {
     display: false,

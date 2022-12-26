@@ -15,6 +15,7 @@ import useStructuredProduct from '../../hooks/useStructuredProduct';
 
 import { getStructuredProduct } from '../../data/structuredProducts';
 import { getNetworkSlug } from '../../services/aptosUtils';
+import StructuredProductDepositWithdraw from './StructuredProductDepositWithdraw';
 
 interface Props {
   productName: string;
@@ -25,8 +26,6 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
   const { network } = useWallet();
 
   const structuredProduct = getStructuredProduct(productName, getNetworkSlug(network?.name));
-
-  const { deposit, withdraw } = useStructuredProduct(structuredProduct.moduleAddress);
 
   return (
     <Flex
@@ -55,10 +54,8 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
               <Card
                 justifyContent='center'
               >
-                <DepositWithdraw 
-                  deposit={deposit}
-                  withdraw={withdraw}
-                  block={structuredProduct.block}
+                <StructuredProductDepositWithdraw 
+                  structuredProduct={structuredProduct}
                 />
               </Card>
             </Flex>

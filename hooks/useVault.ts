@@ -14,7 +14,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
 
     const { client } = useAptos();
 
-    const { account, submitTransaction } = useWallet();
+    const { address, submitTransaction } = useWallet();
 
     const { managerResource } = useManagerResource(managerAddress);
 
@@ -40,7 +40,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
     }, [vaultId, managerResource, vault, complete]);
 
     const deposit = async (amount : number) => {
-        if(vault && account?.address){
+        if(vault && address){
             await submitTransaction({
                 type: 'entry_function_payload',
                 function: `${satay}::satay::deposit`,
@@ -58,7 +58,7 @@ const useVault = (managerAddress : string, vaultId : string) => {
     }
 
     const withdraw = async (amount : number) => {
-        if(vault && account?.address){
+        if(vault && address){
             await submitTransaction({
                 type: 'entry_function_payload',
                 function: `${satay}::satay::withdraw`,

@@ -55,13 +55,13 @@ const supportedNetworks = [
 ] as const;
 
 export const getNetworkSlug = (networkName: string | null) => {
-    if (!networkName) return "";
+    if (!networkName) return undefined;
     for(const network of supportedNetworks) {
         if (networkName.toLowerCase().includes(network)) {
             return network;
         }
     }
-    return '';
+    return undefined;
 }
 
 export const getStructFromType = (type: string) : StructData => {

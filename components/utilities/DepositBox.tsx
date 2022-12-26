@@ -31,9 +31,9 @@ interface Props {
 
 const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewPath }) => {
 
-    const { connected, account } = useWallet()
+    const { connected, address } = useWallet()
 
-    const balance = useCoinBalance(account.address.toString(), coinStruct);
+    const balance = useCoinBalance(address, coinStruct);
 
     const { decimals } = useCoinInfo(coinStruct);
 
