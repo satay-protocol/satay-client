@@ -13,7 +13,8 @@ import {
   MartianWalletAdapter,
   BloctoWalletAdapter,
   WalletAdapterNetwork,
-  MsafeWalletAdapter
+  MsafeWalletAdapter,
+  SpacecyWalletAdapter
 } from '@manahippo/aptos-wallet-adapter';
 import { AptosProvider } from '../contexts/AptosContext';
 
@@ -31,7 +32,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       }),
       new AptosWalletAdapter(),
       new MartianWalletAdapter(),
-      new MsafeWalletAdapter("Testnet")
+      new MsafeWalletAdapter("Testnet"),
+      new SpacecyWalletAdapter()
     ])
     setLoaded(true);
   }, [])
