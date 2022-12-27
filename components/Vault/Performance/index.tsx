@@ -64,12 +64,14 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
                     <Skeleton
                         isLoaded={!loading}
                     >
-                        <HStack>
+                        <HStack
+                            mb={2}
+                        >
                             <Text
                                 fontSize='lg'
                                 fontWeight='bold'
                             >
-                                {displayValue.toLocaleString(undefined, {minimumFractionDigits: 2})} {symbol}
+                                {displayValue.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})} {symbol}
                             </Text>
                             <ChangePercentage 
                                 amountStart={performance[0]?.metrics[selectedMetric.value] || 0}
