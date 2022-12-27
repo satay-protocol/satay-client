@@ -7,6 +7,6 @@ const token = influxdb_1.INFLUXDB_TOKEN;
 const url = 'https://us-central1-1.gcp.cloud2.influxdata.com';
 const client = new influxdb_client_1.InfluxDB({ url, token });
 let org = `Performance`;
-let bucket = `TVL`;
+let bucket = `Vault Performance`;
 exports.writeClient = client.getWriteApi(org, bucket, 'ns');
 exports.queryClient = client.getQueryApi(org);
