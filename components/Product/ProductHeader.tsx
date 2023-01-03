@@ -1,9 +1,11 @@
 import React from 'react'
 
-import { HStack, VStack, Text, Flex } from '@chakra-ui/react';
+import { HStack, VStack, Text, Flex, Button } from '@chakra-ui/react';
 
 import Card from '../utilities/Card';
 import ProtocolList from '../utilities/ProtocolList';
+import Link from 'next/link';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 interface Props {
     name: string;
@@ -12,8 +14,24 @@ interface Props {
 }
 
 const ProductHeader : React.FC<Props> = ({ name, description, protocols}) => {
+
   return (
-    <Card>
+    <Card
+        gap={2}
+    >
+        <Link
+            href={`/products`}
+        >
+            <Button
+                variant='ghost'
+                size='xs'
+                mr='auto'
+                leftIcon={<ArrowBackIcon />}
+                ml={-2}
+            >
+                Products
+            </Button>
+        </Link>
         <Flex
             flexDirection={{base: 'column-reverse', sm: 'row'}}
             gap={4}

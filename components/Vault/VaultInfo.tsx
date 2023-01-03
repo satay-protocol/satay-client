@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { VStack } from '@chakra-ui/react'
+import { Button, Text, VStack } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import Overview from './Overview'
 import Performance from './Performance'
 
 import { Vault } from '../../types/vaults'
+import Link from 'next/link'
+import { ArrowBackIcon } from '@chakra-ui/icons'
 
 interface Props {
     vault: Vault
@@ -14,7 +16,21 @@ interface Props {
 
 const VaultInfo : React.FC<Props> = ({ vault }) => {
   return (
-    <Card>
+    <Card
+        gap={2}
+    >
+        <Link
+            href={`/vaults`}
+        >
+            <Button
+                variant='ghost'
+                size='xs'
+                mr='auto'
+                leftIcon={<ArrowBackIcon />}
+            >
+                Back
+            </Button>
+        </Link>
         <VStack
             spacing={8}
         >

@@ -4,7 +4,7 @@ import 'chart.js/auto';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2'
 
-import { useColorModeValue, useTheme } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue, useTheme } from '@chakra-ui/react';
 
 interface Props {
   data: number[],
@@ -14,17 +14,22 @@ interface Props {
   onMouseEnter?: () => void,
 }
 
+const chartId = 'aaa'
+
 const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeave, onMouseEnter }) => {
   
 
   const { colors } = useTheme();
 
+  const { colorMode } = useColorMode()
+
   const brand = useColorModeValue(colors.brand[600], colors.brand[400]);
   const hoverLine = useColorModeValue(colors.blackAlpha[400], colors.whiteAlpha[400]);
 
   useEffect(() => {
+    Chart.unregister({id: chartId});
     Chart.register({
-      id: 'uniqueid5', //typescript crashes without id
+      id: chartId, //typescript crashes without id
       afterDraw: function (chart: Chart, easing: any) {
         const activeElements = chart.tooltip.getActiveElements()
         if (activeElements.length) {
@@ -45,7 +50,7 @@ const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeav
         }
       }
     });
-  }, [setDisplayIndex, brand, hoverLine]);
+  }, [setDisplayIndex, brand, hoverLine, colorMode]);
 
   const gridOptions = {
     display: false,
