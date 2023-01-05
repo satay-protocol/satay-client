@@ -5,7 +5,7 @@ import { Text, VStack } from '@chakra-ui/react'
 import StrategyComponent from './Strategy'
 
 import { Strategy } from '../../types/vaults'
-import { structToString } from '../../services/vaults'
+import { structToString } from '../../services/aptosUtils'
 
 interface Props {
     strategies: Strategy[]

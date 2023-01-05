@@ -1,4 +1,12 @@
 import { StructData } from "./aptos";
+import { Coin } from "./coin";
+
+export interface VaultInfo {
+    baseCoin: Coin,
+    vaultId: string,
+    managerAddress: string,
+    vaultAddress: string,
+}
 
 export interface Vault {
     symbol: string;

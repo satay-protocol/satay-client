@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAptos } from "../contexts/AptosContext";
 import { satay } from "../data/moduleAddresses";
-import { structToString, getVaultFromTable } from "../services/vaults";
+import { getVaultFromTable } from "../services/vaults";
+import { structToString } from "../services/aptosUtils";
 
 import { Vault } from "../types/vaults";
 

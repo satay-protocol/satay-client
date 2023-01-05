@@ -4,12 +4,13 @@ import { getStrategy } from "../data/strategies";
 import { satay } from "../data/moduleAddresses";
 import { getVaultInfo } from "../data/vaultsData";
 
-import { Vault, Strategy, VaultStrategyData } from "../types/vaults";
+import { Vault, Strategy, VaultStrategyData, VaultInfo as NewVaultInfo } from "../types/vaults";
 import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/aptos";
-import { CoinStoreResource } from "../types/aptos";
 
-import { round, toAptos } from "./utils";
 import { getStructFromType } from "./aptosUtils";
+import { callGetFunction } from "./simulation";
+import { SupportedNetwork } from "../types/network";
+import { coins } from "../data/coins";
 
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
@@ -65,9 +66,6 @@ export const getTypeString = (struct : StructData) => {
         + Buffer.from(struct.struct_name.slice(2), 'hex').toString();
 }
 
-export const structToString = (struct : StructData) => {
-    return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
-}
 
 export const structToModule = (struct : StructData) => {
     return struct.account_address + "::" + struct.module_name;
@@ -90,4 +88,41 @@ export const getStrategiesForVault = async (client : AptosClient, vaultAddress :
             resource.data as VaultStrategyData
         ))
     return strategies;
+}
+
+export const fetchAllVaultIds = async (network: SupportedNetwork): Promise<string[]> => {
+    const nextVaultIdResult = await callGetFunction({
+        func: `${satay}::satay::get_next_vault_id`,
+        type_args: [],
+        args: [],
+        ledger_version: 0,
+        network,
+    })
+    const nextVaultId = nextVaultIdResult.details.return_values[0] as number;
+    return Array.from({length: nextVaultId}, (_, i) => i).map(i => i.toString());
+}
+
+export const fetchVaultInfo = async (vaultId: string, network: SupportedNetwork): Promise<NewVaultInfo> => {
+    let vaultAddressResult = await callGetFunction({
+        func: `${satay}::satay::get_vault_address_by_id`,
+        type_args: [],
+        args: [vaultId],
+        ledger_version: 0,
+        network,
+    })
+    const vaultAddress = "0x" + (vaultAddressResult.details.return_values[0] as string);
+    let managerAddressResult = await callGetFunction({
+        func: `${satay}::vault_config::get_vault_manager_address`,
+        type_args: [],
+        args: [vaultAddress],
+        ledger_version: 0,
+        network,
+    })
+    let managerAddress = "0x" + (managerAddressResult.details.return_values[0] as string);
+    return {
+        vaultId,
+        managerAddress,
+        vaultAddress,
+        baseCoin: coins[0]
+    }
 }

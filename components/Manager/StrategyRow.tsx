@@ -8,7 +8,8 @@ import {
 import DebtRatioSlider from './DebtRatioSlider';
 import HarvestButton from './HarvestButton';
 import { Strategy } from '../../types/vaults';
-import { structToModule, structToString } from '../../services/vaults';
+import { structToModule } from '../../services/vaults';
+import { structToString } from '../../services/aptosUtils';
 
 interface Props {
     strategy: Strategy,
