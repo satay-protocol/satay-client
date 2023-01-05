@@ -7,7 +7,7 @@ import { VStack, Text, useBreakpointValue } from '@chakra-ui/react'
 import StructuredProductComponent from '../StructuredProduct'
 import Card from '../utilities/Card'
 import { useWallet } from '@manahippo/aptos-wallet-adapter'
-import { getNetworkSlug } from '../../services/aptosUtils'
+import { getNetworkSlug } from '../../services/network'
 
 interface Props {
     page?: boolean

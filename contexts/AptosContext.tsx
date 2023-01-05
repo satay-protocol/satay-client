@@ -2,7 +2,7 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { AptosClient } from "aptos";
 
 import { createContext, ReactNode, FC, useContext, useState, useEffect } from "react"
-import { getNetworkSlug } from "../services/aptosUtils";
+import { getNetworkSlug } from "../services/network";
 
 interface ContextType {
     client: AptosClient;

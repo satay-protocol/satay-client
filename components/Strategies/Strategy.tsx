@@ -1,11 +1,10 @@
 import React from 'react'
 
-import { Flex, Text, useColorModeValue, VStack } from '@chakra-ui/react'
+import { Text, VStack } from '@chakra-ui/react'
 
 import { Strategy } from '../../types/vaults'
 import ProtocolList from '../utilities/ProtocolList'
 import Link from 'next/link'
-import { structToString } from '../../services/vaults'
 import AccentedBox from '../utilities/AccentedBox'
 
 interface Props {

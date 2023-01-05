@@ -17,7 +17,7 @@ import { strategies } from '../../../data/strategies';
 
 import { Vault } from '../../../types/vaults';
 import { StructData } from '../../../types/aptos';
-import { structToString } from '../../../services/vaults';
+import { structToString } from '../../../services/aptosUtils';
 
 interface Props {
     isOpen: boolean;

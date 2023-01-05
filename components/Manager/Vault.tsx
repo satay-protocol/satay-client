@@ -13,7 +13,7 @@ import SelectStrategy from '../modals/SelectStrategy'
 import StrategyRow from './StrategyRow'
 
 import { Vault, VaultStrategyData } from '../../types/vaults'
-import { structToString } from '../../services/vaults'
+import { structToString } from '../../services/aptosUtils'
 
 interface Props {
     vault: Vault,
