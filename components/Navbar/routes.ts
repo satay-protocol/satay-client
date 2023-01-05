@@ -1,5 +1,6 @@
 import { AiOutlineSwap } from "react-icons/ai";
 import { CiVault } from "react-icons/ci";
+import { TbBuildingBridge } from "react-icons/tb";
 
 import { IconType } from "react-icons";
 
@@ -20,4 +21,9 @@ export const routes: Route[] = [
         href: '/products',
         icon: AiOutlineSwap
     },
+    {
+        name: 'Bridge',
+        href: '/bridge',
+        icon: TbBuildingBridge
+    }
 ];
