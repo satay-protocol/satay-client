@@ -1,7 +1,8 @@
 import { APT } from "./coinStructs";
 import { satay } from "./moduleAddresses";
 
-import { getTypeString, structToString } from "../services/vaults";
+import { getTypeString } from "../services/vaults";
+import { structToString } from "../services/aptosUtils";
 
 import { StructData } from "../types/aptos";
 import { Strategy, StrategyInfo, VaultStrategyData } from "../types/vaults";
@@ -45,10 +46,3 @@ export const getStrategy = (strategyWitness: StructData, vaultStrategyData: Vaul
     debtRatio: vaultStrategyData.debt_ratio,
     strategyCoinType: getTypeString(vaultStrategyData.strategy_coin_type),
 });
-
-// input as airport name
-// process input file
-// - for each line
-//  - check if airport is same
-//  - if same
-//   - make sure there is 4 data points

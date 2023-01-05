@@ -18,7 +18,7 @@ import { satay } from '../../data/moduleAddresses';
 import Strategies from '../Strategies';
 import Card from '../utilities/Card';
 import Holdings from './Holdings';
-import { satayStakeCoin } from '../../types/block';
+import { satayStakeCoin } from '../../data/blocks';
 
 interface Props {
   vaultId: string;

@@ -1,36 +1,27 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+
+import Head from 'next/head';
+
 import {
   Box,
-  useColorModeValue,
-  Drawer,
-  DrawerContent,
-  useDisclosure,
   Container,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
-import { IconType } from 'react-icons';
 
 import Navbar from '../components/Navbar';
+import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
+import Footer from '../components/Footer';
 
 import useWallet from '../hooks/useWallet';
 
-import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
-import Head from 'next/head';
-import NotConnected from '../components/utilities/NotConnected';
-import { getNetworkSlug } from '../services/aptosUtils';
-import Footer from '../components/Footer';
+import { getNetworkSlug } from '../services/network';
 
-interface LinkItemProps {
-  name: string;
-  icon: IconType;
-  href: string;
+interface Props {
+  children: React.ReactNode;
 }
 
-const DefaultLayout = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+const DefaultLayout: React.FC<Props> = ({ children }) => {
 
   const { network, connected } = useWallet();
 

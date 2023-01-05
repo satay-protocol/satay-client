@@ -1,18 +1,10 @@
 import { dittoStakingAddress, liquidswapCurvesAddress, liquidswapLPAddress } from "./protocolAddresses";
 
 import { StructData } from "../types/aptos";
-import { structToString } from "../services/vaults";
+import { structToString } from "../services/aptosUtils";
 import { dittoFarming, satay } from "./moduleAddresses";
 
-const convertStringToHex = (str: string) => {
-    var arr = [];
-    for (var i = 0; i < str.length; i++) {
-        arr[i] = (str.charCodeAt(i).toString(16)).slice(-4);
-    }
-    return "0x" + arr.join("");
-}
-
-export const APT : StructData = {
+export const APT: StructData = {
     struct_name: "AptosCoin",
     account_address: "0x1",
     module_name: "aptos_coin"
