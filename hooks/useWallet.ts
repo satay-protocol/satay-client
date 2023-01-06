@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useWallet as useWalletAdapter } from "@manahippo/aptos-wallet-adapter";
-import { TransactionPayload, Transaction_PendingTransaction, Transaction_UserTransaction, UserTransaction } from "aptos/src/generated";
+import { TransactionPayload, Transaction_UserTransaction } from "aptos/src/generated";
 import { useAptos } from "../contexts/AptosContext";
 
 interface ToastMessage {
