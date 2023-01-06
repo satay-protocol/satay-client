@@ -3,7 +3,7 @@ import { callGetFunction } from "./simulation"
 
 export const getTVL = async (vaultId: string) => {
     const response = await callGetFunction({
-        func: `${satay}::satay::get_vault_total_asset`,
+        func: `${satay}::satay::get_total_assets`,
         args: [vaultId],
         ledger_version: 0,
         network: 'testnet',
