@@ -9,8 +9,6 @@ import { satay } from "../../data/moduleAddresses"
 
 const useGovernanceAccess = (connectedAddress: string) => {
 
-    console.log(connectedAddress);
-
     const { network } = useWallet();
 
     const [hasGovernanceAccess, setHasGovernanceAccess] = useState(false)
@@ -26,7 +24,6 @@ const useGovernanceAccess = (connectedAddress: string) => {
                 ledger_version: 0,
                 network: getNetworkSlug(network.name),
             })
-            console.log(governanceAddress);
             setHasGovernanceAccess(governanceAddress.details.return_values[0] === connectedAddress.slice(2))
         }
     

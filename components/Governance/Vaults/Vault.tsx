@@ -1,5 +1,6 @@
 import { HStack, Image, Skeleton, Text, VStack } from '@chakra-ui/react';
 import React from 'react'
+import useGovernanceVaultInfo from '../../../hooks/governance/useGovernanceVaultInfo';
 import useVaultInfo from '../../../hooks/utility/useVaultInfo'
 import { ellipsize } from '../../../services/utils';
 import Copyable from '../../utilities/Copyable';
@@ -11,7 +12,7 @@ interface Props {
 
 const Vault: React.FC<Props> = ({ vaultId }) => {
 
-  const vaultInfo = useVaultInfo(vaultId);
+  const vaultInfo = useGovernanceVaultInfo(vaultId);
 
   if(!vaultInfo){
     return (
