@@ -29,12 +29,6 @@ const Actions: React.FC<Props> = ({ vaultId, strategyWitness, baseCoinSymbol, de
             w="100%"
             spacing={4}
         >
-            {/* <Text
-                fontSize="lg"
-                fontWeight="semibold"
-            >
-                Actions
-            </Text> */}
             <SimpleGrid
                 columns={2}
                 gap={4}

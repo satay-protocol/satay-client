@@ -36,14 +36,14 @@ const Strategy: React.FC<Props> = ({ keeperInfo }) => {
                         spacing={4}
                     >
                         <Text
-                            fontSize="xl"
+                            fontSize="2xl"
                             fontWeight="bold"
                         >
                             {keeperInfo.name}
                         </Text>
                         <ProtocolList 
                             protocols={keeperInfo.protocols}
-                            iconSize={'32px'}
+                            iconSize={'36px'}
                         />
                     </HStack>
                     <Text
