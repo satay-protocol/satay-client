@@ -7,7 +7,7 @@ import {
     useColorModeValue
 } from '@chakra-ui/react';
 
-import useCoinBalances from '../../hooks/useCoinBalances';
+import useCoinBalances from '../../hooks/coin/useCoinBalances';
 
 import { toAptos } from '../../services/utils';
 import AccentedBox from '../utilities/AccentedBox';

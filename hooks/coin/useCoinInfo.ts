@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { useAptos } from '../contexts/AptosContext';
+import { useAptos } from '../../contexts/AptosContext';
 
-import { getCoinInfo } from '../services/aptosUtils';
+import { getCoinInfo } from '../../services/aptosUtils';
 
-import { StructData } from '../types/aptos'
+import { StructData } from '../../types/aptos'
 
 const useCoinInfo = (coinStruct: StructData) => {
 

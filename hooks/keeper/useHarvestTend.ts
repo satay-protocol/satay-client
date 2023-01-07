@@ -1,6 +1,10 @@
-import useWallet from "../useWallet";
+import { structToModule } from "../../services/aptosUtils";
+import { StructData } from "../../types/aptos";
+import useWallet from "../utility/useWallet";
 
-const useVaultStrategy = (vaultId: string, strategyModule: string) => {
+const useHarvestTend = (vaultId: string, strategyWitness: StructData) => {
+
+    const strategyModule = structToModule(strategyWitness);
 
     const { submitTransaction } = useWallet();
 
@@ -34,4 +38,4 @@ const useVaultStrategy = (vaultId: string, strategyModule: string) => {
     }
 }
 
-export default useVaultStrategy
+export default useHarvestTend

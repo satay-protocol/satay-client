@@ -2,7 +2,7 @@ import { useState } from "react"
 import { structToModule, structToString } from "../../services/aptosUtils";
 
 import { StructData } from "../../types/aptos"
-import useWallet from "../useWallet";
+import useWallet from "../utility/useWallet";
 
 const format = (value: string) => value + '%';
 const parse = (value: string) => value.replace('%', '');

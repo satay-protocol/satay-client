@@ -45,9 +45,9 @@ export const getStrategyInfo = (strategyWitness: StructData): StrategyInfo => (
 
 export const getStrategy = (strategyWitness: StructData, vaultStrategyData: VaultStrategyData): Strategy => ({
     ...getStrategyInfo(strategyWitness) || null,
-    totalDebt: vaultStrategyData.total_debt,
-    totalGain: vaultStrategyData.total_gain,
-    totalLoss: vaultStrategyData.total_loss,
-    debtRatio: vaultStrategyData.debt_ratio,
+    totalDebt: parseInt(vaultStrategyData.total_debt),
+    totalGain: parseInt(vaultStrategyData.total_gain),
+    totalLoss:parseInt(vaultStrategyData.total_loss),
+    debtRatio: parseInt(vaultStrategyData.debt_ratio),
     strategyCoinType: getTypeString(vaultStrategyData.strategy_coin_type),
 });

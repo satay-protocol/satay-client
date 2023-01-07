@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import useWallet from "../useWallet";
+import useWallet from "../utility/useWallet";
 
 import { ellipsize } from "../../services/utils";
 

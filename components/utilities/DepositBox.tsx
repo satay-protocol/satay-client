@@ -13,13 +13,13 @@ import {
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-import useWallet from '../../hooks/useWallet';
+import useWallet from '../../hooks/utility/useWallet';
 
 import { fromAptos } from '../../services/utils';
-import useCoinBalance from '../../hooks/useCoinBalance';
+import useCoinBalance from '../../hooks/coin/useCoinBalance';
 
 import { StructData } from '../../types/aptos';
-import useCoinInfo from '../../hooks/useCoinInfo';
+import useCoinInfo from '../../hooks/coin/useCoinInfo';
 import AccentedBox from './AccentedBox';
 
 interface Props {

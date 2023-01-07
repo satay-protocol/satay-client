@@ -1,5 +1,5 @@
-import useWallet from "./useWallet";
-import useCoinBalance from "./useCoinBalance";
+import useWallet from "./utility/useWallet";
+import useCoinBalance from "./coin/useCoinBalance";
 
 import { StructData } from "../types/aptos";
 
