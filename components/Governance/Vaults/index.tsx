@@ -5,7 +5,7 @@ import { Text, VStack } from '@chakra-ui/react'
 import Card from '../../utilities/Card'
 import Vault from './Vault'
 
-import useActiveVaultIds from '../../../hooks/utility/useActiveVaultIds'
+import useActiveVaultIds from '../../../hooks/vault/useActiveVaultIds'
 
 const Vaults = () => {
 

@@ -1,24 +1,19 @@
 import React from 'react'
 
-import useVault from '../../hooks/useVault';
-
 import { 
   Box, 
   Flex,
-  HStack,
   Skeleton,
   VStack,
 } from '@chakra-ui/react';
 
 import VaultInfo from './VaultInfo';
-import DepositWithdraw from '../DepositWithdraw';
-
-import { satay } from '../../data/moduleAddresses';
-
 import Strategies from '../Strategies';
 import Card from '../utilities/Card';
 import Holdings from './Holdings';
-import { satayStakeCoin } from '../../data/blocks';
+import VaultDepositWithdraw from './VaultDepositWithdraw';
+
+import useVaultInfo from '../../hooks/vault/useVaultInfo';
 
 interface Props {
   vaultId: string;
@@ -26,9 +21,9 @@ interface Props {
 
 const Vault : React.FC<Props> = ({ vaultId }) => {
 
-  const { vault, deposit, withdraw } = useVault(satay, vaultId);
+  const vault = useVaultInfo(vaultId);
 
-  const block = vault && satayStakeCoin(vault.baseCoin, vault.symbol, vault.baseCoinProtocol);
+  
 
   return (
     <Box>
@@ -62,11 +57,10 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
                   alignItems='flex-start'
                   h='100%'
                 >
-                  <DepositWithdraw 
-                    deposit={deposit}
-                    withdraw={withdraw}
-                    block={block}
-                  />    
+                  <VaultDepositWithdraw 
+                    vaultId={vaultId}
+                    baseCoin={vault.baseCoin}
+                  />  
                   <Holdings
                     vaultAddress={vault.vaultAddress}
                   />
@@ -75,7 +69,7 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
             </Flex>
             <Card>
               <Strategies 
-                strategies={vault.strategies}
+                vaultAddress={vault.vaultAddress}
               />
             </Card>
           </Flex>

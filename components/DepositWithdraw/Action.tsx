@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 import { fromAptos, round } from '../../services/utils';
-import useUserCoinBalance from '../../hooks/useUserCoinBalance';
+import useUserCoinBalance from '../../hooks/coin/useUserCoinBalance';
 import useWallet from '../../hooks/utility/useWallet';
 
 import { StructData } from '../../types/aptos';

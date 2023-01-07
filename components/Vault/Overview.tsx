@@ -7,7 +7,7 @@ import {
     HStack,
 } from '@chakra-ui/react'
 import Copyable from '../utilities/Copyable';
-import { ellipsizeAddress } from '../../services/utils';
+import { ellipsize } from '../../services/utils';
 
 const imageSize = "80px"
 
@@ -45,7 +45,7 @@ const Overview : React.FC<Props> = ({ logo, symbol, vaultAddress }) => {
                         Address:
                     </Text>
                     <Copyable
-                        display={ellipsizeAddress(vaultAddress)}
+                        display={ellipsize(vaultAddress)}
                         copyText={vaultAddress}
                     />
                 </HStack>

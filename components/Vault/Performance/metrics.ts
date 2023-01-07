@@ -1,4 +1,4 @@
-import { MetricsSlug } from "../../../hooks/useVaultPerformance";
+import { MetricsSlug } from "../../../hooks/vault/useVaultPerformance";
 
 export interface Metric {
     name: string;

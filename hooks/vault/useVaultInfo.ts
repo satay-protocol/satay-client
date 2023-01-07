@@ -13,7 +13,9 @@ const useVaultInfo = (vaultId: string) => {
 
     useEffect(() => {
         const getVaultInfo = async () => {
-            const vaultInfo = await fetchVaultInfo(vaultId, getNetworkSlug(network.name));
+            const networkSlug = getNetworkSlug(network?.name);
+            if(!networkSlug) return;
+            const vaultInfo = await fetchVaultInfo(vaultId, networkSlug);
             setVaultInfo(vaultInfo);
         };
         getVaultInfo();

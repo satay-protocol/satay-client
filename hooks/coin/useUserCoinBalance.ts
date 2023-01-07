@@ -1,7 +1,7 @@
-import useWallet from "./utility/useWallet";
-import useCoinBalance from "./coin/useCoinBalance";
+import useWallet from "../utility/useWallet";
+import useCoinBalance from "./useCoinBalance";
 
-import { StructData } from "../types/aptos";
+import { StructData } from "../../types/aptos";
 
 const useUserCoinBalance = (coinStruct: StructData) => {
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useAptos } from '../../contexts/AptosContext';
 
-import { getCoinBalance } from '../../services/aptosUtils';
+import { getCoinBalance } from '../../services/coin';
 
 import { StructData } from '../../types/aptos';
 

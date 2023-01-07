@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useAptos } from '../../contexts/AptosContext';
 
-import { getCoinInfo } from '../../services/aptosUtils';
+import { getCoinInfo } from '../../services/coin';
 
 import { StructData } from '../../types/aptos'
 

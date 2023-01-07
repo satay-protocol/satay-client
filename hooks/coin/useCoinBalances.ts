@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 
 import { useAptos } from "../../contexts/AptosContext";
 
-import { getCoinBalances } from '../../services/aptosUtils';
+import { getCoinBalances } from '../../services/coin';
 import { CoinData } from '../../types/vaults';
 
 const useCoinBalances = (address : string) => {
 
-    const { client } = useAptos();
+    const { client, network } = useAptos();
 
     const [balances, setBalances] = useState<CoinData[]>([]);
     

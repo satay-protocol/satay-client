@@ -4,14 +4,16 @@ import { Text, VStack } from '@chakra-ui/react'
 
 import StrategyComponent from './Strategy'
 
-import { Strategy } from '../../types/strategy'
 import { structToString } from '../../services/aptosUtils'
+import useVaultStrategies from '../../hooks/utility/useVaultStrategies'
 
 interface Props {
-    strategies: Strategy[]
+    vaultAddress: string
 }
 
-const Strategies : React.FC<Props> = ({ strategies }) => {
+const Strategies : React.FC<Props> = ({ vaultAddress }) => {
+
+    const strategies = useVaultStrategies(vaultAddress)
 
     return (
         <VStack

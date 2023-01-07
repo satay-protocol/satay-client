@@ -13,11 +13,13 @@ const useActiveVaultIds = () => {
 
     useEffect(() => {
         const getVaultIds = async () => {
-            let vaultIds = await fetchAllVaultIds(getNetworkSlug(network.name));
+            const networkSlug = getNetworkSlug(network?.name);
+            if(!networkSlug) return;
+            let vaultIds = await fetchAllVaultIds(networkSlug);
             setVaultIds(vaultIds);
         }
         getVaultIds();
-    }, [])
+    }, [network])
 
     return vaultIds;
 }

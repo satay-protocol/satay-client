@@ -6,7 +6,7 @@ import { Box, Button, HStack, Skeleton, Tab, TabList, Tabs, Text, useColorModeVa
 
 import LineGraph from '../../utilities/LineGraph';
 
-import useVaultPerformance from '../../../hooks/useVaultPerformance';
+import useVaultPerformance from '../../../hooks/vault/useVaultPerformance';
 
 import { Interval, intervals } from './intervals';
 import { Metric, metrics } from './metrics';
