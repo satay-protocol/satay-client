@@ -7,10 +7,13 @@ import {
     SliderFilledTrack,
     SliderThumb,
     Button,
-    Text
+    Text,
+    Flex
  } from '@chakra-ui/react'
-import useUpdateDebtRatio from '../../hooks/manager/useUpdateDebtRatio'
-import AccentedBox from '../utilities/AccentedBox';
+
+ import AccentedBox from '../../utilities/AccentedBox';
+
+import useUpdateDebtRatio from '../../../hooks/vaultManager/useUpdateDebtRatio';
 
  interface Props {
     vaultId: string,
@@ -31,9 +34,8 @@ const DebtRatioSlider : React.FC<Props> = ({ vaultId, strategyModule, currentDeb
     );
 
   return (
-    <AccentedBox
+    <Flex
         flex={1}
-        display="flex"
         alignItems="center"
         gap={4}
     >
@@ -53,10 +55,11 @@ const DebtRatioSlider : React.FC<Props> = ({ vaultId, strategyModule, currentDeb
         </Text>
         <Button
             onClick={updateDebtRatio}
+            variant='ghost'
         >
             Update
         </Button>
-    </AccentedBox>
+    </Flex>
     
   )
 }

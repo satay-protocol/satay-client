@@ -5,6 +5,8 @@ import { HStack, Image, Skeleton, Text, VStack } from '@chakra-ui/react'
 import useVaultManagerVaultInfo from '../../../hooks/vaultManager/useVaultManagerVaultInfo'
 import UpdateFees from './UpdateFees'
 import FreezeVault from './FreezeVault'
+import Strategies from '../Strategies'
+import AccentedBox from '../../utilities/AccentedBox'
 
 interface Props {
     vaultId: string
@@ -23,41 +25,50 @@ const Vault: React.FC<Props> = ({ vaultId }) => {
     };
     
       return (
-        <VStack
-          alignItems="flex-start"
+        <AccentedBox
           w='100%'
         >
-          <HStack
+          <VStack
+            alignItems="flex-start"
             w='100%'
-            
-            justifyContent='space-between'
+            spacing={4}
           >
             <HStack
-              spacing={4}
+              w='100%'
+              justifyContent='space-between'
             >
-              <Image 
-                src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
-                boxSize={12}
-                rounded="full"
-                alt='Vault Logo'
-              />
-              <Text
-                fontSize='lg'
-                fontWeight='semibold'
+              <HStack
+                spacing={4}
               >
-                {vaultInfo.baseCoin.symbol} Vault
-              </Text>
+                <Image 
+                  src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
+                  boxSize={12}
+                  rounded="full"
+                  alt='Vault Logo'
+                />
+                <Text
+                  fontSize='2xl'
+                  fontWeight='bold'
+                >
+                  {vaultInfo.baseCoin.symbol} Vault
+                </Text>
+              </HStack>
+              <FreezeVault 
+                vaultId={vaultId}
+                isFrozen={vaultInfo.isFrozen}
+              />
             </HStack>
-            <FreezeVault 
+            <UpdateFees
               vaultId={vaultId}
-              isFrozen={vaultInfo.isFrozen}
+              vaultFees={vaultInfo.fees}
             />
-        </HStack>
-        <UpdateFees
-          vaultId={vaultId}
-          vaultFees={vaultInfo.fees}
-        />
-      </VStack>
+            <Strategies 
+              vaultAddress={vaultInfo.vaultAddress}
+              vaultId={vaultId}
+              baseCoin={vaultInfo.baseCoin}
+            />
+          </VStack>
+        </AccentedBox>
       )
 }
 

@@ -4,7 +4,8 @@ import { getStrategy } from "../data/strategies";
 import { satay } from "../data/moduleAddresses";
 import { getVaultInfo } from "../data/vaultsData";
 
-import { Vault, Strategy, VaultStrategyData, VaultInfo as NewVaultInfo, VaultFees } from "../types/vaults";
+import { Vault, VaultInfo as NewVaultInfo, VaultFees } from "../types/vaults";
+import { Strategy, VaultStrategyData } from "../types/strategy";
 import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/aptos";
 
 import { getStructFromType } from "./aptosUtils";
@@ -25,7 +26,6 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
         const {data : vault} = await client.getAccountResource(vaultAddress, `${satay}::vault::Vault`);
         const vaultData = vault as VaultData;
-        const coinType = getTypeString(vaultData.base_coin_type);
         const baseCoin = {
             struct_name: Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString(),
             module_name: Buffer.from(vaultData.base_coin_type.module_name.slice(2), 'hex').toString(),

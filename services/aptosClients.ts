@@ -2,7 +2,6 @@ import { AptosClient } from "aptos";
 
 import { SupportedNetwork } from "../types/network";
 
-
 type RpcUrls = {
     [key in SupportedNetwork]: string;
 };

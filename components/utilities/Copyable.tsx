@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Box, Text, useClipboard, useColorModeValue, useToast } from '@chakra-ui/react';
 
@@ -9,7 +9,11 @@ interface Props {
 
 const Copyable: React.FC<Props> = ({ display, copyText }) => {
 
-  const { onCopy } = useClipboard(copyText)
+  const { onCopy, setValue } = useClipboard(copyText)
+
+  useEffect(() => {
+    setValue(copyText)
+  }, [copyText, setValue])
 
   const toast = useToast()
 
