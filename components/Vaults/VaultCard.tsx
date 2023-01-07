@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, Flex, Image, useColorModeValue, Skeleton } from '@chakra-ui/react'
+import { Text, Flex, Image, Skeleton } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import Strategies from '../Strategies'
@@ -41,13 +41,6 @@ const VaultCard : React.FC<Props> = ({ vaultId }) => {
                             fontWeight='bold'
                         >
                             {vault.baseCoin.symbol} Vault
-                        </Text>
-                        <Text
-                            fontSize='lg'
-                            color={useColorModeValue('brand.500', 'brand.400')}
-                            fontWeight='bold'
-                        >
-                            15% APY
                         </Text>
                     </Flex>
                     <VaultDepositBox 
