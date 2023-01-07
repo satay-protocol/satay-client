@@ -3,9 +3,11 @@ import { AptosClient } from "aptos";
 
 import { createContext, ReactNode, FC, useContext, useState, useEffect } from "react"
 import { getNetworkSlug } from "../services/network";
+import { SupportedNetwork } from "../types/network";
 
 interface ContextType {
     client: AptosClient;
+    network: SupportedNetwork
     updateClient: () => Promise<void>;
 }
 
@@ -17,6 +19,7 @@ const rpcUrls = {
 
 export const AptosContext = createContext<ContextType>({
     client: new AptosClient(rpcUrls['testnet']),
+    network: 'testnet',
     updateClient: async () => {}
 });
 
@@ -45,6 +48,7 @@ export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
         <AptosContext.Provider
             value={{
                 client,
+                network: getNetworkSlug(network?.name),
                 updateClient
             }}
         >

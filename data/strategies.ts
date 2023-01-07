@@ -1,7 +1,5 @@
-import { APT } from "./coinStructs";
 import { satay } from "./moduleAddresses";
 
-import { getTypeString } from "../services/vaults";
 import { structToString } from "../services/aptosUtils";
 
 import { StructData } from "../types/aptos";
@@ -49,5 +47,5 @@ export const getStrategy = (strategyWitness: StructData, vaultStrategyData: Vaul
     totalGain: parseInt(vaultStrategyData.total_gain),
     totalLoss:parseInt(vaultStrategyData.total_loss),
     debtRatio: parseInt(vaultStrategyData.debt_ratio),
-    strategyCoinType: getTypeString(vaultStrategyData.strategy_coin_type),
+    strategyCoinType: structToString(vaultStrategyData.strategy_coin_type),
 });

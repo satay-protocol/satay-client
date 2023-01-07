@@ -1,7 +1,7 @@
 import { HStack, Image, Skeleton, Text, VStack } from '@chakra-ui/react';
 import React from 'react'
 import useGovernanceVaultInfo from '../../../hooks/governance/useGovernanceVaultInfo';
-import useVaultInfo from '../../../hooks/utility/useVaultInfo'
+import useVaultInfo from '../../../hooks/vault/useVaultInfo'
 import { ellipsize } from '../../../services/utils';
 import AccentedBox from '../../utilities/AccentedBox';
 import Copyable from '../../utilities/Copyable';
