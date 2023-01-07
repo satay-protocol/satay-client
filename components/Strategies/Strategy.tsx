@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Text, VStack } from '@chakra-ui/react'
 
-import { Strategy } from '../../types/vaults'
+import { Strategy } from '../../types/strategy'
 import ProtocolList from '../utilities/ProtocolList'
 import Link from 'next/link'
 import AccentedBox from '../utilities/AccentedBox'
@@ -36,14 +36,14 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
                         fontSize="sm"
                         fontWeight="bold"
                     >
-                        {strategy.title}
+                        {strategy.name}
                     </Text>
                     <Text>
                         {strategy.description}
                     </Text>
                 </VStack>
                 <ProtocolList 
-                    protocols={strategy.protocolsUsed}
+                    protocols={strategy.protocols}
                 />
             </AccentedBox>
         </Link>
