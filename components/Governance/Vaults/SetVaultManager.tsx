@@ -19,7 +19,7 @@ const SetVaultManager: React.FC<Props> = ({ vaultAddress }) => {
             <LabeledInput 
                 label="New Vault Manager"
                 value={newVaultManager}
-                setValue={setNewVaultManager}
+                onChange={setNewVaultManager}
                 placeholder="0x..."
             />
             <Button
