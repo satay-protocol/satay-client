@@ -9,7 +9,7 @@ import { structToString } from "../../services/aptosUtils";
 
 const useCreateVault = () => {
 
-    const { address, submitTransaction } = useWallet();
+    const { submitTransaction } = useWallet();
 
     const [coin, setCoin] = useState<Coin | undefined>(undefined);
 

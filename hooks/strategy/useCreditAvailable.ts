@@ -1,18 +1,20 @@
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import { useState, useEffect } from 'react';
-import { getNetworkSlug } from '../../services/network';
+
+import { useAptos } from '../../contexts/AptosContext';
+
 import { fetchCreditAvailable } from '../../services/strategies';
+
 import { StructData } from '../../types/aptos';
 
 const useCreditAvailable = (strategyWitness: StructData, vaultId: string, baseCoinType: StructData, decimals: number) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
     
     const [creditAvailable, setCreditAvailable] = useState(0);
 
     useEffect(() => {
         const loadCreditAvailable = async () => {
-            const creditAvailable = await fetchCreditAvailable(strategyWitness, vaultId, baseCoinType, decimals, getNetworkSlug(network.name));
+            const creditAvailable = await fetchCreditAvailable(strategyWitness, vaultId, baseCoinType, decimals, network);
             setCreditAvailable(creditAvailable);
         }
         loadCreditAvailable();

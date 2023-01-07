@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { satay } from '../../data/moduleAddresses';
-import { ellipsize } from '../../services/utils';
+
 import useWallet from '../utility/useWallet';
+
+import { ellipsize } from '../../services/utils';
+
+import { satay } from '../../data/moduleAddresses';
 
 const useSetGovernance = () => {
 

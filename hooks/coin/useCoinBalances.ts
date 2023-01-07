@@ -7,7 +7,7 @@ import { CoinData } from '../../types/vaults';
 
 const useCoinBalances = (address : string) => {
 
-    const { client, network } = useAptos();
+    const { client } = useAptos();
 
     const [balances, setBalances] = useState<CoinData[]>([]);
     
