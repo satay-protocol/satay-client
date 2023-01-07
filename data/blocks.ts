@@ -4,7 +4,8 @@ import {
     LP, 
     stAPT, 
     tAPT, 
-    vaultCoin } from "../data/coinStructs";
+    vaultCoin 
+} from "../data/coinStructs";
 
 import { Block } from '../types/block';
 import { StructData } from "../types/aptos";

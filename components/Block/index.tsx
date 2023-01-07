@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, Flex, HStack, Box } from '@chakra-ui/react'
+import { Text, Flex, Box } from '@chakra-ui/react'
 
 import { Block } from '../../types/block';
 import ProtocolList from '../utilities/ProtocolList';

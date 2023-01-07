@@ -1,11 +1,12 @@
-export interface Coin {
-    name: string;
-    type: string;
-}
+import { APT } from "./coinStructs";
 
-export const coins : Coin[] = [
+import { Coin } from "../types/coin";
+
+export const coins: Coin[] = [
     {
         name: "Aptos",
-        type: "0x1::aptos_coin::AptosCoin"
+        symbol: "APT",
+        protocol: "aptos",
+        coinStruct: APT
     }
 ]

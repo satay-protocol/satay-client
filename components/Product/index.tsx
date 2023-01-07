@@ -7,15 +7,13 @@ import {
 import { useWallet } from '@manahippo/aptos-wallet-adapter';
 
 import ProductInfo from './ProductInfo';
-import DepositWithdraw from '../DepositWithdraw';
 import Card from '../utilities/Card';
 import ProductHeader from './ProductHeader';
+import StructuredProductDepositWithdraw from './StructuredProductDepositWithdraw';
 
-import useStructuredProduct from '../../hooks/useStructuredProduct';
+import { getNetworkSlug } from '../../services/network';
 
 import { getStructuredProduct } from '../../data/structuredProducts';
-import { getNetworkSlug } from '../../services/aptosUtils';
-import StructuredProductDepositWithdraw from './StructuredProductDepositWithdraw';
 
 interface Props {
   productName: string;

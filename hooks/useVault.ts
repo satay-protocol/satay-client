@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAptos } from "../contexts/AptosContext";
 import { satay } from "../data/moduleAddresses";
-import { structToString, getVaultFromTable } from "../services/vaults";
+import { getVaultFromTable } from "../services/vaults";
+import { structToString } from "../services/aptosUtils";
 
 import { Vault } from "../types/vaults";
 
 import useManagerResource from "./manager/useManagerResource";
 
 import { toAptos } from "../services/utils";
-import useWallet from "./useWallet";
+import useWallet from "./utility/useWallet";
 
 const useVault = (managerAddress : string, vaultId : string) => {
 
@@ -45,7 +46,6 @@ const useVault = (managerAddress : string, vaultId : string) => {
                 type: 'entry_function_payload',
                 function: `${satay}::satay::deposit`,
                 arguments: [
-                    vault.managerAddress,
                     vault.vaultId,
                     amount.toString()
                 ],
@@ -63,7 +63,6 @@ const useVault = (managerAddress : string, vaultId : string) => {
                 type: 'entry_function_payload',
                 function: `${satay}::satay::withdraw`,
                 arguments: [
-                    vault.managerAddress,
                     vault.vaultId,
                     amount.toString()
                 ],

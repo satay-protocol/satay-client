@@ -2,7 +2,6 @@ import { AptosClient } from "aptos";
 
 import { CoinInfoStruct, CoinStoreResource, StructData } from "../types/aptos";
 import { CoinData } from "../types/vaults";
-import { structToString } from "./vaults";
 
 
 export const getCoinBalance = async (client : AptosClient, coinStruct: StructData, address : string, coinStoreAddress = '0x1::coin') => {
@@ -16,6 +15,15 @@ export const getCoinBalance = async (client : AptosClient, coinStruct: StructDat
         .catch((err) => 0)
     return coin;
 }
+
+export const structToModule = (struct : StructData) => {
+    return struct.account_address + "::" + struct.module_name;
+}
+
+export const structToString = (struct : StructData) => {
+    return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
+}
+
 
 export const getCoinBalances = async (client : AptosClient, address: string) : Promise<CoinData[]> => {
     let resources = await client.getAccountResources(address);
@@ -48,21 +56,6 @@ export const getCoinType = (resourceType: string) => (
         ))
         .join("")
 )
-
-const supportedNetworks = [
-    'testnet',
-    // 'mainnet'
-] as const;
-
-export const getNetworkSlug = (networkName: string | null) => {
-    if (!networkName) return undefined;
-    for(const network of supportedNetworks) {
-        if (networkName.toLowerCase().includes(network)) {
-            return network;
-        }
-    }
-    return undefined;
-}
 
 export const getStructFromType = (type: string) : StructData => {
     const account_address = type.slice(0, type.indexOf('::'));

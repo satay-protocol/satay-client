@@ -4,12 +4,14 @@ import { getStrategy } from "../data/strategies";
 import { satay } from "../data/moduleAddresses";
 import { getVaultInfo } from "../data/vaultsData";
 
-import { Vault, Strategy, VaultStrategyData } from "../types/vaults";
+import { Vault, VaultInfo as NewVaultInfo, VaultFees } from "../types/vaults";
+import { Strategy, VaultStrategyData } from "../types/strategy";
 import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/aptos";
-import { CoinStoreResource } from "../types/aptos";
 
-import { round, toAptos } from "./utils";
 import { getStructFromType } from "./aptosUtils";
+import { callGetFunction } from "./simulation";
+import { SupportedNetwork } from "../types/network";
+import { coins } from "../data/coins";
 
 
 export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
@@ -24,7 +26,6 @@ export const getVaultFromTable = async (client : AptosClient, managerResource : 
         const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
         const {data : vault} = await client.getAccountResource(vaultAddress, `${satay}::vault::Vault`);
         const vaultData = vault as VaultData;
-        const coinType = getTypeString(vaultData.base_coin_type);
         const baseCoin = {
             struct_name: Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString(),
             module_name: Buffer.from(vaultData.base_coin_type.module_name.slice(2), 'hex').toString(),
@@ -65,9 +66,6 @@ export const getTypeString = (struct : StructData) => {
         + Buffer.from(struct.struct_name.slice(2), 'hex').toString();
 }
 
-export const structToString = (struct : StructData) => {
-    return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
-}
 
 export const structToModule = (struct : StructData) => {
     return struct.account_address + "::" + struct.module_name;
@@ -90,4 +88,77 @@ export const getStrategiesForVault = async (client : AptosClient, vaultAddress :
             resource.data as VaultStrategyData
         ))
     return strategies;
+}
+
+export const fetchAllVaultIds = async (network: SupportedNetwork): Promise<string[]> => {
+    const nextVaultIdResult = await callGetFunction({
+        func: `${satay}::satay::get_next_vault_id`,
+        type_args: [],
+        args: [],
+        ledger_version: 0,
+        network,
+    })
+    const nextVaultId = nextVaultIdResult.details.return_values[0] as number;
+    return Array.from({length: nextVaultId}, (_, i) => i).map(i => i.toString());
+}
+
+export const fetchVaultAddressForId = async (vaultId: string, network: SupportedNetwork): Promise<string> => {
+    let vaultAddressResult = await callGetFunction({
+        func: `${satay}::satay::get_vault_address_by_id`,
+        type_args: [],
+        args: [vaultId],
+        ledger_version: 0,
+        network,
+    })
+    return "0x" + (vaultAddressResult.details.return_values[0] as string);
+}
+
+export const fetchVaultManagerForAddress = async (vaultAddress: string, network: SupportedNetwork): Promise<string> => {
+    let managerAddressResult = await callGetFunction({
+        func: `${satay}::vault_config::get_vault_manager_address`,
+        type_args: [],
+        args: [vaultAddress],
+        ledger_version: 0,
+        network,
+    })
+    return "0x" + (managerAddressResult.details.return_values[0] as string);
+}
+
+export const fetchVaultManagerForId = async (vaultId: string, network: SupportedNetwork): Promise<string> => {
+    const vaultAddress = await fetchVaultAddressForId(vaultId, network);
+    return fetchVaultManagerForAddress(vaultAddress, network);
+}
+
+export const fetchVaultInfo = async (vaultId: string, network: SupportedNetwork): Promise<NewVaultInfo> => {
+    const vaultAddress = await fetchVaultAddressForId(vaultId, network);
+    return {
+        vaultId,
+        vaultAddress,
+        baseCoin: coins[0]
+    }
+}
+
+export const fetchVaultFees = async (vaultId: string, network: SupportedNetwork): Promise<VaultFees> => {
+    let feesResult = await callGetFunction({
+        func: `${satay}::satay::get_vault_fees`,
+        type_args: [],
+        args: [vaultId],
+        ledger_version: 0,
+        network,
+    })
+    return {
+        managementFee: (feesResult.details.return_values[0] as number),
+        performanceFee: (feesResult.details.return_values[1] as number),
+    }
+}
+
+export const fetchIsVaultFrozen = async (vaultId: string, network: SupportedNetwork): Promise<boolean> => {
+    let isFrozenResult = await callGetFunction({
+        func: `${satay}::satay::is_vault_frozen`,
+        type_args: [],
+        args: [vaultId],
+        ledger_version: 0,
+        network,
+    })
+    return isFrozenResult.details.return_values[0] as boolean;
 }
