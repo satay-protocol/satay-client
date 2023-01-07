@@ -28,59 +28,70 @@ const UpdateFees: React.FC<Props> = ({ vaultId, vaultFees }) => {
     );
 
     return (
-        <HStack
-            alignItems='flex-end'
+        <VStack
+            alignItems="flex-start"
             w='100%'
         >
-            <VStack
-                alignItems="flex-start"
-                spacing={fieldSpacing}
-                flex={1}
-            >
-                <Text
-                    fontSize='xs'
-                    fontWeight='bold'
-                >
-                    Management Fee
-                </Text>
-                <NumberInput
-                    value={managementFee}
-                    onChange={(value) => updateManagementFee(value)}
-                    min={0}
-                    max={MAX_FEE_AMOUNTS}
-                    w='100%'
-                >
-                    <NumberInputField />
-                </NumberInput>
-            </VStack>
-            <VStack
-                alignItems="flex-start"
-                spacing={fieldSpacing}
-                flex={1}
-            >
-                <Text
-                    fontSize='xs'
-                    fontWeight='bold'
-                >
-                    Performance Fee
-                </Text>
-                <NumberInput
-                    value={performanceFee}
-                    onChange={(value) => updatePerformanceFee(value)}
-                    min={0}
-                    max={MAX_FEE_AMOUNTS}
-                    w='100%'
-                >
-                    <NumberInputField />
-                </NumberInput>
-            </VStack>
-            <Button
-                onClick={() => updateFees()}
-                colorScheme='brand'
+            <Text
+                fontSize='xl'
+                fontWeight='semibold'
             >
                 Update Fees
-            </Button>
-        </HStack>
+            </Text>
+            <HStack
+                alignItems='flex-end'
+                w='100%'
+            >
+                <VStack
+                    alignItems="flex-start"
+                    spacing={fieldSpacing}
+                    flex={1}
+                >
+                    <Text
+                        fontSize='xs'
+                        fontWeight='bold'
+                    >
+                        Management Fee
+                    </Text>
+                    <NumberInput
+                        value={managementFee}
+                        onChange={(value) => updateManagementFee(value)}
+                        min={0}
+                        max={MAX_FEE_AMOUNTS}
+                        w='100%'
+                    >
+                        <NumberInputField />
+                    </NumberInput>
+                </VStack>
+                <VStack
+                    alignItems="flex-start"
+                    spacing={fieldSpacing}
+                    flex={1}
+                >
+                    <Text
+                        fontSize='xs'
+                        fontWeight='bold'
+                    >
+                        Performance Fee
+                    </Text>
+                    <NumberInput
+                        value={performanceFee}
+                        onChange={(value) => updatePerformanceFee(value)}
+                        min={0}
+                        max={MAX_FEE_AMOUNTS}
+                        w='100%'
+                    >
+                        <NumberInputField />
+                    </NumberInput>
+                </VStack>
+                <Button
+                    onClick={() => updateFees()}
+                    colorScheme='brand'
+                >
+                    Update Fees
+                </Button>
+            </HStack>
+        </VStack>
     )
 }
 

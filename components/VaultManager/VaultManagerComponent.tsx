@@ -20,8 +20,8 @@ const VaultManagerComponent: React.FC<Props> = ({ connectedAddress }) => {
             gap={4}
         >
             <Text
-                fontSize="2xl"
-                fontWeight="bold"
+                fontSize="3xl"
+                fontWeight="extrabold"
             >
                 Your Vaults
             </Text>

@@ -5,7 +5,8 @@ import { getTypeString } from "../services/vaults";
 import { structToString } from "../services/aptosUtils";
 
 import { StructData } from "../types/aptos";
-import { Strategy, StrategyInfo, VaultStrategyData } from "../types/vaults";
+import { Strategy, VaultStrategyData, StrategyInfo } from "../types/strategy";
+import { coins } from "./coins";
 
 const dittoStrategyWitness: StructData = {
     struct_name: "DittoStrategy",
@@ -23,10 +24,10 @@ const tortugaStrategyWitness: StructData = {
 export const strategies : StrategyInfo[] = [
     {
         strategyWitness: dittoStrategyWitness,
-        baseCoin: APT,
-        title: "Ditto Staking + LP Strategy",
+        baseCoin: coins[0],
+        name: "Ditto Staking + LP Strategy",
         description: "Stake APT on Ditto for stAPT to earn APT emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees. Stake LP tokens on Ditto Rewards to earn DTO emissions.",
-        protocolsUsed: ["ditto", "pontem"],
+        protocols: ["ditto", "pontem"],
         productName: "ditto_farming"
     },
     // {
@@ -38,8 +39,12 @@ export const strategies : StrategyInfo[] = [
     // }
 ]
 
-export const getStrategy = (strategyWitness: StructData, vaultStrategyData: VaultStrategyData) : Strategy => ({
-    ...strategies.find((strategy) => structToString(strategyWitness) === structToString(strategy.strategyWitness)) || null,
+export const getStrategyInfo = (strategyWitness: StructData): StrategyInfo => (
+    strategies.find((strategy) => structToString(strategyWitness) === structToString(strategy.strategyWitness)) || null
+);
+
+export const getStrategy = (strategyWitness: StructData, vaultStrategyData: VaultStrategyData): Strategy => ({
+    ...getStrategyInfo(strategyWitness) || null,
     totalDebt: vaultStrategyData.total_debt,
     totalGain: vaultStrategyData.total_gain,
     totalLoss: vaultStrategyData.total_loss,

@@ -3,6 +3,7 @@ import React from 'react'
 import useGovernanceVaultInfo from '../../../hooks/governance/useGovernanceVaultInfo';
 import useVaultInfo from '../../../hooks/utility/useVaultInfo'
 import { ellipsize } from '../../../services/utils';
+import AccentedBox from '../../utilities/AccentedBox';
 import Copyable from '../../utilities/Copyable';
 import SetVaultManager from './SetVaultManager';
 
@@ -23,40 +24,44 @@ const Vault: React.FC<Props> = ({ vaultId }) => {
   };
 
   return (
-    <HStack
+    <AccentedBox
       w='100%'
-      spacing={4}
     >
-      <Image 
-        src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
-        boxSize={12}
-        rounded="full"
-        alt='Vault Logo'
-      />
-      <VStack
-        alignItems="flex-start"
-        spacing={1}
+      <HStack
+        w='100%'
+        spacing={4}
       >
-        <Text
-          fontSize='lg'
-          fontWeight='semibold'
+        <Image 
+          src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
+          boxSize={12}
+          rounded="full"
+          alt='Vault Logo'
+        />
+        <VStack
+          alignItems="flex-start"
+          spacing={1}
         >
-          {vaultInfo.baseCoin.symbol} Vault
-        </Text>
-        <HStack>
-          <Text>
-            Manager
+          <Text
+            fontSize='lg'
+            fontWeight='semibold'
+          >
+            {vaultInfo.baseCoin.symbol} Vault
           </Text>
-          <Copyable 
-            display={ellipsize(vaultInfo.managerAddress)}
-            copyText={vaultInfo.managerAddress}
-          />
-        </HStack>
-      </VStack>
-      <SetVaultManager 
-        vaultAddress={vaultInfo.vaultAddress}
-      />
-  </HStack>
+          <HStack>
+            <Text>
+              Manager
+            </Text>
+            <Copyable 
+              display={ellipsize(vaultInfo.managerAddress)}
+              copyText={vaultInfo.managerAddress}
+            />
+          </HStack>
+        </VStack>
+        <SetVaultManager 
+          vaultAddress={vaultInfo.vaultAddress}
+        />
+      </HStack>
+    </AccentedBox>
   )
 }
 

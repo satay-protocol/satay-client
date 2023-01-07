@@ -16,6 +16,10 @@ export const getCoinBalance = async (client : AptosClient, coinStruct: StructDat
     return coin;
 }
 
+export const structToModule = (struct : StructData) => {
+    return struct.account_address + "::" + struct.module_name;
+}
+
 export const structToString = (struct : StructData) => {
     return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
 }

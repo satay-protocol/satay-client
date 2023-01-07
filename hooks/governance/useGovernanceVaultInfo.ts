@@ -17,7 +17,7 @@ const useGovernanceVaultInfo = (vaultId: string) => {
             setGovernanceVaultInfo(governanceVaultInfo);
         };
         getGovernanceVaultInfo();
-    });
+    }, [network, vaultId]);
 
     return governanceVaultInfo;
 

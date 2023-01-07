@@ -31,7 +31,7 @@ const SelectStrategy : React.FC<Props> = ({ isOpen, onClose, baseCoin, vault, ap
 
   const availableStrategies = strategies
     .filter(strategy => 
-      structToString(strategy.baseCoin) === structToString(baseCoin) 
+      structToString(strategy.baseCoin.coinStruct) === structToString(baseCoin) 
       && !approvedStrategies.includes(structToString(strategy.strategyWitness))
     )
 
