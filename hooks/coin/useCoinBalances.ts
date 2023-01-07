@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import { useAptos } from "../contexts/AptosContext";
+import { useAptos } from "../../contexts/AptosContext";
 
-import { getCoinBalances } from '../services/aptosUtils';
-import { CoinData } from '../types/vaults';
+import { getCoinBalances } from '../../services/aptosUtils';
+import { CoinData } from '../../types/vaults';
 
 const useCoinBalances = (address : string) => {
 

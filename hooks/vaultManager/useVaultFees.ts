@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useWallet from '../useWallet';
+import useWallet from '../utility/useWallet';
 
 import { satay } from '../../data/moduleAddresses';
 
@@ -8,19 +8,15 @@ const useVaultFees = (vaultId: string, curManagementFee: number, curPerformanceF
 
     const { submitTransaction } = useWallet();
 
-    const format = (value: string) => value + '%';
-    const parse = (value: string) => value.replace('%', '');
-    const toFeeAmount = (value: string) => (parseInt(parse(value)) * 100).toString();
+    const [managementFee, setManagementFee] = useState<string | undefined>(curManagementFee.toString());
+    const [performanceFee, setPerformanceFee] = useState<string | undefined>(curPerformanceFee.toString());
 
-    const [managementFee, setManagementFee] = useState<string>(curManagementFee.toString());
-    const [performanceFee, setPerformanceFee] = useState<string>(curPerformanceFee.toString());
-
-    const updateManagementFee = (value: string) => {
-        setManagementFee(parse(value));
+    const onManagementFeeChange = (value: string) => {
+        setManagementFee(value);
     }
 
-    const updatePerformanceFee = (value: string) => {
-        setPerformanceFee(parse(value));
+    const onPerformanceFeeChange = (value: string) => {
+        setPerformanceFee(value);
     }
 
     const updateFees = async () => {
@@ -29,8 +25,8 @@ const useVaultFees = (vaultId: string, curManagementFee: number, curPerformanceF
             function: `${satay}::satay::update_vault_fee`,
             arguments: [
                 vaultId,
-                toFeeAmount(managementFee), 
-                toFeeAmount(performanceFee)
+                managementFee, 
+                performanceFee
             ],
             type_arguments: []
         }, {
@@ -40,10 +36,10 @@ const useVaultFees = (vaultId: string, curManagementFee: number, curPerformanceF
     }
 
     return {
-        managementFee: format(managementFee),
-        performanceFee: format(performanceFee),
-        updateManagementFee,
-        updatePerformanceFee,
+        managementFee,
+        performanceFee,
+        onManagementFeeChange,
+        onPerformanceFeeChange,
         updateFees
     }
 }

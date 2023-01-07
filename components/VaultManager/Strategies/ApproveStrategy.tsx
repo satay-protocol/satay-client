@@ -6,6 +6,7 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import { structToString } from '../../../services/aptosUtils'
 import { strategies } from '../../../data/strategies'
 import { Coin } from '../../../types/coin'
+import LabeledPercentageInput from '../../utilities/LabeledPercentageInput'
 
 interface Props {
     vaultId: string,
@@ -42,6 +43,10 @@ const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoi
         </Text>
         <HStack
             w='100%'
+            p={4}
+            borderWidth={1}
+            rounded='lg'
+            alignItems='flex-end'
         >
             <Menu>
                 <MenuButton
@@ -63,18 +68,19 @@ const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoi
                     }
                 </MenuList>
             </Menu>
-            <NumberInput
+            <LabeledPercentageInput 
+                label='Debt Ratio'
                 value={debtRatio}
                 onChange={updateDebtRatio}
+                placeholder='0%'
                 min={0}
                 max={100}
-                flex={1}
-            >
-                <NumberInputField />
-            </NumberInput>
+            />
+
             <Button
                 onClick={approveStrategy}
                 colorScheme='brand'
+                disabled={!selectedWitness || !debtRatio}
             >
                 Approve
             </Button>

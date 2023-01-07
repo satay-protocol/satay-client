@@ -13,7 +13,7 @@ import Navbar from '../components/Navbar';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 import Footer from '../components/Footer';
 
-import useWallet from '../hooks/useWallet';
+import useWallet from '../hooks/utility/useWallet';
 
 import { getNetworkSlug } from '../services/network';
 

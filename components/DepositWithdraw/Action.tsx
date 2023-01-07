@@ -13,10 +13,10 @@ import {
 
 import { fromAptos, round } from '../../services/utils';
 import useUserCoinBalance from '../../hooks/useUserCoinBalance';
-import useWallet from '../../hooks/useWallet';
+import useWallet from '../../hooks/utility/useWallet';
 
 import { StructData } from '../../types/aptos';
-import useCoinInfo from '../../hooks/useCoinInfo';
+import useCoinInfo from '../../hooks/coin/useCoinInfo';
 import AccentedBox from '../utilities/AccentedBox';
 
 interface Props {

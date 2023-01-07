@@ -4,7 +4,7 @@ import { structToString } from "../../services/aptosUtils";
 import { getNetworkSlug } from "../../services/network";
 import { fetchKeeperForStrategy } from "../../services/strategies";
 import { StructData } from "../../types/aptos";
-import useWallet from "../useWallet";
+import useWallet from "../utility/useWallet";
 
 const useStrategyKeeper = (strategyWitness: StructData, vaultAddress: string) => {
 

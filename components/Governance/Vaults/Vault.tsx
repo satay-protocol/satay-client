@@ -26,41 +26,45 @@ const Vault: React.FC<Props> = ({ vaultId }) => {
   return (
     <AccentedBox
       w='100%'
+      display='flex'
+      flexDirection='column'
+      gap={4}
     >
       <HStack
         w='100%'
-        spacing={4}
+        justifyContent='space-between'
       >
-        <Image 
-          src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
-          boxSize={12}
-          rounded="full"
-          alt='Vault Logo'
-        />
-        <VStack
-          alignItems="flex-start"
-          spacing={1}
+        <HStack
+          spacing={4}
         >
+          <Image 
+            src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
+            boxSize={12}
+            rounded="full"
+            alt='Vault Logo'
+          />
           <Text
-            fontSize='lg'
-            fontWeight='semibold'
+            fontSize='2xl'
+            fontWeight='bold'
           >
             {vaultInfo.baseCoin.symbol} Vault
           </Text>
-          <HStack>
-            <Text>
-              Manager
+        </HStack>
+        <HStack>
+            <Text
+              fontWeight='semibold'
+            >
+              Vault Manager:
             </Text>
             <Copyable 
               display={ellipsize(vaultInfo.managerAddress)}
               copyText={vaultInfo.managerAddress}
             />
           </HStack>
-        </VStack>
-        <SetVaultManager 
-          vaultAddress={vaultInfo.vaultAddress}
-        />
       </HStack>
+      <SetVaultManager 
+        vaultAddress={vaultInfo.vaultAddress}
+      />
     </AccentedBox>
   )
 }

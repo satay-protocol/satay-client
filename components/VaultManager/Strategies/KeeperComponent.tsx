@@ -1,10 +1,11 @@
-import { Button, HStack, Input, Text } from '@chakra-ui/react'
+import { Button, HStack, Box, Text } from '@chakra-ui/react'
 import React from 'react'
 import useStrategyKeeper from '../../../hooks/vaultManager/useStrategyKeeper'
 import { ellipsize } from '../../../services/utils'
 
 import { StructData } from '../../../types/aptos'
 import Copyable from '../../utilities/Copyable'
+import LabeledInput from '../../utilities/LabeledInput'
 
 interface Props {
     vaultAddress: string,
@@ -21,8 +22,11 @@ const KeeperComponent: React.FC<Props> = ({ vaultAddress, strategyWitess }) => {
     } = useStrategyKeeper(strategyWitess, vaultAddress);
 
     return (
-        <HStack
+        <Box
             w='100%'
+            display='flex'
+            flexDirection='column'
+            gap={4}
         >
             <HStack>
                 <Text>
@@ -33,18 +37,26 @@ const KeeperComponent: React.FC<Props> = ({ vaultAddress, strategyWitess }) => {
                     display={ellipsize(curKeeper)}
                 />
             </HStack>
-            <Input 
-                value={newKeeper}
-                onChange={(e) => setNewKeeper(e.target.value)}
-                placeholder={'New Keeper Address'}
-                flex={1}
-            />
-            <Button
-                onClick={onUpdate}
+            <HStack
+                w='100%'
+                alignItems='flex-end'
             >
-                Update
-            </Button>
-        </HStack>
+                
+                <LabeledInput 
+                    label='New Keeper Address'
+                    value={newKeeper}
+                    onChange={setNewKeeper}
+                    placeholder='0x...'
+                />
+                <Button
+                    onClick={onUpdate}
+                    disabled={!newKeeper || curKeeper === newKeeper}
+                    variant='ghost'
+                >
+                    Offer
+                </Button>
+            </HStack>
+        </Box>
     )
 }
 

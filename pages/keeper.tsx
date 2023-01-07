@@ -2,15 +2,14 @@ import type { NextPage } from 'next'
 
 import DefaultLayout from '../layouts/default'
 
-import Governance from '../components/Governance'
+import Keeper from '../components/Keeper'
 
-
-const GovernancePage: NextPage = () => {
+const KeeperPage: NextPage = () => {
   return (
     <DefaultLayout>
-      <Governance />
+      <Keeper />
     </DefaultLayout>
   )
 }
 
-export default GovernancePage
+export default KeeperPage

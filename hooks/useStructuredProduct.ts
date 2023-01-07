@@ -1,5 +1,5 @@
 import { toAptos } from "../services/utils";
-import useWallet from "./useWallet";
+import useWallet from "./utility/useWallet";
 
 const useStructuredProduct = (moduleAddress: string) => {
 

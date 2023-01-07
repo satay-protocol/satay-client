@@ -22,7 +22,9 @@ const Strategy: React.FC<Props> = ({ strategy, vaultAddress, vaultId }) => {
   return (
     <VStack
       w='100%'
-      spacing={4}
+      rounded='lg'
+      borderWidth={1}
+      p={4}
     >
       <HStack
         key={strategyModule}
@@ -44,7 +46,6 @@ const Strategy: React.FC<Props> = ({ strategy, vaultAddress, vaultId }) => {
         strategyWitess={strategy.strategyWitness}
         vaultAddress={vaultAddress}
       />
-      <Divider />
     </VStack>
   )
 }

@@ -23,7 +23,7 @@ const VaultManagerComponent: React.FC<Props> = ({ connectedAddress }) => {
                 fontSize="3xl"
                 fontWeight="extrabold"
             >
-                Your Vaults
+                Vaults
             </Text>
             <Vaults
                 vaultIds={vaultIds}

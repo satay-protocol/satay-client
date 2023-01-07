@@ -19,6 +19,7 @@ const FreezeVault: React.FC<Props> = ({ vaultId, isFrozen }) => {
     <Button
         onClick={() => frozen ? unfreezeVault() : freezeVault()}
         colorScheme='brand'
+        variant='outline'
     >
         {frozen ? 'Unfreeze' : 'Freeze'}
     </Button>

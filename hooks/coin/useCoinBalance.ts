@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { useAptos } from '../contexts/AptosContext';
+import { useAptos } from '../../contexts/AptosContext';
 
-import { getCoinBalance } from '../services/aptosUtils';
+import { getCoinBalance } from '../../services/aptosUtils';
 
-import { StructData } from '../types/aptos';
+import { StructData } from '../../types/aptos';
 
 const useCoinBalance = (accountAddress: string, coinStruct: StructData, coinStoreAddress = '0x1::coin') => {
 

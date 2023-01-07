@@ -7,6 +7,7 @@ import Vaults from './Vaults';
 import NotGovernance from './NotGovernance';
 
 import useGovernanceAccess from '../../hooks/governance/useGovernanceAccess';
+import SetGovernance from './SetGovernance';
 
 
 interface Props {
@@ -27,6 +28,7 @@ const GovernanceComponent : React.FC<Props> = ({ connectedAddress }) => {
             >
               <Vaults />
               <CreateVault />
+              <SetGovernance />
             </Flex>
           ) : (
             <NotGovernance />

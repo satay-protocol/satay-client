@@ -10,7 +10,7 @@ export interface StrategyInfo {
     productName: string;
 }
 
-export interface Strategy extends StrategyInfo {
+export interface VaultStrategy {
     strategyCoinType: string;
     debtRatio: number;
     totalDebt: number;
@@ -18,10 +18,17 @@ export interface Strategy extends StrategyInfo {
     totalLoss: number;
 }
 
+export interface Strategy extends StrategyInfo, VaultStrategy {}
+
+export interface KeeperInfo extends StrategyInfo {
+    vaultAddress: string;
+    vaultId: string;
+}
+
 export interface VaultStrategyData {
     strategy_coin_type: StructData;
-    debt_ratio: number;
-    total_debt: number;
-    total_gain: number;
-    total_loss: number;
+    debt_ratio: string;
+    total_debt: string;
+    total_gain: string;
+    total_loss: string;
 }
