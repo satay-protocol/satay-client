@@ -17,21 +17,26 @@ const HarvestTend : React.FC<Props> = ({ vaultId, strategyWitness, creditAvailab
     const { harvest, tend } = useVaultStrategy(vaultId, strategyWitness);
 
     return (
-        <HStack>
-            <Button
-                onClick={tend}
-                colorScheme="brand"
-                variant="outline"
-                disabled={debtOutstanding > 0}
-            >
-                Tend
-            </Button>
+        <HStack
+            w="100%"
+            justifyContent="space-around"
+        >
             <Button
                 onClick={harvest}
                 colorScheme="brand"
                 disabled={creditAvailable === 0 && debtOutstanding === 0}
+                flex={1}
+                // variant="outline"
             >
                 Harvest
+            </Button>
+            <Button
+                onClick={tend}
+                colorScheme="brand"
+                disabled={debtOutstanding > 0}
+                flex={1}
+            >
+                Tend
             </Button>
         </HStack>
     )

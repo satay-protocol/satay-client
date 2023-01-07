@@ -10,6 +10,7 @@ import { structToModule } from '../../../services/aptosUtils'
 import VaultStrategyData from './VaultStrategyData'
 import useCoinInfo from '../../../hooks/coin/useCoinInfo'
 import Actions from './Actions'
+import ProtocolList from '../../utilities/ProtocolList'
 
 interface Props {
     keeperInfo: KeeperInfo
@@ -31,12 +32,20 @@ const Strategy: React.FC<Props> = ({ keeperInfo }) => {
                     justifyContent="space-between"
                     w='100%'
                 >
-                    <Text
-                        fontSize="xl"
-                        fontWeight="bold"
+                    <HStack
+                        spacing={4}
                     >
-                        {keeperInfo.name}
-                    </Text>
+                        <Text
+                            fontSize="xl"
+                            fontWeight="bold"
+                        >
+                            {keeperInfo.name}
+                        </Text>
+                        <ProtocolList 
+                            protocols={keeperInfo.protocols}
+                            iconSize={'32px'}
+                        />
+                    </HStack>
                     <Text
                         fontSize="xl"
                         fontWeight="semibold"
@@ -44,7 +53,9 @@ const Strategy: React.FC<Props> = ({ keeperInfo }) => {
                         {keeperInfo.baseCoin.symbol} Vault
                     </Text>
                 </HStack>
-                <Text>
+                <Text
+                    fontSize="sm"
+                >
                     {keeperInfo.description}
                 </Text>
                 {

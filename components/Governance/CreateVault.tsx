@@ -21,22 +21,22 @@ import { coins } from '../../data/coins'
 import useCreateVault from '../../hooks/governance/useCreateVault'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { structToString } from '../../services/aptosUtils'
-
-import { Coin } from '../../types/coin'
+import LabeledPercentageInput from '../utilities/LabeledPercentageInput'
+import AccentedBox from '../utilities/AccentedBox'
 
 const MAX_FEE_AMOUNTS = 50;
 
 const CreateVault : React.FC = () => {
 
-    const createVault = useCreateVault();
-
-    const [selectedCoin, setSelectedCoin] = React.useState<Coin | undefined>(undefined);
-    const [managementFee, setManagementFee] = React.useState<string>("0");
-    const [performanceFee, setPerformanceFee] = React.useState<string>("0");
-
-    const format = (value: string) => value + '%';
-    const parse = (value: string) => value.replace('%', '');
-    const toFeeAmount = (value: string) => (parseInt(parse(value)) * 100).toString();
+    const {
+        coin,
+        managementFee,
+        performanceFee,
+        onChangeCoin,
+        onChangeManagementFee,
+        onChangePerformanceFee,
+        onCreateVault
+    } = useCreateVault();
 
     const fieldSpacing = 1;
 
@@ -52,93 +52,67 @@ const CreateVault : React.FC = () => {
                 >
                     Create Vault
                 </Text>
-                <HStack
-                    spacing={4}
-                    alignItems='flex-end'
-                >
-                    <VStack
-                        alignItems="flex-start"
-                        spacing={fieldSpacing}
+                <AccentedBox>
+                    <HStack
+                        alignItems='flex-end'
                     >
-                        <Text
-                            fontSize='xs'
-                            fontWeight='bold'
+                        <VStack
+                            alignItems="flex-start"
+                            spacing={fieldSpacing}
                         >
-                            Base Coin
-                        </Text>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rightIcon={<ChevronDownIcon />}
+                            <Text
+                                fontSize='xs'
+                                fontWeight='medium'
                             >
-                                {selectedCoin ? selectedCoin.name : 'Select a Coin'}
-                            </MenuButton>
-                            <MenuList>
-                                {
-                                    coins.map((coin) => (
-                                        <MenuItem 
-                                            key={structToString(coin.coinStruct)}
-                                            onClick={() => setSelectedCoin(coin)}
-                                        >
-                                            {coin.name}
-                                        </MenuItem>
-                                    ))
-                                }
-                            </MenuList>
-                        </Menu>
-                    </VStack>
-                    <VStack
-                        alignItems="flex-start"
-                        spacing={fieldSpacing}
-                        flex={1}
-                    >
-                        <Text
-                            fontSize='xs'
-                            fontWeight='bold'
-                        >
-                            Management Fee
-                        </Text>
-                        <NumberInput
-                            value={format(managementFee)}
-                            onChange={(value) => setManagementFee(parse(value))}
+                                Base Coin
+                            </Text>
+                            <Menu>
+                                <MenuButton
+                                    as={Button}
+                                    rightIcon={<ChevronDownIcon />}
+                                >
+                                    {coin ? coin.name : 'Select a Coin'}
+                                </MenuButton>
+                                <MenuList>
+                                    {
+                                        coins.map((coin) => (
+                                            <MenuItem 
+                                                key={structToString(coin.coinStruct)}
+                                                onClick={() => onChangeCoin(coin)}
+                                            >
+                                                {coin.name}
+                                            </MenuItem>
+                                        ))
+                                    }
+                                </MenuList>
+                            </Menu>
+                        </VStack>
+                        <LabeledPercentageInput 
+                            label="Management Fee"
+                            value={managementFee}
+                            onChange={onChangeManagementFee}
+                            placeholder='0%'
                             min={0}
                             max={MAX_FEE_AMOUNTS}
-                            w='100%'
-                        >
-                            <NumberInputField />
-                        </NumberInput>
-                    </VStack>
-                    <VStack
-                        alignItems="flex-start"
-                        spacing={fieldSpacing}
-                        flex={1}
-                    >
-                        <Text
-                            fontSize='xs'
-                            fontWeight='bold'
-                        >
-                            Performance Fee
-                        </Text>
-                        <NumberInput
-                            value={format(performanceFee)}
-                            onChange={(value) => setPerformanceFee(parse(value))}
+                        />
+                        <LabeledPercentageInput
+                            label="Performance Fee"
+                            value={performanceFee}
+                            onChange={onChangePerformanceFee}
+                            placeholder='0%'
                             min={0}
                             max={MAX_FEE_AMOUNTS}
-                            w='100%'
+                        />
+                        <Button
+                            onClick={onCreateVault}
+                            colorScheme="brand"
+                            disabled={!coin || !managementFee || !performanceFee}
+                            flexShrink={0}
                         >
-                            <NumberInputField />
-                        </NumberInput>
-                    </VStack>
-                    
-                    <Button
-                        onClick={() => selectedCoin && createVault(selectedCoin, toFeeAmount(managementFee), toFeeAmount(performanceFee))}
-                        colorScheme="brand"
-                        disabled={!selectedCoin}
-                        flexShrink={0}
-                    >
-                        Create
-                    </Button>
-                </HStack>
+                            Create
+                        </Button>
+                    </HStack>
+                </AccentedBox>
             </Flex>
         </Card>
     )

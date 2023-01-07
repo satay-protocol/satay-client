@@ -27,13 +27,14 @@ const Actions: React.FC<Props> = ({ vaultId, strategyWitness, baseCoinSymbol, de
         <VStack
             alignItems="flex-start"
             w="100%"
+            spacing={4}
         >
-            <Text
+            {/* <Text
                 fontSize="lg"
                 fontWeight="semibold"
             >
                 Actions
-            </Text>
+            </Text> */}
             <SimpleGrid
                 columns={2}
                 gap={4}

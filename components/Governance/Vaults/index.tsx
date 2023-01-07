@@ -16,8 +16,8 @@ const Vaults = () => {
             gap={4}
         >
             <Text
-                fontSize="xl"
-                fontWeight="bold"
+                fontSize="3xl"
+                fontWeight="extrabold"
             >
                 Vaults
             </Text>

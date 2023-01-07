@@ -3,6 +3,7 @@ import React from 'react'
 import { HStack, VStack, Text, NumberInput, NumberInputField, Button } from '@chakra-ui/react'
 import useVaultFees from '../../../hooks/vaultManager/useVaultFees';
 import { VaultFees } from '../../../types/vaults';
+import LabeledPercentageInput from '../../utilities/LabeledPercentageInput';
 
 const MAX_FEE_AMOUNTS = 50;
 const fieldSpacing = 1;
@@ -18,8 +19,8 @@ const UpdateFees: React.FC<Props> = ({ vaultId, vaultFees }) => {
     const {
         managementFee,
         performanceFee,
-        updateManagementFee,
-        updatePerformanceFee,
+        onManagementFeeChange,
+        onPerformanceFeeChange,
         updateFees
     } = useVaultFees(
         vaultId,
@@ -41,52 +42,34 @@ const UpdateFees: React.FC<Props> = ({ vaultId, vaultFees }) => {
             <HStack
                 alignItems='flex-end'
                 w='100%'
+                p={4}
+                borderWidth={1}
+                rounded='lg'
             >
-                <VStack
-                    alignItems="flex-start"
-                    spacing={fieldSpacing}
-                    flex={1}
-                >
-                    <Text
-                        fontSize='xs'
-                        fontWeight='bold'
-                    >
-                        Management Fee
-                    </Text>
-                    <NumberInput
-                        value={managementFee}
-                        onChange={(value) => updateManagementFee(value)}
-                        min={0}
-                        max={MAX_FEE_AMOUNTS}
-                        w='100%'
-                    >
-                        <NumberInputField />
-                    </NumberInput>
-                </VStack>
-                <VStack
-                    alignItems="flex-start"
-                    spacing={fieldSpacing}
-                    flex={1}
-                >
-                    <Text
-                        fontSize='xs'
-                        fontWeight='bold'
-                    >
-                        Performance Fee
-                    </Text>
-                    <NumberInput
-                        value={performanceFee}
-                        onChange={(value) => updatePerformanceFee(value)}
-                        min={0}
-                        max={MAX_FEE_AMOUNTS}
-                        w='100%'
-                    >
-                        <NumberInputField />
-                    </NumberInput>
-                </VStack>
+                <LabeledPercentageInput 
+                    label='Management Fee'
+                    value={managementFee}
+                    onChange={onManagementFeeChange}
+                    placeholder='0%'
+                    min={0}
+                    max={MAX_FEE_AMOUNTS}
+                />
+                <LabeledPercentageInput
+                    label='Performance Fee'
+                    value={performanceFee}
+                    onChange={onPerformanceFeeChange}
+                    placeholder='0%'
+                    min={0}
+                    max={MAX_FEE_AMOUNTS}
+                />
                 <Button
                     onClick={() => updateFees()}
                     colorScheme='brand'
+                    disabled={
+                        (!managementFee || !performanceFee) ||
+                        (managementFee === vaultFees.managementFee.toString() 
+                        && performanceFee === vaultFees.performanceFee.toString())
+                    }
                 >
                     Update Fees
                 </Button>

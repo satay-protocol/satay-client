@@ -10,15 +10,17 @@ const VaultStrategyEntry: React.FC<Props> = ({ title, value }) => {
   return (
     <HStack
         w='100%'
+        justifyContent='space-between'
     >
         <Text
             opacity={0.7}
-            fontWeight='medium'
+            fontSize='lg'
         >
             {title}:
         </Text>
         <Text
             fontWeight='medium'
+            fontSize='lg'
         >
             {value}
         </Text>

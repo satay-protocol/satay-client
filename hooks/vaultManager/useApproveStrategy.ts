@@ -4,23 +4,19 @@ import { structToModule, structToString } from "../../services/aptosUtils";
 import { StructData } from "../../types/aptos"
 import useWallet from "../utility/useWallet";
 
-const format = (value: string) => value + '%';
-const parse = (value: string) => value.replace('%', '');
-const toBpsAmount = (value: string) => (parseInt(parse(value)) * 100).toString();
-
 const useApproveStrategy = (vaultId: string) => {
 
     const { submitTransaction } = useWallet();
 
     const [selectedWitness, setSelectedWitness] = useState<StructData | null>(null);
-    const [debtRatio, setDebtRatio] = useState<string>('');
+    const [debtRatio, setDebtRatio] = useState<string | undefined>();
 
     const selectWitness = (witness: StructData) => {
         setSelectedWitness(witness);
     }
 
     const updateDebtRatio = (ratio: string) => {
-        setDebtRatio(parse(ratio));
+        setDebtRatio(ratio);
     }
 
     const approveStrategy = async () => {
@@ -30,7 +26,7 @@ const useApproveStrategy = (vaultId: string) => {
                 function: `${structToModule(selectedWitness)}::initialize`,
                 arguments: [
                     vaultId,
-                    toBpsAmount(debtRatio)
+                    debtRatio
                 ],
                 type_arguments: []
             }, {
@@ -42,7 +38,7 @@ const useApproveStrategy = (vaultId: string) => {
 
     return {
         selectedWitness: selectedWitness?.struct_name,
-        debtRatio: format(debtRatio),
+        debtRatio,
         selectWitness,
         updateDebtRatio,
         approveStrategy

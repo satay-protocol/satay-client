@@ -147,8 +147,8 @@ export const fetchVaultFees = async (vaultId: string, network: SupportedNetwork)
         network,
     })
     return {
-        managementFee: (feesResult.details.return_values[0] as number) / 100,
-        performanceFee: (feesResult.details.return_values[1] as number) / 100,
+        managementFee: (feesResult.details.return_values[0] as number),
+        performanceFee: (feesResult.details.return_values[1] as number),
     }
 }
 

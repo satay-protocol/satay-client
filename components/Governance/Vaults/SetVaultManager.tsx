@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Button, HStack, Input } from '@chakra-ui/react'
 import useSetVaultManager from '../../../hooks/governance/useSetVaultManager'
+import LabeledInput from '../../utilities/LabeledInput'
 
 interface Props {
     vaultAddress: string
@@ -13,18 +14,20 @@ const SetVaultManager: React.FC<Props> = ({ vaultAddress }) => {
 
     return (
         <HStack
-            flex={1}
+            alignItems='flex-end'
         >
-            <Input 
-                placeholder="New Vault Manager Address"
+            <LabeledInput 
+                label="New Vault Manager"
                 value={newVaultManager}
-                onChange={(e) => setNewVaultManager(e.target.value)}
+                setValue={setNewVaultManager}
+                placeholder="0x..."
             />
             <Button
                 colorScheme="brand"
                 onClick={submit}
+                disabled={!newVaultManager}
             >
-                Submit
+                Offer
             </Button>
         </HStack>
     )

@@ -17,8 +17,8 @@ const Copyable: React.FC<Props> = ({ display, copyText }) => {
 
   const toast = useToast()
 
-  const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
-  const bgHoverColor = useColorModeValue('gray.100', 'whiteAlpha.100');
+  const bgColor = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
+  const bgHoverColor = useColorModeValue('blackAlpha.100', 'whiteAlpha.100');
 
   const copy = () => {
     onCopy()

@@ -55,7 +55,9 @@ const DebtRatioSlider : React.FC<Props> = ({ vaultId, strategyModule, currentDeb
         </Text>
         <Button
             onClick={updateDebtRatio}
-            variant='ghost'
+            colorScheme='brand'
+            flexShrink={0}
+            disabled={debtRatio === currentDebtRatio / 100}
         >
             Update
         </Button>
