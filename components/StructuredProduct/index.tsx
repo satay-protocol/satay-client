@@ -6,7 +6,7 @@ import Card from '../utilities/Card'
 import ProtocolList from '../utilities/ProtocolList'
 import DepositBox from '../utilities/DepositBox'
 
-import useStructuredProduct from '../../hooks/useStructuredProduct'
+import useStructuredProduct from '../../hooks/structuredProduct/useStructuredProduct'
 
 import { StructuredProduct } from '../../types/structuredProduct'
 
