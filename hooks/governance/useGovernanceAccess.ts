@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react"
 
-import { useWallet } from "@manahippo/aptos-wallet-adapter"
+import { useAptos } from "../../contexts/AptosContext"
 
-import { getNetworkSlug } from "../../services/network"
 import { callGetFunction } from "../../services/simulation"
 
 import { satay } from "../../data/moduleAddresses"
 
 const useGovernanceAccess = (connectedAddress: string) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
 
     const [hasGovernanceAccess, setHasGovernanceAccess] = useState(false)
     
@@ -22,7 +21,7 @@ const useGovernanceAccess = (connectedAddress: string) => {
                 type_args: [],
                 args: [],
                 ledger_version: 0,
-                network: getNetworkSlug(network.name),
+                network,
             })
             setHasGovernanceAccess(governanceAddress.details.return_values[0] === connectedAddress.slice(2))
         }

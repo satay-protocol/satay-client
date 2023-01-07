@@ -1,19 +1,20 @@
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { useState, useEffect } from "react";
+
+import { useAptos } from "../../contexts/AptosContext";
+
 import { fetchGovernanceVaultInfo } from "../../services/governance";
-import { getNetworkSlug } from "../../services/network";
 
 import { GovernanceVaultInfo } from "../../types/vaults";
 
 const useGovernanceVaultInfo = (vaultId: string) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
 
     const [governanceVaultInfo, setGovernanceVaultInfo] = useState<GovernanceVaultInfo | null>(null);
 
     useEffect(() => {
         const getGovernanceVaultInfo = async () => {
-            const governanceVaultInfo = await fetchGovernanceVaultInfo(vaultId, getNetworkSlug(network.name));
+            const governanceVaultInfo = await fetchGovernanceVaultInfo(vaultId, network);
             setGovernanceVaultInfo(governanceVaultInfo);
         };
         getGovernanceVaultInfo();
