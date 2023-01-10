@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { VStack } from '@chakra-ui/react'
+import { Box, Text, VStack } from '@chakra-ui/react'
 
 import Vault from './Vault'
 
@@ -13,12 +13,23 @@ const Vaults: React.FC<Props> = ({ vaultIds }) => {
     <VStack
         alignItems="flex-start"
     >
-        {vaultIds.map((vaultId) => (
-            <Vault 
-                key={vaultId}
-                vaultId={vaultId}
-            />
-        ))}
+        {
+            vaultIds.length > 0 ? (
+                vaultIds.map((vaultId) => (
+                    <Vault 
+                        key={vaultId}
+                        vaultId={vaultId}
+                    />
+                ))
+            ) : (
+                <Box>
+                    <Text>
+                        You are not the manager of any vaults.
+                    </Text>
+                </Box>
+            )
+            
+        }
     </VStack>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { VStack } from '@chakra-ui/react'
+import { Box, Text, VStack } from '@chakra-ui/react'
 
 import Strategy from './Strategy'
 
@@ -18,14 +18,23 @@ const Strategies: React.FC<Props> = ({ strategies }) => {
         alignItems="flex-start"
     >
         {
-            strategies.map((strategy) => {
-                return (
-                    <Strategy
-                        key={structToString(strategy.strategyWitness)}
-                        keeperInfo={strategy}
-                    />
-                )
-            })
+            strategies.length > 0 ? (
+                strategies.map((strategy) => {
+                    return (
+                        <Strategy
+                            key={structToString(strategy.strategyWitness)}
+                            keeperInfo={strategy}
+                        />
+                    )
+                })
+            ) : (
+                <Box>
+                    <Text>
+                        You are not the keeper of any strategies.
+                    </Text>
+                </Box>
+            )
+            
         }
     </VStack>
   )

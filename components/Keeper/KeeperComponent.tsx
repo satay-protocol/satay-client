@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text } from '@chakra-ui/react'
+import { Skeleton, Text } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import Strategies from './Strategies'
@@ -13,7 +13,7 @@ interface Props {
 
 const KeeperComponent: React.FC<Props> = ({ connectedAddress }) => {
 
-    const strategiesKeptByUser = useStrategiesKeptByUser(connectedAddress);
+    const { strategiesKeptByUser, fetched } = useStrategiesKeptByUser(connectedAddress);
 
     return (
         <Card
@@ -25,9 +25,13 @@ const KeeperComponent: React.FC<Props> = ({ connectedAddress }) => {
             >
                 Your Strategies
             </Text>
-            <Strategies 
-                strategies={strategiesKeptByUser}
-            />
+            <Skeleton
+                isLoaded={fetched}
+            >
+                <Strategies 
+                    strategies={strategiesKeptByUser}
+                />
+            </Skeleton>
         </Card>
     )
 }

@@ -11,16 +11,21 @@ const useStrategiesKeptByUser = (userAddress: string) => {
     const { network } = useAptos();
 
     const [strategiesKeptByUser, setStrategiesKeptByUser] = useState<KeeperInfo[]>([]);
+    const [fetched, setFetched] = useState(false);
 
     useEffect(() => {
         const loadStrategiesKeptByUser = async () => {
             const strategiesKeptByUser = await fetchStrategiesKeptByAccount(userAddress, network);
             setStrategiesKeptByUser(strategiesKeptByUser);
+            setFetched(true);
         }
         loadStrategiesKeptByUser();
     }, [userAddress]);
 
-    return strategiesKeptByUser;
+    return {
+        strategiesKeptByUser,
+        fetched
+    };
 }
 
 export default useStrategiesKeptByUser

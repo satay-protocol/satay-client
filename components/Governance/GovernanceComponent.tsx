@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Skeleton } from '@chakra-ui/react'
 
 import CreateVault from './CreateVault';
 import Vaults from './Vaults';
@@ -15,24 +15,28 @@ interface Props {
 
 const GovernanceComponent : React.FC<Props> = ({ connectedAddress }) => {
 
-    const hasGovernanceAccess = useGovernanceAccess(connectedAddress);
+    const { hasGovernanceAccess, fetched } = useGovernanceAccess(connectedAddress);
 
     return (
       <Box>
-        {
-          hasGovernanceAccess ? (
-            <Flex
-              direction="column"
-              gap={4}
-            >
-              <Vaults />
-              <CreateVault />
-              <SetGovernance />
-            </Flex>
-          ) : (
-            <NotGovernance />
-          )
-        }
+        <Skeleton
+          isLoaded={fetched}
+        >
+          {
+            hasGovernanceAccess ? (
+              <Flex
+                direction="column"
+                gap={4}
+              >
+                <Vaults />
+                <CreateVault />
+                <SetGovernance />
+              </Flex>
+            ) : (
+              <NotGovernance />
+            )
+          }
+        </Skeleton>
       </Box>
     )
 }
