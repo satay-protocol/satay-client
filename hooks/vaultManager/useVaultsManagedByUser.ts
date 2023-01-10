@@ -9,17 +9,22 @@ const useVaultsManagedByUser = (userAddress: string) => {
 
     const { network } = useAptos();
 
-    const [vaultIdsManagedByUser, setVaultIdsManagedByUser] = useState<string[]>([])
+    const [vaultIds, setVaultIds] = useState<string[]>([]);
+    const [fetched, setFetched] = useState<boolean>(false);
 
     useEffect(() => {
         const getVaultsManagedByUser = async () => {
-            const vaultIds = await fetchVaultsManagedByAccount(userAddress, network)
-            setVaultIdsManagedByUser(vaultIds)
+            const vaultIdsManagedByAccount = await fetchVaultsManagedByAccount(userAddress, network)
+            setVaultIds(vaultIdsManagedByAccount);
+            setFetched(true);
         }
         getVaultsManagedByUser()
     }, [userAddress])
 
-    return vaultIdsManagedByUser
+    return {
+        vaultIds,
+        fetched
+    }
 }
 
 export default useVaultsManagedByUser

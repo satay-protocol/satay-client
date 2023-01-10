@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text } from '@chakra-ui/react'
+import { Skeleton, Text } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import Vaults from './Vaults'
@@ -13,7 +13,7 @@ interface Props {
 
 const VaultManagerComponent: React.FC<Props> = ({ connectedAddress }) => {
 
-    const vaultIds = useVaultsManagedByUser(connectedAddress)
+    const { vaultIds, fetched } = useVaultsManagedByUser(connectedAddress)
 
     return (
         <Card
@@ -25,9 +25,13 @@ const VaultManagerComponent: React.FC<Props> = ({ connectedAddress }) => {
             >
                 Vaults
             </Text>
-            <Vaults
-                vaultIds={vaultIds}
-            />
+            <Skeleton
+                isLoaded={fetched}
+            >
+                <Vaults
+                    vaultIds={vaultIds}
+                />
+            </Skeleton>
         </Card>
     )
 }

@@ -10,7 +10,8 @@ const useGovernanceAccess = (connectedAddress: string) => {
 
     const { network } = useAptos();
 
-    const [hasGovernanceAccess, setHasGovernanceAccess] = useState(false)
+    const [hasGovernanceAccess, setHasGovernanceAccess] = useState(false);
+    const [fetched, setFetched] = useState(false);
     
     useEffect(() => {
         if (!connectedAddress) return
@@ -23,13 +24,14 @@ const useGovernanceAccess = (connectedAddress: string) => {
                 ledger_version: 0,
                 network,
             })
-            setHasGovernanceAccess(governanceAddress.details.return_values[0] === connectedAddress.slice(2))
+            setHasGovernanceAccess(governanceAddress.details.return_values[0] === connectedAddress.slice(2));
+            setFetched(true);
         }
     
         checkAccess()
     }, [connectedAddress])
     
-    return hasGovernanceAccess
+    return {hasGovernanceAccess, fetched}
 }
 
 export default useGovernanceAccess
