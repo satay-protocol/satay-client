@@ -1,18 +1,19 @@
-import { useWallet } from '@manahippo/aptos-wallet-adapter'
 import { useState, useEffect } from 'react'
-import { getNetworkSlug } from '../../services/network';
+
+import { useAptos } from '../../contexts/AptosContext';
+
 import { fetchVaultsManagedByAccount } from '../../services/vaultManager'
 
 
 const useVaultsManagedByUser = (userAddress: string) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
 
     const [vaultIdsManagedByUser, setVaultIdsManagedByUser] = useState<string[]>([])
 
     useEffect(() => {
         const getVaultsManagedByUser = async () => {
-            const vaultIds = await fetchVaultsManagedByAccount(userAddress, getNetworkSlug(network.name))
+            const vaultIds = await fetchVaultsManagedByAccount(userAddress, network)
             setVaultIdsManagedByUser(vaultIds)
         }
         getVaultsManagedByUser()

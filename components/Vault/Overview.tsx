@@ -6,10 +6,12 @@ import {
     Image,
     HStack,
 } from '@chakra-ui/react'
+
 import Copyable from '../utilities/Copyable';
+
 import { ellipsize } from '../../services/utils';
 
-const imageSize = "80px"
+const imageSize = "80px";
 
 interface Props {
     logo: string;

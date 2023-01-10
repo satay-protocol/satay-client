@@ -1,5 +1,7 @@
-import { Box, HStack, Image, Skeleton, Text, useColorMode, useTheme, VStack } from '@chakra-ui/react';
-import React, { useEffect, useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
+
+import { HStack, Image, Text, useColorMode, VStack } from '@chakra-ui/react';
+
 import Card from '../utilities/Card';
 
 import { blackAlpha, bridgeTheme, whiteAlpha } from './theme';
@@ -8,14 +10,11 @@ const Bridge = () => {
 
     const containerRef = useRef();
 
-    const {colorMode} = useColorMode();
+    const { colorMode } = useColorMode();
     
-    const [loaded, setLoaded] = React.useState(false);
-
     useLayoutEffect(() => {
         const bridge = containerRef.current;
         customElements.whenDefined("aptos-bridge").then(() => {
-            setLoaded(true);
             const theme = bridgeTheme(colorMode);
           // @ts-ignore
           bridge?.setTheme(theme);

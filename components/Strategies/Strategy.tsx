@@ -1,11 +1,13 @@
 import React from 'react'
 
+import Link from 'next/link'
+
 import { Text, VStack } from '@chakra-ui/react'
 
-import { Strategy } from '../../types/strategy'
 import ProtocolList from '../utilities/ProtocolList'
-import Link from 'next/link'
 import AccentedBox from '../utilities/AccentedBox'
+
+import { Strategy } from '../../types/strategy'
 
 interface Props {
     strategy: Strategy

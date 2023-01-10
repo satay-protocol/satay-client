@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { HStack, VStack, Text, Flex, Button } from '@chakra-ui/react';
+import Link from 'next/link';
+
+import { VStack, Text, Flex, Button } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 
 import Card from '../utilities/Card';
 import ProtocolList from '../utilities/ProtocolList';
-import Link from 'next/link';
-import { ArrowBackIcon } from '@chakra-ui/icons';
 
 interface Props {
     name: string;

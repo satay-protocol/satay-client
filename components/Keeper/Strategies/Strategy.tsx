@@ -3,14 +3,13 @@ import React from 'react'
 import { HStack, Text, VStack } from '@chakra-ui/react'
 
 import AccentedBox from '../../utilities/AccentedBox'
-
-import { KeeperInfo } from '../../../types/strategy'
-import HarvestTend from './HarvestTend'
-import { structToModule } from '../../../services/aptosUtils'
 import VaultStrategyData from './VaultStrategyData'
-import useCoinInfo from '../../../hooks/coin/useCoinInfo'
 import Actions from './Actions'
 import ProtocolList from '../../utilities/ProtocolList'
+
+import useCoinInfo from '../../../hooks/coin/useCoinInfo'
+
+import { KeeperInfo } from '../../../types/strategy'
 
 interface Props {
     keeperInfo: KeeperInfo

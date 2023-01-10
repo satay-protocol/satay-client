@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { Button, HStack, Input } from '@chakra-ui/react'
-import useSetVaultManager from '../../../hooks/governance/useSetVaultManager'
+import { Button, HStack } from '@chakra-ui/react'
+
 import LabeledInput from '../../utilities/LabeledInput'
+
+import useSetVaultManager from '../../../hooks/governance/useSetVaultManager'
 
 interface Props {
     vaultAddress: string

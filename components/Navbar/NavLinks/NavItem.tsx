@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Button,
   Link,
@@ -6,6 +7,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useRouter } from 'next/router';
+
 import { Route } from './routes';
 
 interface NavItemProps extends FlexProps {

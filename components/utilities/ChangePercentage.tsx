@@ -1,5 +1,6 @@
-import { Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react'
+
+import { Text, useColorModeValue } from '@chakra-ui/react';
 
 interface Props {
     amountStart: number;

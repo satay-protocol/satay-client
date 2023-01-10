@@ -6,21 +6,20 @@ import {
     Flex, 
     NumberInput, 
     Text, 
-    VStack,
     Button,
     NumberInputField,
-    useColorModeValue
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
+import AccentedBox from './AccentedBox';
+
 import useWallet from '../../hooks/utility/useWallet';
+import useCoinBalance from '../../hooks/coin/useCoinBalance';
+import useCoinInfo from '../../hooks/coin/useCoinInfo';
 
 import { fromAptos } from '../../services/utils';
-import useCoinBalance from '../../hooks/coin/useCoinBalance';
 
 import { StructData } from '../../types/aptos';
-import useCoinInfo from '../../hooks/coin/useCoinInfo';
-import AccentedBox from './AccentedBox';
 
 interface Props {
     coinStruct: StructData,

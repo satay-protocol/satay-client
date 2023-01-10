@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { SimpleGrid, VStack } from '@chakra-ui/react'
 
 import HarvestTend from './HarvestTend'
+import VaultStrategyEntry from './VaultStrategyEntry'
 
 import useCreditAvailable from '../../../hooks/strategy/useCreditAvailable'
 import useDebtOutstanding from '../../../hooks/strategy/useDebtOutstanding'
 
 import { StructData } from '../../../types/aptos'
-import VaultStrategyEntry from './VaultStrategyEntry'
 
 interface Props {
     vaultId: string,

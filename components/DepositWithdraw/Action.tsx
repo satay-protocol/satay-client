@@ -8,16 +8,17 @@ import {
     NumberInputField,
     Flex,
     Button,
-    useColorModeValue
 } from '@chakra-ui/react';
 
-import { fromAptos, round } from '../../services/utils';
+import AccentedBox from '../utilities/AccentedBox';
+
 import useUserCoinBalance from '../../hooks/coin/useUserCoinBalance';
 import useWallet from '../../hooks/utility/useWallet';
+import useCoinInfo from '../../hooks/coin/useCoinInfo';
+
+import { round } from '../../services/utils';
 
 import { StructData } from '../../types/aptos';
-import useCoinInfo from '../../hooks/coin/useCoinInfo';
-import AccentedBox from '../utilities/AccentedBox';
 
 interface Props {
     actionName: string;

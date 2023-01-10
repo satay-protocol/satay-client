@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { Divider, HStack, Text, VStack } from '@chakra-ui/react'
+import { HStack, Text, VStack } from '@chakra-ui/react'
 
 import DebtRatioSlider from './DebtRatioSlider'
+import KeeperComponent from './KeeperComponent'
 
 import { structToModule } from '../../../services/aptosUtils'
 
 import { Strategy } from '../../../types/strategy'
-import KeeperComponent from './KeeperComponent'
 
 interface Props {
     vaultId: string,

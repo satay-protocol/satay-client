@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { useAptos } from "../../contexts/AptosContext";
 
-import { getNetworkSlug } from "../../services/network";
 import { fetchVaultManagerVaultInfo } from "../../services/vaultManager";
 
 import { VaultManagerVaultInfo } from "../../types/vaults";
 
 const useVaultManagerVaultInfo = (vaultId: string) => {
     
-    const { network } = useWallet();
+    const { network } = useAptos();
 
     const [vaultManagerVaultInfo, setVaultManagerVaultInfo] = useState<VaultManagerVaultInfo | null>(null);
 
     useEffect(() => {
         const getVaultManagerVaultInfo = async () => {
-            const vaultManagerVaultInfo = await fetchVaultManagerVaultInfo(vaultId, getNetworkSlug(network.name));
+            const vaultManagerVaultInfo = await fetchVaultManagerVaultInfo(vaultId, network);
             setVaultManagerVaultInfo(vaultManagerVaultInfo);
         };
         getVaultManagerVaultInfo();

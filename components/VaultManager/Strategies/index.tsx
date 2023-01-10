@@ -7,8 +7,9 @@ import Strategy from './Strategy'
 
 import useVaultStrategies from '../../../hooks/utility/useVaultStrategies'
 
-import { Coin } from '../../../types/coin'
 import { structToString } from '../../../services/aptosUtils'
+
+import { Coin } from '../../../types/coin'
 
 interface Props {
     vaultAddress: string,

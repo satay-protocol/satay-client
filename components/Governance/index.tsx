@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
 import NotConnected from '../utilities/NotConnected';
 import GovernanceComponent from './GovernanceComponent';
 
+import { useWallet } from '@manahippo/aptos-wallet-adapter';
+
 const Governance = () => {
+  
   const { account } = useWallet();
 
   let connectedAddress = account?.address?.toString();

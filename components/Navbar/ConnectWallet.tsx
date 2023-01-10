@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 
-import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter'
-
 import {
     Menu,
     MenuButton,
@@ -14,11 +12,12 @@ import {
     useToast
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+
 import { FaWallet } from 'react-icons/fa'
 
+import { useWallet, Wallet } from '@manahippo/aptos-wallet-adapter'
+
 import { ellipsize } from '../../services/utils'
-
-
 
 const ConnectWallet = () => {
 

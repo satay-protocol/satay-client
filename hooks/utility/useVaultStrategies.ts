@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react"
 
-import { useWallet } from "@manahippo/aptos-wallet-adapter"
+import { useAptos } from "../../contexts/AptosContext";
 
 import { fetchStrategiesForVaultAddress } from "../../services/strategies"
+
 import { Strategy } from "../../types/strategy";
-import { getNetworkSlug } from "../../services/network";
 
 const useVaultStrategies = (vaultAddress: string) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
 
     const [strategies, setStrategies] = useState<Strategy[]>([])
 
     useEffect(() => {
         const fetchStrategies = async () => {
-            const strategies = await fetchStrategiesForVaultAddress(vaultAddress, getNetworkSlug(network.name));
+            const strategies = await fetchStrategiesForVaultAddress(vaultAddress, network);
             setStrategies(strategies)
         }
         fetchStrategies()

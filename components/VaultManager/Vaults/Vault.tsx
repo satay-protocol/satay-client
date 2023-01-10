@@ -2,11 +2,12 @@ import React from 'react'
 
 import { HStack, Image, Skeleton, Text, VStack } from '@chakra-ui/react'
 
-import useVaultManagerVaultInfo from '../../../hooks/vaultManager/useVaultManagerVaultInfo'
 import UpdateFees from './UpdateFees'
 import FreezeVault from './FreezeVault'
 import Strategies from '../Strategies'
 import AccentedBox from '../../utilities/AccentedBox'
+
+import useVaultManagerVaultInfo from '../../../hooks/vaultManager/useVaultManagerVaultInfo'
 
 interface Props {
     vaultId: string

@@ -1,8 +1,12 @@
-import { VStack } from '@chakra-ui/react'
 import React from 'react'
-import { structToString } from '../../../services/aptosUtils'
-import { KeeperInfo } from '../../../types/strategy'
+
+import { VStack } from '@chakra-ui/react'
+
 import Strategy from './Strategy'
+
+import { structToString } from '../../../services/aptosUtils'
+
+import { KeeperInfo } from '../../../types/strategy'
 
 interface Props {
     strategies: KeeperInfo[]
