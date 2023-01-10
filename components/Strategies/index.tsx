@@ -4,8 +4,9 @@ import { Text, VStack } from '@chakra-ui/react'
 
 import StrategyComponent from './Strategy'
 
-import { structToString } from '../../services/aptosUtils'
 import useVaultStrategies from '../../hooks/utility/useVaultStrategies'
+
+import { structToString } from '../../services/aptosUtils'
 
 interface Props {
     vaultAddress: string

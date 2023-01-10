@@ -1,8 +1,10 @@
 import React from 'react'
-import useVaultDepositWithdraw from '../../hooks/vault/useVaultDepositWithdraw'
-import { Coin } from '../../types/coin'
 
 import DepositBox from '../utilities/DepositBox'
+
+import useVaultDepositWithdraw from '../../hooks/vault/useVaultDepositWithdraw'
+
+import { Coin } from '../../types/coin'
 
 interface Props {
     vaultId: string,

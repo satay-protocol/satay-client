@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { HStack, Image, Box } from '@chakra-ui/react'
+import { HStack, Image } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
-
 
 interface Props {
     protocols: string[]

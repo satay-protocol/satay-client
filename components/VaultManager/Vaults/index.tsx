@@ -1,5 +1,7 @@
-import { VStack } from '@chakra-ui/react'
 import React from 'react'
+
+import { VStack } from '@chakra-ui/react'
+
 import Vault from './Vault'
 
 interface Props {

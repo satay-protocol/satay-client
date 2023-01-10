@@ -5,10 +5,9 @@ import { Box, Flex } from '@chakra-ui/react'
 import CreateVault from './CreateVault';
 import Vaults from './Vaults';
 import NotGovernance from './NotGovernance';
-
-import useGovernanceAccess from '../../hooks/governance/useGovernanceAccess';
 import SetGovernance from './SetGovernance';
 
+import useGovernanceAccess from '../../hooks/governance/useGovernanceAccess';
 
 interface Props {
     connectedAddress: string

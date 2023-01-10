@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { HStack, VStack, Text, NumberInput, NumberInputField, Button } from '@chakra-ui/react'
-import useVaultFees from '../../../hooks/vaultManager/useVaultFees';
-import { VaultFees } from '../../../types/vaults';
+import { HStack, VStack, Text, Button } from '@chakra-ui/react'
+
 import LabeledPercentageInput from '../../utilities/LabeledPercentageInput';
 
+import useVaultFees from '../../../hooks/vaultManager/useVaultFees';
+
+import { VaultFees } from '../../../types/vaults';
+
 const MAX_FEE_AMOUNTS = 50;
-const fieldSpacing = 1;
 
 interface Props {
     vaultId: string

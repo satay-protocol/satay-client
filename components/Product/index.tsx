@@ -1,17 +1,13 @@
 import React from 'react'
 
-import { 
-  Flex
-} from '@chakra-ui/react';
-
-import { useWallet } from '@manahippo/aptos-wallet-adapter';
+import { Flex } from '@chakra-ui/react';
 
 import ProductInfo from './ProductInfo';
 import Card from '../utilities/Card';
 import ProductHeader from './ProductHeader';
 import StructuredProductDepositWithdraw from './StructuredProductDepositWithdraw';
 
-import { getNetworkSlug } from '../../services/network';
+import { useAptos } from '../../contexts/AptosContext';
 
 import { getStructuredProduct } from '../../data/structuredProducts';
 
@@ -21,9 +17,9 @@ interface Props {
 
 const ProductComponent : React.FC<Props> = ({ productName }) => {
 
-  const { network } = useWallet();
+  const { network } = useAptos();
 
-  const structuredProduct = getStructuredProduct(productName, getNetworkSlug(network?.name));
+  const structuredProduct = getStructuredProduct(productName, network);
 
   return (
     <Flex

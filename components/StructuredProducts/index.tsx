@@ -1,13 +1,14 @@
 import React from 'react'
 
-import { getStructuredProducts } from '../../data/structuredProducts'
 
 import { VStack, Text, useBreakpointValue } from '@chakra-ui/react'
 
 import StructuredProductComponent from '../StructuredProduct'
 import Card from '../utilities/Card'
-import { useWallet } from '@manahippo/aptos-wallet-adapter'
-import { getNetworkSlug } from '../../services/network'
+
+import { useAptos } from '../../contexts/AptosContext'
+
+import { getStructuredProducts } from '../../data/structuredProducts'
 
 interface Props {
     page?: boolean
@@ -15,12 +16,12 @@ interface Props {
 
 const StructuredProducts : React.FC<Props> = ({ page }) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
 
     const pageHeaderSize = useBreakpointValue({ base: '2xl', md: '3xl' })
     const nonpageHeaderSize = useBreakpointValue({ base: 'xl', md: '2xl' })  
 
-    const structuredProducts = getStructuredProducts(getNetworkSlug(network?.name));
+    const structuredProducts = getStructuredProducts(network);
 
     return (
         <VStack

@@ -1,11 +1,15 @@
-import { Button, HStack, Box, Text } from '@chakra-ui/react'
 import React from 'react'
+
+import { Button, HStack, Box, Text } from '@chakra-ui/react'
+
+import Copyable from '../../utilities/Copyable'
+import LabeledInput from '../../utilities/LabeledInput'
+
 import useStrategyKeeper from '../../../hooks/vaultManager/useStrategyKeeper'
+
 import { ellipsize } from '../../../services/utils'
 
 import { StructData } from '../../../types/aptos'
-import Copyable from '../../utilities/Copyable'
-import LabeledInput from '../../utilities/LabeledInput'
 
 interface Props {
     vaultAddress: string,

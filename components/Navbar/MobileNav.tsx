@@ -10,11 +10,10 @@ import {
     DrawerContent,
     useDisclosure,
     useColorModeValue,
-    VStack,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { routes } from './routes';
-import NavItem from './NavItem';
+
+import Navlinks from './NavLinks';
   
 const MobileNav: React.FC = () => {
 
@@ -62,19 +61,7 @@ const MobileNav: React.FC = () => {
                                 onClick={onClose} 
                             />
                         </Flex>
-                        <VStack
-                            spacing={4}
-                            alignItems="flex-start"
-                        >
-                            {
-                                routes.map((route) => (
-                                    <NavItem 
-                                        key={route.href}
-                                        route={route}
-                                    />
-                                ))
-                            }
-                        </VStack>
+                        <Navlinks />
                     </Box>
                 </DrawerContent>
             </Drawer>

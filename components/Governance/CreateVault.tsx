@@ -5,24 +5,23 @@ import {
     HStack,
     Button,
     Flex,
-    NumberInput,
-    NumberInputField,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
     VStack
 } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 import Card from '../utilities/Card'
-
-import { coins } from '../../data/coins'
-
-import useCreateVault from '../../hooks/governance/useCreateVault'
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import { structToString } from '../../services/aptosUtils'
 import LabeledPercentageInput from '../utilities/LabeledPercentageInput'
 import AccentedBox from '../utilities/AccentedBox'
+
+import useCreateVault from '../../hooks/governance/useCreateVault'
+
+import { structToString } from '../../services/aptosUtils'
+
+import { coins } from '../../data/coins'
 
 const MAX_FEE_AMOUNTS = 50;
 

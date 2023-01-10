@@ -3,9 +3,9 @@ import React from 'react'
 import { Text } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
+import Strategies from './Strategies'
 
 import useStrategiesKeptByUser from '../../hooks/keeper/useStrategiesKeptByUser'
-import Strategies from './Strategies'
 
 interface Props {
     connectedAddress: string

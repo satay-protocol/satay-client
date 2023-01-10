@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { Button, HStack, Input, Text } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import LabeledInput from '../utilities/LabeledInput'
-import useSetGovernance from '../../hooks/governance/useSetGovernance'
 import AccentedBox from '../utilities/AccentedBox'
+
+import useSetGovernance from '../../hooks/governance/useSetGovernance'
 
 const SetGovernance = () => {
 

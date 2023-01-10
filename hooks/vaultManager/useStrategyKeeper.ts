@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
-import { satay } from "../../data/moduleAddresses";
-import { structToString } from "../../services/aptosUtils";
-import { getNetworkSlug } from "../../services/network";
-import { fetchKeeperForStrategy } from "../../services/strategies";
-import { StructData } from "../../types/aptos";
+
+import { useAptos } from "../../contexts/AptosContext";
 import useWallet from "../utility/useWallet";
+
+import { structToString } from "../../services/aptosUtils";
+import { fetchKeeperForStrategy } from "../../services/strategies";
+
+import { satay } from "../../data/moduleAddresses";
+
+import { StructData } from "../../types/aptos";
 
 const useStrategyKeeper = (strategyWitness: StructData, vaultAddress: string) => {
 
-    const { network, submitTransaction } = useWallet();
+    const { network } = useAptos();
+    const { submitTransaction } = useWallet();
 
     const [curKeeper, setCurKeeper] = useState<string | null>(null);
     const [newKeeper, setNewKeeperState] = useState<string | null>(null);
@@ -19,7 +24,7 @@ const useStrategyKeeper = (strategyWitness: StructData, vaultAddress: string) =>
 
     useEffect(() => {
         const getKeeper = async () => {
-            const keeper = await fetchKeeperForStrategy(strategyWitness, vaultAddress, getNetworkSlug(network.name));
+            const keeper = await fetchKeeperForStrategy(strategyWitness, vaultAddress, network);
             setCurKeeper(keeper);
         };
         getKeeper();

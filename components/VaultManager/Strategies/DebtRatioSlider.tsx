@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { 
-    HStack,
     Slider,
     SliderTrack,
     SliderFilledTrack,
@@ -10,8 +9,6 @@ import {
     Text,
     Flex
  } from '@chakra-ui/react'
-
- import AccentedBox from '../../utilities/AccentedBox';
 
 import useUpdateDebtRatio from '../../../hooks/vaultManager/useUpdateDebtRatio';
 

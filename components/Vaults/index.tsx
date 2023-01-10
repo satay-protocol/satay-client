@@ -3,7 +3,6 @@ import React from 'react'
 import { Text, Flex, useBreakpointValue } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
-
 import VaultsList from './VaultsList';
 
 interface Props {

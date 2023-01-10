@@ -1,20 +1,21 @@
 import React from 'react'
 
+import Link from 'next/link'
+
 import { Button, VStack } from '@chakra-ui/react'
+import { ArrowBackIcon } from '@chakra-ui/icons'
 
 import Card from '../utilities/Card'
 import Overview from './Overview'
 import Performance from './Performance'
 
-import { VaultInfo } from '../../types/vaults'
-import Link from 'next/link'
-import { ArrowBackIcon } from '@chakra-ui/icons'
+import { VaultInfo as VaultInfoType } from '../../types/vaults'
 
 interface Props {
-    vault: VaultInfo
+    vault: VaultInfoType
 }
 
-const VaultInfo : React.FC<Props> = ({ vault }) => {
+const VaultInfo: React.FC<Props> = ({ vault }) => {
   return (
     <Card
         gap={2}

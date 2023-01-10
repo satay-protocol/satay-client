@@ -1,16 +1,16 @@
 import React from 'react'
 
 import { 
-    Box, 
     VStack,
     Text,
     useColorModeValue
 } from '@chakra-ui/react';
 
+import AccentedBox from '../utilities/AccentedBox';
+
 import useCoinBalances from '../../hooks/coin/useCoinBalances';
 
 import { toAptos } from '../../services/utils';
-import AccentedBox from '../utilities/AccentedBox';
 
 interface Props {
     vaultAddress: string;

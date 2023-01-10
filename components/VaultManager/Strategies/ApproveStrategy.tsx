@@ -1,12 +1,17 @@
 import React from 'react'
 
-import { Box, Button, HStack, Menu, MenuButton, MenuItem, MenuList, NumberInput, NumberInputField, Text, VStack } from '@chakra-ui/react'
-import useApproveStrategy from '../../../hooks/vaultManager/useApproveStrategy'
+import { Button, HStack, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { structToString } from '../../../services/aptosUtils'
-import { strategies } from '../../../data/strategies'
-import { Coin } from '../../../types/coin'
+
 import LabeledPercentageInput from '../../utilities/LabeledPercentageInput'
+
+import useApproveStrategy from '../../../hooks/vaultManager/useApproveStrategy'
+
+import { structToString } from '../../../services/aptosUtils'
+
+import { strategies } from '../../../data/strategies'
+
+import { Coin } from '../../../types/coin'
 
 interface Props {
     vaultId: string,

@@ -1,8 +1,12 @@
-import { SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
-import useVaultStrategy from '../../../hooks/strategy/useVaultStrategy'
-import { StructData } from '../../../types/aptos'
+
+import { SimpleGrid, Text, VStack } from '@chakra-ui/react'
+
 import VaultStrategyEntry from './VaultStrategyEntry'
+
+import useVaultStrategy from '../../../hooks/strategy/useVaultStrategy'
+
+import { StructData } from '../../../types/aptos'
 
 interface Props {
   strategyWitness: StructData,
@@ -10,8 +14,6 @@ interface Props {
   decimals: number,
   baseCoinSymbol: string,
 }
-
-
 
 const VaultStrategyData: React.FC<Props> = ({ strategyWitness, vaultAddress, decimals, baseCoinSymbol }) => {
 

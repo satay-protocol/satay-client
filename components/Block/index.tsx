@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { Text, Flex, Box } from '@chakra-ui/react'
+import {ArrowForwardIcon} from '@chakra-ui/icons'
 
-import { Block } from '../../types/block';
 import ProtocolList from '../utilities/ProtocolList';
 
-import {ArrowForwardIcon} from '@chakra-ui/icons'
+import { Block } from '../../types/block';
 
 interface Props {
     bg?: string;

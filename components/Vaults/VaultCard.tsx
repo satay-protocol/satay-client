@@ -4,9 +4,9 @@ import { Text, Flex, Image, Skeleton } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import Strategies from '../Strategies'
+import VaultDepositBox from './VaultDepositBox'
 
 import useVaultInfo from '../../hooks/vault/useVaultInfo'
-import VaultDepositBox from './VaultDepositBox'
 
 interface Props {
     vaultId: string
