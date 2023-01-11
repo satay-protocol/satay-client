@@ -2,3 +2,5 @@ export const dittoStakingAddress = "0xd11107bdf0d6d7040c6c0bfbdecb6545191fdf13e8
 
 export const liquidswapLPAddress = "0x5a97986a9d031c4567e15b797be516910cfcb4156312482efc6a19c0a30c948"
 export const liquidswapCurvesAddress = "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12"
+
+export const layerZeroAddress = "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa"
