@@ -1,10 +1,11 @@
 import tortugaLeverage from "./tortugaLeverage";
 import { dittoStakingTestnet, dittoStakingMainnet } from "./dittoLPFarming";
 
-import { StructuredProduct } from "../../types/structuredProduct";
-import { DEFAULT_NETWORK, SupportedNetwork } from "../../services/aptosClients";
+import { DEFAULT_NETWORK } from "../../contexts/AptosContext";
 
-const devnetStructuredProducts = [];
+import { StructuredProduct } from "../../types/structuredProduct";
+import { SupportedNetwork } from "../../types/network";
+
 
 const testnetStructuredProducts: StructuredProduct[] = [
     dittoStakingTestnet,
@@ -20,9 +21,8 @@ type StructuredProductMapping = {
 };
 
 const structuredProducts: StructuredProductMapping = {
-    'devnet': devnetStructuredProducts,
     'testnet': testnetStructuredProducts,
-    'mainnet': mainnetStructuredProducts,
+    // 'mainnet': mainnetStructuredProducts,
 }
 
 export const getStructuredProducts = (chainName: SupportedNetwork = DEFAULT_NETWORK) => structuredProducts[chainName] || [];

@@ -1,8 +1,11 @@
-import { DEFAULT_NETWORK, SupportedNetwork } from "./aptosClients"
 
 import { satay } from "../data/moduleAddresses"
 
+import { DEFAULT_NETWORK } from "../contexts/AptosContext"
+
 import { callGetFunction } from "./simulation"
+
+import { SupportedNetwork } from "../types/network"
 
 export const getTVL = async (vaultId: string, network: SupportedNetwork = DEFAULT_NETWORK) => {
     const response = await callGetFunction({
