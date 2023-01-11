@@ -21,6 +21,7 @@ const HalbornAudit = () => {
                 <Image 
                     src={`/halborn_logo_${colorMode}.png`}
                     h={8}
+                    alt='Halborn Logo'
                 />
             </a>
         </HStack>

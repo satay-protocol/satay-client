@@ -1,5 +1,4 @@
-import { SupportedNetwork } from "./aptosClients"
-
+import { SupportedNetwork } from "../types/network"
 interface CallFunctionBody {
     func: string,
     type_args: string[],

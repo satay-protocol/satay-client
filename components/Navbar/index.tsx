@@ -6,16 +6,15 @@ import {
     Flex,
     HStack,
     Image,
-    Button
+    Button,
+    Box
 } from '@chakra-ui/react'
 
-import NavItem from './NavItem';
 import ConnectWallet from './ConnectWallet';
 import ColorModeToggle from './ColorModeToggle';
 import Card from '../utilities/Card';
 import MobileNav from './MobileNav';
-
-import { routes } from './routes';
+import Navlinks from './NavLinks';
   
 const Navbar : React.FC = () => {    
     return (
@@ -41,19 +40,11 @@ const Navbar : React.FC = () => {
                         />
                     </Button>
                 </Link>
-                <Flex
-                    alignItems={'center'}
+                <Box
                     display={{ base: 'none', md: 'flex' }}
                 >
-                    {
-                        routes.map((route) => (
-                            <NavItem 
-                                key={route.href}
-                                route={route}
-                            />
-                        ))
-                    }
-                </Flex>
+                    <Navlinks />
+                </Box>
                 <HStack 
                     flex={1}
                     justifyContent='flex-end'

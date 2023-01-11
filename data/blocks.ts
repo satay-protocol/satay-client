@@ -4,10 +4,12 @@ import {
     LP, 
     stAPT, 
     tAPT, 
-    vaultCoin } from "../data/coinStructs";
+    vaultCoin 
+} from "../data/coinStructs";
 
 import { Block } from '../types/block';
 import { StructData } from "../types/aptos";
+import { Coin } from "../types/coin";
 
 export const dittoStakeAptos : Block = {
     inputCoinType: APT,
@@ -89,12 +91,12 @@ export const repeatStakeTortugaAptos: Block = {
     outputProtocol: "tortuga",
 }
 
-export const satayStakeCoin = (inputCoin: StructData, inputCoinSymbol: string, inputCoinProtocol: string) : Block => ({
-    inputCoinType: inputCoin,
-    outputCoinType: vaultCoin(inputCoin),
-    inputCoinSymbol: inputCoinSymbol,
-    outputCoinSymbol: `s${inputCoinSymbol}`,
-    description: `Stake ${inputCoinSymbol} on Satay for s${inputCoinSymbol} to earn yield`,
-    inputProtocol: inputCoinProtocol,
+export const satayStakeCoin = (coin: Coin) : Block => ({
+    inputCoinType: coin.coinStruct,
+    outputCoinType: vaultCoin(coin.coinStruct),
+    inputCoinSymbol: coin.symbol,
+    outputCoinSymbol: `s${coin.symbol}`,
+    description: `Stake ${coin.symbol} on Satay for s${coin.symbol} to earn yield`,
+    inputProtocol: coin.protocol,
     outputProtocol: "satay",
 })

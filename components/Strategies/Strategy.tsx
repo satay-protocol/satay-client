@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { Flex, Text, useColorModeValue, VStack } from '@chakra-ui/react'
-
-import { Strategy } from '../../types/vaults'
-import ProtocolList from '../utilities/ProtocolList'
 import Link from 'next/link'
-import { structToString } from '../../services/vaults'
+
+import { Text, VStack } from '@chakra-ui/react'
+
+import ProtocolList from '../utilities/ProtocolList'
 import AccentedBox from '../utilities/AccentedBox'
+
+import { Strategy } from '../../types/strategy'
 
 interface Props {
     strategy: Strategy
@@ -37,14 +38,14 @@ const Strategy : React.FC<Props> = ({ strategy }) => {
                         fontSize="sm"
                         fontWeight="bold"
                     >
-                        {strategy.title}
+                        {strategy.name}
                     </Text>
                     <Text>
                         {strategy.description}
                     </Text>
                 </VStack>
                 <ProtocolList 
-                    protocols={strategy.protocolsUsed}
+                    protocols={strategy.protocols}
                 />
             </AccentedBox>
         </Link>

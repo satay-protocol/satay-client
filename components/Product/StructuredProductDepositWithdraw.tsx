@@ -2,7 +2,7 @@ import React from 'react'
 
 import DepositWithdraw from '../DepositWithdraw'
 
-import useStructuredProduct from '../../hooks/useStructuredProduct'
+import useStructuredProduct from '../../hooks/structuredProduct/useStructuredProduct'
 
 import { StructuredProduct } from '../../types/structuredProduct'
 

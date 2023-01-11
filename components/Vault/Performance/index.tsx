@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 
 import moment from 'moment';
 
-import { Box, Button, HStack, Skeleton, Tab, TabList, Tabs, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, HStack, Skeleton, Tab, TabList, Tabs, Text } from '@chakra-ui/react';
 
 import LineGraph from '../../utilities/LineGraph';
+import AccentedBox from '../../utilities/AccentedBox';
+import ChangePercentage from '../../utilities/ChangePercentage';
 
-import useVaultPerformance from '../../../hooks/useVaultPerformance';
+import useVaultPerformance from '../../../hooks/vault/useVaultPerformance';
 
 import { Interval, intervals } from './intervals';
 import { Metric, metrics } from './metrics';
-import AccentedBox from '../../utilities/AccentedBox';
-import ChangePercentage from '../../utilities/ChangePercentage';
 
 interface Props {
     vaultId: string;

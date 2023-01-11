@@ -1,23 +1,25 @@
+import { createContext, ReactNode, FC, useContext, useState, useEffect } from "react"
+
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
+
 import { AptosClient } from "aptos";
 
-import { createContext, ReactNode, FC, useContext, useState, useEffect } from "react"
-import { DEFAULT_NETWORK } from "../services/aptosClients";
-import { getNetworkSlug } from "../services/aptosUtils";
+import { getAptosClient } from "../services/aptosClients";
+import { getNetworkSlug } from "../services/network";
+
+import { SupportedNetwork } from "../types/network";
 
 interface ContextType {
     client: AptosClient;
+    network: SupportedNetwork
     updateClient: () => Promise<void>;
 }
 
-const rpcUrls = {
-    "devnet": 'https://fullnode.devnet.aptoslabs.com/v1',
-    "testnet": 'https://fullnode.testnet.aptoslabs.com/v1',
-    "mainnet": 'https://fullnode.mainnet.aptoslabs.com/v1',
-}
+const defaultNetwork: SupportedNetwork = 'testnet';
 
 export const AptosContext = createContext<ContextType>({
-    client: new AptosClient(rpcUrls[DEFAULT_NETWORK]),
+    client: getAptosClient(defaultNetwork),
+    network: 'testnet',
     updateClient: async () => {}
 });
 
@@ -29,16 +31,18 @@ interface AptosContextProps {
 
 export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
 
-    const { network } = useWallet();
+    const { network: networkInfo } = useWallet();
 
     useEffect(() => {
         updateClient();
-    }, [network]);
+    }, [networkInfo]);
 
-    const [client, setClient] = useState<AptosClient>(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || DEFAULT_NETWORK]));
+    let network = getNetworkSlug(networkInfo?.name) || defaultNetwork;
+
+    const [client, setClient] = useState<AptosClient>(getAptosClient(network));
 
     const updateClient = async () => {
-        setClient(new AptosClient(rpcUrls[getNetworkSlug(network?.name) || DEFAULT_NETWORK]));
+        setClient(getAptosClient(network));
     }
  
     return (
@@ -46,6 +50,7 @@ export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
         <AptosContext.Provider
             value={{
                 client,
+                network,
                 updateClient
             }}
         >

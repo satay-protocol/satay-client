@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 
+import { useColorMode, useColorModeValue, useTheme } from '@chakra-ui/react';
+
 import 'chart.js/auto';
 import Chart from 'chart.js/auto';
-import { Line } from 'react-chartjs-2'
-
-import { useColorMode, useColorModeValue, useTheme } from '@chakra-ui/react';
+import { Line } from 'react-chartjs-2';
 
 interface Props {
   data: number[],
