@@ -6,7 +6,6 @@ type RpcUrls = {
     [key in SupportedNetwork]: string;
 };
 
-
 const rpcUrls: RpcUrls = {
     // "devnet": 'https://fullnode.devnet.aptoslabs.com/v1',
     "testnet": 'https://fullnode.testnet.aptoslabs.com/v1',

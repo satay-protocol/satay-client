@@ -4,11 +4,12 @@ import {
     LP, 
     stAPT, 
     tAPT, 
-    vaultCoin 
+    vaultCoin ,
+    USDC,
+    SatayLendCoin
 } from "../data/coinStructs";
 
 import { Block } from '../types/block';
-import { StructData } from "../types/aptos";
 import { Coin } from "../types/coin";
 
 export const dittoStakeAptos : Block = {
@@ -100,3 +101,43 @@ export const satayStakeCoin = (coin: Coin) : Block => ({
     inputProtocol: coin.protocol,
     outputProtocol: "satay",
 })
+
+export const lendUSDCToAries: Block = {
+    inputCoinType: USDC,
+    outputCoinType: SatayLendCoin,
+    inputCoinSymbol: 'USDC',
+    outputCoinSymbol: 'SLC',
+    description: 'Lend USDC to Aries to earn interest',
+    inputProtocol: 'usdc',
+    outputProtocol: 'aries'
+}
+
+export const lendUSDCToAptin: Block = {
+    inputCoinType: USDC,
+    outputCoinType: SatayLendCoin,
+    inputCoinSymbol: 'USDC',
+    outputCoinSymbol: 'SLC',
+    description: 'Lend USDC to Aptin to earn interest',
+    inputProtocol: 'usdc',
+    outputProtocol: 'aptin'
+}
+
+export const lendUSDCToAbel: Block = {
+    inputCoinType: USDC,
+    outputCoinType: SatayLendCoin,
+    inputCoinSymbol: 'USDC',
+    outputCoinSymbol: 'SLC',
+    description: 'Lend USDC to Abel to earn interest',
+    inputProtocol: 'usdc',
+    outputProtocol: 'abel'
+}
+
+export const lendUSDCThroughSatay: Block = {
+    inputCoinType: USDC,
+    outputCoinType: SatayLendCoin,
+    inputCoinSymbol: 'USDC',
+    outputCoinSymbol: 'SLC',
+    description: 'Optimize allocation of USDC to highest-earning borrow/lend market',
+    inputProtocol: 'usdc',
+    outputProtocol: 'satay'
+}

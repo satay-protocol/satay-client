@@ -19,6 +19,7 @@ const StructuredProductDepositWithdraw: React.FC<Props> = ({ structuredProduct }
             deposit={deposit}
             withdraw={withdraw}
             block={structuredProduct.block}
+            inDevelopment={structuredProduct.inDevelopment}
         />
     )
 }

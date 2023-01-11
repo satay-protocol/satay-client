@@ -26,9 +26,10 @@ interface Props {
     coinSymbol: string,
     onDeposit: (amount : number) => Promise<void>,
     viewPath: string,
+    inDevelopment?: boolean
 }
 
-const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewPath }) => {
+const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewPath, inDevelopment }) => {
 
     const { connected, address } = useWallet()
 
@@ -100,9 +101,9 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                     onClick={() => onClick()}
                     variant='solid'
                     colorScheme='brand'
-                    disabled={!connected || amount === 0}
+                    disabled={inDevelopment || !connected || amount === 0}
                 >
-                    Deposit
+                    {inDevelopment ? "Coming Soon" : "Deposit"}
                 </Button>
                 <Link
                     href={viewPath}

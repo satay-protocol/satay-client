@@ -1,4 +1,4 @@
-import { dittoStakingAddress, liquidswapCurvesAddress, liquidswapLPAddress } from "./protocolAddresses";
+import { dittoStakingAddress, layerZeroAddress, liquidswapCurvesAddress, liquidswapLPAddress } from "./protocolAddresses";
 
 import { StructData } from "../types/aptos";
 import { structToString } from "../services/aptosUtils";
@@ -20,6 +20,18 @@ export const tAPT: StructData = {
     struct_name: "TortugaAptos",
     account_address: satay,
     module_name: "tortuga_coin"
+}
+
+export const USDC: StructData = {
+    struct_name: "USDC",
+    account_address: layerZeroAddress,
+    module_name: 'asset'
+}
+
+export const SatayLendCoin: StructData = {
+    struct_name: "SatayUSDCLend",
+    account_address: satay,
+    module_name: 'borrow_lend_optimize'
 }
 
 const stablePool : StructData = {

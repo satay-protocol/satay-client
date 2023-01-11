@@ -16,10 +16,11 @@ import { Block } from '../../types/block';
 interface Props {
     deposit: (amount : number) => Promise<void>;
     withdraw: (amount : number) => Promise<void>;
-    block: Block
+    block: Block,
+    inDevelopment?: boolean
 }
 
-const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block }) => {
+const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block, inDevelopment }) => {
     return (
         <Box
             w={'100%'}
@@ -40,6 +41,7 @@ const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block }) => {
                             logo={`/${block.inputProtocol}_logo.jpeg`}
                             actionName='Deposit'
                             coinStruct={block.inputCoinType}
+                            inDevelopment={inDevelopment}
                         />
                     </TabPanel>
                     <TabPanel
@@ -52,6 +54,7 @@ const DepositWithdraw : React.FC<Props> = ({ deposit, withdraw, block }) => {
                             logo={`/${block.outputProtocol}_logo.jpeg`}
                             actionName='Withdraw'
                             coinStruct={block.outputCoinType}
+                            inDevelopment={inDevelopment}
                         />
                     </TabPanel>
                 </TabPanels>

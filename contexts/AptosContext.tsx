@@ -15,11 +15,11 @@ interface ContextType {
     updateClient: () => Promise<void>;
 }
 
-const defaultNetwork: SupportedNetwork = 'testnet';
+export const DEFAULT_NETWORK: SupportedNetwork = 'testnet';
 
 export const AptosContext = createContext<ContextType>({
-    client: getAptosClient(defaultNetwork),
-    network: 'testnet',
+    client: getAptosClient(DEFAULT_NETWORK),
+    network: DEFAULT_NETWORK,
     updateClient: async () => {}
 });
 
@@ -37,7 +37,7 @@ export const AptosProvider : FC<AptosContextProps> = ({ children }) => {
         updateClient();
     }, [networkInfo]);
 
-    let network = getNetworkSlug(networkInfo?.name) || defaultNetwork;
+    let network = getNetworkSlug(networkInfo?.name) || DEFAULT_NETWORK;
 
     const [client, setClient] = useState<AptosClient>(getAptosClient(network));
 
