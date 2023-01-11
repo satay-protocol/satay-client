@@ -2,6 +2,7 @@ import { AptosClient } from "aptos";
 
 import { CoinInfoStruct, CoinStoreResource, StructData } from "../types/aptos";
 import { CoinData } from "../types/vaults";
+import { SUPPORTED_NETWORKS } from "./aptosClients";
 import { structToString } from "./vaults";
 
 
@@ -49,14 +50,10 @@ export const getCoinType = (resourceType: string) => (
         .join("")
 )
 
-const supportedNetworks = [
-    'testnet',
-    // 'mainnet'
-] as const;
 
 export const getNetworkSlug = (networkName: string | null) => {
     if (!networkName) return undefined;
-    for(const network of supportedNetworks) {
+    for(const network of SUPPORTED_NETWORKS) {
         if (networkName.toLowerCase().includes(network)) {
             return network;
         }

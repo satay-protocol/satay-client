@@ -24,10 +24,11 @@ interface Props {
     action: (amount : number) => Promise<void>;
     symbol: string;
     logo: string;
-    coinStruct: StructData
+    coinStruct: StructData,
+    inDevelopment?: boolean
 }
 
-const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct}) => {
+const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct, inDevelopment }) => {
 
     const { connected } = useWallet();
 
@@ -136,9 +137,9 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                     variant='solid'
                     colorScheme='brand'
                     flex={1}
-                    disabled={!connected || amount === 0}
+                    disabled={inDevelopment || !connected || amount === 0}
                 >
-                    {actionName}
+                    {inDevelopment ? "Coming Soon" : actionName}
                 </Button>
             </Flex>
         </Flex>

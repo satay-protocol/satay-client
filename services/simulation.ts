@@ -1,17 +1,11 @@
-import { getAptosClient } from "./aptosClients";
-
-const SUPPORTED_NETWORKS = [
-    'testnet',
-    'mainnet',
-    'devnet'
-] as const;
+import { SupportedNetwork } from "./aptosClients"
 
 interface CallFunctionBody {
     func: string,
     type_args: string[],
     args: string[],
     ledger_version: number,
-    network: typeof SUPPORTED_NETWORKS[number],
+    network: SupportedNetwork,
     options?: {
       with_logs: boolean
     }

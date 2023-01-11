@@ -10,4 +10,5 @@ export interface StructuredProduct {
     protocols: string[];
     blocks: Block[];
     block: Block;
+    inDevelopment?: boolean
 }
