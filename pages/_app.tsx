@@ -14,7 +14,8 @@ import {
   BloctoWalletAdapter,
   WalletAdapterNetwork,
   MsafeWalletAdapter,
-  SpacecyWalletAdapter
+  SpacecyWalletAdapter,
+  RiseWalletAdapter
 } from '@manahippo/aptos-wallet-adapter';
 import { AptosProvider } from '../contexts/AptosContext';
 
@@ -26,14 +27,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     setWallets([
       new PontemWalletAdapter(),
+      new MsafeWalletAdapter("Testnet"),
+      new AptosWalletAdapter(),
+      new MartianWalletAdapter(),
       new BloctoWalletAdapter({
         bloctoAppId: 'a9d395d4-4b40-4af3-bcb8-cf30fce97614',
         network: WalletAdapterNetwork.Testnet,
       }),
-      new AptosWalletAdapter(),
-      new MartianWalletAdapter(),
-      new MsafeWalletAdapter("Testnet"),
-      new SpacecyWalletAdapter()
+      new SpacecyWalletAdapter(),
+      new RiseWalletAdapter()
     ])
     setLoaded(true);
   }, [])
