@@ -6,12 +6,16 @@ import { DEFAULT_NETWORK } from "../../contexts/AptosContext";
 
 import { StructuredProduct } from "../../types/structuredProduct";
 import { SupportedNetwork } from "../../types/network";
+import { tortugaStaking } from "./tortugaStake";
+import { dittoStaking } from "./dittoStaking";
 
 
 const testnetStructuredProducts: StructuredProduct[] = [
     dittoStakingTestnet,
     tortugaLeverage,
-    borrowLendOptimization
+    borrowLendOptimization,
+    tortugaStaking,
+    dittoStaking
 ]
 
 const mainnetStructuredProducts: StructuredProduct[] = [

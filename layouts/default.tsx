@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 
-import Navbar from '../components/Navbar';
+import Navbar, { navbarHeight } from '../components/Navbar';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
 import Footer from '../components/Footer';
 
@@ -46,6 +46,7 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
           flexDirection='column'
           gap={4}
           p={{ base: 4, md: 8}}
+          pt={{ base: 4, md: 8 + navbarHeight }}
         >
           <Navbar />
           {

@@ -15,13 +15,24 @@ import ColorModeToggle from './ColorModeToggle';
 import Card from '../utilities/Card';
 import MobileNav from './MobileNav';
 import Navlinks from './NavLinks';
+
+export const navbarHeight = 20;
   
 const Navbar : React.FC = () => {    
     return (
-        <Card>
+        <Card
+            position='absolute'
+            top={0}
+            left={0}
+            right={0}
+            zIndex={100}
+            height={navbarHeight}
+
+        >
             <Flex
                 alignItems="center"
                 gap={8}
+                h='100%'
             >
                 <Link
                     href='/'
