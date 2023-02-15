@@ -4,7 +4,7 @@ import { structToString } from "../services/aptosUtils";
 
 import { StructData } from "../types/aptos";
 import { Strategy, VaultStrategyData, StrategyInfo } from "../types/strategy";
-import { coins } from "./coins";
+import { APTOS, coins } from "./coins";
 
 const dittoStrategyWitness: StructData = {
     struct_name: "DittoStrategy",
@@ -13,28 +13,46 @@ const dittoStrategyWitness: StructData = {
 }
 
 const tortugaStrategyWitness: StructData = {
-    struct_name: "TortugaStrategy",
-    account_address: "0xe3eaddfcc4d7436d26fef92ee39685ef176e3513dc736d116129ce055c07afac",
-    module_name: "tortuga_staking_strategy"
+    struct_name: "SimpleTortugaStrategy",
+    account_address: satay,
+    module_name: "simple_tortuga_strategy"
+}
+
+const dittoStakeStrategyWitness: StructData = {
+    struct_name: "SimpleDittoStrategy",
+    account_address: satay,
+    module_name: "simple_ditto_strategy"
 }
 
 
 export const strategies : StrategyInfo[] = [
-    {
-        strategyWitness: dittoStrategyWitness,
-        baseCoin: coins[0],
-        name: "Ditto Staking + LP Strategy",
-        description: "Stake APT on Ditto for stAPT to earn APT emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees. Stake LP tokens on Ditto Rewards to earn DTO emissions.",
-        protocols: ["ditto", "pontem"],
-        productName: "ditto_farming"
-    },
     // {
-    //     strategyWitness: tortugaStrategyWitness,
-    //     baseCoin: APT,
-    //     title: "Tortuga Staking Strategy",
-    //     description: "Stake APT on Tortuga for tAPT to earn APT emission rewards. Instantly unstake at best rate via Hippo Aggregator.",
-    //     protocolsUsed: ["tortuga", "hippo"],
-    // }
+    //     strategyWitness: dittoStrategyWitness,
+    //     vaultStrategyModule
+    //     baseCoin: coins[0],
+    //     name: "Ditto Staking + LP Strategy",
+    //     description: "Stake APT on Ditto for stAPT to earn APT emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees. Stake LP tokens on Ditto Rewards to earn DTO emissions.",
+    //     protocols: ["ditto", "pontem"],
+    //     productName: "ditto_farming"
+    // },
+    {
+        strategyWitness: tortugaStrategyWitness,
+        vaultStrategyModule: `${satay}::simple_tortuga_vault_strategy`,
+        baseCoin: APTOS,
+        name: "Tortuga Staking Strategy",
+        description: "Stake APT on Tortuga for tAPT to earn APT emission rewards. Instantly unstake at best rate via Hippo Aggregator.",
+        protocols: ["tortuga", "hippo"],
+        productName: "tortuga_farming"
+    },
+    {
+        strategyWitness: dittoStakeStrategyWitness,
+        vaultStrategyModule: `${satay}::simple_ditto_vault_strategy`,
+        baseCoin: APTOS,
+        name: "Ditto Staking Strategy",
+        description: "Stake APT on Tortuga for stAPT to earn APT emission rewards. Instantly unstake at best rate via Hippo Aggregator.",
+        protocols: ["ditto", "hippo"],
+        productName: "ditto_farming"
+    }
 ]
 
 export const getStrategyInfo = (strategyWitness: StructData): StrategyInfo => (

@@ -14,10 +14,11 @@ interface Props {
     strategyWitness: StructData,
     baseCoinSymbol: string,
     decimals: number,
-    baseCoinStruct: StructData
+    baseCoinStruct: StructData,
+    vaultStrategyModule: string
 }
 
-const Actions: React.FC<Props> = ({ strategyWitness, baseCoinSymbol, decimals, baseCoinStruct}) => {
+const Actions: React.FC<Props> = ({ strategyWitness, baseCoinSymbol, decimals, baseCoinStruct, vaultStrategyModule}) => {
 
     const creditAvailable = useCreditAvailable(baseCoinStruct, strategyWitness, decimals);
     const debtOutstanding = useDebtOutstanding(baseCoinStruct, strategyWitness, decimals);
@@ -43,8 +44,7 @@ const Actions: React.FC<Props> = ({ strategyWitness, baseCoinSymbol, decimals, b
                 />
             </SimpleGrid>
             <HarvestTend 
-                baseCoinStruct={baseCoinStruct}
-                strategyWitness={strategyWitness}
+                vaultStrategyModule={vaultStrategyModule}
                 creditAvailable={creditAvailable}
                 debtOutstanding={debtOutstanding}
             />

@@ -64,13 +64,14 @@ const Strategy: React.FC<Props> = ({ keeperInfo }) => {
                                 strategyWitness={keeperInfo.strategyWitness}
                                 vaultAddress={keeperInfo.vaultAddress}
                                 decimals={decimals}
-                                baseCoinSymbol={keeperInfo.baseCoin.symbol}
+                                baseCoin={keeperInfo.baseCoin}
                             />
                             <Actions 
                                 strategyWitness={keeperInfo.strategyWitness}
                                 baseCoinSymbol={keeperInfo.baseCoin.symbol}
                                 decimals={decimals}
                                 baseCoinStruct={keeperInfo.baseCoin.coinStruct}
+                                vaultStrategyModule={keeperInfo.vaultStrategyModule}
                             />
                         </>
                     )

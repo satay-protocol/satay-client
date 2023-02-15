@@ -7,17 +7,15 @@ import useVaultStrategy from '../../../hooks/keeper/useHarvestTend'
 import { StructData } from '../../../types/aptos'
 
 interface Props {
-    baseCoinStruct: StructData,
-    strategyWitness: StructData,
+    vaultStrategyModule: string,
     creditAvailable: number,
     debtOutstanding: number,
 }
 
-const HarvestTend : React.FC<Props> = ({ baseCoinStruct, strategyWitness, creditAvailable, debtOutstanding }) => {
+const HarvestTend : React.FC<Props> = ({ vaultStrategyModule, creditAvailable, debtOutstanding }) => {
 
-    const { harvest, tend } = useVaultStrategy(baseCoinStruct, strategyWitness);
+    const { harvest, tend } = useVaultStrategy(vaultStrategyModule);
 
-    const harvestDisabled = creditAvailable === 0 && debtOutstanding === 0;
     const tendDisabled = debtOutstanding > 0;
 
     return (
@@ -28,9 +26,8 @@ const HarvestTend : React.FC<Props> = ({ baseCoinStruct, strategyWitness, credit
             <Button
                 onClick={harvest}
                 colorScheme="brand"
-                disabled={harvestDisabled}
                 flex={1}
-                variant={harvestDisabled ? "outline" : "solid"}
+                variant="solid"
             >
                 Harvest
             </Button>

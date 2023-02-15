@@ -1,18 +1,18 @@
 import { useState } from "react"
-import { structToModule, structToString } from "../../services/aptosUtils";
 
-import { StructData } from "../../types/aptos"
+import { StrategyInfo } from "../../types/strategy";
+
 import useWallet from "../utility/useWallet";
 
-const useApproveStrategy = (baseCoinStruct: StructData) => {
+const useApproveStrategy = () => {
 
     const { submitTransaction } = useWallet();
 
-    const [selectedWitness, setSelectedWitness] = useState<StructData | null>(null);
+    const [selectedStrategy, setSelectedStrategy] = useState<StrategyInfo | null>(null);
     const [debtRatio, setDebtRatio] = useState<string | undefined>();
 
-    const selectWitness = (witness: StructData) => {
-        setSelectedWitness(witness);
+    const selectStrategy = (strategy: StrategyInfo) => {
+        setSelectedStrategy(strategy);
     }
 
     const updateDebtRatio = (ratio: string) => {
@@ -20,14 +20,12 @@ const useApproveStrategy = (baseCoinStruct: StructData) => {
     }
 
     const approveStrategy = async () => {
-        if (selectedWitness) {
+        if (selectedStrategy) {
             await submitTransaction({
                 type: 'entry_function_payload',
-                function: `${structToModule(selectedWitness)}::approve`,
-                arguments: [
-                    debtRatio
-                ],
-                type_arguments: [structToString(baseCoinStruct)]
+                function: `${selectedStrategy.vaultStrategyModule}::approve`,
+                arguments: [debtRatio],
+                type_arguments: []
             }, {
                 title: 'Strategy Approved!',
                 description: 'Your strategy has been approved and is ready to be used.'
@@ -36,9 +34,9 @@ const useApproveStrategy = (baseCoinStruct: StructData) => {
     }
 
     return {
-        selectedWitness: selectedWitness?.struct_name,
+        selectedStrategy,
+        selectStrategy,
         debtRatio,
-        selectWitness,
         updateDebtRatio,
         approveStrategy
     }

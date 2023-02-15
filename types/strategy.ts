@@ -3,6 +3,7 @@ import { Coin } from "./coin";
 
 export interface StrategyInfo {
     strategyWitness: StructData;
+    vaultStrategyModule: string;
     baseCoin: Coin;
     name: string;
     description: string;

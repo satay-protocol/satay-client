@@ -26,12 +26,12 @@ const ApproveStrategy: React.FC<Props> = ({ approvedStrategies, baseCoin }) => {
     )
 
     const {
-        selectedWitness,
-        selectWitness,
+        selectedStrategy,
+        selectStrategy,
         debtRatio,
         updateDebtRatio,
         approveStrategy
-    } = useApproveStrategy(baseCoin.coinStruct)
+    } = useApproveStrategy()
 
   return (
     <VStack
@@ -57,14 +57,14 @@ const ApproveStrategy: React.FC<Props> = ({ approvedStrategies, baseCoin }) => {
                     as={Button}
                     rightIcon={<ChevronDownIcon />}
                 >
-                    {selectedWitness || 'Select Strategy'}
+                    {selectedStrategy?.name || 'Select Strategy'}
                 </MenuButton>
                 <MenuList>
                     {
                         availableStrategies.map((strategy, index) => (
                             <MenuItem
                                 key={index}
-                                onClick={() => selectWitness(strategy.strategyWitness)}
+                                onClick={() => selectStrategy(strategy)}
                             >
                                 {strategy.name}
                             </MenuItem>
@@ -84,7 +84,7 @@ const ApproveStrategy: React.FC<Props> = ({ approvedStrategies, baseCoin }) => {
             <Button
                 onClick={approveStrategy}
                 colorScheme='brand'
-                disabled={!selectedWitness || !debtRatio}
+                disabled={!selectedStrategy || !debtRatio}
             >
                 Approve
             </Button>

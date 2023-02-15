@@ -15,7 +15,7 @@ export const fetchStrategiesForVaultAddress = async (client: AptosClient, vaultA
     const strategies = resources
         .filter(resource => resource.type.includes("VaultStrategy"))
         .map(resource => getStrategy(
-            getStructFromType(resource.type.slice(resource.type.indexOf("VaultStrategy<") + 14, -1)),
+            getStructFromType(resource.type.slice(resource.type.lastIndexOf(", ") + 2, -1)),
             resource.data as VaultStrategyData
         ))
     return strategies;
@@ -29,9 +29,8 @@ export const fetchKeeperForStrategy = async (client: AptosClient, baseCoinStruct
     }).then((res) => res[0] as string).catch(() => "")
 )
 
-export const fetchVaultStrategy = async (strategyWitness: StructData, vaultAddress: string, decimals: number, network: SupportedNetwork) : Promise<VaultStrategy> => {
-    let client = getAptosClient(network);
-    let vaultStrategyData = (await client.getAccountResource(vaultAddress, `${satay}::vault::VaultStrategy<${structToString(strategyWitness)}>`)).data as VaultStrategyData;
+export const fetchVaultStrategy = async (client: AptosClient, baseCoinStruct: StructData, strategyWitness: StructData, vaultAddress: string, decimals: number) : Promise<VaultStrategy> => {
+    let vaultStrategyData = (await client.getAccountResource(vaultAddress, `${satay}::vault::VaultStrategy<${structToString(baseCoinStruct)}, ${structToString(strategyWitness)}>`)).data as VaultStrategyData;
     return {
         totalDebt: parseInt(vaultStrategyData.total_debt) / 10 ** decimals,
         totalGain: parseInt(vaultStrategyData.total_gain) / 10 ** decimals,
