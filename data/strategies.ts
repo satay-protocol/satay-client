@@ -1,10 +1,10 @@
-import { satay } from "./moduleAddresses";
-
 import { structToString } from "../services/aptosUtils";
+
+import { satay } from "./moduleAddresses";
+import { APTOS } from "./coins";
 
 import { StructData } from "../types/aptos";
 import { Strategy, VaultStrategyData, StrategyInfo } from "../types/strategy";
-import { APTOS, coins } from "./coins";
 
 const dittoStrategyWitness: StructData = {
     struct_name: "DittoStrategy",

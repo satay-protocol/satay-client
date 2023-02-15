@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { StructData } from "../../types/aptos";
 interface VaultPerformanceRecord {
     tvl: number;
     earnings: number;
@@ -17,7 +18,7 @@ interface PerformancePoint {
     time: string;
 }
 
-const useVaultPerformance = (vaultId: string, numDays: number) => {
+const useVaultPerformance = (baseCoinStruct: StructData, numDays: number) => {
 
     const [performance, setPerformance] = useState<PerformancePoint[]>([]);
     const [loading, setLoading] = useState(true);
@@ -34,7 +35,8 @@ const useVaultPerformance = (vaultId: string, numDays: number) => {
                 time: point.time,
             }
         })
-        setPerformance(performance);
+        // setPerformance(performance);
+        setPerformance(createPerformance());
         setLoading(false);
     }
 
@@ -46,3 +48,22 @@ const useVaultPerformance = (vaultId: string, numDays: number) => {
 }
 
 export default useVaultPerformance;
+
+const createPerformance = () => {
+    const performance = [];
+    const initialTvl = 10;
+    let tvl = initialTvl;
+    for (let i = 0; i < 15; i++) {
+        performance.push({
+            time: new Date().toISOString(),
+            metrics: {
+                tvl: tvl,
+                earnings: tvl - initialTvl,
+            }
+        })
+        tvl += (Math.random() - 0.20) * initialTvl / 100;
+
+    }
+    return performance;
+        
+}
