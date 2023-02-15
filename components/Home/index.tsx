@@ -25,7 +25,7 @@ const Home = () => {
           fontSize='lg'
           fontWeight='semibold'
         >
-          Pioneering Yield Aggregation on Aptos and Sui
+          Pioneering Yield Aggregation on Aptos
         </Text>
       </Card>
       <Vaults />

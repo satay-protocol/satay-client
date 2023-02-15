@@ -9,13 +9,15 @@ import AccentedBox from '../../utilities/AccentedBox'
 
 import useVaultManagerVaultInfo from '../../../hooks/vaultManager/useVaultManagerVaultInfo'
 
+import { Coin } from '../../../types/coin'
+
 interface Props {
-    vaultId: string
+    baseCoin: Coin
 }
 
-const Vault: React.FC<Props> = ({ vaultId }) => {
+const Vault: React.FC<Props> = ({ baseCoin }) => {
 
-    const vaultInfo = useVaultManagerVaultInfo(vaultId)
+    const vaultInfo = useVaultManagerVaultInfo(baseCoin.coinStruct)
 
     if(!vaultInfo){
         return (
@@ -25,52 +27,51 @@ const Vault: React.FC<Props> = ({ vaultId }) => {
         )
     };
     
-      return (
-        <AccentedBox
+    return (
+      <AccentedBox
+        w='100%'
+      >
+        <VStack
+          alignItems="flex-start"
           w='100%'
+          spacing={4}
         >
-          <VStack
-            alignItems="flex-start"
+          <HStack
             w='100%'
-            spacing={4}
+            justifyContent='space-between'
           >
             <HStack
-              w='100%'
-              justifyContent='space-between'
+              spacing={4}
             >
-              <HStack
-                spacing={4}
-              >
-                <Image 
-                  src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
-                  boxSize={12}
-                  rounded="full"
-                  alt='Vault Logo'
-                />
-                <Text
-                  fontSize='2xl'
-                  fontWeight='bold'
-                >
-                  {vaultInfo.baseCoin.symbol} Vault
-                </Text>
-              </HStack>
-              <FreezeVault 
-                vaultId={vaultId}
-                isFrozen={vaultInfo.isFrozen}
+              <Image 
+                src={`/${vaultInfo.baseCoin.protocol}_logo.jpeg`}
+                boxSize={12}
+                rounded="full"
+                alt='Vault Logo'
               />
+              <Text
+                fontSize='2xl'
+                fontWeight='bold'
+              >
+                {vaultInfo.baseCoin.symbol} Vault
+              </Text>
             </HStack>
-            <UpdateFees
-              vaultId={vaultId}
-              vaultFees={vaultInfo.fees}
+            <FreezeVault 
+              baseCoin={baseCoin}
+              isFrozen={vaultInfo.isFrozen}
             />
-            <Strategies 
-              vaultAddress={vaultInfo.vaultAddress}
-              vaultId={vaultId}
-              baseCoin={vaultInfo.baseCoin}
-            />
-          </VStack>
-        </AccentedBox>
-      )
+          </HStack>
+          <UpdateFees
+            baseCoin={baseCoin}
+            vaultFees={vaultInfo.fees}
+          />
+          <Strategies 
+            vaultAddress={vaultInfo.vaultAddress}
+            baseCoin={vaultInfo.baseCoin}
+          />
+        </VStack>
+      </AccentedBox>
+    )
 }
 
 export default Vault

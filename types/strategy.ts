@@ -11,7 +11,6 @@ export interface StrategyInfo {
 }
 
 export interface VaultStrategy {
-    strategyCoinType: string;
     debtRatio: number;
     totalDebt: number;
     totalGain: number;
@@ -22,7 +21,6 @@ export interface Strategy extends StrategyInfo, VaultStrategy {}
 
 export interface KeeperInfo extends StrategyInfo {
     vaultAddress: string;
-    vaultId: string;
 }
 
 export interface VaultStrategyData {

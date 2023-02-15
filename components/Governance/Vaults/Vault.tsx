@@ -9,14 +9,15 @@ import SetVaultManager from './SetVaultManager';
 import useGovernanceVaultInfo from '../../../hooks/governance/useGovernanceVaultInfo';
 
 import { ellipsize } from '../../../services/utils';
+import { StructData } from '../../../types/aptos';
 
 interface Props {
-    vaultId: string
+  baseCoinStruct: StructData
 }
 
-const Vault: React.FC<Props> = ({ vaultId }) => {
+const Vault: React.FC<Props> = ({ baseCoinStruct }) => {
 
-  const vaultInfo = useGovernanceVaultInfo(vaultId);
+  const vaultInfo = useGovernanceVaultInfo(baseCoinStruct);
 
   if(!vaultInfo){
     return (

@@ -8,14 +8,15 @@ import KeeperComponent from './KeeperComponent'
 import { structToModule } from '../../../services/aptosUtils'
 
 import { Strategy } from '../../../types/strategy'
+import { Coin } from '../../../types/coin'
 
 interface Props {
-    vaultId: string,
     vaultAddress: string,
-    strategy: Strategy
+    strategy: Strategy,
+    baseCoin: Coin
 }
 
-const Strategy: React.FC<Props> = ({ strategy, vaultAddress, vaultId }) => {
+const Strategy: React.FC<Props> = ({ strategy, vaultAddress, baseCoin }) => {
 
   const strategyModule = structToModule(strategy.strategyWitness);
 
@@ -38,13 +39,13 @@ const Strategy: React.FC<Props> = ({ strategy, vaultAddress, vaultId }) => {
         </Text>
         <DebtRatioSlider 
             strategyModule={strategyModule}
-            vaultId={vaultId}
             currentDebtRatio={strategy.debtRatio}
+            baseCoin={baseCoin}
         />
       </HStack>
       <KeeperComponent 
         strategyWitess={strategy.strategyWitness}
-        vaultAddress={vaultAddress}
+        baseCoin={baseCoin}
       />
     </VStack>
   )

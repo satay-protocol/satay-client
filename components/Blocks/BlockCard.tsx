@@ -1,12 +1,9 @@
 import React from 'react'
 
-import { Text, Flex, Image, Skeleton } from '@chakra-ui/react'
+import { Text, Flex, Image } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
-import Strategies from '../Strategies'
 import BlockDepositBox from './BlockDepositBox'
-
-import useVaultInfo from '../../hooks/vault/useVaultInfo'
 
 import { Block } from '../../types/block'
 

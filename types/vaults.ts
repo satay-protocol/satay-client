@@ -4,7 +4,6 @@ import { Strategy } from "./strategy";
 
 export interface VaultInfo {
     baseCoin: Coin,
-    vaultId: string,
     vaultAddress: string,
 }
 
@@ -27,7 +26,6 @@ export interface Vault {
     symbol: string;
     logo: string;
     tvl: number;
-    vaultId: string;
     managerAddress: string;
     vaultAddress: string;
     about: string;

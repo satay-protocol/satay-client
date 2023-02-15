@@ -14,12 +14,11 @@ import { strategies } from '../../../data/strategies'
 import { Coin } from '../../../types/coin'
 
 interface Props {
-    vaultId: string,
     approvedStrategies: string[],
     baseCoin: Coin
 }
 
-const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoin }) => {
+const ApproveStrategy: React.FC<Props> = ({ approvedStrategies, baseCoin }) => {
 
     const availableStrategies = strategies.filter(strategy => 
         structToString(strategy.baseCoin.coinStruct) === structToString(baseCoin.coinStruct) 
@@ -32,7 +31,7 @@ const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoi
         debtRatio,
         updateDebtRatio,
         approveStrategy
-    } = useApproveStrategy(vaultId)
+    } = useApproveStrategy(baseCoin.coinStruct)
 
   return (
     <VStack

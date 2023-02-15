@@ -4,7 +4,10 @@ import useWallet from '../utility/useWallet';
 
 import { satay } from '../../data/moduleAddresses';
 
-const useVaultFees = (vaultId: string, curManagementFee: number, curPerformanceFee: number) => {
+import { StructData } from '../../types/aptos';
+import { structToString } from '../../services/aptosUtils';
+
+const useVaultFees = (baseCoinStruct: StructData, curManagementFee: number, curPerformanceFee: number) => {
 
     const { submitTransaction } = useWallet();
 
@@ -24,14 +27,13 @@ const useVaultFees = (vaultId: string, curManagementFee: number, curPerformanceF
             type: 'entry_function_payload',
             function: `${satay}::satay::update_vault_fee`,
             arguments: [
-                vaultId,
                 managementFee, 
                 performanceFee
             ],
-            type_arguments: []
+            type_arguments: [structToString(baseCoinStruct)]
         }, {
             title: "Fees Updated!",
-            description: `You have updated the fees for vault ${vaultId}`
+            description: `You have updated the fees for the vault`
         });
     }
 

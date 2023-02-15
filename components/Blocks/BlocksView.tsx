@@ -1,9 +1,6 @@
 import React from 'react'
 
-import {
-    VStack,
-    SimpleGrid
-} from '@chakra-ui/react'
+import {SimpleGrid} from '@chakra-ui/react'
 
 import BlockCard from './BlockCard'
 

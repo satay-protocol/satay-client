@@ -12,3 +12,5 @@ export const APTOS = {
 export const coins: Coin[] = [
     APTOS
 ]
+
+export const getCoin = (symbol: string) : Coin | undefined => coins.find(coin => coin.symbol === symbol);

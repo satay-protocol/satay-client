@@ -1,27 +1,32 @@
-import { satay } from "../data/moduleAddresses";
-import { StructData } from "../types/aptos";
-import { SupportedNetwork } from "../types/network";
-import { KeeperInfo } from "../types/strategy";
+import { AptosClient } from "aptos";
+
 import { structToString } from "./aptosUtils";
-import { callGetFunction } from "./simulation";
 import { fetchStrategiesForVaultAddress } from "./strategies";
+import { fetchVaultAddress } from "./vaults";
 
-import { fetchAllVaultIds, fetchVaultAddressForId } from "./vaults";
+import { satay } from "../data/moduleAddresses";
+import { activeVaults } from "../data/vaults";
 
-export const fetchStrategiesKeptByAccount = async (address: string, network: SupportedNetwork): Promise<KeeperInfo[]> => {
-    let vaultIds = await fetchAllVaultIds(network);
+import { StructData } from "../types/aptos";
+import { KeeperInfo } from "../types/strategy";
+import { VaultInfo } from "../types/vaults";
 
-    let vaultAddresses = await Promise.all(vaultIds.map(async (vaultId) => (
-        fetchVaultAddressForId(vaultId, network)
-    )))
 
-    let vaultStrategies = await Promise.all(vaultAddresses.map(async (vaultAddress) => (
-        fetchStrategiesForVaultAddress(vaultAddress, network)
+
+export const fetchStrategiesKeptByAccount = async (client: AptosClient, address: string): Promise<KeeperInfo[]> => {
+
+    let vaults: VaultInfo[] = await Promise.all(activeVaults.map(async (baseCoin) => ({
+        vaultAddress: await fetchVaultAddress(client, baseCoin.coinStruct),
+        baseCoin
+    })))
+
+    let vaultStrategies = await Promise.all(vaults.map(async ({ vaultAddress }) => (
+        fetchStrategiesForVaultAddress(client, vaultAddress)
     )))
 
     let keepers = await Promise.all(vaultStrategies.map(async (strategies, index) => (
         Promise.all(strategies.map(async (strategy) => (
-            fetchKeeperForStrategy(strategy.strategyWitness, vaultAddresses[index], network)
+            fetchKeeperForStrategy(client, vaults[index].baseCoin.coinStruct, strategy.strategyWitness)
         )))
     )))
 
@@ -31,20 +36,16 @@ export const fetchStrategiesKeptByAccount = async (address: string, network: Sup
                 keepers[index][i] === address
             ))
             .map((strategy) => ({
-                vaultAddress: vaultAddresses[index],
-                vaultId: vaultIds[index],
+                vaultAddress: vaults[index].vaultAddress,
                 ...strategy
             }))
     )).flat()
 }
 
-export const fetchKeeperForStrategy = async (strategyWitness: StructData, vaultAddress: string, network: SupportedNetwork): Promise<string> => {
-    let keeperResult = await callGetFunction({
-        func: `${satay}::strategy_config::get_keeper_address`,
-        args: [vaultAddress],
-        type_args: [structToString(strategyWitness)],
-        ledger_version: 0,
-        network: network,
-    });
-    return "0x" + (keeperResult.details.return_values[0] as string);
-}
+export const fetchKeeperForStrategy = async (client: AptosClient, baseCoinStruct: StructData, strategyWitness: StructData): Promise<string> => (
+    client.view({
+        function: `${satay}::satay::get_keeper_address`,
+        type_arguments: [structToString(baseCoinStruct), structToString(strategyWitness)],
+        arguments: [],
+    }).then((res) => res[0] as string).catch(() => "")
+)

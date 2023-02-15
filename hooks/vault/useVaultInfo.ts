@@ -3,22 +3,23 @@ import { useState, useEffect } from "react";
 import { useAptos } from "../../contexts/AptosContext";
 
 import { fetchVaultInfo } from "../../services/vaults";
+import { StructData } from "../../types/aptos";
 
 import { VaultInfo } from "../../types/vaults";
 
-const useVaultInfo = (vaultId: string) => {
+const useVaultInfo = (baseCoinStruct: StructData) => {
 
-    const { network } = useAptos();
+    const { client } = useAptos();
 
     const [vaultInfo, setVaultInfo] = useState<VaultInfo | null>(null);
 
     useEffect(() => {
         const getVaultInfo = async () => {
-            const vaultInfo = await fetchVaultInfo(vaultId, network);
+            const vaultInfo = await fetchVaultInfo(client, baseCoinStruct);
             setVaultInfo(vaultInfo);
         };
         getVaultInfo();
-    }, [vaultId]);
+    }, [baseCoinStruct]);
 
     return vaultInfo;
 }

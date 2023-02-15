@@ -15,15 +15,15 @@ import VaultDepositWithdraw from './VaultDepositWithdraw';
 
 import useVaultInfo from '../../hooks/vault/useVaultInfo';
 
+import { StructData } from '../../types/aptos';
+
 interface Props {
-  vaultId: string;
+  baseCoinStruct: StructData;
 }
 
-const Vault : React.FC<Props> = ({ vaultId }) => {
+const Vault : React.FC<Props> = ({ baseCoinStruct }) => {
 
-  const vault = useVaultInfo(vaultId);
-
-  
+  const vault = useVaultInfo(baseCoinStruct);
 
   return (
     <Box>
@@ -58,7 +58,6 @@ const Vault : React.FC<Props> = ({ vaultId }) => {
                   h='100%'
                 >
                   <VaultDepositWithdraw 
-                    vaultId={vaultId}
                     baseCoin={vault.baseCoin}
                   />  
                   <Holdings

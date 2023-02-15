@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 import { VStack, Text, useBreakpointValue } from '@chakra-ui/react'
 
 import StructuredProductComponent from '../StructuredProduct'

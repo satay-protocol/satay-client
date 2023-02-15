@@ -4,7 +4,7 @@ import { structToModule, structToString } from "../../services/aptosUtils";
 import { StructData } from "../../types/aptos"
 import useWallet from "../utility/useWallet";
 
-const useApproveStrategy = (vaultId: string) => {
+const useApproveStrategy = (baseCoinStruct: StructData) => {
 
     const { submitTransaction } = useWallet();
 
@@ -23,12 +23,11 @@ const useApproveStrategy = (vaultId: string) => {
         if (selectedWitness) {
             await submitTransaction({
                 type: 'entry_function_payload',
-                function: `${structToModule(selectedWitness)}::initialize`,
+                function: `${structToModule(selectedWitness)}::approve`,
                 arguments: [
-                    vaultId,
                     debtRatio
                 ],
-                type_arguments: []
+                type_arguments: [structToString(baseCoinStruct)]
             }, {
                 title: 'Strategy Approved!',
                 description: 'Your strategy has been approved and is ready to be used.'

@@ -47,5 +47,4 @@ export const getStrategy = (strategyWitness: StructData, vaultStrategyData: Vaul
     totalGain: parseInt(vaultStrategyData.total_gain),
     totalLoss:parseInt(vaultStrategyData.total_loss),
     debtRatio: parseInt(vaultStrategyData.debt_ratio),
-    strategyCoinType: structToString(vaultStrategyData.strategy_coin_type),
 });

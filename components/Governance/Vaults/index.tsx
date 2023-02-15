@@ -4,13 +4,10 @@ import { Text, VStack } from '@chakra-ui/react'
 
 import Card from '../../utilities/Card'
 import Vault from './Vault'
-
-import useActiveVaultIds from '../../../hooks/vault/useActiveVaultIds'
+import { activeVaults } from '../../../data/vaults'
+import { structToString } from '../../../services/aptosUtils'
 
 const Vaults = () => {
-
-    const vaultIds = useActiveVaultIds();
-
     return (
         <Card
             gap={4}
@@ -25,11 +22,11 @@ const Vaults = () => {
                 alignItems="flex-start"
             >
                 {
-                    vaultIds.map((vaultId) => {
+                    activeVaults.map((baseCoin) => {
                         return (
                             <Vault
-                                key={vaultId}
-                                vaultId={vaultId}
+                                key={structToString(baseCoin.coinStruct)}
+                                baseCoinStruct={baseCoin.coinStruct}
                             />
                         )
                     })

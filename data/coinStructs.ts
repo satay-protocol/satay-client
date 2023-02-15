@@ -2,7 +2,7 @@ import { dittoStakingAddress, layerZeroAddress, liquidswapCurvesAddress, liquids
 
 import { StructData } from "../types/aptos";
 import { structToString } from "../services/aptosUtils";
-import { dittoFarming, satay } from "./moduleAddresses";
+import { dittoFarming, satay, satayCoins } from "./moduleAddresses";
 
 export const APT: StructData = {
     struct_name: "AptosCoin",
@@ -66,8 +66,8 @@ export const LP = (coin1: StructData, coin2: StructData, poolType: PoolType) : S
 
 export const vaultCoin = (coin: StructData) : StructData => ({
     struct_name: `VaultCoin<${structToString(coin)}>`,
-    account_address: satay,
-    module_name: "vault"
+    account_address: satayCoins,
+    module_name: "vault_coin"
 })
 
 export const dittoFarmingCoin : StructData = {

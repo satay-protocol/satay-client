@@ -8,14 +8,14 @@ import { KeeperInfo } from '../../types/strategy'
 
 const useStrategiesKeptByUser = (userAddress: string) => {
 
-    const { network } = useAptos();
+    const { client } = useAptos();
 
     const [strategiesKeptByUser, setStrategiesKeptByUser] = useState<KeeperInfo[]>([]);
     const [fetched, setFetched] = useState(false);
 
     useEffect(() => {
         const loadStrategiesKeptByUser = async () => {
-            const strategiesKeptByUser = await fetchStrategiesKeptByAccount(userAddress, network);
+            const strategiesKeptByUser = await fetchStrategiesKeptByAccount(client, userAddress);
             setStrategiesKeptByUser(strategiesKeptByUser);
             setFetched(true);
         }

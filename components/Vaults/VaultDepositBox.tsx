@@ -7,20 +7,19 @@ import useVaultDepositWithdraw from '../../hooks/vault/useVaultDepositWithdraw'
 import { Coin } from '../../types/coin'
 
 interface Props {
-    vaultId: string,
     baseCoin: Coin
 }
 
-const VaultDepositBox: React.FC<Props> = ({ vaultId, baseCoin }) => {
+const VaultDepositBox: React.FC<Props> = ({ baseCoin }) => {
 
-    let { deposit } = useVaultDepositWithdraw(vaultId, baseCoin.coinStruct)
+    let { deposit } = useVaultDepositWithdraw(baseCoin.coinStruct)
 
   return (
     <DepositBox 
         coinStruct={baseCoin.coinStruct}
         coinSymbol={baseCoin.symbol}
         onDeposit={deposit}
-        viewPath={`/vaults/${vaultId}`}
+        viewPath={`/vaults/${baseCoin.symbol}`}
     />
   )
 }

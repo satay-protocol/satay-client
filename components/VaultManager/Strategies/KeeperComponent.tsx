@@ -10,20 +10,21 @@ import useStrategyKeeper from '../../../hooks/vaultManager/useStrategyKeeper'
 import { ellipsize } from '../../../services/utils'
 
 import { StructData } from '../../../types/aptos'
+import { Coin } from '../../../types/coin'
 
 interface Props {
-    vaultAddress: string,
-    strategyWitess: StructData
+    strategyWitess: StructData,
+    baseCoin: Coin
 }
 
-const KeeperComponent: React.FC<Props> = ({ vaultAddress, strategyWitess }) => {
+const KeeperComponent: React.FC<Props> = ({ baseCoin, strategyWitess }) => {
 
     const {
         curKeeper,
         newKeeper,
         setNewKeeper,
         onUpdate
-    } = useStrategyKeeper(strategyWitess, vaultAddress);
+    } = useStrategyKeeper(baseCoin.coinStruct, strategyWitess);
 
     return (
         <Box

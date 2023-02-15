@@ -6,19 +6,19 @@ import { fetchDebtOutstanding } from '../../services/strategies';
 
 import { StructData } from '../../types/aptos';
 
-const useDebtOutstanding = (strategyWitness: StructData, vaultId: string, baseCoinType: StructData, decimals: number) => {
+const useDebtOutstanding = (baseCoinStruct: StructData, strategyWitness: StructData, decimals: number) => {
 
-    const { network } = useAptos();
+    const { client } = useAptos();
     
     const [debtOutstanding, setDebtOutstanding] = useState(0);
 
     useEffect(() => {
         const loadDebtOutstanding = async () => {
-            const debtOutstanding = await fetchDebtOutstanding(strategyWitness, vaultId, baseCoinType, decimals, network);
+            const debtOutstanding = await fetchDebtOutstanding(client, baseCoinStruct, strategyWitness, decimals);
             setDebtOutstanding(debtOutstanding);
         }
         loadDebtOutstanding();
-    }, [strategyWitness, vaultId, baseCoinType, decimals])
+    }, [strategyWitness, baseCoinStruct, decimals])
 
     return debtOutstanding;
 }

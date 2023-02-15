@@ -67,11 +67,10 @@ const Strategy: React.FC<Props> = ({ keeperInfo }) => {
                                 baseCoinSymbol={keeperInfo.baseCoin.symbol}
                             />
                             <Actions 
-                                vaultId={keeperInfo.vaultId}
                                 strategyWitness={keeperInfo.strategyWitness}
                                 baseCoinSymbol={keeperInfo.baseCoin.symbol}
                                 decimals={decimals}
-                                baseCoinType={keeperInfo.baseCoin.coinStruct}
+                                baseCoinStruct={keeperInfo.baseCoin.coinStruct}
                             />
                         </>
                     )

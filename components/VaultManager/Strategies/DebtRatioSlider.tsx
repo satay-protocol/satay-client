@@ -12,20 +12,22 @@ import {
 
 import useUpdateDebtRatio from '../../../hooks/vaultManager/useUpdateDebtRatio';
 
+import { Coin } from '../../../types/coin';
+
  interface Props {
-    vaultId: string,
     strategyModule: string,
     currentDebtRatio: number,
+    baseCoin: Coin
  }
 
-const DebtRatioSlider : React.FC<Props> = ({ vaultId, strategyModule, currentDebtRatio }) => {
+const DebtRatioSlider : React.FC<Props> = ({ baseCoin, strategyModule, currentDebtRatio }) => {
 
     const {
         debtRatio,
         updateDebtRatio,
         onDebtRatioChange
     } = useUpdateDebtRatio(
-        vaultId,
+        baseCoin.coinStruct,
         strategyModule,
         currentDebtRatio
     );
@@ -37,7 +39,7 @@ const DebtRatioSlider : React.FC<Props> = ({ vaultId, strategyModule, currentDeb
         gap={4}
     >
         <Slider 
-            aria-label={`${strategyModule}-${vaultId}-debt-ratio-slider`}
+            aria-label={`${strategyModule}-${baseCoin.symbol}-debt-ratio-slider`}
             value={debtRatio}
             onChange={onDebtRatioChange}
             colorScheme="brand"

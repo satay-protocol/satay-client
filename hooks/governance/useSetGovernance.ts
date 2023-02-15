@@ -10,7 +10,7 @@ const useSetGovernance = () => {
 
     const { submitTransaction } = useWallet();
 
-    const [newGovernanceAddress, setNewGovernanceAddress] = useState<string | undefined>(undefined);
+    const [newGovernanceAddress, setNewGovernanceAddress] = useState<string>("");
 
     const onChange = (newGovernanceAddress: string) => {
         setNewGovernanceAddress(newGovernanceAddress);

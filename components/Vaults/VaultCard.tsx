@@ -8,19 +8,22 @@ import VaultDepositBox from './VaultDepositBox'
 
 import useVaultInfo from '../../hooks/vault/useVaultInfo'
 
+import { StructData } from '../../types/aptos'
+
 interface Props {
-    vaultId: string
+    baseCoinStruct: StructData
 }
 
-const VaultCard : React.FC<Props> = ({ vaultId }) => {
+const VaultCard : React.FC<Props> = ({ baseCoinStruct }) => {
 
-    const vault = useVaultInfo(vaultId);
+    const vault = useVaultInfo(baseCoinStruct);
 
     if(!vault) return <Skeleton />;
 
     return (
         <Card
             gap={4}
+            w='100%'
         >
             <Flex
                 alignItems='center'
@@ -44,7 +47,6 @@ const VaultCard : React.FC<Props> = ({ vaultId }) => {
                         </Text>
                     </Flex>
                     <VaultDepositBox 
-                        vaultId={vaultId}
                         baseCoin={vault.baseCoin}
                     />
                 </Flex>
