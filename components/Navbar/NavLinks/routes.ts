@@ -23,7 +23,7 @@ export const routes: Route[] = [
         icon: BiCodeBlock
     },
     { 
-        name: 'Products', 
+        name: 'Strategies', 
         href: '/products',
         icon: AiOutlineSwap
     },

@@ -11,7 +11,7 @@ import {
 
 import Navbar, { navbarHeight } from '../components/Navbar';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
-import Footer from '../components/Footer';
+import Footer, { footerHeight } from '../components/Footer';
 
 import useWallet from '../hooks/utility/useWallet';
 
@@ -39,14 +39,15 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
       <Container 
         mx='auto' 
         maxW='4xl'
+        justifyContent='center'
         p={0}
       >
         <Box
           display='flex'
-          flexDirection='column'
           gap={4}
           p={{ base: 4, md: 8}}
-          pt={{ base: 4, md: 8 + navbarHeight }}
+          pt={{ base: 4 + navbarHeight, md: 8 + navbarHeight }}
+          pb={{ base: 4 + navbarHeight, md: 8 + footerHeight }}
         >
           <Navbar />
           {
