@@ -16,9 +16,7 @@ interface Props {
     baseCoin: Coin
 }
 
-const Strategy: React.FC<Props> = ({ strategy, vaultAddress, baseCoin }) => {
-
-  const strategyModule = structToModule(strategy.strategyWitness);
+const Strategy: React.FC<Props> = ({ strategy, baseCoin }) => {
 
   return (
     <VStack
@@ -28,7 +26,7 @@ const Strategy: React.FC<Props> = ({ strategy, vaultAddress, baseCoin }) => {
       p={4}
     >
       <HStack
-        key={strategyModule}
+        key={strategy.vaultStrategyModule}
         spacing={4}
         w='100%'
       >
@@ -38,7 +36,7 @@ const Strategy: React.FC<Props> = ({ strategy, vaultAddress, baseCoin }) => {
             {strategy.name}
         </Text>
         <DebtRatioSlider 
-            strategyModule={strategyModule}
+            strategyModule={strategy.vaultStrategyModule}
             currentDebtRatio={strategy.debtRatio}
             baseCoin={baseCoin}
         />
