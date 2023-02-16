@@ -27,7 +27,6 @@ const DebtRatioSlider : React.FC<Props> = ({ baseCoin, strategyModule, currentDe
         updateDebtRatio,
         onDebtRatioChange
     } = useUpdateDebtRatio(
-        baseCoin.coinStruct,
         strategyModule,
         currentDebtRatio
     );
