@@ -10,8 +10,6 @@ interface Props {
 
 const BlockDepositBox: React.FC<Props> = ({ block }) => {
 
-    // let { deposit } = useVaultDepositWithdraw(vaultId, baseCoin.coinStruct)
-
     const deposit = async (amount: number) => {};
 
     return (

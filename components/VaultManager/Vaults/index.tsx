@@ -4,21 +4,24 @@ import { Box, Text, VStack } from '@chakra-ui/react'
 
 import Vault from './Vault'
 
+import { Coin } from '../../../types/coin'
+import { structToString } from '../../../services/aptosUtils'
+
 interface Props {
-    vaultIds: string[]
+    vaultBaseCoins: Coin[]
 }
 
-const Vaults: React.FC<Props> = ({ vaultIds }) => {
+const Vaults: React.FC<Props> = ({ vaultBaseCoins }) => {
   return (
     <VStack
         alignItems="flex-start"
     >
         {
-            vaultIds.length > 0 ? (
-                vaultIds.map((vaultId) => (
+            vaultBaseCoins.length > 0 ? (
+                vaultBaseCoins.map((baseCoin) => (
                     <Vault 
-                        key={vaultId}
-                        vaultId={vaultId}
+                        key={structToString(baseCoin.coinStruct)}
+                        baseCoin={baseCoin}
                     />
                 ))
             ) : (

@@ -14,12 +14,11 @@ import { strategies } from '../../../data/strategies'
 import { Coin } from '../../../types/coin'
 
 interface Props {
-    vaultId: string,
     approvedStrategies: string[],
     baseCoin: Coin
 }
 
-const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoin }) => {
+const ApproveStrategy: React.FC<Props> = ({ approvedStrategies, baseCoin }) => {
 
     const availableStrategies = strategies.filter(strategy => 
         structToString(strategy.baseCoin.coinStruct) === structToString(baseCoin.coinStruct) 
@@ -27,12 +26,12 @@ const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoi
     )
 
     const {
-        selectedWitness,
-        selectWitness,
+        selectedStrategy,
+        selectStrategy,
         debtRatio,
         updateDebtRatio,
         approveStrategy
-    } = useApproveStrategy(vaultId)
+    } = useApproveStrategy()
 
   return (
     <VStack
@@ -58,14 +57,14 @@ const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoi
                     as={Button}
                     rightIcon={<ChevronDownIcon />}
                 >
-                    {selectedWitness || 'Select Strategy'}
+                    {selectedStrategy?.name || 'Select Strategy'}
                 </MenuButton>
                 <MenuList>
                     {
                         availableStrategies.map((strategy, index) => (
                             <MenuItem
                                 key={index}
-                                onClick={() => selectWitness(strategy.strategyWitness)}
+                                onClick={() => selectStrategy(strategy)}
                             >
                                 {strategy.name}
                             </MenuItem>
@@ -85,7 +84,7 @@ const ApproveStrategy: React.FC<Props> = ({ vaultId, approvedStrategies, baseCoi
             <Button
                 onClick={approveStrategy}
                 colorScheme='brand'
-                disabled={!selectedWitness || !debtRatio}
+                disabled={!selectedStrategy || !debtRatio}
             >
                 Approve
             </Button>

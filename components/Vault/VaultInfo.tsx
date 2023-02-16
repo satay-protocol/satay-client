@@ -41,8 +41,7 @@ const VaultInfo: React.FC<Props> = ({ vault }) => {
                 vaultAddress={vault.vaultAddress}
             />
             <Performance 
-                vaultId={vault.vaultId}
-                symbol={vault.baseCoin.symbol}
+                baseCoin={vault.baseCoin}
             />
         </VStack>
     </Card>

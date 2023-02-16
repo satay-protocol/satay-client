@@ -1,23 +1,24 @@
-import { fetchAllVaultIds, fetchIsVaultFrozen, fetchVaultFees, fetchVaultInfo, fetchVaultManagerForId } from "./vaults";
+import { fetchIsVaultFrozen, fetchVaultFees, fetchVaultInfo, fetchVaultManager } from "./vaults";
 
 import { SupportedNetwork } from "../types/network";
 import { VaultManagerVaultInfo } from "../types/vaults";
+import { activeVaults } from "../data/vaults";
+import { AptosClient } from "aptos";
+import { Coin } from "../types/coin";
+import { StructData } from "../types/aptos";
 
-export const fetchVaultsManagedByAccount = async (address: string, network: SupportedNetwork): Promise<string[]> => {
-    let vaultIds = await fetchAllVaultIds(network);
-
-    let vaultManagers = await Promise.all(vaultIds.map(async (vaultId) => (
-        fetchVaultManagerForId(vaultId, network)
+export const fetchVaultsManagedByAccount = async (client: AptosClient, address: string): Promise<Coin[]> => {
+    let vaultManagers = await Promise.all(activeVaults.map(async (baseCoin) => (
+        fetchVaultManager(client, baseCoin.coinStruct)
     )))
-
-    return vaultIds.filter((_, i) => vaultManagers[i] === address);
+    return activeVaults.filter((_, i) => vaultManagers[i] === address);
 }
 
-export const fetchVaultManagerVaultInfo = async (vaultId: string, network: SupportedNetwork): Promise<VaultManagerVaultInfo> => {
+export const fetchVaultManagerVaultInfo = async (client: AptosClient, baseCoinStruct: StructData): Promise<VaultManagerVaultInfo> => {
     const [vaultInfo, isFrozen, fees] = await Promise.all([
-        fetchVaultInfo(vaultId, network),
-        fetchIsVaultFrozen(vaultId, network),
-        fetchVaultFees(vaultId, network)
+        fetchVaultInfo(client, baseCoinStruct),
+        fetchIsVaultFrozen(client, baseCoinStruct),
+        fetchVaultFees(client, baseCoinStruct)
     ]);
     return {
         ...vaultInfo,

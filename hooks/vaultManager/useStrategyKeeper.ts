@@ -10,9 +10,9 @@ import { satay } from "../../data/moduleAddresses";
 
 import { StructData } from "../../types/aptos";
 
-const useStrategyKeeper = (strategyWitness: StructData, vaultAddress: string) => {
+const useStrategyKeeper = (baseCoinStruct: StructData, strategyWitness: StructData) => {
 
-    const { network } = useAptos();
+    const { client } = useAptos();
     const { submitTransaction } = useWallet();
 
     const [curKeeper, setCurKeeper] = useState<string | null>(null);
@@ -24,21 +24,18 @@ const useStrategyKeeper = (strategyWitness: StructData, vaultAddress: string) =>
 
     useEffect(() => {
         const getKeeper = async () => {
-            const keeper = await fetchKeeperForStrategy(strategyWitness, vaultAddress, network);
+            const keeper = await fetchKeeperForStrategy(client, baseCoinStruct, strategyWitness);
             setCurKeeper(keeper);
         };
         getKeeper();
-    }, [strategyWitness, vaultAddress]);
+    }, [strategyWitness, baseCoinStruct]);
 
     const onUpdate = async () => {
         await submitTransaction({
             type: 'entry_function_payload',
             function: `${satay}::strategy_config::set_keeper`,
-            arguments: [
-                vaultAddress,
-                newKeeper
-            ],
-            type_arguments: [structToString(strategyWitness)]
+            arguments: [newKeeper],
+            type_arguments: [structToString(baseCoinStruct), structToString(strategyWitness)]
         }, {
             title: 'Keeper Updated!',
             description: 'Your keeper has been updated.'

@@ -2,7 +2,10 @@ import { useState } from "react";
 
 import useWallet from "../utility/useWallet";
 
-const useUpdateDebtRatio = (vaultId: string, strategyModule: string, currentDebtRatio = 0) => {
+import { StructData } from "../../types/aptos";
+import { structToString } from "../../services/aptosUtils";
+
+const useUpdateDebtRatio = (baseCoinStruct: StructData, strategyModule: string, currentDebtRatio = 0) => {
 
     const [debtRatio, setDebtRatio] = useState(currentDebtRatio / 100);
 
@@ -16,8 +19,8 @@ const useUpdateDebtRatio = (vaultId: string, strategyModule: string, currentDebt
         await submitTransaction({
             type: 'entry_function_payload',
             function: `${strategyModule}::update_debt_ratio`,
-            arguments: [vaultId, (debtRatio * 100).toString()],
-            type_arguments: []
+            arguments: [(debtRatio * 100).toString()],
+            type_arguments: [structToString(baseCoinStruct)]
         }, {
             title: "Strategy Harvested!",
             description: `You have successfully harvested the strategy`

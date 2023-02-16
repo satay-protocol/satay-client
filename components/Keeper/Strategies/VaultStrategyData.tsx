@@ -7,17 +7,18 @@ import VaultStrategyEntry from './VaultStrategyEntry'
 import useVaultStrategy from '../../../hooks/strategy/useVaultStrategy'
 
 import { StructData } from '../../../types/aptos'
+import { Coin } from '../../../types/coin'
 
 interface Props {
   strategyWitness: StructData,
   vaultAddress: string,
   decimals: number,
-  baseCoinSymbol: string,
+  baseCoin: Coin
 }
 
-const VaultStrategyData: React.FC<Props> = ({ strategyWitness, vaultAddress, decimals, baseCoinSymbol }) => {
+const VaultStrategyData: React.FC<Props> = ({ strategyWitness, vaultAddress, decimals, baseCoin }) => {
 
-  const vaultStrategy = useVaultStrategy(strategyWitness, vaultAddress, decimals);
+  const vaultStrategy = useVaultStrategy(baseCoin.coinStruct, strategyWitness, vaultAddress, decimals);
 
     if(!vaultStrategy) return null;
     return (
@@ -42,15 +43,15 @@ const VaultStrategyData: React.FC<Props> = ({ strategyWitness, vaultAddress, dec
           />
           <VaultStrategyEntry
             title='Total Debt'
-            value={`${vaultStrategy.totalDebt} ${baseCoinSymbol}`}
+            value={`${vaultStrategy.totalDebt} ${baseCoin.symbol}`}
           />
           <VaultStrategyEntry
             title='Total Gain'
-            value={`${vaultStrategy.totalGain} ${baseCoinSymbol}`}
+            value={`${vaultStrategy.totalGain} ${baseCoin.symbol}`}
           />
           <VaultStrategyEntry
             title='Total Loss'
-            value={`${vaultStrategy.totalLoss} ${baseCoinSymbol}`}
+            value={`${vaultStrategy.totalLoss} ${baseCoin.symbol}`}
           />
         </SimpleGrid>
       </VStack>

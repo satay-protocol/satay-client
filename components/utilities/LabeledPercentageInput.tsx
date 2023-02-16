@@ -15,7 +15,6 @@ interface Props {
 }
 
 const LabeledPercentageInput: React.FC<Props> = ({ label, value, onChange, placeholder, min, max }) => {
-    console.log(value);
   return (
     <LabeledNumberInput 
         label={label}

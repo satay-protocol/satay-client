@@ -7,24 +7,24 @@ import {
 
 import VaultCard from './VaultCard'
 
-import useActiveVaultIds from '../../hooks/vault/useActiveVaultIds'
+import { activeVaults } from '../../data/vaults'
+import { structToString } from '../../services/aptosUtils'
 
 const VaultsList = () => {
-
-    const vaultIds = useActiveVaultIds();
 
     return (
         <VStack
             width='100%'
         >
             <Skeleton
-                isLoaded={vaultIds.length > 0}
+                isLoaded={activeVaults.length > 0}
+                w='100%'
             >
                 {
-                    vaultIds.map(vaultId => (
+                    activeVaults.map(baseCoin => (
                         <VaultCard
-                            key={vaultId}
-                            vaultId={vaultId}
+                            key={structToString(baseCoin.coinStruct)}
+                            baseCoinStruct={baseCoin.coinStruct}
                         />
                     ))
                 }

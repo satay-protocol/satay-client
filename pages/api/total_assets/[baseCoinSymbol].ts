@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getCoin } from '../../../data/coins';
+import { getAptosClient } from '../../../services/aptosClients';
 
 import { getTVL } from '../../../services/vaultPerformance';
 
@@ -11,8 +13,9 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
 
-    const { vault_id } = req.query;
+    const { baseCoinSymbol } = req.query;
 
-    const totalAssets = await getTVL(vault_id as string)
+    const baseCoin = getCoin(baseCoinSymbol as string);
+    const totalAssets = await getTVL(getAptosClient('testnet'), baseCoin.coinStruct)
     res.status(200).json({ totalAssets })
 }

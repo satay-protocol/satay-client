@@ -22,7 +22,6 @@ const Blocks: React.FC<Props> = ({ page }) => {
       gap={4}
       w='100%'
     >
-      {/* <Card> */}
         <Flex
             flexDirection='column'
             alignItems='center'
@@ -41,7 +40,6 @@ const Blocks: React.FC<Props> = ({ page }) => {
                 Satay Blocks are composable, primative DeFi operations that can be used to create yield generating strategies.
             </Text>
         </Flex>
-      {/* </Card> */}
       <LiquidStaking />
       <BorrowLend />
     </Flex>

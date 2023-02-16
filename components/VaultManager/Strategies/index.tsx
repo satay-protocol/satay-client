@@ -13,11 +13,10 @@ import { Coin } from '../../../types/coin'
 
 interface Props {
     vaultAddress: string,
-    vaultId: string,
     baseCoin: Coin
 }
 
-const Strategies: React.FC<Props> = ({ vaultAddress, vaultId, baseCoin }) => {
+const Strategies: React.FC<Props> = ({ vaultAddress, baseCoin }) => {
 
     const strategies = useVaultStrategies(vaultAddress);
 
@@ -33,17 +32,23 @@ const Strategies: React.FC<Props> = ({ vaultAddress, vaultId, baseCoin }) => {
                 Strategies
             </Text>
             {
+                strategies.length === 0 && (
+                    <Text>
+                        No approved strategies
+                    </Text>
+                )
+            }
+            {
                 strategies.map((strategy, index) => (
                     <Strategy 
                         key={index}
                         strategy={strategy}
-                        vaultId={vaultId}
+                        baseCoin={baseCoin}
                         vaultAddress={vaultAddress}
                     />
                 ))
             }
-            <ApproveStrategy 
-                vaultId={vaultId}
+            <ApproveStrategy
                 baseCoin={baseCoin}
                 approvedStrategies={strategies.map(strategy => structToString(strategy.strategyWitness))}
             />

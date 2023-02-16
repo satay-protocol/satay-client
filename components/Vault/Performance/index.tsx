@@ -13,17 +13,18 @@ import useVaultPerformance from '../../../hooks/vault/useVaultPerformance';
 import { Interval, intervals } from './intervals';
 import { Metric, metrics } from './metrics';
 
+import { Coin } from '../../../types/coin';
+
 interface Props {
-    vaultId: string;
-    symbol: string;
+    baseCoin: Coin
 }
 
-const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
+const Performance: React.FC<Props> = ({ baseCoin }) => {
 
     const [selectedMetric, setSelectedMetric] = useState<Metric>(metrics[0]);
     const [selectedInterval, setSelectedInterval] = useState<Interval>(intervals[0]);
 
-    const { performance, loading } = useVaultPerformance(vaultId, selectedInterval.value);
+    const { performance, loading } = useVaultPerformance(baseCoin.coinStruct, selectedInterval.value);
     const [displayValueIndex, setDisplayValueIndex] = useState<number>(performance.length - 1);
     const [mouseOver, setMouseOver] = useState<boolean>(false);
 
@@ -71,7 +72,7 @@ const Performance: React.FC<Props> = ({ vaultId, symbol }) => {
                                 fontSize='lg'
                                 fontWeight='bold'
                             >
-                                {displayValue.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})} {symbol}
+                                {displayValue.toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})} {baseCoin.symbol}
                             </Text>
                             <ChangePercentage 
                                 amountStart={performance[0]?.metrics[selectedMetric.value] || 0}

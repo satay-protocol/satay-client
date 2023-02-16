@@ -10,7 +10,7 @@ import { socialLinks } from './socialLinks'
 const SocialLinks = () => {
   return (
     <HStack
-        justifyContent={{base: 'center', md: 'flex-end'}}
+        justifyContent="center"
         flex={1}
     >
         {

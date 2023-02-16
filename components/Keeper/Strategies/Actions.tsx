@@ -11,17 +11,17 @@ import useDebtOutstanding from '../../../hooks/strategy/useDebtOutstanding'
 import { StructData } from '../../../types/aptos'
 
 interface Props {
-    vaultId: string,
     strategyWitness: StructData,
     baseCoinSymbol: string,
     decimals: number,
-    baseCoinType: StructData
+    baseCoinStruct: StructData,
+    vaultStrategyModule: string
 }
 
-const Actions: React.FC<Props> = ({ vaultId, strategyWitness, baseCoinSymbol, decimals, baseCoinType}) => {
+const Actions: React.FC<Props> = ({ strategyWitness, baseCoinSymbol, decimals, baseCoinStruct, vaultStrategyModule}) => {
 
-    const creditAvailable = useCreditAvailable(strategyWitness, vaultId, baseCoinType, decimals);
-    const debtOutstanding = useDebtOutstanding(strategyWitness, vaultId, baseCoinType, decimals);
+    const creditAvailable = useCreditAvailable(baseCoinStruct, strategyWitness, decimals);
+    const debtOutstanding = useDebtOutstanding(baseCoinStruct, strategyWitness, decimals);
 
     return (
         <VStack
@@ -44,8 +44,7 @@ const Actions: React.FC<Props> = ({ vaultId, strategyWitness, baseCoinSymbol, de
                 />
             </SimpleGrid>
             <HarvestTend 
-                vaultId={vaultId}
-                strategyWitness={strategyWitness}
+                vaultStrategyModule={vaultStrategyModule}
                 creditAvailable={creditAvailable}
                 debtOutstanding={debtOutstanding}
             />

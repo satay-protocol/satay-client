@@ -13,7 +13,7 @@ interface Props {
 
 const VaultManagerComponent: React.FC<Props> = ({ connectedAddress }) => {
 
-    const { vaultIds, fetched } = useVaultsManagedByUser(connectedAddress)
+    const { vaultBaseCoins, fetched } = useVaultsManagedByUser(connectedAddress)
 
     return (
         <Card
@@ -29,7 +29,7 @@ const VaultManagerComponent: React.FC<Props> = ({ connectedAddress }) => {
                 isLoaded={fetched}
             >
                 <Vaults
-                    vaultIds={vaultIds}
+                    vaultBaseCoins={vaultBaseCoins}
                 />
             </Skeleton>
         </Card>

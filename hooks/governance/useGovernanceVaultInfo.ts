@@ -3,22 +3,23 @@ import { useState, useEffect } from "react";
 import { useAptos } from "../../contexts/AptosContext";
 
 import { fetchGovernanceVaultInfo } from "../../services/governance";
+import { StructData } from "../../types/aptos";
 
 import { GovernanceVaultInfo } from "../../types/vaults";
 
-const useGovernanceVaultInfo = (vaultId: string) => {
+const useGovernanceVaultInfo = (baseCoinStruct: StructData) => {
 
-    const { network } = useAptos();
+    const { client } = useAptos();
 
     const [governanceVaultInfo, setGovernanceVaultInfo] = useState<GovernanceVaultInfo | null>(null);
 
     useEffect(() => {
         const getGovernanceVaultInfo = async () => {
-            const governanceVaultInfo = await fetchGovernanceVaultInfo(vaultId, network);
+            const governanceVaultInfo = await fetchGovernanceVaultInfo(client, baseCoinStruct);
             setGovernanceVaultInfo(governanceVaultInfo);
         };
         getGovernanceVaultInfo();
-    }, [network, vaultId]);
+    }, [client, baseCoinStruct]);
 
     return governanceVaultInfo;
 

@@ -4,26 +4,27 @@ import { Button } from '@chakra-ui/react'
 
 import useFreezeVault from '../../../hooks/vaultManager/useFreezeVault'
 
+import { Coin } from '../../../types/coin';
+
 interface Props {
-    vaultId: string,
+    baseCoin: Coin,
     isFrozen: boolean,
 }
 
-const FreezeVault: React.FC<Props> = ({ vaultId, isFrozen }) => {
+const FreezeVault: React.FC<Props> = ({ baseCoin, isFrozen }) => {
 
     const {
-        frozen,
         freezeVault,
         unfreezeVault
-    } = useFreezeVault(vaultId, isFrozen);
+    } = useFreezeVault(baseCoin.coinStruct);
 
   return (
     <Button
-        onClick={() => frozen ? unfreezeVault() : freezeVault()}
+        onClick={() => isFrozen ? unfreezeVault() : freezeVault()}
         colorScheme='brand'
         variant='outline'
     >
-        {frozen ? 'Unfreeze' : 'Freeze'}
+        {isFrozen ? 'Unfreeze' : 'Freeze'}
     </Button>
   )
 }

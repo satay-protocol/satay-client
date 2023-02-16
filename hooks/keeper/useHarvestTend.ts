@@ -1,18 +1,14 @@
-import { structToModule } from "../../services/aptosUtils";
-import { StructData } from "../../types/aptos";
 import useWallet from "../utility/useWallet";
 
-const useHarvestTend = (vaultId: string, strategyWitness: StructData) => {
-
-    const strategyModule = structToModule(strategyWitness);
+const useHarvestTend = (vaultStrategyModule: string) => {
 
     const { submitTransaction } = useWallet();
 
     const harvest = async () => {
         await submitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyModule}::harvest`,
-            arguments: [vaultId],
+            function: `${vaultStrategyModule}::harvest`,
+            arguments: [],
             type_arguments: []
         }, {
             title: "Strategy Harvested!",
@@ -23,8 +19,8 @@ const useHarvestTend = (vaultId: string, strategyWitness: StructData) => {
     const tend = async () => {
         await submitTransaction({
             type: 'entry_function_payload',
-            function: `${strategyModule}::tend`,
-            arguments: [vaultId],
+            function: `${vaultStrategyModule}::tend`,
+            arguments: [],
             type_arguments: []
         }, {
             title: "Strategy Tended!",

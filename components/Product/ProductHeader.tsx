@@ -30,7 +30,7 @@ const ProductHeader : React.FC<Props> = ({ name, description, protocols}) => {
                 leftIcon={<ArrowBackIcon />}
                 ml={-2}
             >
-                Products
+                Strategies
             </Button>
         </Link>
         <Flex

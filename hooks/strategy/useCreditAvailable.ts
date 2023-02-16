@@ -6,19 +6,19 @@ import { fetchCreditAvailable } from '../../services/strategies';
 
 import { StructData } from '../../types/aptos';
 
-const useCreditAvailable = (strategyWitness: StructData, vaultId: string, baseCoinType: StructData, decimals: number) => {
+const useCreditAvailable = (baseCoinStruct: StructData, strategyWitness: StructData, decimals: number) => {
 
-    const { network } = useAptos();
+    const { client } = useAptos();
     
     const [creditAvailable, setCreditAvailable] = useState(0);
 
     useEffect(() => {
         const loadCreditAvailable = async () => {
-            const creditAvailable = await fetchCreditAvailable(strategyWitness, vaultId, baseCoinType, decimals, network);
+            const creditAvailable = await fetchCreditAvailable(client, baseCoinStruct, strategyWitness, decimals);
             setCreditAvailable(creditAvailable);
         }
         loadCreditAvailable();
-    }, [strategyWitness, vaultId, baseCoinType, decimals])
+    }, [strategyWitness, baseCoinStruct, decimals])
 
     return creditAvailable;
 }

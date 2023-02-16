@@ -1,35 +1,34 @@
 import React from 'react'
 
-import { 
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Text, VStack, Flex } from '@chakra-ui/react'
 
-import Card from '../utilities/Card'
-import StructuredProducts from '../StructuredProducts'
-import Vaults from '../Vaults'
+import Offerings from './Offerings'
 
 const Home = () => {
+
   return (
     <VStack
-      spacing={4}
+      spacing={8}
     >
-      <Card>
+      <Flex
+          flexDirection='column'
+          alignItems='center'
+      >
         <Text
-          fontSize={{ base: '2xl', md: '3xl' }}
+          fontSize='3xl'
           fontWeight='extrabold'
         >
           Welcome to Satay Finance
         </Text>
         <Text
-          fontSize='lg'
           fontWeight='semibold'
+          textAlign='center'
+          fontSize='lg'
         >
-          Pioneering Yield Aggregation on Aptos and Sui
+          Pioneering Yield Aggregation on Aptos
         </Text>
-      </Card>
-      <Vaults />
-      <StructuredProducts />
+      </Flex>
+      <Offerings />
     </VStack>
   )
 }

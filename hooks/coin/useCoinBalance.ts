@@ -6,14 +6,14 @@ import { getCoinBalance } from '../../services/coin';
 
 import { StructData } from '../../types/aptos';
 
-const useCoinBalance = (accountAddress: string, coinStruct: StructData, coinStoreAddress = '0x1::coin') => {
+const useCoinBalance = (accountAddress: string, coinStruct: StructData) => {
 
     const { client } = useAptos();
 
     const [balance, setBalance] = useState(0);
 
     const getBalance = async () => {
-        const coinBalance = await getCoinBalance(client, coinStruct, accountAddress, coinStoreAddress);
+        const coinBalance = await getCoinBalance(client, coinStruct, accountAddress);
         if(coinBalance !== balance) {
             setBalance(coinBalance);
         }

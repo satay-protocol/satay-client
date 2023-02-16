@@ -5,20 +5,21 @@ import { useAptos } from "../../contexts/AptosContext";
 import { fetchVaultManagerVaultInfo } from "../../services/vaultManager";
 
 import { VaultManagerVaultInfo } from "../../types/vaults";
+import { StructData } from "../../types/aptos";
 
-const useVaultManagerVaultInfo = (vaultId: string) => {
+const useVaultManagerVaultInfo = (baseCoinStruct: StructData) => {
     
-    const { network } = useAptos();
+    const { client } = useAptos();
 
     const [vaultManagerVaultInfo, setVaultManagerVaultInfo] = useState<VaultManagerVaultInfo | null>(null);
 
     useEffect(() => {
         const getVaultManagerVaultInfo = async () => {
-            const vaultManagerVaultInfo = await fetchVaultManagerVaultInfo(vaultId, network);
+            const vaultManagerVaultInfo = await fetchVaultManagerVaultInfo(client, baseCoinStruct);
             setVaultManagerVaultInfo(vaultManagerVaultInfo);
         };
         getVaultManagerVaultInfo();
-    }, [vaultId]);
+    }, [client, baseCoinStruct]);
 
     return vaultManagerVaultInfo;
 }

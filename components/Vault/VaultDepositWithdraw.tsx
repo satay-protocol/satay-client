@@ -9,13 +9,12 @@ import { satayStakeCoin } from '../../data/blocks';
 import { Coin } from '../../types/coin'
 
 interface Props {
-    vaultId: string,
     baseCoin: Coin
 }
 
-const VaultDepositWithdraw: React.FC<Props> = ({ vaultId, baseCoin }) => {
+const VaultDepositWithdraw: React.FC<Props> = ({ baseCoin }) => {
 
-    const { deposit, withdraw } = useVaultDepositWithdraw(vaultId, baseCoin.coinStruct)
+    const { deposit, withdraw } = useVaultDepositWithdraw(baseCoin.coinStruct)
 
     const block = satayStakeCoin(baseCoin);
 

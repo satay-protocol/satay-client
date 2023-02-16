@@ -7,16 +7,17 @@ import LabeledPercentageInput from '../../utilities/LabeledPercentageInput';
 import useVaultFees from '../../../hooks/vaultManager/useVaultFees';
 
 import { VaultFees } from '../../../types/vaults';
+import { Coin } from '../../../types/coin';
 
 const MAX_FEE_AMOUNTS = 50;
 
 interface Props {
-    vaultId: string
+    baseCoin: Coin
     vaultFees: VaultFees
 }
 
 
-const UpdateFees: React.FC<Props> = ({ vaultId, vaultFees }) => {
+const UpdateFees: React.FC<Props> = ({ baseCoin, vaultFees }) => {
 
     const {
         managementFee,
@@ -25,7 +26,7 @@ const UpdateFees: React.FC<Props> = ({ vaultId, vaultFees }) => {
         onPerformanceFeeChange,
         updateFees
     } = useVaultFees(
-        vaultId,
+        baseCoin.coinStruct,
         vaultFees.managementFee,
         vaultFees.performanceFee
     );
