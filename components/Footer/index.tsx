@@ -1,44 +1,35 @@
 import React from 'react'
 
-import { Flex, HStack, Text, VStack } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 
-import { socialLinks } from './socialLinks'
-import SocialLink from './SocialLink'
-import Card from '../utilities/Card'
 import HalbornAudit from './HalbornAudit'
+
+import SocialLinks from './SocialLinks'
+
+export const footerHeight = 20;
 
 const Footer = () => {
     return (
-        <VStack
-            spacing={4}
+        <Flex
+            gap={4}
+            position='absolute'
+            bottom={0}
+            left={0}
+            right={0}
+            height={footerHeight}
+            alignItems='center'
+            justifyContent='space-between'
+            p={4}
+            flexDirection={{base: 'column', md: 'row'}}
         >
-            <Card>
-                <Flex
-                    justifyContent='space-between'
-                    alignItems='center'
-                >
-                    <Text
-                        display={{base: 'none', md: 'block'}}
-                    >
-                        Copyright © 2022 Satay Labs
-                    </Text>
-                    <HStack
-                        justifyContent={{base: 'center', md: 'flex-end'}}
-                        flex={1}
-                    >
-                        {
-                            socialLinks.map((socialLink) => (
-                                <SocialLink 
-                                    key={socialLink.name}
-                                    socialLink={socialLink}
-                                />
-                            ))
-                        }
-                    </HStack>
-                </Flex>
-            </Card>
+            <Text
+                display={{base: 'none', md: 'block'}}
+            >
+                Copyright © 2022 Satay Labs
+            </Text>
+            <SocialLinks />
             <HalbornAudit />
-        </VStack>
+        </Flex>
     )
 }
 

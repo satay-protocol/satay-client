@@ -1,9 +1,10 @@
 import React from "react";
 
 import { 
-    Box,
-    BoxProps,
-    useStyleConfig } from "@chakra-ui/react";
+  Box,
+  BoxProps,
+  useStyleConfig 
+} from "@chakra-ui/react";
 
 interface Props extends BoxProps {
   variant?: string;

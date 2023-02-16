@@ -1,13 +1,14 @@
-import { satay } from "../data/moduleAddresses"
-import { callGetFunction } from "./simulation"
+import { structToString } from "./aptosUtils"
 
-export const getTVL = async (vaultId: string) => {
-    const response = await callGetFunction({
-        func: `${satay}::satay::get_vault_total_asset`,
-        args: [satay, vaultId],
-        ledger_version: 0,
-        network: 'testnet',
-        type_args: ['0x1::aptos_coin::AptosCoin']
-    })
-    return response.details.return_values[0] as number
-}
+import { satay } from "../data/moduleAddresses"
+
+import { AptosClient } from "aptos"
+import { StructData } from "../types/aptos"
+
+export const getTVL = async (client: AptosClient, baseCoinStruct: StructData) => (
+    client.view({
+        function: `${satay}::satay::get_total_assets`,
+        type_arguments: [structToString(baseCoinStruct)],
+        arguments: [],
+    }).then((res) => res[0] as number).catch(() => 0)
+)

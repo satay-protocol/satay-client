@@ -2,18 +2,20 @@ import { satay } from "../consts/moduleAddresses"
 import { getDecimals } from "./coinDecimals";
 import { callGetFunction } from "./executeViewFunction"
 
-export const getTVL = async (vaultId: string, baseCoinAddress: string) => {
+import { AptosClient } from "aptos";
+
+export const getTVL = async (client: AptosClient, baseCoinAddress: string) => {
     const [tvl, decimals] = await Promise.all([
-        getTVLRaw(vaultId, baseCoinAddress),
-        getDecimals(baseCoinAddress, 'testnet')
+        getTVLRaw(client, baseCoinAddress),
+        getDecimals(client, baseCoinAddress)
     ])
     return tvl / 10 ** decimals;
 }
 
-const getTVLRaw = async (vaultId: string, baseCoinAddress: string) => {
+const getTVLRaw = async (client: AptosClient, baseCoinAddress: string) => {
     const tvlResonse = await callGetFunction({
         func: `${satay}::satay::get_vault_total_asset`,
-        args: [satay, vaultId],
+        args: [satay],
         ledger_version: 0,
         network: 'testnet',
         type_args: [baseCoinAddress]

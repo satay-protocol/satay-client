@@ -3,16 +3,18 @@ import { HttpFunction } from '@google-cloud/functions-framework';
 import { Point } from '@influxdata/influxdb-client';
 
 import { writeClient, queryClient } from './influxClient';
+import { getAptosClient } from './utils/aptosClient';
 import { getVaultEarnings } from './utils/vaultEarnings';
 
 import { getTVL } from './utils/vaultPerformance';
 
-const vaultId = "0";
+export const satayAddress = "0x659d53b22ebb61ef1f64d28698b8117f65136d8bb211d6d22f54d5064eec08f5"
 const vaultAddress = "0xb6d95f8bdcd6f81a90017c775aff7dd1175eb558c4b9b682f704c5561d9b7437";
 const baseCoinAddress = "0x1::aptos_coin::AptosCoin";
 
 export const writeTVL: HttpFunction = async (req, res) => {
-  const TVL = await getTVL(vaultId, baseCoinAddress);
+  const client = getAptosClient('testnet');
+  const TVL = await getTVL(client, baseCoinAddress);
   let point = new Point('TVL')
     .intField('totalAssets', TVL)
   writeClient.writePoint(point)
@@ -21,10 +23,11 @@ export const writeTVL: HttpFunction = async (req, res) => {
 };
 
 export const writeVaultPerformance: HttpFunction = async (req, res) => {
-  const TVL = await getTVL("0", "0x1::aptos_coin::AptosCoin");
-  const earnings = await getVaultEarnings(vaultAddress, baseCoinAddress, 'testnet');
+  let client = getAptosClient('testnet');
+  const TVL = await getTVL(client, baseCoinAddress);
+  const earnings = await getVaultEarnings(client, baseCoinAddress);
   let point = new Point('Vault Performance')
-    .stringField('vaultId', vaultId)
+    .stringField('vaultId', baseCoinAddress)
     .floatField('totalAssets', TVL)
     .floatField('earnings', earnings)
   writeClient.writePoint(point)

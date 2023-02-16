@@ -6,30 +6,30 @@ import {
     Flex, 
     NumberInput, 
     Text, 
-    VStack,
     Button,
     NumberInputField,
-    useColorModeValue
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
-import useWallet from '../../hooks/useWallet';
+import AccentedBox from './AccentedBox';
+
+import useWallet from '../../hooks/utility/useWallet';
+import useCoinBalance from '../../hooks/coin/useCoinBalance';
+import useCoinInfo from '../../hooks/coin/useCoinInfo';
 
 import { fromAptos } from '../../services/utils';
-import useCoinBalance from '../../hooks/useCoinBalance';
 
 import { StructData } from '../../types/aptos';
-import useCoinInfo from '../../hooks/useCoinInfo';
-import AccentedBox from './AccentedBox';
 
 interface Props {
     coinStruct: StructData,
     coinSymbol: string,
     onDeposit: (amount : number) => Promise<void>,
     viewPath: string,
+    inDevelopment?: boolean
 }
 
-const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewPath }) => {
+const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewPath, inDevelopment }) => {
 
     const { connected, address } = useWallet()
 
@@ -101,9 +101,9 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                     onClick={() => onClick()}
                     variant='solid'
                     colorScheme='brand'
-                    disabled={!connected || amount === 0}
+                    disabled={inDevelopment || !connected || amount === 0}
                 >
-                    Deposit
+                    {inDevelopment ? "Coming Soon" : "Deposit"}
                 </Button>
                 <Link
                     href={viewPath}

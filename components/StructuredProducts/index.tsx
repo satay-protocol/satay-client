@@ -1,54 +1,60 @@
 import React from 'react'
 
-import { getStructuredProducts } from '../../data/structuredProducts'
-
-import { VStack, Text, useBreakpointValue } from '@chakra-ui/react'
+import { VStack, Text, useBreakpointValue, Flex } from '@chakra-ui/react'
 
 import StructuredProductComponent from '../StructuredProduct'
 import Card from '../utilities/Card'
-import { useWallet } from '@manahippo/aptos-wallet-adapter'
-import { getNetworkSlug } from '../../services/aptosUtils'
+
+import { useAptos } from '../../contexts/AptosContext'
+
+import { getStructuredProducts } from '../../data/structuredProducts'
 
 interface Props {
     page?: boolean
 }
 
-const StructuredProducts : React.FC<Props> = ({ page }) => {
+const StructuredProducts : React.FC<Props> = ({ }) => {
 
-    const { network } = useWallet();
+    const { network } = useAptos();
 
-    const pageHeaderSize = useBreakpointValue({ base: '2xl', md: '3xl' })
-    const nonpageHeaderSize = useBreakpointValue({ base: 'xl', md: '2xl' })  
-
-    const structuredProducts = getStructuredProducts(getNetworkSlug(network?.name));
+    const structuredProducts = getStructuredProducts(network);
 
     return (
         <VStack
-            spacing={4}
+            spacing={8}
         >
-            <Card
-                w='100%'
+            <Flex
+                flexDirection='column'
+                alignItems='center'
             >
                 <Text
-                    fontSize={page ? pageHeaderSize : nonpageHeaderSize}
-                    fontWeight={page ? 'extrabold' : 'bold'}
+                    fontSize='3xl'
+                    fontWeight='extrabold'
                 >
-                    Structured Products
+                    Strategies
                 </Text>
                 <Text
-                    fontWeight={page ? 'semibold' : 'normal'}
+                    fontWeight='semibold'
+                    textAlign='center'
+                    maxW={{ base: '100%', md: '50%' }}
                 >
-                    Structured Products allow you to open complex, multi-protocol positions in one click
+                    Satay Strategies are composed of multiple Blocks and allow you to open complex, multi-protocol positions in one click
                 </Text>
-            </Card>
-            {
-                structuredProducts.map((structuredProduct) => (
-                    <StructuredProductComponent
-                        key={structuredProduct.moduleAddress}
-                        structuredProduct={structuredProduct}
-                    />
-                ))
-            }
+            </Flex>
+            <Flex
+                gap={4}
+                flexDirection='column'
+                w='100%'
+            >
+                {
+                    structuredProducts.map((structuredProduct) => (
+                        <StructuredProductComponent
+                            key={structuredProduct.moduleAddress}
+                            structuredProduct={structuredProduct}
+                        />
+                    ))
+                }
+            </Flex>
         </VStack>
     )
 }

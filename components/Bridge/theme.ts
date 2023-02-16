@@ -1,4 +1,4 @@
-type ColorMode = 'light' | 'dark';
+import { ColorMode } from "@chakra-ui/react";
 
 const colorModeValue = (mode: ColorMode, light: string, dark: string) => {
     return mode === 'light' ? light : dark;

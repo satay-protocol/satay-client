@@ -1,36 +1,27 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+
+import Head from 'next/head';
+
 import {
   Box,
-  useColorModeValue,
-  Drawer,
-  DrawerContent,
-  useDisclosure,
   Container,
+  useColorModeValue,
 } from '@chakra-ui/react';
 
-import { IconType } from 'react-icons';
 
-import Navbar from '../components/Navbar';
-
-import useWallet from '../hooks/useWallet';
-
+import Navbar, { navbarHeight } from '../components/Navbar';
 import IncorrectNetwork from '../components/utilities/IncorrectNetwork';
-import Head from 'next/head';
-import NotConnected from '../components/utilities/NotConnected';
-import { getNetworkSlug } from '../services/aptosUtils';
-import Footer from '../components/Footer';
+import Footer, { footerHeight } from '../components/Footer';
 
-interface LinkItemProps {
-  name: string;
-  icon: IconType;
-  href: string;
+import useWallet from '../hooks/utility/useWallet';
+
+import { getNetworkSlug } from '../services/network';
+
+interface Props {
+  children: React.ReactNode;
 }
 
-const DefaultLayout = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+const DefaultLayout: React.FC<Props> = ({ children }) => {
 
   const { network, connected } = useWallet();
 
@@ -48,13 +39,15 @@ const DefaultLayout = ({
       <Container 
         mx='auto' 
         maxW='4xl'
+        justifyContent='center'
         p={0}
       >
         <Box
           display='flex'
-          flexDirection='column'
           gap={4}
           p={{ base: 4, md: 8}}
+          pt={{ base: 4 + navbarHeight, md: 8 + navbarHeight }}
+          pb={{ base: 4 + navbarHeight, md: 8 + footerHeight }}
         >
           <Navbar />
           {

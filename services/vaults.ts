@@ -2,76 +2,16 @@ import { AptosClient } from "aptos";
 
 import { getStrategy } from "../data/strategies";
 import { satay } from "../data/moduleAddresses";
-import { getVaultInfo } from "../data/vaultsData";
+import { coins } from "../data/coins";
 
-import { Vault, Strategy, VaultStrategyData } from "../types/vaults";
-import { VaultInfo, ManagerResource, VaultData, StructData } from "../types/aptos";
-import { CoinStoreResource } from "../types/aptos";
-
-import { round, toAptos } from "./utils";
-import { getStructFromType } from "./aptosUtils";
+import { VaultInfo, VaultFees } from "../types/vaults";
+import { Strategy, VaultStrategyData } from "../types/strategy";
+import { StructData } from "../types/aptos";
 
 
-export const getVaultFromTable = async (client : AptosClient, managerResource : ManagerResource, vaultId : string) : Promise<Vault | null> => {
-    const vaultInfo = await client.getTableItem(managerResource.vaults.handle, {
-        key_type: "u64",
-        value_type: `${satay}::satay::VaultInfo`,
-        key: vaultId
-    })
-        .then((res) => (res as VaultInfo))
-        .catch(e => null);
-    if(vaultInfo){
-        const vaultAddress = vaultInfo.vault_cap.vec[0].vault_addr
-        const {data : vault} = await client.getAccountResource(vaultAddress, `${satay}::vault::Vault`);
-        const vaultData = vault as VaultData;
-        const coinType = getTypeString(vaultData.base_coin_type);
-        const baseCoin = {
-            struct_name: Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString(),
-            module_name: Buffer.from(vaultData.base_coin_type.module_name.slice(2), 'hex').toString(),
-            account_address: vaultData.base_coin_type.account_address
-        }
-        return {
-            ...getVaultInfo(Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()),
-            baseCoin,
-            tvl: await getTVL(vaultId),
-            managerAddress: managerResource.vaultManager,
-            vaultId,
-            vaultAddress: vaultInfo.vault_cap.vec[0].vault_addr,
-            strategies: await getStrategiesForVault(client, vaultInfo.vault_cap.vec[0].vault_addr),
-        }
-    } else {
-        return null;
-    }
-}
+import { getStructFromType, structToString } from "./aptosUtils";
 
-export const getVaultFromAddress = async (client : AptosClient, vaultAddress : string) => {
-    const {data : vault} = await client.getAccountResource(vaultAddress, `${satay}::vault::Vault`);
-    const vaultData = vault as VaultData;
-    return {
-        vault_address: vaultAddress,
-        base_coin: Buffer.from(vaultData.base_coin_type.struct_name.slice(2), 'hex').toString()
-    }
-}
 
-export const getVaults = async (client : AptosClient, managerResource : ManagerResource) : Promise<Array<Vault | null>> => {
-    return Promise.all(Array.from({length: parseInt(managerResource.next_vault_id)}, (_, i) => i).map(async (_, id) => {
-        return getVaultFromTable(client, managerResource, id.toString())
-    }))
-}
-
-export const getTypeString = (struct : StructData) => {
-    return struct.account_address + "::"
-        + Buffer.from(struct.module_name.slice(2), 'hex').toString() + "::"
-        + Buffer.from(struct.struct_name.slice(2), 'hex').toString();
-}
-
-export const structToString = (struct : StructData) => {
-    return struct.account_address + "::" + struct.module_name + "::" + struct.struct_name;
-}
-
-export const structToModule = (struct : StructData) => {
-    return struct.account_address + "::" + struct.module_name;
-}
 
 export const getTVL = async (vaultId: string): Promise<number> => {
     const TVL: number = await fetch(`/api/total_assets/${vaultId}`)
@@ -80,8 +20,7 @@ export const getTVL = async (vaultId: string): Promise<number> => {
     return TVL;
 }
 
-
-export const getStrategiesForVault = async (client : AptosClient, vaultAddress : string) : Promise<Strategy[]> => {
+export const getStrategiesForVault = async (client: AptosClient, vaultAddress: string): Promise<Strategy[]> => {
     const resources = await client.getAccountResources(vaultAddress);
     const strategies = resources
         .filter(resource => resource.type.includes("VaultStrategy"))
@@ -91,3 +30,50 @@ export const getStrategiesForVault = async (client : AptosClient, vaultAddress :
         ))
     return strategies;
 }
+
+export const fetchVaultAddress = async (client: AptosClient, baseCoinStruct: StructData): Promise<string> => (
+    client.view({
+        function: `${satay}::satay::get_vault_address`,
+        type_arguments: [structToString(baseCoinStruct)],
+        arguments: []
+    }).then(res => res[0] as string).catch(_ => "")
+)
+
+
+export const fetchVaultManager = async (client: AptosClient, baseCoinStruct: StructData): Promise<string> => (
+    client.view({
+        function: `${satay}::satay::get_vault_manager_address`,
+        type_arguments: [structToString(baseCoinStruct)],
+        arguments: []
+    }).then(res => res[0] as string).catch(_ => "")
+)
+
+export const fetchVaultInfo = async (client: AptosClient, baseCoinStruct: StructData): Promise<VaultInfo> => {
+    const vaultAddress = await fetchVaultAddress(client, baseCoinStruct);
+    return {
+        vaultAddress,
+        baseCoin: coins[0]
+    }
+}
+
+export const fetchVaultFees = async (client: AptosClient, baseCoinStruct: StructData): Promise<VaultFees> => (
+    client.view({
+        function: `${satay}::satay::get_vault_fees`,
+        type_arguments: [structToString(baseCoinStruct)],
+        arguments: []
+    }).then(res => ({
+        managementFee: parseInt(res[0] as string),
+        performanceFee: parseInt(res[1] as string)
+    })).catch(_ => ({
+        managementFee: 0,
+        performanceFee: 0
+    }))
+)
+
+export const fetchIsVaultFrozen = async (client: AptosClient, baseCoinStruct: StructData): Promise<boolean> => (
+    client.view({
+        function: `${satay}::satay::is_vault_frozen`,
+        type_arguments: [structToString(baseCoinStruct)],
+        arguments: []
+    }).then(res => res[0] as boolean).catch(_ => false)
+)

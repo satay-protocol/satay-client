@@ -2,51 +2,33 @@ import React from 'react'
 
 import {
     VStack,
-    Text,
-    CircularProgress
+    Skeleton
 } from '@chakra-ui/react'
 
-import useVaults from '../../hooks/useVaults'
-
-import { satay } from '../../data/moduleAddresses'
 import VaultCard from './VaultCard'
-import Card from '../utilities/Card'
+
+import { activeVaults } from '../../data/vaults'
+import { structToString } from '../../services/aptosUtils'
 
 const VaultsList = () => {
-
-    const { vaults, fetched } = useVaults(satay);
 
     return (
         <VStack
             width='100%'
         >
-            {
-                fetched ? (
-                    vaults.length > 0 ? (
-                        vaults.map(vault => (
-                            <VaultCard
-                                key={`${vault.managerAddress}-${vault.vaultId}`}
-                                vault={vault}
-                            />
-                        ))
-                    ) : (
-                        <Card>
-                            <Text>
-                                No Vaults
-                            </Text>
-                        </Card>
-                    )
-                ) : (
-                    <Card
-                        alignItems='center'
-                    >
-                        <CircularProgress 
-                            color='brand.500'
-                            isIndeterminate
+            <Skeleton
+                isLoaded={activeVaults.length > 0}
+                w='100%'
+            >
+                {
+                    activeVaults.map(baseCoin => (
+                        <VaultCard
+                            key={structToString(baseCoin.coinStruct)}
+                            baseCoinStruct={baseCoin.coinStruct}
                         />
-                    </Card>
-                )
-            }
+                    ))
+                }
+            </Skeleton>
         </VStack>
     )
 }

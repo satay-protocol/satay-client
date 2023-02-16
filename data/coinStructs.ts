@@ -1,18 +1,10 @@
-import { dittoStakingAddress, liquidswapCurvesAddress, liquidswapLPAddress } from "./protocolAddresses";
+import { dittoStakingAddress, layerZeroAddress, liquidswapCurvesAddress, liquidswapLPAddress } from "./protocolAddresses";
 
 import { StructData } from "../types/aptos";
-import { structToString } from "../services/vaults";
-import { dittoFarming, satay } from "./moduleAddresses";
+import { structToString } from "../services/aptosUtils";
+import { dittoFarming, satay, satayCoins } from "./moduleAddresses";
 
-const convertStringToHex = (str: string) => {
-    var arr = [];
-    for (var i = 0; i < str.length; i++) {
-        arr[i] = (str.charCodeAt(i).toString(16)).slice(-4);
-    }
-    return "0x" + arr.join("");
-}
-
-export const APT : StructData = {
+export const APT: StructData = {
     struct_name: "AptosCoin",
     account_address: "0x1",
     module_name: "aptos_coin"
@@ -28,6 +20,18 @@ export const tAPT: StructData = {
     struct_name: "TortugaAptos",
     account_address: satay,
     module_name: "tortuga_coin"
+}
+
+export const USDC: StructData = {
+    struct_name: "USDC",
+    account_address: layerZeroAddress,
+    module_name: 'asset'
+}
+
+export const SatayLendCoin: StructData = {
+    struct_name: "SatayUSDCLend",
+    account_address: satay,
+    module_name: 'borrow_lend_optimize'
 }
 
 const stablePool : StructData = {
@@ -62,8 +66,8 @@ export const LP = (coin1: StructData, coin2: StructData, poolType: PoolType) : S
 
 export const vaultCoin = (coin: StructData) : StructData => ({
     struct_name: `VaultCoin<${structToString(coin)}>`,
-    account_address: satay,
-    module_name: "vault"
+    account_address: satayCoins,
+    module_name: "vault_coin"
 })
 
 export const dittoFarmingCoin : StructData = {

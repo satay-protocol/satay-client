@@ -1,26 +1,29 @@
 import React from 'react'
 
-import { Text, Flex, Image, useColorModeValue } from '@chakra-ui/react'
+import { Text, Flex, Image, Skeleton } from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
-import DepositBox from '../utilities/DepositBox'
 import Strategies from '../Strategies'
+import VaultDepositBox from './VaultDepositBox'
 
-import useVault from '../../hooks/useVault'
+import useVaultInfo from '../../hooks/vault/useVaultInfo'
 
-import { Vault } from '../../types/vaults'
+import { StructData } from '../../types/aptos'
 
 interface Props {
-    vault: Vault
+    baseCoinStruct: StructData
 }
 
-const VaultCard : React.FC<Props> = ({ vault }) => {
+const VaultCard : React.FC<Props> = ({ baseCoinStruct }) => {
 
-    const { deposit } = useVault(vault.managerAddress, vault.vaultId);
+    const vault = useVaultInfo(baseCoinStruct);
+
+    if(!vault) return <Skeleton />;
 
     return (
         <Card
             gap={4}
+            w='100%'
         >
             <Flex
                 alignItems='center'
@@ -40,33 +43,23 @@ const VaultCard : React.FC<Props> = ({ vault }) => {
                             fontSize={{ base: 'lg', md: 'xl'}}
                             fontWeight='bold'
                         >
-                            {vault.symbol} Vault
-                        </Text>
-                        <Text
-                            fontSize='lg'
-                            color={useColorModeValue('brand.500', 'brand.400')}
-                            fontWeight='bold'
-                        >
-                            15% APY
+                            {vault.baseCoin.symbol} Vault
                         </Text>
                     </Flex>
-                    <DepositBox 
-                        coinStruct={vault.baseCoin}
-                        coinSymbol={vault.symbol}
-                        onDeposit={deposit}
-                        viewPath={`/vaults/${vault.vaultId}`}
+                    <VaultDepositBox 
+                        baseCoin={vault.baseCoin}
                     />
                 </Flex>
                 <Image 
-                    src={`/${vault.baseCoinProtocol}_logo.jpeg`}
-                    alt={vault.symbol}
+                    src={`/${vault.baseCoin.protocol}_logo.jpeg`}
+                    alt={vault.baseCoin.symbol}
                     boxSize={'100px'}
                     rounded='full'
                     display={{ base: 'none', md: 'block' }}
                 />
             </Flex>
             <Strategies 
-                strategies={vault.strategies}
+                vaultAddress={vault.vaultAddress}
             />
         </Card>
     )

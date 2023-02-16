@@ -2,7 +2,7 @@ import React from 'react'
 
 import DepositWithdraw from '../DepositWithdraw'
 
-import useStructuredProduct from '../../hooks/useStructuredProduct'
+import useStructuredProduct from '../../hooks/structuredProduct/useStructuredProduct'
 
 import { StructuredProduct } from '../../types/structuredProduct'
 
@@ -19,6 +19,7 @@ const StructuredProductDepositWithdraw: React.FC<Props> = ({ structuredProduct }
             deposit={deposit}
             withdraw={withdraw}
             block={structuredProduct.block}
+            inDevelopment={structuredProduct.inDevelopment}
         />
     )
 }

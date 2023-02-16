@@ -8,26 +8,28 @@ import {
     NumberInputField,
     Flex,
     Button,
-    useColorModeValue
 } from '@chakra-ui/react';
 
-import { fromAptos, round } from '../../services/utils';
-import useUserCoinBalance from '../../hooks/useUserCoinBalance';
-import useWallet from '../../hooks/useWallet';
+import AccentedBox from '../utilities/AccentedBox';
+
+import useUserCoinBalance from '../../hooks/coin/useUserCoinBalance';
+import useWallet from '../../hooks/utility/useWallet';
+import useCoinInfo from '../../hooks/coin/useCoinInfo';
+
+import { round } from '../../services/utils';
 
 import { StructData } from '../../types/aptos';
-import useCoinInfo from '../../hooks/useCoinInfo';
-import AccentedBox from '../utilities/AccentedBox';
 
 interface Props {
     actionName: string;
     action: (amount : number) => Promise<void>;
     symbol: string;
     logo: string;
-    coinStruct: StructData
+    coinStruct: StructData,
+    inDevelopment?: boolean
 }
 
-const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct}) => {
+const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct, inDevelopment }) => {
 
     const { connected } = useWallet();
 
@@ -136,9 +138,9 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                     variant='solid'
                     colorScheme='brand'
                     flex={1}
-                    disabled={!connected || amount === 0}
+                    disabled={inDevelopment || !connected || amount === 0}
                 >
-                    {actionName}
+                    {inDevelopment ? "Coming Soon" : actionName}
                 </Button>
             </Flex>
         </Flex>
