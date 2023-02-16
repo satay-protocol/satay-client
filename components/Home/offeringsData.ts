@@ -13,10 +13,10 @@ export interface OfferingType {
 
 export const offeringsData: OfferingType[] = [
     {
-        icon: BiCodeBlock,
-        title: 'Blocks',
-        description: 'Blocks are composable DeFi primitive operations through trusted third-party protocols.',
-        route: '/blocks'
+        icon: CiVault,
+        title: 'Automated Vaults',
+        description: 'Vaults optimize allocations to Blocks and Strategies to maximize yield.',
+        route: '/vaults'
     },
     {
         icon: AiOutlineSwap,
@@ -25,9 +25,9 @@ export const offeringsData: OfferingType[] = [
         route: '/products'
     },
     {
-        icon: CiVault,
-        title: 'Automated Vaults',
-        description: 'Vaults optimize allocations to Blocks and Strategies to maximize yield.',
-        route: '/vaults'
-    }
+        icon: BiCodeBlock,
+        title: 'Blocks',
+        description: 'Blocks are composable DeFi primitive operations through trusted third-party protocols.',
+        route: '/blocks'
+    },
 ]

@@ -9,7 +9,8 @@ import {
     useBreakpointValue,
     IconButton,
     useClipboard,
-    useToast
+    useToast,
+    Image
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 
@@ -81,12 +82,13 @@ const ConnectWallet = () => {
                                 Disconnect
                             </MenuItem>
                         </>
-
                     ) : (
                         wallets.map(wallet => (
                             <MenuItem
                                 key={wallet.adapter.name}
                                 onClick={() => onConnect(wallet)}
+                                icon={<Image src={wallet.adapter.icon} boxSize={6} />}
+                                fontWeight="medium"
                             >
                                 {wallet.adapter.name}
                             </MenuItem>

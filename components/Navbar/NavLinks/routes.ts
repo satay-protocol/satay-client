@@ -17,15 +17,15 @@ export const routes: Route[] = [
         href: '/vaults',
         icon: CiVault
     },
-    {
-        name: 'Blocks',
-        href: '/blocks',
-        icon: BiCodeBlock
-    },
     { 
         name: 'Strategies', 
         href: '/products',
         icon: AiOutlineSwap
+    },
+    {
+        name: 'Blocks',
+        href: '/blocks',
+        icon: BiCodeBlock
     },
     {
         name: 'Bridge',
