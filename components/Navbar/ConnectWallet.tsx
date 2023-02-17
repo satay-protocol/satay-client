@@ -10,7 +10,10 @@ import {
     IconButton,
     useClipboard,
     useToast,
-    Image
+    Image,
+    Flex,
+    Text,
+    Box
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 
@@ -87,10 +90,36 @@ const ConnectWallet = () => {
                             <MenuItem
                                 key={wallet.adapter.name}
                                 onClick={() => onConnect(wallet)}
-                                icon={<Image src={wallet.adapter.icon} boxSize={6} />}
+                                icon={<Image src={wallet.adapter.icon} boxSize={6} alt={wallet.adapter.name} />}
                                 fontWeight="medium"
+                                alignItems='center'
                             >
-                                {wallet.adapter.name}
+                                <Flex
+                                    justifyContent='space-between'
+                                    alignItems='center'
+                                    gap={4}
+                                >
+                                    {wallet.adapter.name}
+                                    {
+                                        (wallet.adapter.name === 'Pontem' || wallet.adapter.name == 'Rise Wallet') && (
+                                            <Flex
+                                                alignItems='center'
+                                                bg='green.500'
+                                                rounded='lg'
+                                                p={1}
+
+                                            >
+                                                <Text
+                                                    fontSize='xs'
+                                                    color='white'
+                                                    fontWeight='bold'
+                                                >
+                                                    Popular
+                                                </Text>
+                                            </Flex>
+                                        )
+                                    }
+                                </Flex>
                             </MenuItem>
                         ))
                     )

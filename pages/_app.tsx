@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     setWallets([
       new PontemWalletAdapter(),
+      new RiseWalletAdapter(),
       new MsafeWalletAdapter("Testnet"),
       new AptosWalletAdapter(),
       new MartianWalletAdapter(),
@@ -34,8 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         bloctoAppId: 'a9d395d4-4b40-4af3-bcb8-cf30fce97614',
         network: WalletAdapterNetwork.Testnet,
       }),
-      new SpacecyWalletAdapter(),
-      new RiseWalletAdapter()
+      new SpacecyWalletAdapter()
     ])
     setLoaded(true);
   }, [])

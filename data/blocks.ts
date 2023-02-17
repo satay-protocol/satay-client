@@ -21,7 +21,8 @@ export const dittoStakeAptos : Block = {
     description: "Stake APT on Ditto for stAPT to earn APT emission rewards",
     inputProtocol: "aptos",
     outputProtocol: "ditto",
-    title: "Ditto Stake Aptos"
+    title: "Ditto Stake Aptos",
+    apy: "7"
 }
 
 export const dittoStakedAptosLp: Block = {
@@ -32,7 +33,8 @@ export const dittoStakedAptosLp: Block = {
     description: "Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees",
     inputProtocol: "ditto",
     outputProtocol: "pontem",
-    title: "APT/stAPT LP"
+    title: "APT/stAPT LP",
+    apy: "15"
 }
 
 export const dittoStakeAptosAndLp: Block = {
@@ -43,7 +45,8 @@ export const dittoStakeAptosAndLp: Block = {
     description: "Stake APT on Ditto for stAPT to earn emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees",
     inputProtocol: "aptos",
     outputProtocol: "pontem",
-    title: "Ditto Stake Aptos and LP"
+    title: "Ditto Stake Aptos and LP",
+    apy: "22"
 }
 
 export const dittoFarming: Block = {
@@ -54,7 +57,8 @@ export const dittoFarming: Block = {
     description: "Stake APT on Ditto for stAPT to earn APT emission rewards. Add liquidity to stAPT/APT pool on Liquidswap for LP<APT, stAPT> to earn trading fees. Stake LP tokens on Ditto Rewards to earn DTO emissions.",
     inputProtocol: "aptos",
     outputProtocol: "ditto",
-    title: "Ditto Farming"
+    title: "Ditto Farming",
+    apy: "29"
 }
 
 export const stakeAptStaptLP: Block = {
@@ -65,7 +69,8 @@ export const stakeAptStaptLP: Block = {
     description: "Stake LP tokens on Ditto Rewards to earn DTO emissions.",
     inputProtocol: "pontem",
     outputProtocol: "ditto",
-    title: "Stake stAPT/APT LP"
+    title: "Stake stAPT/APT LP",
+    apy: "7"
 }
 
 export const tortugaStakeAptos: Block = {
@@ -73,10 +78,11 @@ export const tortugaStakeAptos: Block = {
     outputCoinType: stAPT,
     inputCoinSymbol: "APT",
     outputCoinSymbol: "tAPT",
-    description: "Stake APT on Tortuga for tAPT",
+    description: "Stake APT on Tortuga for tAPT to earn APT emission rewards",
     inputProtocol: "aptos",
     outputProtocol: "tortuga",
-    title: "Stake APT for tAPT"
+    title: "Stake APT for tAPT",
+    apy: "7"
 }
 
 export const tortugaCollateralAptos: Block = {
@@ -87,7 +93,8 @@ export const tortugaCollateralAptos: Block = {
     description: "Deposit tAPT as collateral to borrow APT on Aries.",
     inputProtocol: "tortuga",
     outputProtocol: "aries",
-    title: "Collateralize tAPT"
+    title: "Collateralize tAPT",
+    apy: "0"
 }
 
 export const repeatStakeTortugaAptos: Block = {
@@ -98,7 +105,8 @@ export const repeatStakeTortugaAptos: Block = {
     description: "Repeat 2x to gain 2.8x leverage - 65% LTV on Aries",
     inputProtocol: "aries",
     outputProtocol: "tortuga",
-    title: "Repeat Stake tAPT"
+    title: "Repeat Stake tAPT",
+    apy: "20"
 }
 
 export const satayStakeCoin = (coin: Coin) : Block => ({
@@ -109,7 +117,8 @@ export const satayStakeCoin = (coin: Coin) : Block => ({
     description: `Stake ${coin.symbol} on Satay for s${coin.symbol} to earn yield`,
     inputProtocol: coin.protocol,
     outputProtocol: "satay",
-    title: `Stake ${coin.symbol} on Satay`
+    title: `Stake ${coin.symbol} on Satay`,
+    apy: "7"
 })
 
 export const lendCointoAries = (coin: Coin) : Block => ({
@@ -120,7 +129,8 @@ export const lendCointoAries = (coin: Coin) : Block => ({
     description: `Lend ${coin.symbol} to Aries to earn interest`,
     inputProtocol: coin.protocol,
     outputProtocol: "aries",
-    title: `Lend ${coin.symbol} to Aries`
+    title: `Lend ${coin.symbol} to Aries`,
+    apy: "12"
 })
 
 export const lendCointoAptin = (coin: Coin) : Block => ({
@@ -131,7 +141,8 @@ export const lendCointoAptin = (coin: Coin) : Block => ({
     description: `Lend ${coin.symbol} to Aptin to earn interest`,
     inputProtocol: coin.protocol,
     outputProtocol: "aptin",
-    title: `Lend ${coin.symbol} to Aptin`
+    title: `Lend ${coin.symbol} to Aptin`,
+    apy: "9"
 })
 
 export const lendCointoAbel = (coin: Coin) : Block => ({
@@ -142,7 +153,8 @@ export const lendCointoAbel = (coin: Coin) : Block => ({
     description: `Lend ${coin.symbol} to Abel to earn interest`,
     inputProtocol: coin.protocol,
     outputProtocol: "abel",
-    title: `Lend ${coin.symbol} to Abel`
+    title: `Lend ${coin.symbol} to Abel`,
+    apy: "8"
 })
 
 export const lendUSDCToAries: Block = {
@@ -153,7 +165,8 @@ export const lendUSDCToAries: Block = {
     description: 'Lend USDC to Aries to earn interest',
     inputProtocol: 'usdc',
     outputProtocol: 'aries',
-    title: 'Lend USDC to Aries'
+    title: 'Lend USDC to Aries',
+    apy: "6"
 }
 
 export const lendUSDCToAptin: Block = {
@@ -164,7 +177,8 @@ export const lendUSDCToAptin: Block = {
     description: 'Lend USDC to Aptin to earn interest',
     inputProtocol: 'usdc',
     outputProtocol: 'aptin',
-    title: 'Lend USDC to Aptin'
+    title: 'Lend USDC to Aptin',
+    apy: "7"
 }
 
 export const lendUSDCToAbel: Block = {
@@ -175,7 +189,8 @@ export const lendUSDCToAbel: Block = {
     description: 'Lend USDC to Abel to earn interest',
     inputProtocol: 'usdc',
     outputProtocol: 'abel',
-    title: 'Lend USDC to Abel'
+    title: 'Lend USDC to Abel',
+    apy: "8"
 }
 
 export const lendUSDCThroughSatay: Block = {
@@ -186,7 +201,8 @@ export const lendUSDCThroughSatay: Block = {
     description: 'Optimize allocation of USDC to highest-earning borrow/lend market',
     inputProtocol: 'usdc',
     outputProtocol: 'satay',
-    title: 'Lend USDC through Satay'
+    title: 'Lend USDC through Satay',
+    apy: "9"
 }
 
 export const liquidStaking: Block[] = [

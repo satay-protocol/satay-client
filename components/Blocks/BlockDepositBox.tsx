@@ -18,6 +18,7 @@ const BlockDepositBox: React.FC<Props> = ({ block }) => {
             coinSymbol={block.inputCoinSymbol}
             onDeposit={deposit}
             viewPath={`/blocks`}
+            inDevelopment
         />
     )
 }

@@ -40,7 +40,7 @@ const BlockCard : React.FC<Props> = ({ block }) => {
                             fontWeight='bold'
                             color='brand.500'
                         >
-                            7% APY
+                            {block.apy}% APY
                         </Text>
                     </Flex>
                     <Image 
@@ -51,9 +51,12 @@ const BlockCard : React.FC<Props> = ({ block }) => {
                         display={{ base: 'none', md: 'block' }}
                     />
                 </Flex>
-                <BlockDepositBox 
-                        block={block}
-                    />
+                <Text>
+                    {block.description}
+                </Text>
+                {/* <BlockDepositBox 
+                    block={block}
+                /> */}
             </Flex>
         </Card>
     )

@@ -8,4 +8,5 @@ export interface Block {
     inputProtocol: string,
     outputProtocol: string,
     title: string,
+    apy: string,
 }
