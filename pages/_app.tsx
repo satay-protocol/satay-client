@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <AptosProvider>
               <Head>
                 <title>Satay Finance</title>
-                <meta name="description" content="One-stop DeFi Aggregator" />
+                <meta name="description" content="One-stop DeFi Aggregator on Aptos" />
               </Head>
               <Component {...pageProps} />
             </AptosProvider>

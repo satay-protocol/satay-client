@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Head from 'next/head';
-
 import {
   Box,
   Container,
@@ -32,10 +30,6 @@ const DefaultLayout: React.FC<Props> = ({ children }) => {
       minH="100vh" 
       bg={useColorModeValue('blackAlpha.50', 'blackAlpha.700')}
     >
-      <Head>
-        <title>Satay Finance</title>
-        <meta name="description" content="The premier yield aggregator on Aptos." />
-      </Head>
       <Container 
         mx='auto' 
         maxW='4xl'
