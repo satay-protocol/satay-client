@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import Head from "next/head";
 import type { AppProps } from 'next/app'
 
 import { ChakraProvider } from '@chakra-ui/react'
@@ -45,18 +46,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <WalletProvider
-      wallets={wallets}
-      autoConnect={true}
-    >
-      <ChakraProvider
-        theme={theme}
-      >
-        <AptosProvider>
-          <Component {...pageProps} />
-        </AptosProvider>
-      </ChakraProvider>
-    </WalletProvider>
+        <WalletProvider
+            wallets={wallets}
+            autoConnect={true}
+        >
+          <ChakraProvider
+              theme={theme}
+          >
+            <AptosProvider>
+              <Head>
+                <title>Satay Finance</title>
+                <meta name="description" content="One-stop DeFi Aggregator" />
+              </Head>
+              <Component {...pageProps} />
+            </AptosProvider>
+          </ChakraProvider>
+        </WalletProvider>
   )
 }
 
