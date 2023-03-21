@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { Text, Flex, useBreakpointValue, Box } from '@chakra-ui/react'
+import { Text, Flex, useBreakpointValue } from '@chakra-ui/react'
 
-import Card from '../utilities/Card'
-import BlocksView from './BlocksView';
-import LiquidStaking from './LiquidStaking';
-import BorrowLend from './BorrowLend';
+import BlockClass from "./BlockClass";
+import {borrowLend, liquidStaking} from "../../data/blocks";
 
 interface Props {
   page?: boolean
@@ -40,8 +38,18 @@ const Blocks: React.FC<Props> = ({ page }) => {
                 Satay Blocks are composable, primative DeFi operations that can be used to create yield generating strategies.
             </Text>
         </Flex>
-      <LiquidStaking />
-      <BorrowLend />
+        <BlockClass
+            title="Liquid Staking"
+            description="Earn yield on your staked coins."
+            link="https://satay.finance/liquid-staking"
+            blocks={liquidStaking}
+        />
+        <BlockClass
+            title="Borrow / Lend"
+            description="Borrow and lend your staked coins."
+            link="https://satay.finance/borrow-lend"
+            blocks={borrowLend}
+        />
     </Flex>
   )
 }

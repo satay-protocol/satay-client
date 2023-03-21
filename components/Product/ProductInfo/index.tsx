@@ -23,7 +23,7 @@ const ProductInfo : React.FC<Props> = ({ blocks }) => {
           fontSize='lg'
           fontWeight='bold'
         >
-          Steps
+          Blocks
         </Text>
       </Card>
       {blocks.map((block, index) => (

@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { Text, VStack, Flex } from '@chakra-ui/react'
+import {Text, VStack, Flex, Image, Button, useColorModeValue} from '@chakra-ui/react'
 
 import Offerings from './Offerings'
 
 const Home = () => {
+
+  const aptosLogoUri = useColorModeValue('/aptos_text_light.svg', '/aptos_text_dark.svg')
 
   return (
     <VStack
@@ -15,18 +17,53 @@ const Home = () => {
           alignItems='center'
       >
         <Text
-          fontSize='3xl'
-          fontWeight='extrabold'
+          fontSize='5xl'
+          fontWeight='black'
         >
-          Welcome to Satay Finance
+          Satay Finance
         </Text>
         <Text
-          fontWeight='semibold'
+          fontWeight='extrabold'
           textAlign='center'
-          fontSize='lg'
+          fontSize='xl'
         >
-          Pioneering Yield Aggregation on Aptos
+          One-stop DeFi Aggregator
         </Text>
+
+      </Flex>
+      <Image
+          src='/vault_diagram.png'
+          alt='Satay Vault Diagram'
+          w={{base: '100%', md: '75%'}}
+      />
+      <Flex
+          alignItems='center'
+          mt={4}
+          gap={2}
+      >
+        <Text
+            fontSize='md'
+            fontWeight='bold'
+            opacity={0.7}
+        >
+          Powered by
+        </Text>
+        <a
+            href='https://aptoslabs.com/'
+            target='_blank'
+            rel='noreferrer'
+        >
+          <Button
+              variant='ghost'
+              px={0}
+          >
+            <Image
+                src={aptosLogoUri}
+                h='36px'
+                alt='Aptos Labs Logo'
+            />
+          </Button>
+        </a>
       </Flex>
       <Offerings />
     </VStack>

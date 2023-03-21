@@ -30,9 +30,9 @@ const LineGraph: React.FC<Props> = ({ data, labels, setDisplayIndex, onMouseLeav
     Chart.unregister({id: chartId});
     Chart.register({
       id: chartId, //typescript crashes without id
-      afterDraw: function (chart: Chart, easing: any) {
-        const activeElements = chart.tooltip.getActiveElements()
-        if (activeElements.length) {
+      afterDraw: function (chart: Chart, _easing: any) {
+        const activeElements = chart?.tooltip?.getActiveElements()
+        if (activeElements?.length) {
           const activePoint = activeElements[0];
           setDisplayIndex && setDisplayIndex(activePoint.index);
           const ctx = chart.ctx;

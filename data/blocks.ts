@@ -7,7 +7,7 @@ import {
     vaultCoin ,
     USDC,
     SatayLendCoin
-} from "../data/coinStructs";
+} from "./coinStructs";
 
 import { Block } from '../types/block';
 import { Coin } from "../types/coin";
@@ -21,7 +21,7 @@ export const dittoStakeAptos : Block = {
     description: "Stake APT on Ditto for stAPT to earn APT emission rewards",
     inputProtocol: "aptos",
     outputProtocol: "ditto",
-    title: "Ditto Stake Aptos",
+    title: "Stake APT on Ditto",
     apy: "7"
 }
 
@@ -81,7 +81,7 @@ export const tortugaStakeAptos: Block = {
     description: "Stake APT on Tortuga for tAPT to earn APT emission rewards",
     inputProtocol: "aptos",
     outputProtocol: "tortuga",
-    title: "Stake APT for tAPT",
+    title: "Stake APT on Tortuga",
     apy: "7"
 }
 
@@ -213,5 +213,4 @@ export const liquidStaking: Block[] = [
 export const borrowLend = [
     lendCointoAries(APTOS),
     lendCointoAptin(APTOS),
-    lendCointoAbel(APTOS),
 ]

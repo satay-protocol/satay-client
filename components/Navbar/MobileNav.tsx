@@ -31,7 +31,7 @@ const MobileNav: React.FC = () => {
             <Drawer
                 autoFocus={false}
                 isOpen={isOpen}
-                placement="left"
+                placement="right"
                 onClose={onClose}
                 returnFocusOnClose={false}
                 onOverlayClick={onClose}
