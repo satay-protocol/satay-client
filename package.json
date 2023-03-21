@@ -13,7 +13,7 @@
     "@chakra-ui/react": "^2.2.9",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@manahippo/aptos-wallet-adapter": "1.0.8",
+    "@manahippo/aptos-wallet-adapter": "1.0.10",
     "@solana/web3.js": "^1.66.1",
     "aptos": "1.6.0",
     "chart.js": "^3.9.1",
