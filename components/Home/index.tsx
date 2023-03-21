@@ -55,11 +55,11 @@ const Home = () => {
         >
           <Button
               variant='ghost'
-              px={0}
+              px={2}
           >
             <Image
                 src={aptosLogoUri}
-                h='36px'
+                h='32px'
                 alt='Aptos Labs Logo'
             />
           </Button>
