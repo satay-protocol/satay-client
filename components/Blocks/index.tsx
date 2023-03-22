@@ -41,13 +41,13 @@ const Blocks: React.FC<Props> = ({ page }) => {
         <BlockClass
             title="Liquid Staking"
             description="Earn yield on your staked coins."
-            link="https://satay.finance/liquid-staking"
+            link="https://pontem.network/posts/a-guide-to-liquid-staking"
             blocks={liquidStaking}
         />
         <BlockClass
             title="Borrow / Lend"
             description="Borrow and lend your staked coins."
-            link="https://satay.finance/borrow-lend"
+            link="https://www.nansen.ai/guides/crypto-lending-everything-you-need-to-know-to-get-started"
             blocks={borrowLend}
         />
     </Flex>
