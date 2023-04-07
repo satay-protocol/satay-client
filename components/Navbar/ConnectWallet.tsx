@@ -56,19 +56,35 @@ const ConnectWallet = () => {
 
     return (
         <Menu>
-            <MenuButton
-                py={2}
-                transition="all 0.3s"
-                _focus={{ boxShadow: 'none' }}
-                as={mobileView ? IconButton : Button} 
-                colorScheme={connected ? 'brand': 'gray'}
-                variant={connected ? 'outline' : 'solid'}
-                rightIcon={!mobileView ? <ChevronDownIcon /> : undefined}
-                leftIcon={!mobileView ? <FaWallet /> : undefined}
-                icon={mobileView ? <FaWallet /> : undefined}
-            >
-                {(connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet')}
-            </MenuButton>
+            {
+                mobileView ? (
+                    <MenuButton
+                        py={2}
+                        transition="all 0.3s"
+                        _focus={{ boxShadow: 'none' }}
+                        as={IconButton}
+                        colorScheme={connected ? 'brand': 'gray'}
+                        variant={connected ? 'outline' : 'solid'}
+                        icon={mobileView ? <FaWallet /> : undefined}
+                    >
+                        {(connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet')}
+                    </MenuButton>
+                ) : (
+                    <MenuButton
+                        py={2}
+                        transition="all 0.3s"
+                        _focus={{ boxShadow: 'none' }}
+                        as={Button}
+                        colorScheme={connected ? 'brand': 'gray'}
+                        variant={connected ? 'outline' : 'solid'}
+                        rightIcon={!mobileView ? <ChevronDownIcon /> : undefined}
+                        leftIcon={!mobileView ? <FaWallet /> : undefined}
+                    >
+                        {(connected ? ellipsize(account?.address?.toString()) : 'Connect Wallet')}
+                    </MenuButton>
+                )
+            }
+
             <MenuList>
                 {
                     connected ? (

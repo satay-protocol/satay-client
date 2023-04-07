@@ -101,7 +101,7 @@ const DepositBox : React.FC<Props> = ({ coinStruct, coinSymbol, onDeposit, viewP
                     onClick={() => onClick()}
                     variant='solid'
                     colorScheme='brand'
-                    disabled={inDevelopment || !connected || amount === 0}
+                    isDisabled={inDevelopment || !connected || amount === 0}
                 >
                     {inDevelopment ? "Coming Soon" : "Deposit"}
                 </Button>

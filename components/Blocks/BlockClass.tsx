@@ -4,13 +4,13 @@ import {Button, Flex, Text, VStack} from '@chakra-ui/react'
 
 import Card from '../utilities/Card'
 import BlocksView from './BlocksView'
-import {Block} from "../../types/block";
+import {NewBlock} from "../../types/block";
 
 interface Props {
     title: string
     description: string
     link: string
-    blocks: Block[]
+    blocks: NewBlock[]
 }
 
 const BorrowLend: React.FC<Props> = ({ blocks, title, description, link }) => {

@@ -6,7 +6,7 @@ import Offerings from './Offerings'
 
 const Home = () => {
 
-  const aptosLogoUri = useColorModeValue('/aptos_text_light.svg', '/aptos_text_dark.svg')
+  const aptosLogoUri = useColorModeValue('/aptos_text_light.svg', '/aptos_text_dark.svg');
 
   return (
     <VStack

@@ -4,10 +4,17 @@ import { Text, VStack } from '@chakra-ui/react'
 
 import Card from '../../utilities/Card'
 import Vault from './Vault'
-import { activeVaults } from '../../../data/vaults'
+
+import {useAptos} from "../../../contexts/AptosContext";
+
+import {getVaults} from '../../../data/vaults'
+
 import { structToString } from '../../../services/aptosUtils'
 
 const Vaults = () => {
+
+    const { network } = useAptos();
+
     return (
         <Card
             gap={4}
@@ -22,7 +29,7 @@ const Vaults = () => {
                 alignItems="flex-start"
             >
                 {
-                    activeVaults.map((baseCoin) => {
+                    getVaults(network).map((baseCoin) => {
                         return (
                             <Vault
                                 key={structToString(baseCoin.coinStruct)}

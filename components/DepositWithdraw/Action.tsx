@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import {
     VStack,
     Image,
     Text,
-    NumberInput,
-    NumberInputField,
     Flex,
     Button,
 } from '@chakra-ui/react';
@@ -19,6 +17,7 @@ import useCoinInfo from '../../hooks/coin/useCoinInfo';
 import { round } from '../../services/utils';
 
 import { StructData } from '../../types/aptos';
+import CoinAmountInput from "../utilities/CoinAmountInput";
 
 interface Props {
     actionName: string;
@@ -37,36 +36,11 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
 
     const { decimals } = useCoinInfo(coinStruct);
 
-    const zeroWithDecimals = `0.${'0'.repeat(decimals)}`;
-
-    const [amountAsString, setAmountAsString] = useState(zeroWithDecimals);
     const [amount, setAmount] = useState(0);
-
-    useEffect(() => {
-        if(amount === 0) {
-            setAmountAsString(zeroWithDecimals);
-        }
-    }, [decimals, amount, zeroWithDecimals]);
-
-    const handleTextChange = (value : string) => {
-        setAmountAsString(value);
-        if(value == ""){
-            setAmount(0);
-        } else if(value[value.length-1] !== "."){
-            setAmount(parseFloat(value));
-        }
-    }
 
     const onClick = async () => {
         await action(Math.round(amount * 10**decimals));
-        setAmountAsString(zeroWithDecimals);
         setAmount(0);
-    }
-
-    const onFocus = () => {
-        if(amount === 0){
-            setAmountAsString("");
-        }
     }
 
     return (
@@ -115,18 +89,11 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                                 {round(balance, 3)} {symbol}
                             </Text>
                         </VStack>
-                        <NumberInput
-                            value={amountAsString}
-                            onChange={handleTextChange}
-                            w='100%'
-                            max={balance}
-                            precision={decimals}
-                            defaultValue={0}
-                            focusBorderColor='brand.500'
-                            onFocus={onFocus}
-                        >
-                            <NumberInputField />
-                        </NumberInput>
+                        <CoinAmountInput
+                            decimals={decimals}
+                            amount={amount}
+                            setAmount={setAmount}
+                        />
                     </VStack>
                 </AccentedBox>
             </Flex>
@@ -134,11 +101,11 @@ const Action : React.FC<Props> = ({ action, symbol, logo, actionName, coinStruct
                 gap={4}
             >
                 <Button
-                    onClick={() => onClick()}
+                    onClick={onClick}
                     variant='solid'
                     colorScheme='brand'
                     flex={1}
-                    disabled={inDevelopment || !connected || amount === 0}
+                    isDisabled={inDevelopment || !connected || amount === 0}
                 >
                     {inDevelopment ? "Coming Soon" : actionName}
                 </Button>

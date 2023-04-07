@@ -17,9 +17,9 @@ export const stAPT : StructData = {
 }
 
 export const tAPT: StructData = {
-    struct_name: "TortugaAptos",
-    account_address: satay,
-    module_name: "tortuga_coin"
+    struct_name: "StakedAptosCoin",
+    account_address: "0x84d7aeef42d38a5ffc3ccef853e1b82e4958659d16a7de736a29c55fbbeb0114",
+    module_name: "staked_aptos_coin"
 }
 
 export const USDC: StructData = {

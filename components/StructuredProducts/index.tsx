@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { VStack, Text, useBreakpointValue, Flex } from '@chakra-ui/react'
+import { VStack, Text, Flex } from '@chakra-ui/react'
 
 import StructuredProductComponent from '../StructuredProduct'
-import Card from '../utilities/Card'
 
 import { useAptos } from '../../contexts/AptosContext'
 
 import { getStructuredProducts } from '../../data/structuredProducts'
+import {moduleToString} from "../../data/modules";
 
 interface Props {
     page?: boolean
@@ -49,7 +49,7 @@ const StructuredProducts : React.FC<Props> = ({ }) => {
                 {
                     structuredProducts.map((structuredProduct) => (
                         <StructuredProductComponent
-                            key={structuredProduct.moduleAddress}
+                            key={moduleToString(structuredProduct.module)}
                             structuredProduct={structuredProduct}
                         />
                     ))

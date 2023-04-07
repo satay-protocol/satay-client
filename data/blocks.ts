@@ -145,18 +145,6 @@ export const lendCointoAptin = (coin: Coin) : Block => ({
     apy: "9"
 })
 
-export const lendCointoAbel = (coin: Coin) : Block => ({
-    inputCoinType: coin.coinStruct,
-    outputCoinType: SatayLendCoin,
-    inputCoinSymbol: coin.symbol,
-    outputCoinSymbol: 'SLC',
-    description: `Lend ${coin.symbol} to Abel to earn interest`,
-    inputProtocol: coin.protocol,
-    outputProtocol: "abel",
-    title: `Lend ${coin.symbol} to Abel`,
-    apy: "8"
-})
-
 export const lendUSDCToAries: Block = {
     inputCoinType: USDC,
     outputCoinType: SatayLendCoin,

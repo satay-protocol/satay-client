@@ -2,12 +2,15 @@ import { fetchIsVaultFrozen, fetchVaultFees, fetchVaultInfo, fetchVaultManager }
 
 import { SupportedNetwork } from "../types/network";
 import { VaultManagerVaultInfo } from "../types/vaults";
-import { activeVaults } from "../data/vaults";
+import { getVaults } from "../data/vaults";
 import { AptosClient } from "aptos";
 import { Coin } from "../types/coin";
 import { StructData } from "../types/aptos";
+import {getAptosClient} from "./aptosClients";
 
-export const fetchVaultsManagedByAccount = async (client: AptosClient, address: string): Promise<Coin[]> => {
+export const fetchVaultsManagedByAccount = async (network: SupportedNetwork, address: string): Promise<Coin[]> => {
+    const client = getAptosClient(network);
+    const activeVaults = getVaults(network);
     let vaultManagers = await Promise.all(activeVaults.map(async (baseCoin) => (
         fetchVaultManager(client, baseCoin.coinStruct)
     )))

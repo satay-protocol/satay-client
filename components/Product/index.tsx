@@ -5,7 +5,7 @@ import { Flex } from '@chakra-ui/react';
 import ProductInfo from './ProductInfo';
 import Card from '../utilities/Card';
 import ProductHeader from './ProductHeader';
-import StructuredProductDepositWithdraw from './StructuredProductDepositWithdraw';
+import DefaultDepositBox from '../StrategyDepositBoxes/DefaultDepositBox';
 
 import { useAptos } from '../../contexts/AptosContext';
 
@@ -48,9 +48,14 @@ const ProductComponent : React.FC<Props> = ({ productName }) => {
               <Card
                 justifyContent='center'
               >
-                <StructuredProductDepositWithdraw 
-                  structuredProduct={structuredProduct}
-                />
+                {
+                    structuredProduct.depositBox !== null ? (
+                        <structuredProduct.depositBox />
+                    ) : (
+                        <DefaultDepositBox structuredProduct={structuredProduct} />
+                    )
+                }
+
               </Card>
             </Flex>
           </>
