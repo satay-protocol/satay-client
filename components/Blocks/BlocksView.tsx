@@ -4,10 +4,10 @@ import {SimpleGrid} from '@chakra-ui/react'
 
 import BlockCard from './BlockCard'
 
-import { Block } from '../../types/block'
+import {NewBlock} from '../../types/block'
 
 interface Props {
-    blocks: Block[]
+    blocks: NewBlock[]
 }
 
 const BlocksView: React.FC<Props> = ({ blocks }) => {

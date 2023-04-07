@@ -7,15 +7,15 @@ import { DEFAULT_NETWORK } from "../../contexts/AptosContext";
 import { StructuredProduct } from "../../types/structuredProduct";
 import { SupportedNetwork } from "../../types/network";
 
-
 const testnetStructuredProducts: StructuredProduct[] = [
     dittoStakingTestnet,
-    tortugaLeverage,
     borrowLendOptimization,
 ]
 
 const mainnetStructuredProducts: StructuredProduct[] = [
+    tortugaLeverage,
     dittoStakingMainnet,
+    borrowLendOptimization,
 ]
 
 type StructuredProductMapping = {
@@ -24,11 +24,11 @@ type StructuredProductMapping = {
 
 const structuredProducts: StructuredProductMapping = {
     'testnet': testnetStructuredProducts,
-    // 'mainnet': mainnetStructuredProducts,
+    'mainnet': mainnetStructuredProducts,
 }
 
 export const getStructuredProducts = (chainName: SupportedNetwork = DEFAULT_NETWORK) => structuredProducts[chainName] || [];
 
 export const getStructuredProduct = (product_name: string, chainName: SupportedNetwork = DEFAULT_NETWORK) => {
-    return getStructuredProducts(chainName).find((product) => product.moduleAddress.includes(product_name));
+    return getStructuredProducts(chainName).find((product) => product.module.module_name == product_name);
 }

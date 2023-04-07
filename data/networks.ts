@@ -1,5 +1,5 @@
 export const SUPPORTED_NETWORKS = [
     'testnet',
-    // 'mainnet',
+    'mainnet',
     // 'devnet'
 ] as const;

@@ -9,6 +9,7 @@ import DepositBox from '../utilities/DepositBox'
 import useStructuredProduct from '../../hooks/structuredProduct/useStructuredProduct'
 
 import { StructuredProduct } from '../../types/structuredProduct'
+import {moduleToString} from "../../data/modules";
 
 interface Props {
     structuredProduct: StructuredProduct
@@ -16,7 +17,7 @@ interface Props {
 
 const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => {
 
-    const { deposit } = useStructuredProduct(structuredProduct.moduleAddress);
+    const { deposit } = useStructuredProduct(moduleToString(structuredProduct.module));
 
     const iconSize = useBreakpointValue({ base: '60px', md: '80px' })
 
@@ -43,7 +44,7 @@ const StructuredProductComponent : React.FC<Props> = ({ structuredProduct }) => 
                     coinStruct={structuredProduct.block.inputCoinType}
                     coinSymbol={structuredProduct.block.inputCoinSymbol}
                     onDeposit={deposit}
-                    viewPath={'/products/' + structuredProduct.moduleAddress.slice(structuredProduct.moduleAddress.indexOf('::') + 2)}
+                    viewPath={'/products/' + structuredProduct.module.module_name}
                     inDevelopment={structuredProduct.inDevelopment}
                 />
                 <ProtocolList 

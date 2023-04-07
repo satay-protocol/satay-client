@@ -1,7 +1,9 @@
-import { MoveResource } from "aptos/src/generated";
 
-export interface StructData {
+export interface StructData extends Module {
     struct_name: string,
+}
+
+export interface Module {
     account_address: string;
     module_name: string;
 }
@@ -10,10 +12,6 @@ export interface CoinStoreResource {
     coin: {
         value: string
     }
-}
-
-export interface CoinInfoResource extends MoveResource {
-    data: CoinInfoStruct
 }
 
 export interface CoinInfoStruct {

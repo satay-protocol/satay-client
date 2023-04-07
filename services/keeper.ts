@@ -5,17 +5,21 @@ import { fetchStrategiesForVaultAddress } from "./strategies";
 import { fetchVaultAddress } from "./vaults";
 
 import { satay } from "../data/moduleAddresses";
-import { activeVaults } from "../data/vaults";
+import { getVaults } from "../data/vaults";
 
 import { StructData } from "../types/aptos";
 import { KeeperInfo } from "../types/strategy";
 import { VaultInfo } from "../types/vaults";
+import {SupportedNetwork} from "../types/network";
+import {getAptosClient} from "./aptosClients";
 
 
 
-export const fetchStrategiesKeptByAccount = async (client: AptosClient, address: string): Promise<KeeperInfo[]> => {
+export const fetchStrategiesKeptByAccount = async (network: SupportedNetwork, address: string): Promise<KeeperInfo[]> => {
 
-    let vaults: VaultInfo[] = await Promise.all(activeVaults.map(async (baseCoin) => ({
+    const client = getAptosClient(network);
+
+    let vaults: VaultInfo[] = await Promise.all(getVaults(network).map(async (baseCoin) => ({
         vaultAddress: await fetchVaultAddress(client, baseCoin.coinStruct),
         baseCoin
     })))

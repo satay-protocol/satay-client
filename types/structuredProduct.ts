@@ -1,11 +1,15 @@
+import React from "react";
+
 import { Block } from "./block";
+import {Module} from "./aptos";
 
 export interface StructuredProduct {
-    moduleAddress: string;
+    module: Module;
     name: string;
     description: string;
     protocols: string[];
     blocks: Block[];
     block: Block;
-    inDevelopment?: boolean
+    inDevelopment?: boolean;
+    depositBox: React.FC;
 }

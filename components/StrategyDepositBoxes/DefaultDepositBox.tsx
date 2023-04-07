@@ -5,14 +5,15 @@ import DepositWithdraw from '../DepositWithdraw'
 import useStructuredProduct from '../../hooks/structuredProduct/useStructuredProduct'
 
 import { StructuredProduct } from '../../types/structuredProduct'
+import {moduleToString} from "../../data/modules";
 
 interface Props {
     structuredProduct: StructuredProduct
 }
 
-const StructuredProductDepositWithdraw: React.FC<Props> = ({ structuredProduct }) => {
+const DefaultDepositBox: React.FC<Props> = ({ structuredProduct }) => {
 
-    const { deposit, withdraw } = useStructuredProduct(structuredProduct.moduleAddress);
+    const { deposit, withdraw } = useStructuredProduct(moduleToString(structuredProduct.module));
 
     return (
         <DepositWithdraw 
@@ -24,4 +25,4 @@ const StructuredProductDepositWithdraw: React.FC<Props> = ({ structuredProduct }
     )
 }
 
-export default StructuredProductDepositWithdraw
+export default DefaultDepositBox

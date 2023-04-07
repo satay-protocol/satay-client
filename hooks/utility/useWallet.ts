@@ -26,10 +26,10 @@ const useWallet = () => {
 
     const toast = useToast();
 
-    const submitTransaction = async (transaction: TransactionPayload, toastMessage: ToastMessage) => {
-        await signAndSubmitTransaction(transaction)
+    const submitTransaction = async (transaction: TransactionPayload, toastMessage: ToastMessage): Promise<boolean> => {
+        return signAndSubmitTransaction(transaction)
             .then(async ({hash}) => {
-                await client.waitForTransactionWithResult(hash)
+                return client.waitForTransactionWithResult(hash)
                     .then(async (transaction: Transaction_UserTransaction) => {
                         if(transaction.success){
                             await updateClient();
@@ -40,6 +40,7 @@ const useWallet = () => {
                                 duration: 5000,
                                 isClosable: true,
                             });
+                            return true;
                         } else {
                             toast({
                                 title: "Transaction failed",
@@ -48,6 +49,7 @@ const useWallet = () => {
                                 duration: 5000,
                                 isClosable: true,
                             });
+                            return false;
                         }
                     })
             })
@@ -59,6 +61,7 @@ const useWallet = () => {
                     duration: 5000,
                     isClosable: true,
                 });
+                return false
             })
     }
 
